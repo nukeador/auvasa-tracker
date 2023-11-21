@@ -83,13 +83,14 @@ button#installButton {
 }
 
 .stop-block h2 {
-    padding: 1em;
+    padding: 1em 0 0 0;
+  text-align: center;
 }
 
 .line-info {
     border-top: 1px solid #eee;
     display: flex;
-    padding: 1em;
+    padding: 0em 1em;
 }
 
 .highlight {
