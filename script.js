@@ -46,7 +46,7 @@ function saveBusLines() {
     localStorage.setItem('busLines', JSON.stringify(busLines));
 }
 
-function updateBusList() {
+async function updateBusList() {
     var listElement = document.getElementById('busList');
     listElement.innerHTML = '';
 
@@ -55,7 +55,16 @@ function updateBusList() {
     for (var stop in stops) {
         var stopBlock = document.createElement('div');
         stopBlock.className = 'stop-block';
-        stopBlock.innerHTML = '<h2>🚏 ' + stop + '</h2>';
+
+        // Obtener el nombre de la parada de la API
+        const stopName = await getStopName(stop);
+        if (stopName) {
+            stopBlock.innerHTML = '<h2>🚏 '+ stopName + ' (' + stop + ')</h2>';
+        }
+        else {
+            stopBlock.innerHTML = '<h2>🚏 '+ stop + '</h2>';
+        }
+        
         listElement.appendChild(stopBlock);
 
         stops[stop].forEach(function(line, index) {
@@ -92,6 +101,24 @@ function groupByStops(busLines) {
         acc[line.stopNumber].push(line);
         return acc;
     }, {});
+}
+
+// Función para obtener el nombre de la parada del API
+async function getStopName(stopId) {
+
+    // FIXME: Añadir un cache de al menos 1h para evitar consultar el nombre cada 30s
+    
+    try {
+        const response = await fetch(`https://api-auvasa.vercel.app/${stopId}/`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.parada.nombre;
+    } catch (error) {
+        console.error('Error al obtener datos de la API:', error);
+        return null;
+    }
 }
 
 function fetchBusTime(stopNumber, lineNumber, lineItem) {

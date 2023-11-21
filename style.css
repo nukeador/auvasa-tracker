@@ -15,7 +15,7 @@ h1 {
 }
 
 
-input[type=number] {
+input[type=number], input[type=text] {
     padding: 10px;
     margin-right: 5px;
     border: 1px solid #ddd;
