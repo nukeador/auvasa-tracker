@@ -7,6 +7,7 @@
     <title>Seguimiento de paradas y líneas de AUVASA</title>
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -29,9 +30,25 @@
     <footer>
         <a href="https://github.com/nukeador/auvasa-tracker">Código</a>
         <a href="https://www.gnu.org/licenses/agpl-3.0.html">Licencia AGPL 3</a>
+        <button id="installButton" style="display: none;">Instalar App</button>
     </footer>
 
     <script src="script.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    // Registro exitoso
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    // Registro fallido
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    
 </body>
 
 </html>
