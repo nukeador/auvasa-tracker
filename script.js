@@ -151,3 +151,35 @@ window.onload = function() {
 }
 
 setInterval(updateBusList, 30000);
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Previene que Chrome 67 y anteriores muestren automáticamente el prompt de instalación
+    e.preventDefault();
+    // Guarda el evento para que pueda ser activado más tarde
+    deferredPrompt = e;
+    // Actualiza la interfaz para mostrar el botón de instalación
+    showInstallButton();
+});
+
+function showInstallButton() {
+    const installButton = document.getElementById('installButton');
+    installButton.style.display = 'block';
+
+    installButton.addEventListener('click', (e) => {
+        // Oculta el botón ya que no se necesita más
+        installButton.style.display = 'none';
+        // Muestra el prompt de instalación
+        deferredPrompt.prompt();
+        // Espera a que el usuario responda al prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Usuario aceptó la instalación');
+            } else {
+                console.log('Usuario rechazó la instalación');
+            }
+            deferredPrompt = null;
+        });
+    });
+}
