@@ -89,7 +89,7 @@ function groupByStops(busLines) {
 }
 
 function fetchBusTime(stopNumber, lineNumber, lineItem) {
-    var apiUrl = 'http://api-auvasa.vercel.app/' + stopNumber + '/' + lineNumber;
+    var apiUrl = 'https://api-auvasa.vercel.app/' + stopNumber + '/' + lineNumber;
 
     fetch(apiUrl)
         .then(function(response) { return response.json(); })
