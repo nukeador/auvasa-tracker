@@ -11,7 +11,7 @@ h1 {
     background-repeat: no-repeat;
     background-size: contain;
     max-height: 1.5em;
-    padding: 1em 1em 1em 5em;
+    padding: 1.6em 1em 1em 5em;
 }
 
 
@@ -50,6 +50,15 @@ button#removeAllButton {
 button#removeAllButton:hover {
     background-color: #b63e3e;
 }
+
+button#installButton {
+    display: block;
+    background-color: #6aa8ff;
+    border-radius: 2em;
+    float: right;
+    color: #000000;
+}
+
 .bus-list {
     list-style: none;
     padding: 0;
