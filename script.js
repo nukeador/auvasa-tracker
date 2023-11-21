@@ -100,8 +100,9 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
     fetch(apiUrl)
         .then(function(response) { return response.json(); })
         .then(function(data) {
-            if (data && data.length > 0) {
-                var busInfo = data[0];
+            if (data.buses && data.buses.length > 0) {
+                var paradaInfo = data.parada;
+                var busInfo = data.buses[0];
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p></div>';
             } else {
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';;
