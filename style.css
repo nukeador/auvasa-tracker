@@ -111,3 +111,20 @@ button:hover {
       padding: 2rem;
     }
   }
+
+footer {
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+footer a {
+    color: #333;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
