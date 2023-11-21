@@ -55,14 +55,20 @@ function updateBusList() {
     for (var stop in stops) {
         var stopBlock = document.createElement('div');
         stopBlock.className = 'stop-block';
-        stopBlock.innerHTML = '<h3>Parada ' + stop + '</h3>';
+        stopBlock.innerHTML = '<h2>🚏 ' + stop + '</h2>';
         listElement.appendChild(stopBlock);
 
-        stops[stop].forEach(function(line) {
+        stops[stop].forEach(function(line, index) {
             var lineItem = document.createElement('div');
             lineItem.className = 'line-info';
-            lineItem.innerHTML = 'Línea ' + line.lineNumber + ': cargando...';
+            
+            // Elementos pares tienen un clase especial
+            if (index % 2 === 0) {
+                lineItem.classList.add('highlight');
+            }
 
+            lineItem.innerHTML = '<div class="linea"><h3>' + line.lineNumber + '</h3></div> <div class="tiempo"> Cargando...</div> ';
+            
             var removeButton = document.createElement('button');
             removeButton.innerHTML = '&#128465;';
             removeButton.className = 'remove-button';
@@ -96,7 +102,7 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
         .then(function(data) {
             if (data && data.length > 0) {
                 var busInfo = data[0];
-                lineItem.innerHTML = 'Línea ' + lineNumber + ' (' + busInfo.destino + '): ' + busInfo.tiempoRestante + ' minutos';
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p></div>';
             } else {
                 lineItem.innerHTML = 'Información no disponible';
             }
@@ -131,10 +137,17 @@ function removeBusLine(stopNumber, lineNumber) {
 }
 
 function removeAllBusLines() {
-    busLines = [];
-    saveBusLines();
-    updateBusList();
+    // Mostrar un cuadro de diálogo de confirmación
+    if (confirm("¿Seguro que quieres borrar todas las líneas y paradas?")) {
+        busLines = [];
+        saveBusLines();
+        updateBusList();
+    } else {
+        // El usuario eligió no eliminar las líneas de autobús
+        console.log("Eliminación cancelada.");
+    }
 }
+
 
 window.onload = function() {
     var addButton = document.getElementById('addButton');
@@ -150,7 +163,11 @@ window.onload = function() {
     updateBusList();
 }
 
+// Tiempo de actualización, por defecto 30s
 setInterval(updateBusList, 30000);
+
+
+// Código para la instalación como PWA 
 
 let deferredPrompt;
 

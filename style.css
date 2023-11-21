@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
     color: #333;
 }
 
@@ -43,8 +43,12 @@ button:hover {
     background-color: rgb(1, 46, 55);
 }
 
+button#addButton {
+    margin: 1em auto;
+}
+
 button#removeAllButton {
-    background-color: #d9a0a0;
+    background-color: #db4d4d;
 }
 
 button#removeAllButton:hover {
@@ -59,10 +63,15 @@ button#installButton {
     color: #000000;
 }
 
+#formulario > * {
+    display: block;
+    margin: auto;
+}
+
 .bus-list {
     list-style: none;
     padding: 0;
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .stop-block {
@@ -70,13 +79,21 @@ button#installButton {
     border-left: 5px solid #143325;
     margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 15px;
     border-radius: 4px;
 }
 
+.stop-block h2 {
+    padding: 1em;
+}
+
 .line-info {
-    padding: 10px;
     border-top: 1px solid #eee;
+    display: flex;
+    padding: 1em;
+}
+
+.highlight {
+    background-color: #f0f9ff9c;
 }
 
 .line-info:first-child {
@@ -91,6 +108,30 @@ button#installButton {
 .line-info button:hover {
     background-color: #c03e2b;
 }
+
+.line-info .linea, .line-info .tiempo {
+    flex: 1;
+}
+
+.line-info .linea h3 {
+    font-weight: bold;
+    font-size: 1.8em;
+    margin: 0.4em;
+}
+
+.line-info .tiempo {
+    font-size: 1.6em;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.line-info .tiempo p {
+    font-size: 0.5em;
+    display: block;
+    margin: 0 0.4em;
+}
+
 
 /* Estilos para el botón de eliminar, que por defecto está oculto */
 .remove-button {
