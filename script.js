@@ -104,7 +104,7 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 var busInfo = data[0];
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p></div>';
             } else {
-                lineItem.innerHTML = 'Información no disponible';
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">Sin info.</div>';;
             }
             // Crea y agrega el botón de eliminación cada vez que se actualiza la información.
             var removeButton = document.createElement('button');
@@ -116,7 +116,7 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
             lineItem.appendChild(removeButton);
         })
         .catch(function(error) {
-            lineItem.innerHTML = 'Error al obtener datos para la parada ' + stopNumber + ', línea ' + lineNumber;
+            lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">Error</div>';
             // Asegúrate de agregar también aquí el botón de eliminar
             var removeButton = document.createElement('button');
             removeButton.innerHTML = '&#128465;';
