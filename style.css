@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    color: #5a5a5a;
+}
+
+input[type=number] {
+    padding: 10px;
+    margin-right: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #215940;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(1, 46, 55);
+}
+
+.bus-list {
+    list-style: none;
+    padding: 0;
+}
+
+.stop-block {
+    background-color: #fff;
+    border-left: 5px solid #143325;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.line-info {
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.line-info:first-child {
+    border-top: none;
+}
+
+.line-info button {
+    background-color: #ff6347;
+    margin-left: 15px;
+}
+
+.line-info button:hover {
+    background-color: #c03e2b;
+}
+
+/* Estilos para el botón de eliminar, que por defecto está oculto */
+.remove-button {
+    display: none; /* Ocultar por defecto */
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+}
+
+/* Mostrar el botón solo cuando se pasa el ratón por encima del contenedor de la parada */
+.line-info:hover .remove-button {
+    display: inline; /* Mostrar cuando se pasa el ratón por encima */
+}
+
+.error {
+    background-color: #C75146; /* rojo sepia */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.error.show {
+    opacity: 1;
+}

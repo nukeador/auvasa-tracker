@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Seguimiento de paradas y líneas de AUVASA</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Seguimiento líneas de AUVASA</h1>
+
+    <div>
+        <input type="number" id="stopNumber" placeholder="Número de parada" />
+        <input type="number" id="lineNumber" placeholder="Línea" />
+        <button onclick="addBusLine()">Añadir</button>
+    </div>
+
+    <div class="bus-list" id="busList">
+        <!-- Aquí se mostrarán las líneas de autobús y tiempos de espera -->
+    </div>
+
+    <div>
+        <button id="removeAllButton">Eliminar Todo</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
