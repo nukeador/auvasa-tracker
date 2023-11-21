@@ -138,7 +138,7 @@ function removeBusLine(stopNumber, lineNumber) {
 
 function removeAllBusLines() {
     // Mostrar un cuadro de diálogo de confirmación
-    if (confirm("¿Seguro que quieres borrar todas las líneas y paradas?")) {
+    if (confirm("¿Seguro que quieres borrar todas las líneas y paradas en seguimiento?")) {
         busLines = [];
         saveBusLines();
         updateBusList();
