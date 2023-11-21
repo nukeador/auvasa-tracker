@@ -2,7 +2,7 @@ var busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getIte
 
 // Agregar función para consultar API
 async function stopAndLineExist(stopNumber, lineNumber) {
-    const response = await fetch(`http://api-auvasa.vercel.app/${stopNumber}/${lineNumber}`);
+    const response = await fetch(`https://api-auvasa.vercel.app/${stopNumber}/${lineNumber}`);
     return response.ok;
 }
 
@@ -139,14 +139,13 @@ function removeAllBusLines() {
 window.onload = function() {
     var addButton = document.getElementById('addButton');
     var removeAllButton = document.getElementById('removeAllButton');
-    var removeAllButton = document.getElementById('removeAllButton');
+
     if (removeAllButton) {
         removeAllButton.addEventListener('click', removeAllBusLines);
-        removeAllButton.addEventListener('touchend', removeAllBusLines);
     }
+
     if (addButton) {
         addButton.addEventListener('click', addBusLine);
-        addButton.addEventListener('touchend', addBusLine);
     }
     updateBusList();
 }
