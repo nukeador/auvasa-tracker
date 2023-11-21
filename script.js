@@ -142,9 +142,11 @@ window.onload = function() {
     var removeAllButton = document.getElementById('removeAllButton');
     if (removeAllButton) {
         removeAllButton.addEventListener('click', removeAllBusLines);
+        removeAllButton.addEventListener('touchend', removeAllBusLines);
     }
     if (addButton) {
         addButton.addEventListener('click', addBusLine);
+        addButton.addEventListener('touchend', addBusLine);
     }
     updateBusList();
 }
