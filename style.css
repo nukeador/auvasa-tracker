@@ -37,6 +37,7 @@ button:hover {
 .bus-list {
     list-style: none;
     padding: 0;
+    margin-top: 2em;
 }
 
 .stop-block {
@@ -96,3 +97,17 @@ button:hover {
 .error.show {
     opacity: 1;
 }
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 576px) {
+    .container {
+      padding: 1rem; 
+    }
+  }
+  
+  /* Estilos para pantallas medianas */  
+  @media (min-width: 577px) and (max-width: 768px) {
+    .container {
+      padding: 2rem;
+    }
+  }
