@@ -59,10 +59,10 @@ async function updateBusList() {
         // Obtener el nombre de la parada de la API
         const stopName = await getStopName(stop);
         if (stopName) {
-            stopBlock.innerHTML = '<h2>🚏 '+ stopName + ' (' + stop + ')</h2>';
+            stopBlock.innerHTML = '<h2 id="' + stop + '">🚏 '+ stopName + ' (' + stop + ')</h2>';
         }
         else {
-            stopBlock.innerHTML = '<h2>🚏 '+ stop + '</h2>';
+            stopBlock.innerHTML = '<h2 id="' + stop + '">🚏 '+ stop + '</h2>';
         }
         
         listElement.appendChild(stopBlock);
@@ -70,6 +70,8 @@ async function updateBusList() {
         stops[stop].forEach(function(line, index) {
             var lineItem = document.createElement('div');
             lineItem.className = 'line-info';
+            lineItem.id = line.stopNumber + '-' + line.lineNumber;
+            lineItem.classList.add(line.lineNumber)
             
             // Elementos pares tienen un clase especial
             if (index % 2 === 0) {
@@ -107,7 +109,7 @@ function groupByStops(busLines) {
 async function getStopName(stopId) {
 
     // FIXME: Añadir un cache de al menos 1h para evitar consultar el nombre cada 30s
-    
+
     try {
         const response = await fetch(`https://api-auvasa.vercel.app/${stopId}/`);
         if (!response.ok) {
