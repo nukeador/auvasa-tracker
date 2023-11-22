@@ -18,7 +18,7 @@ async function addBusLine() {
 
         // Crear div para el mensaje 
         const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Esa línea no existe para esa parada';
+        errorMessage.textContent = 'Error: Actualmente no hay información para esa línea en esa parada';
         errorMessage.classList.add('error');
         document.body.appendChild(errorMessage);
 
