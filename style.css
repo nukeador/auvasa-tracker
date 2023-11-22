@@ -22,7 +22,7 @@ input[type=number], input[type=text] {
     border-radius: 4px;
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
     font-size: 16px;
-    width: 10em;
+    width: 6em;
     -webkit-appearance: none;
     -moz-appearance: textfield;
     appearance: textfield;
@@ -63,6 +63,20 @@ button#installButton {
     float: right;
     color: #000000;
 }
+
+#formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#formulario #inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 
 .bus-list {
     list-style: none;
