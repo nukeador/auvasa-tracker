@@ -47,51 +47,73 @@ function saveBusLines() {
 }
 
 async function updateBusList() {
-    var listElement = document.getElementById('busList');
-    listElement.innerHTML = '';
-
     var stops = groupByStops(busLines);
 
-    for (var stop in stops) {
-        var stopBlock = document.createElement('div');
-        stopBlock.className = 'stop-block';
+    for (var stopId in stops) {
+        let stopElement = document.getElementById(stopId);
 
-        // Obtener el nombre de la parada de la API
-        const stopName = await getStopName(stop);
-        if (stopName) {
-            stopBlock.innerHTML = '<h2 id="' + stop + '">🚏 '+ stopName + ' (' + stop + ')</h2>';
-        }
-        else {
-            stopBlock.innerHTML = '<h2 id="' + stop + '">🚏 '+ stop + '</h2>';
-        }
-        
-        listElement.appendChild(stopBlock);
-
-        stops[stop].forEach(function(line, index) {
-            var lineItem = document.createElement('div');
-            lineItem.className = 'line-info';
-            lineItem.id = line.stopNumber + '-' + line.lineNumber;
-            lineItem.classList.add(line.lineNumber)
+        if (!stopElement) {
+            // Crear el stopElement si no existe
+            stopElement = document.createElement('div');
+            stopElement.id = stopId;
+            stopElement.className = 'stop-block';
             
-            // Elementos pares tienen un clase especial
-            if (index % 2 === 0) {
-                lineItem.classList.add('highlight');
+            stopElement.innerHTML = '<h2>🚏 '+ stopId + '</h2>';
+
+            document.getElementById('busList').appendChild(stopElement);
+        }
+
+        const stopName = await getStopName(stopId);
+        if (stopName) {
+            let updatedName = stopName + ' (' + stopId + ')';
+            updateStopName(stopElement, updatedName);
+        }
+
+        stops[stopId].forEach((line, index) => {
+            const busId = stopId + '-' + line.lineNumber;
+            let busElement = document.getElementById(busId);
+
+            if (!busElement) {
+                // Crear un nuevo elemento si no existe
+                busElement = document.createElement('div');
+                busElement.className = 'line-info ' + line.lineNumber;
+                busElement.id = busId;
+
+                // Elementos pares tienen una clase especial
+                if (index % 2 === 0) {
+                    busElement.classList.add('highlight');
+                }
+
+                // Place holder inicial
+                busElement.innerHTML = '<div class="linea"><h3>' + line.lineNumber + '</h3></div> <div class="tiempo">...</div>';
+                
+                // Añadir el botón de eliminar
+                const removeButton = document.createElement('button');
+                removeButton.innerHTML = '&#128465;';
+                removeButton.className = 'remove-button';
+                removeButton.addEventListener('click', function() {
+                    removeBusLine(line.stopNumber, line.lineNumber);
+                });
+                busElement.appendChild(removeButton);
+
+                // Añadir el nuevo elemento al bloque de la parada
+                stopElement.appendChild(busElement);
             }
 
-            lineItem.innerHTML = '<div class="linea"><h3>' + line.lineNumber + '</h3></div> <div class="tiempo">...</div> ';
-            
-            var removeButton = document.createElement('button');
-            removeButton.innerHTML = '&#128465;';
-            removeButton.className = 'remove-button';
-            removeButton.addEventListener('click', function() {
-                removeBusLine(line.stopNumber, line.lineNumber);
-            });
-            lineItem.appendChild(removeButton);
-
-            stopBlock.appendChild(lineItem);
-
-            fetchBusTime(line.stopNumber, line.lineNumber, lineItem);
+            // Actualizar el tiempo del autobús
+            fetchBusTime(line.stopNumber, line.lineNumber, busElement);
         });
+    }
+
+    // Eliminar elementos obsoletos del DOM
+    removeObsoleteElements(stops);
+}
+
+function updateStopName(stopElement, newName) {
+    // Actualiza el nombre de la parada en el DOM
+    var nameElement = stopElement.querySelector('h2');
+    if (nameElement) {
+        nameElement.textContent = '🚏 ' + newName;
     }
 }
 
@@ -122,6 +144,35 @@ async function getStopName(stopId) {
         return null;
     }
 }
+
+function removeObsoleteElements(stops) {
+    // Obtener todos los elementos de parada del DOM
+    const allStopElements = document.querySelectorAll('.stop-block');
+
+    allStopElements.forEach(stopElement => {
+        const stopId = stopElement.id;
+
+        // Si la parada no existe en los datos actuales, eliminarla del DOM
+        if (!stops[stopId]) {
+            stopElement.remove();
+        } else {
+            // Para cada parada existente, verificar las líneas de autobús
+            const lineElements = stopElement.querySelectorAll('.line-info');
+            lineElements.forEach(lineElement => {
+                const lineId = lineElement.id.split('-')[1]; // Obtiene el número de línea del ID
+
+                // Verificar si la línea existe en los datos actuales de la parada
+                const lineExists = stops[stopId].some(line => line.lineNumber.toString() === lineId);
+
+                // Si la línea no existe en los datos actuales, eliminarla del DOM
+                if (!lineExists) {
+                    lineElement.remove();
+                }
+            });
+        }
+    });
+}
+
 
 function fetchBusTime(stopNumber, lineNumber, lineItem) {
     var apiUrl = 'https://api-auvasa.vercel.app/' + stopNumber + '/' + lineNumber;

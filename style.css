@@ -90,6 +90,16 @@ button#installButton {
     padding: 0em 1em;
 }
 
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.stop-block, .line-info {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
 .highlight {
     background-color: #f0f9ff9c;
 }
