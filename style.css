@@ -79,8 +79,9 @@ button#installButton {
 
 #autocompleteResults, #lineSuggestions {
     position: absolute;
-    top: 25%;
+    top: 32%;
     background-color: white;
+    border: 1px solid #ccc;
 }
 
 #lineSuggestions {
