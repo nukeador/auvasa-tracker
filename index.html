@@ -8,6 +8,20 @@
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="manifest" href="manifest.json">
+
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//stats.nukeador.com/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '6']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
 </head>
 
 <body>
@@ -53,7 +67,6 @@
             });
         }
     </script>
-    
 </body>
 
 </html>
