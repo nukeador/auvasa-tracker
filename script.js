@@ -10,6 +10,8 @@ async function addBusLine() {
     const stopNumber = document.getElementById('stopNumber').value;
     const lineNumber = document.getElementById('lineNumber').value;
 
+    console.log(stopNumber, lineNumber);
+
     if (stopNumber && lineNumber) {
         
         const existsInApi = await stopAndLineExist(stopNumber, lineNumber);
@@ -243,6 +245,10 @@ function updateLastUpdatedTime() {
 
 
 window.onload = function() {
+    // Cargamos la lista de paradas para buscador.js
+    loadBusStops();
+    
+    // Acciones para botones añadir y quitar
     var addButton = document.getElementById('addButton');
     var removeAllButton = document.getElementById('removeAllButton');
 

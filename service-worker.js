@@ -7,6 +7,7 @@ const urlsToCache = [
     'https://nukeador.github.io/auvasa-tracker/index.html',
     'https://nukeador.github.io/auvasa-tracker/style.css',
     'https://nukeador.github.io/auvasa-tracker/script.js',
+    'https://nukeador.github.io/auvasa-tracker/buscador.js',
     'https://nukeador.github.io/auvasa-tracker/favicon.png',
     'https://nukeador.github.io/auvasa-tracker/img/logo.png',
 ];

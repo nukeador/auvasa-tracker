@@ -77,6 +77,26 @@ button#installButton {
     justify-content: center;
 }
 
+#autocompleteResults, #lineSuggestions {
+    position: absolute;
+    top: 25%;
+    background-color: white;
+}
+
+#lineSuggestions {
+    left: 50%;
+}
+
+.autocomplete-result, .line-suggestion{
+    cursor: pointer;
+    margin: 2px;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.autocomplete-result:hover {
+    background-color: #e9e9e9;
+}
 
 .bus-list {
     list-style: none;

@@ -45,12 +45,20 @@
     <button id="installButton" style="display: none;">Instalar</button>
 
     <h1>AUVASA Tracker</h1>
-
+ 
     <div id="formulario">
         <div id="inputs">
-            <input type="number" id="stopNumber" placeholder="Nº de parada" /> <input type="text" id="lineNumber" placeholder="Línea" />
+            <input type="text" id="stopNumber" placeholder="Parada" /> <input type="text" id="lineNumber" placeholder="Línea" />
+            <div id="autocompleteResults" style="position: absolute;"></div>
+            <div id="lineSuggestions" style="position: absolute;"></div>
         </div>
         <button id="addButton">Añadir a seguimiento</button>
+    </div>
+
+    <!-- Cuadro de búsqueda oculto inicialmente -->
+    <div id="searchBox" style="display:none;">
+        <input type="text" id="stopName" placeholder="Nombre de la parada" />
+        <div id="searchResults"></div>
     </div>
 
     <div class="bus-list" id="busList">
@@ -76,8 +84,10 @@
         <a href="https://www.gnu.org/licenses/agpl-3.0.html">Licencia AGPL 3</a>
     </footer>
 
+    
     <script src="script.js"></script>
-
+    <script src="buscador.js"></script>
+    
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {

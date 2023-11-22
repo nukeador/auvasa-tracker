@@ -1,0 +1,11053 @@
+[
+  {
+    "parada": {
+      "nombre": "Ctra. Arcas Reales frente La Salle",
+      "numero": "1412"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.733346405354312,
+      "y": 41.61733465875458
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Madre de Dios, 6",
+      "numero": "1411"
+    },
+    "lineas": {
+      "ordinarias": [
+        "U8"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.717313,
+      "y": 41.658062
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Andrómeda frente Orden de Malta",
+      "numero": "1410"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.705195778228987,
+      "y": 41.65522849545914
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Andrómeda esquina Orden de Malta",
+      "numero": "1409"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.70508379601171,
+      "y": 41.655120778580645
+    }
+  },
+  {
+    "parada": {
+      "nombre": "El Pinar de Antequera sentido Puente Duero",
+      "numero": "1408"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.755820799281264,
+      "y": 41.58793431394702
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo del Obregón esquina Brezo",
+      "numero": "1407"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72930556199551,
+      "y": 41.672593103580994
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Adolfo Miaja de la Muela frente Núñez de Guzmán",
+      "numero": "1406"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.755456104974663,
+      "y": 41.63507848487956
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Doctor Quemada frente Iglesia Santo Domingo de Guzmán",
+      "numero": "1405"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74134,
+      "y": 41.632859
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cometa esquina Cosmología",
+      "numero": "1404"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "poligonos": [
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7000981,
+      "y": 41.65519847756944
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cuesta Redonda Piscinas Municipales",
+      "numero": "1403"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.682145,
+      "y": 41.610439
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Yeseras Polideportivo",
+      "numero": "1402"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.680117,
+      "y": 41.611718
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cuesta Redonda esq. Azuela",
+      "numero": "1401"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.678682,
+      "y": 41.610415
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle C/ Ciudad de La Habana 17",
+      "numero": "1400"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7636559,
+      "y": 41.6347645
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle General Ruiz 4",
+      "numero": "1399"
+    },
+    "lineas": {
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.724267,
+      "y": 41.646659
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Recondo 23 esq. Acera Recoletos",
+      "numero": "1398"
+    },
+    "lineas": {
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.726653,
+      "y": 41.643062
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Kilimanjaro fte. Plaza Everest",
+      "numero": "1397"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71684,
+      "y": 41.614934
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real frente Vivero",
+      "numero": "1396"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.76467457,
+      "y": 41.59972861
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real Vivero",
+      "numero": "1395"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.76499248,
+      "y": 41.59958597
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real frente PRAE",
+      "numero": "1394"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.7624777,
+      "y": 41.60309076
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real PRAE",
+      "numero": "1393"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.7624488,
+      "y": 41.603793
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio Santo Domingo de Silos 8",
+      "numero": "1392"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.745813,
+      "y": 41.645496
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio Santo Domingo de Silos 3",
+      "numero": "1391"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.745872,
+      "y": 41.64538
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Enseñanaza Centro Educación Especial",
+      "numero": "1390"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.747742,
+      "y": 41.660457
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 204 frente Centro Deportivo",
+      "numero": "1389"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7506118,
+      "y": 41.613232
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Doce de Octubre 24",
+      "numero": "1388"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.710267,
+      "y": 41.655804
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Dos de Mayo esquina Divina Pastora",
+      "numero": "1387"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.725186,
+      "y": 41.647881
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Zamora Colegio San Agustín",
+      "numero": "1385"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.727085,
+      "y": 41.617789
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Zamora frente Las Arcas",
+      "numero": "1384"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732402,
+      "y": 41.618194
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Zamora Barrio Las Arcas",
+      "numero": "1383"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732326,
+      "y": 41.618382
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Madrid fuente",
+      "numero": "1382"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.725912,
+      "y": 41.647426
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Flauta Mágica esquina Parsifal",
+      "numero": "1381"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736768,
+      "y": 41.68584
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle El Barbero de Sevilla esquina Flauta Mágica",
+      "numero": "1380"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741645,
+      "y": 41.684161
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo 8 esquina Paseo Hosp. Militar",
+      "numero": "1379"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732008,
+      "y": 41.642905
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo 3 esquina Aragón",
+      "numero": "1378"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73155,
+      "y": 41.643532
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fuente El Sol 50 esquina San Sebastián",
+      "numero": "1375"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73434,
+      "y": 41.663966
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Las Contiendas 97",
+      "numero": "1374"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.747579,
+      "y": 41.65865
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Miguel Delibes 1",
+      "numero": "1373"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.755655,
+      "y": 41.611828
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Miguel Delibes 14",
+      "numero": "1372"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.755394,
+      "y": 41.611539
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza San Pablo 2 esquina San Quirce",
+      "numero": "1371"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.725849,
+      "y": 41.657172
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Castilla y León 4, esquina Miguel Delibes",
+      "numero": "1370"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.751941,
+      "y": 41.610455
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Júpiter frente 12  esquina Comuneros de Castilla",
+      "numero": "1369"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736322,
+      "y": 41.662908
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Verbena esquina Nicasio Pérez",
+      "numero": "1368"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ],
+      "futbol": [
+        "F4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.716751,
+      "y": 41.651391
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Gondomar 2 esquina Relatores",
+      "numero": "1367"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.719853,
+      "y": 41.657391
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Francisco Umbral 8",
+      "numero": "1366"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.763753,
+      "y": 41.628014
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Francisco Umbral 7",
+      "numero": "1365"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.763271,
+      "y": 41.628042
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Plata 41A gasolinera",
+      "numero": "1364"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.706123,
+      "y": 41.617588
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Dulzaina esquina Palillos",
+      "numero": "1363"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71035,
+      "y": 41.628515
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Dulzaina esquina Arribes del Duero",
+      "numero": "1362"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71032,
+      "y": 41.628523
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Kilimanjaro frente 39",
+      "numero": "1361"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "16"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.715726,
+      "y": 41.613489
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Kilimanjaro 2",
+      "numero": "1360"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "16"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7189453,
+      "y": 41.61705879
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Belén Campus Miguel Delibes",
+      "numero": "1358"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.70745,
+      "y": 41.6612
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cometa 4",
+      "numero": "1356"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ],
+      "futbol": [
+        "F4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.703706,
+      "y": 41.654982
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cometa esquina Paseo de Juan Carlos I",
+      "numero": "1354"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "poligonos": [
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704274,
+      "y": 41.655247
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Segovia frente Víctimas del Terrorismo",
+      "numero": "1351"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7191142,
+      "y": 41.62892963
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Puente",
+      "numero": "1350"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.822104,
+      "y": 41.588136
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores esquina Padre Benito Menni",
+      "numero": "1348"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7232818,
+      "y": 41.62949838
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Puente Colgante 47",
+      "numero": "1347"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "9"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736602,
+      "y": 41.640752
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 71 esquina Arzobispo García Goldáraz",
+      "numero": "1346"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.738945,
+      "y": 41.636518
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Panaderos 4 esquina Divina Pastora",
+      "numero": "1344"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.723993,
+      "y": 41.648057
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Plata 58 esquina Galena",
+      "numero": "1341"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.706903,
+      "y": 41.617277
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Plata 43",
+      "numero": "1340"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.707275,
+      "y": 41.616936
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Juan Carlos I 20 esquina General Shelly",
+      "numero": "1338"
+    },
+    "lineas": {
+      "ordinarias": [
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.718528,
+      "y": 41.635548
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Juan Carlos I frente 29 Colegio Pablo Picasso",
+      "numero": "1337"
+    },
+    "lineas": {
+      "ordinarias": [
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.716283,
+      "y": 41.639124
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Juan Carlos I 19 esquina Delicias",
+      "numero": "1336"
+    },
+    "lineas": {
+      "ordinarias": [
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.716803,
+      "y": 41.639181
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Armonio 22 esquina Castañuelas",
+      "numero": "1335"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714394,
+      "y": 41.633489
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Castañuelas esquina Carraca",
+      "numero": "1334"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71296,
+      "y": 41.632369
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Helio esquina Nitrógeno",
+      "numero": "1333"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.695278,
+      "y": 41.601944
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Helio 15",
+      "numero": "1332"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.698219,
+      "y": 41.604748
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Helio 3 esquina Acetileno",
+      "numero": "1331"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.701055,
+      "y": 41.607463
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Helio 20 esquina Oxígeno",
+      "numero": "1330"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.698202,
+      "y": 41.604243
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Helio 4 esquina Acetileno",
+      "numero": "1329"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.701278,
+      "y": 41.60711
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Plomo 2",
+      "numero": "1328"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.705117,
+      "y": 41.610936
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Plomo 1",
+      "numero": "1327"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704819,
+      "y": 41.610717
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio 42 frente Plomo",
+      "numero": "1326"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.708029,
+      "y": 41.609661
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Salamanca esquina Fray Antonio de Córdoba",
+      "numero": "1325"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.765707,
+      "y": 41.625009
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Salamanca esquina Santiago López González",
+      "numero": "1324"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.765455,
+      "y": 41.625545
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Salamanca frente Puente de La Hispanidad",
+      "numero": "1323"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.760639,
+      "y": 41.627189
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores 71",
+      "numero": "1322"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722967,
+      "y": 41.629628
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Carraca frente 41 esquina Avenida Soria",
+      "numero": "1321"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.707086,
+      "y": 41.634696
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Víctimas del Terrorismo esquina Carretera Segovia",
+      "numero": "1320"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.718354,
+      "y": 41.629494
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Segovia esquina Víctimas del Terrorismo",
+      "numero": "1319"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "6",
+        "14",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719239,
+      "y": 41.629771
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Dulzaina 2 Hospital Río Hortega",
+      "numero": "1318"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "17",
+        "19"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71213,
+      "y": 41.630816
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Dulzaina frente 2  frente Hospital Río Hortega",
+      "numero": "1317"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.711837,
+      "y": 41.630937
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pirita esquina Esmeralda",
+      "numero": "1316"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "17",
+        "19"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.708581,
+      "y": 41.626256
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pirita 13 frente Esmeralda",
+      "numero": "1315"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "17",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.708259,
+      "y": 41.626377
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Víctimas del Terrorismo Hospital Río Hortega",
+      "numero": "1314"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713827,
+      "y": 41.631419
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pirita frente 67",
+      "numero": "1312"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.703114,
+      "y": 41.619471
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pirita 67",
+      "numero": "1311"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.702845,
+      "y": 41.619594
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Oro 4",
+      "numero": "1310"
+    },
+    "lineas": {
+      "ordinarias": [
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.697319,
+      "y": 41.619986
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Oro frente 4",
+      "numero": "1309"
+    },
+    "lineas": {
+      "ordinarias": [
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.697172,
+      "y": 41.619756
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio 61 esquina Plomo",
+      "numero": "1296"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.707525,
+      "y": 41.6097673516967
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Kilimanjaro 1 esquina Peñalara",
+      "numero": "1290"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71896748,
+      "y": 41.61731394
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo 49 esquina General Shelly",
+      "numero": "1289"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7287915,
+      "y": 41.6345203170852
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo esquina Transición",
+      "numero": "1288"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.727848,
+      "y": 41.6314783356746
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Padre Benito Menni frente 6 esquina Caamaño",
+      "numero": "1287"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7257181,
+      "y": 41.6292034825433
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo frente Transición",
+      "numero": "1283"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72807,
+      "y": 41.6311049917019
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo 68",
+      "numero": "1282"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7289765,
+      "y": 41.6336768729873
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo 50 esquina Adolfo Suárez",
+      "numero": "1281"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7301235,
+      "y": 41.6373824139633
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla frente 10 Campo Grande",
+      "numero": "1279"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.730886,
+      "y": 41.6470888300442
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero frente Campo José Luis Saso",
+      "numero": "1278"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.76895,
+      "y": 41.639621106
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero Campo José Luis Saso",
+      "numero": "1277"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.769025,
+      "y": 41.639901357
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero frente 60",
+      "numero": "1276"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7715,
+      "y": 41.63774339
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Puente Juan de Austria esquina Avenida Salamanca",
+      "numero": "1273"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.744814,
+      "y": 41.64023355
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero frente 140",
+      "numero": "1271"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.772157,
+      "y": 41.63452331
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero esquina Siervas de Jesús",
+      "numero": "1270"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.766607,
+      "y": 41.63267048
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Felipe Ruiz Martín frente 6",
+      "numero": "1269"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.763025396985974,
+      "y": 41.63213460977431
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Felipe Ruiz Martín frente Manuel Canesí Acevedo",
+      "numero": "1268"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.759614,
+      "y": 41.63067932
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Salamanca Puente de La Hispanidad",
+      "numero": "1266"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75806,
+      "y": 41.62752654
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Felipe Ruiz Martín esquina Manuel Canesí Acevedo",
+      "numero": "1265"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75991,
+      "y": 41.63040277
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Felipe Ruiz Martín 6",
+      "numero": "1264"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.763020703120596,
+      "y": 41.632055422035045
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero frente Siervas de Jesús",
+      "numero": "1263"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.766681,
+      "y": 41.63233863
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero 140",
+      "numero": "1262"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.772157,
+      "y": 41.63427442
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Martín Santos Romero 60",
+      "numero": "1261"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7716125,
+      "y": 41.63779944
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Joaquín Velasco Martín 108 frente Colegio María de Molina",
+      "numero": "1259"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7407135,
+      "y": 41.6452804543736
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio San Lorenzo de El Escorial frente Centro Cultural Miguel Delibes",
+      "numero": "1258"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.754824,
+      "y": 41.643515
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio San Lorenzo de El Escorial Centro Cultural Miguel Delibes",
+      "numero": "1257"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7559375,
+      "y": 41.6431521852628
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio de Yuste 28 esquina Mon. San Lorenzo de El Escorial",
+      "numero": "1256"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7499765,
+      "y": 41.645732
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio de Yuste frente 28 esquina Monasterio San Lorenzo de El Escorial",
+      "numero": "1255"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7500875,
+      "y": 41.6456234518414
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio Santo Domingo de Silos frente 5 esquina Montserrat",
+      "numero": "1254"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.746831,
+      "y": 41.645682
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio San Lorenzo de El Escorial esquina San Estaben Gormaz",
+      "numero": "1250"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.749646,
+      "y": 41.6471
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Monasterio San Lorenzo de El Escorial esquina Monasterio de Yuste",
+      "numero": "1249"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.749228,
+      "y": 41.647123
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Mieses esquina Monasterio Santa María Retuerta",
+      "numero": "1248"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.747472,
+      "y": 41.6507024402729
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Mieses esquina Barbecho",
+      "numero": "1247"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.747112,
+      "y": 41.6505948419037
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Adolfo Miaja de la Muela Hospital Psiquiátrico",
+      "numero": "1239"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75384,
+      "y": 41.638444
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Adolfo Miaja de la Muela esquina Padre Llanos",
+      "numero": "1238"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75624,
+      "y": 41.641443
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Adolfo Miaja de la Muela frente Padre Llanos",
+      "numero": "1237"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.75598,
+      "y": 41.641471
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Alamillos 11",
+      "numero": "1235"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "17"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7159105,
+      "y": 41.6540973006898
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente 167 esquina Barcelona",
+      "numero": "1234"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7629125,
+      "y": 41.617225077438
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas 167 esquina José Velicia",
+      "numero": "1233"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7627625,
+      "y": 41.6168606221601
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 10",
+      "numero": "1228"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7314635,
+      "y": 41.6469688959566
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Entrepinos 52 esquina Tirso de Molina",
+      "numero": "1227"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.836614,
+      "y": 41.570393
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Pesqueruela 1 esquina Carretera a Puente Duero",
+      "numero": "1222"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.819497,
+      "y": 41.584196
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Miguel de Cervantes en Aparcamiento",
+      "numero": "1220"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.8450751,
+      "y": 41.5699768
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Entrepinos 57",
+      "numero": "1219"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.836614,
+      "y": 41.570393
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Pesqueruela frente 1 esquina Carretera a Puente Duero",
+      "numero": "1218"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.819727,
+      "y": 41.5841
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fuente del Berrocal esquina El Barbero de Sevilla",
+      "numero": "1217"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.74002898,
+      "y": 41.68259615
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Príncipe Ígor esquina La Flauta Mágica",
+      "numero": "1216"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734333465,
+      "y": 41.68666072
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle La Flauta Mágica esquina Electra",
+      "numero": "1215"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.737950117,
+      "y": 41.6855967
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Armonio esquina Laúd",
+      "numero": "1209"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714314,
+      "y": 41.633662
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Miguel Ruiz de Temiño esquina Juan Carlos I",
+      "numero": "1208"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7193,
+      "y": 41.6328947060586
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Miguel Ruiz de Temiño esquina Juan Carlos I sentido Centro",
+      "numero": "1207"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7192625,
+      "y": 41.633034846555
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Valle de Arán frente 40",
+      "numero": "1206"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7147345,
+      "y": 41.6684137451157
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Costa Brava 1 esquina Costa Dorada",
+      "numero": "1205"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.712025,
+      "y": 41.670777598405
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Costa Brava Centro Comercial",
+      "numero": "1204"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7095915,
+      "y": 41.6683861059322
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Valle de Arán 76 esquina Costa Brava",
+      "numero": "1203"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.712459,
+      "y": 41.6705419266131
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Valle de Arán 48",
+      "numero": "1202"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714605,
+      "y": 41.6684552038688
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Torquemada frente Polideportivo Rondilla",
+      "numero": "1201"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.717528,
+      "y": 41.6657188688998
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio 39",
+      "numero": "1196"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7094375,
+      "y": 41.611365508371
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio 2",
+      "numero": "1195"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7098875,
+      "y": 41.6114215833248
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio frente 33",
+      "numero": "1194"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71255,
+      "y": 41.6141972326135
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Sementera esquina Mieses",
+      "numero": "1193"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7403375,
+      "y": 41.6577508627359
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Málaga esquina Bilbao",
+      "numero": "1192"
+    },
+    "lineas": {
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.714935,
+      "y": 41.6442480882314
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Valle Esgueva frente 81 esquina Incienso",
+      "numero": "1191"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7057005,
+      "y": 41.6595271362751
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fuente del Berrocal frente Gasolinera",
+      "numero": "1190"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741945,
+      "y": 41.681731
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Fuensaldaña esquina Subida Fuente el Sol",
+      "numero": "1189"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736175,
+      "y": 41.6693209760525
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cádiz 15",
+      "numero": "1187"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.715818944133732,
+      "y": 41.64301764668045
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Filipinos esquina Paseo Zorrilla",
+      "numero": "1185"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7330955,
+      "y": 41.6447767902946
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Poniente frente Jorge Guillén",
+      "numero": "1181"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "3",
+        "4",
+        "6",
+        "8"
+      ],
+      "buho": [
+        "B2",
+        "B3",
+        "B4"
+      ],
+      "futbol": [
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "matinales": [
+        "M4",
+        "M5"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73093,
+      "y": 41.6535051650345
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo del Polvorín esquina Villabañez",
+      "numero": "1178"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7022235,
+      "y": 41.6475898606873
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo del Polvorín 12",
+      "numero": "1177"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704203,
+      "y": 41.6499122605628
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Juan Carlos I esquina Abejaruco",
+      "numero": "1176"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.704166,
+      "y": 41.6504237302381
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cádiz 4 esquina Bilbao",
+      "numero": "1175"
+    },
+    "lineas": {
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714629,
+      "y": 41.643696
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santa María de la Cabeza frente 9",
+      "numero": "1173"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.704073,
+      "y": 41.6423282841225
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santa María de la Cabeza 9",
+      "numero": "1172"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7043355,
+      "y": 41.6423484614192
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santa María de la Cabeza 37",
+      "numero": "1171"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.6997185,
+      "y": 41.6463098149298
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santa María de la Cabeza frente 39",
+      "numero": "1170"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.6995115,
+      "y": 41.6462694628112
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Salamanca esquina Puente Juan de Austria",
+      "numero": "1169"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7451435,
+      "y": 41.6390875040964
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas 15 esquina Vereda",
+      "numero": "1168"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.745421,
+      "y": 41.6275418584565
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Vinos de Rueda esquina Cañada Real",
+      "numero": "1167"
+    },
+    "lineas": {
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7521125,
+      "y": 41.6164681295576
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Salamanca esquina Doctor Villacián",
+      "numero": "1166"
+    },
+    "lineas": {
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.745925,
+      "y": 41.6388363956931
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Jara esquina Hierbabuena",
+      "numero": "1165"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7312625,
+      "y": 41.670945668094
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Jardín Botánico esquina Brezo",
+      "numero": "1164"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73055,
+      "y": 41.6727663949318
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Estación del Norte RENFE",
+      "numero": "1163"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "9"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7269125,
+      "y": 41.6432362562154
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Arca Real frente 201",
+      "numero": "1161"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.7328375,
+      "y": 41.618066120219
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Colón 14",
+      "numero": "1159"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "17"
+      ],
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7177935,
+      "y": 41.6532772754137
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Chancillería 5",
+      "numero": "1158"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F5"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7200505,
+      "y": 41.6570369774869
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Acera Recoletos frente 2 esquina Pza Zorrilla",
+      "numero": "1156"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "9"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7287825,
+      "y": 41.6475820145999
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santa Clara 34 esquina Real de Burgos",
+      "numero": "1155"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7191055,
+      "y": 41.6588655688275
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Sotavento esquina Colombia",
+      "numero": "1153"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7472575,
+      "y": 41.6333397912224
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 81 esquina Tierra de Sepúlveda",
+      "numero": "1151"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.743695,
+      "y": 41.6185430800514
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente 53 Inserso",
+      "numero": "1150"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7421,
+      "y": 41.6222431368519
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Tórtola esquina Cigüeña",
+      "numero": "1144"
+    },
+    "lineas": {
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7101875,
+      "y": 41.6453099716567
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Tirso de Molina frente Seminario",
+      "numero": "1141"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72785,
+      "y": 41.6618692769631
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle El Barbero de Sevilla esquina Plaza de la Ópera",
+      "numero": "1130"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7419085,
+      "y": 41.68408578
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fuente del Berrocal Gasolinera",
+      "numero": "1129"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741663,
+      "y": 41.681569
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Fuensaldaña frente Subida Fuente el Sol",
+      "numero": "1128"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736175,
+      "y": 41.669180914474
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Isabel La Católica 1 esquina 20 de Febrero",
+      "numero": "1127"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7325375,
+      "y": 41.6498775148495
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Federico Landrove Moiño 11",
+      "numero": "1120"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7597165,
+      "y": 41.6338984789965
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Manuel Azaña 56",
+      "numero": "1119"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "10"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.761918,
+      "y": 41.6360278011089
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Manuel Azaña 24 frente Juan García Hortelano",
+      "numero": "1118"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "10"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7674865,
+      "y": 41.6367329507186
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña esquina Padre Llanos",
+      "numero": "1117"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "10"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.765904,
+      "y": 41.6393606581086
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña 42",
+      "numero": "1116"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "10"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.762547,
+      "y": 41.6381294007072
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña 45 Bis",
+      "numero": "1115"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7624175,
+      "y": 41.6379496613162
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña  esquina Manuel Azaña",
+      "numero": "1114"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.76584,
+      "y": 41.6391248713347
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Manuel Azaña esquina Juan García Hortelano",
+      "numero": "1113"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7663025,
+      "y": 41.6364287694803
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Manuel Azaña 37",
+      "numero": "1110"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7623805,
+      "y": 41.6363181577649
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Eusebio González Suárez frente Federico Landrove Moiño",
+      "numero": "1109"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7552025,
+      "y": 41.6330965082769
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle General Shelly 18 esquina Avenida Segovia",
+      "numero": "1105"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7209285,
+      "y": 41.6356911053307
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Juan Carlos I frente Bomberos Delicias",
+      "numero": "1102"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.718881,
+      "y": 41.6354067249514
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Viana esquina Cañada Valdestillas",
+      "numero": "1094"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.7920035,
+      "y": 41.551323
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Euro Mercaolid",
+      "numero": "1093"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.718959,
+      "y": 41.6737034422712
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Euro frente Mercaolid",
+      "numero": "1092"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7192065,
+      "y": 41.6738210857522
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Peseta Punto Limpio",
+      "numero": "1091"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.724368,
+      "y": 41.6712530477456
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Peseta esquina Avenida Burgos",
+      "numero": "1090"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.724449,
+      "y": 41.6710816174769
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Viana junto a Pinarillo.",
+      "numero": "1089"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.781437,
+      "y": 41.5443035201806
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Anselmo Miguel Nieto esquina Puertas de Valladolid",
+      "numero": "1088"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74849,
+      "y": 41.6138032285271
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Lorenzo Arrazola esquina Manuel Mucientes",
+      "numero": "1087"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7456685,
+      "y": 41.6096548250213
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Lorenzo Arrazola frente Manuel Mucientes",
+      "numero": "1086"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.745295,
+      "y": 41.6098970748961
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santiago Alba 18",
+      "numero": "1085"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7484225,
+      "y": 41.6084502913038
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santiago Alba esquina Plaza Castilla y León",
+      "numero": "1084"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.7509965,
+      "y": 41.6098264187766
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Anselmo Miguel Nieto esquina Carretera Rueda",
+      "numero": "1082"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74858,
+      "y": 41.613739305436
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas Santa Ana",
+      "numero": "1081"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7653455,
+      "y": 41.6159391952722
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Santa Ana",
+      "numero": "1080"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7653455,
+      "y": 41.6155220256666
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Portillo Balboa frente 60 esquina Amor de Dios",
+      "numero": "1073"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7183075,
+      "y": 41.6635415954661
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real 131 esquina Vinos de Rueda",
+      "numero": "1068"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7534455,
+      "y": 41.6160999319449
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real 67 esquina Vinos Ribera de Duero",
+      "numero": "1067"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.750732,
+      "y": 41.6201335436541
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real 144 esquina Vega de Valdetronco",
+      "numero": "1066"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75214,
+      "y": 41.618526
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real 74 frente Vinos Ribera de Duero",
+      "numero": "1065"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.750912,
+      "y": 41.6202344648154
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santiago Alba 3",
+      "numero": "1055"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7482535,
+      "y": 41.6084147755363
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 364 esquina Vinos de Rueda",
+      "numero": "1044"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748484,
+      "y": 41.6169600532402
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 203 esquina Vinos de Cigales",
+      "numero": "1043"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748016,
+      "y": 41.6169331395795
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 346 esquina Vinos Ribera de Duero",
+      "numero": "1039"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748268,
+      "y": 41.6194764308973
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 187 esquina Vinos Vega Sicilia",
+      "numero": "1038"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.747782,
+      "y": 41.6194495182867
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Poniente frente San Lorenzo",
+      "numero": "1025"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.731151,
+      "y": 41.652707
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Doctrinos 12 esquina María de Molina",
+      "numero": "1007"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "buho": [
+        "B2",
+        "B3"
+      ],
+      "futbol": [
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73116,
+      "y": 41.649407
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Lucio Zumel esquina Avenida Soria",
+      "numero": "1006"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.688725,
+      "y": 41.613342
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Doctor Quemada esquina Zorrilla",
+      "numero": "1004"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.74081,
+      "y": 41.6328
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 52 esquina Paseo Hospital Militar",
+      "numero": "1003"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "5",
+        "7",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "poligonos": [
+        "P1",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.735311,
+      "y": 41.644033
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 39 esquina Puente Colgante",
+      "numero": "1002"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "5",
+        "7",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.737126,
+      "y": 41.641288
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 236 Centro Comercial",
+      "numero": "1001"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "18",
+        "19"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7476335,
+      "y": 41.6237023189827
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 198 La Rubia",
+      "numero": "1000"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "18",
+        "19"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.743994,
+      "y": 41.627834
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 133 La Rubia",
+      "numero": "999"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "18",
+        "19"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74334,
+      "y": 41.627987
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 130 Centro Comercial",
+      "numero": "998"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "5",
+        "7",
+        "10",
+        "18",
+        "19",
+        "C1"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73932,
+      "y": 41.637032
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 1 antiguo Hospital Militar",
+      "numero": "997"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "5",
+        "7",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734005,
+      "y": 41.644481
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 101 LAVA",
+      "numero": "995"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "5",
+        "16",
+        "71",
+        "18",
+        "19",
+        "C2",
+        "71"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740704,
+      "y": 41.63093
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 153 frente  Centro Comercial",
+      "numero": "993"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "18",
+        "19"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7470305,
+      "y": 41.6240185205934
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 65 frente Centro Comercial",
+      "numero": "992"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "5",
+        "7",
+        "10",
+        "18",
+        "19",
+        "C2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73877,
+      "y": 41.637133
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 88 frente Plaza de Toros",
+      "numero": "991"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "5",
+        "7",
+        "9",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B1",
+        "B4"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.737956,
+      "y": 41.640423
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Zorrilla 166 frente LAVA",
+      "numero": "990"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "5",
+        "16",
+        "18",
+        "19",
+        "C1"
+      ],
+      "buho": [
+        "B1",
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740843,
+      "y": 41.631508
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Doctor Villacián 5 esquina Mariano de los Cobos",
+      "numero": "987"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "C1"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.749417,
+      "y": 41.638461
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Doctor Villacián 3 frente Monasterio de Prado",
+      "numero": "986"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "C1"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.746217,
+      "y": 41.639155
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Doctor Villacián Monasterio de Prado",
+      "numero": "985"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "C2"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.745727,
+      "y": 41.639578
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Doctor Villacián frente 5 frente Mariano de los Cobos",
+      "numero": "984"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "C2"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.749382,
+      "y": 41.638633
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Villabáñez 55 esquina Golondrina",
+      "numero": "982"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.705397,
+      "y": 41.648073
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Villabáñez 19 Iglesia San Ignacio de Loyola",
+      "numero": "978"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.708931,
+      "y": 41.64927
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Villabáñez 131 esquina Camino Viejo del Polvorín",
+      "numero": "976"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.701799,
+      "y": 41.647391
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle La Victoria frente 31 esquina San Sebastián",
+      "numero": "973"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732628,
+      "y": 41.662896
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo San Vicente 35 esquina Sevilla",
+      "numero": "972"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.718176,
+      "y": 41.643128
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo San Vicente 16 esquina Álava",
+      "numero": "971"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.717417,
+      "y": 41.643781
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Joaquín Velasco Martín 3 Colegio La Inmaculada",
+      "numero": "969"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "6",
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.737213,
+      "y": 41.650645
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Joaquín Velasco Martín 20 esquina Francesco Scrimieri",
+      "numero": "968"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3",
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.737746,
+      "y": 41.650047
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Joaquín Velasco Martín 1 esquina Gloria Fuertes",
+      "numero": "967"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.735776,
+      "y": 41.653033
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Joaquín Velasco Martín 17 Colegio María de Molina",
+      "numero": "966"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740327,
+      "y": 41.645423
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Joaquín Velasco Martín 9 Polidortivo Huerta del Rey",
+      "numero": "965"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3",
+        "F5"
+      ],
+      "matinales": [
+        "M5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.738743,
+      "y": 41.648067
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Joaquín Velasco Martín 54 frente Polideportivo Huerta del Rey",
+      "numero": "964"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3",
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.739173,
+      "y": 41.647673
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Valdestillas 21",
+      "numero": "962"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.790973,
+      "y": 41.549873
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Torquemada 50 esquina Soto",
+      "numero": "961"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.721253,
+      "y": 41.663538
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Torquemada esquina Tirso de Molina",
+      "numero": "960"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "17",
+        "C2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7240325,
+      "y": 41.6610220818399
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Torquemada 54 Centro Salud Rondilla",
+      "numero": "959"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719641,
+      "y": 41.664604
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Torquemada frente 16",
+      "numero": "957"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "C1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72484,
+      "y": 41.660206
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Torquemada esquina Rondilla Santa Teresa",
+      "numero": "956"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "17"
+      ],
+      "buho": [
+        "B1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.725111,
+      "y": 41.659084
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Torquemada frente antiguo Hospital Río Hortega",
+      "numero": "955"
+    },
+    "lineas": {
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.725367,
+      "y": 41.658127
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio 21",
+      "numero": "954"
+    },
+    "lineas": {
+      "ordinarias": [
+        "14",
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.711935,
+      "y": 41.613866
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio 5",
+      "numero": "953"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7141,
+      "y": 41.619909
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Topacio esquina Aluminio",
+      "numero": "952"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714329,
+      "y": 41.619867
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle José Garrote Tebar 4 esquina Amadeo Arias",
+      "numero": "951"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.756771,
+      "y": 41.633872
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle José Garrote Tebar 21",
+      "numero": "950"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.758352,
+      "y": 41.634288
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle José Garrote Tebar 20 esquina Manuel Silvela",
+      "numero": "949"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7593645,
+      "y": 41.6349982762982
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Rondilla de Santa Teresa frente antiguo Hospital Río Hortega",
+      "numero": "947"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24",
+        "C1"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.726999,
+      "y": 41.659432
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Templarios 6 esquina Puente La Reina",
+      "numero": "946"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.70736,
+      "y": 41.651545
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Templarios 3 esquina Puente La Reina",
+      "numero": "945"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.707217,
+      "y": 41.651541
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Soto 4 esquina Avenida Palencia",
+      "numero": "941"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.717342,
+      "y": 41.661305
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Sotavento esquina Avenida Medina del Campo",
+      "numero": "940"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.747148,
+      "y": 41.633181
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Soria esquina Carraca",
+      "numero": "939"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.705659,
+      "y": 41.633913
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Soria Iveco",
+      "numero": "938"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.709426,
+      "y": 41.638726
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Soria San Cristóbal",
+      "numero": "937"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.700113,
+      "y": 41.62652
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Soria raqueta Cuartel",
+      "numero": "936"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.710805,
+      "y": 41.640769
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Soria esquina San Isidro",
+      "numero": "935"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.70635,
+      "y": 41.635093
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Soria esquina Paseo Juan Carlos I",
+      "numero": "934"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.712286,
+      "y": 41.641932
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Soria frente San Cristóbal",
+      "numero": "933"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.699662,
+      "y": 41.626994
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida El Norte de Castilla frente 19",
+      "numero": "932"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734695,
+      "y": 41.624287
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida El Norte de Castilla 48",
+      "numero": "931"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736277,
+      "y": 41.620464
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida El Norte de Castilla 14",
+      "numero": "930"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.733531,
+      "y": 41.627089
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida El Norte de Castilla 19 esquina Forja",
+      "numero": "928"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734484,
+      "y": 41.6244
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida El Norte de Castilla 47",
+      "numero": "927"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736098,
+      "y": 41.620485
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Zamora frente Colegio San Agustín",
+      "numero": "926"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72692,
+      "y": 41.617981
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas puente",
+      "numero": "924"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.822924,
+      "y": 41.587798
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas Escuela Superior Imagen y Sonido",
+      "numero": "923"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.789548,
+      "y": 41.604583
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas esquina Vega de Valdetronco",
+      "numero": "922"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7590225,
+      "y": 41.6194143823615
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas 34 Barrio San Adrián",
+      "numero": "921"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748601,
+      "y": 41.625755
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas Barrio La Rubia",
+      "numero": "920"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.743902,
+      "y": 41.628327
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas INEA",
+      "numero": "919"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.799148,
+      "y": 41.599907
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Escuela Superior Imagen y Sonido",
+      "numero": "918"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.789979,
+      "y": 41.605138
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Vega de Valdetronco",
+      "numero": "917"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7581225,
+      "y": 41.62010401484
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas 21 Centro Educativo",
+      "numero": "916"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748549,
+      "y": 41.62569
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente INEA",
+      "numero": "915"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.798551,
+      "y": 41.599355
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Las Villas",
+      "numero": "914"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.755411,
+      "y": 41.621651
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas 45 Centro Comercial",
+      "numero": "913"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.751306,
+      "y": 41.624167
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente El Pino",
+      "numero": "912"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.794924,
+      "y": 41.602033
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente El Pichón",
+      "numero": "911"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.805543,
+      "y": 41.593627
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Pago La Bomba",
+      "numero": "910"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.802934,
+      "y": 41.596977
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Encinas",
+      "numero": "908"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.809676,
+      "y": 41.591253
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Las Lagunillas",
+      "numero": "907"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.813342,
+      "y": 41.589226
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente El Barrio",
+      "numero": "906"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.779954,
+      "y": 41.609828
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas frente Las Aceñas",
+      "numero": "905"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.817701,
+      "y": 41.588348
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas Barrio Las Villas",
+      "numero": "904"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.755489,
+      "y": 41.621728
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas 44 frente Centro Comercial",
+      "numero": "903"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.751366,
+      "y": 41.624238
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas El Pino",
+      "numero": "902"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.795354,
+      "y": 41.602526
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas El Pichón",
+      "numero": "901"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.806178,
+      "y": 41.594054
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas Pago La Bomba",
+      "numero": "900"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.80242,
+      "y": 41.596454
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas esquina Encinas",
+      "numero": "898"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.80908,
+      "y": 41.590763
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas Las Lagunillas",
+      "numero": "897"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.813013,
+      "y": 41.588703
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas El Barrio",
+      "numero": "896"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.77891,
+      "y": 41.61016
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Camino Viejo Simancas Las Aceñas",
+      "numero": "895"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.817558,
+      "y": 41.587695
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia 99 esquina Olmedo",
+      "numero": "892"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "13",
+        "14",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720766,
+      "y": 41.639497
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia 88 esquina Hornija",
+      "numero": "891"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720881,
+      "y": 41.633002
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia 57 esquina Paseo San Vicente",
+      "numero": "890"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720407,
+      "y": 41.641226
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia 161 frente Hornija",
+      "numero": "889"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720782,
+      "y": 41.633414
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Segovia Colegio Hijas de Jesús",
+      "numero": "888"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "13",
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.717902,
+      "y": 41.626969
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia esquina Trabajo",
+      "numero": "887"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "13",
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720754,
+      "y": 41.641758
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia Iglesia del Carmen",
+      "numero": "886"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "13",
+        "14",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.721644,
+      "y": 41.637778
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia frente 57",
+      "numero": "885"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "13",
+        "14",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P6",
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720531,
+      "y": 41.641086
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Segovia frente Colegio Hijas de Jesús",
+      "numero": "884"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "13",
+        "14"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.718002,
+      "y": 41.626675
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Segovia frente Iglesia del Carmen",
+      "numero": "883"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "13",
+        "14",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P6",
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.721928,
+      "y": 41.637799
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Transición 3",
+      "numero": "882"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72541,
+      "y": 41.63147
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santuario 5 esquina López Gómez",
+      "numero": "881"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "matinales": [
+        "M6"
+      ],
+      "poligonos": [
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.723514,
+      "y": 41.650116
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Santander 8 frente Barrio España",
+      "numero": "880"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.710005,
+      "y": 41.666608
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Santander 49 Barrio España",
+      "numero": "879"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.710557,
+      "y": 41.666398
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Santander Centro Comercial",
+      "numero": "878"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.708075,
+      "y": 41.6685
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Santander frente Endasa",
+      "numero": "877"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713022,
+      "y": 41.664182
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Santander Endasa",
+      "numero": "876"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713245,
+      "y": 41.664306
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Santa Lucía 62 esquina Plaza Luis Braille",
+      "numero": "875"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ],
+      "futbol": [
+        "F4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714017,
+      "y": 41.651877
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle San Cristóbal 15 esquina Avenida Soria",
+      "numero": "872"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.688043,
+      "y": 41.612321
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Nicolás Salmerón 19 esquina Labradores",
+      "numero": "871"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B2",
+        "B5"
+      ],
+      "futbol": [
+        "F2",
+        "F3"
+      ],
+      "matinales": [
+        "M3",
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720144,
+      "y": 41.646089
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Francisco Mendizábal 5",
+      "numero": "870"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.743292,
+      "y": 41.642894
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Vadillos frente 5",
+      "numero": "869"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.713487,
+      "y": 41.651467
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda esquina Vega Sicilia",
+      "numero": "868"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.743825,
+      "y": 41.6188510835859
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 47 frente Inserso",
+      "numero": "867"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741523,
+      "y": 41.62236
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 37 esquina Corta",
+      "numero": "866"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7418,
+      "y": 41.625153
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 36 esquina Mota",
+      "numero": "865"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741863,
+      "y": 41.627521
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 19 esquina Mota",
+      "numero": "864"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "5"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7417,
+      "y": 41.628015
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda Piscinas FASA",
+      "numero": "863"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.758745,
+      "y": 41.588264
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente 187 frente Hotel",
+      "numero": "862"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75596,
+      "y": 41.600591
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda esquina Vinos de Cigales",
+      "numero": "861"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748655,
+      "y": 41.614245
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente Madroño",
+      "numero": "860"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.754207,
+      "y": 41.60521
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 232 Colegio Ave María",
+      "numero": "859"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.757247,
+      "y": 41.596682
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Castilla y León 1",
+      "numero": "858"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.751292,
+      "y": 41.610265
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda Cuartel Teniente Galiana",
+      "numero": "857"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.763959,
+      "y": 41.579934
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda Parque Artillería",
+      "numero": "856"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.758725,
+      "y": 41.592774
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 131 Centro Deportivo",
+      "numero": "855"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.749623,
+      "y": 41.6131
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente 41",
+      "numero": "854"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741702,
+      "y": 41.624319
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda 187 Hotel",
+      "numero": "853"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75548,
+      "y": 41.600511
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente Vinos de Cigales",
+      "numero": "852"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74848,
+      "y": 41.614129
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda esquina Madroño",
+      "numero": "851"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.753912,
+      "y": 41.605088
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente 232 frente Colegio Ave María",
+      "numero": "850"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.756978,
+      "y": 41.596594
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente Cuartel Teniente Galiana",
+      "numero": "849"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.764257,
+      "y": 41.580098
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Rueda frente Parque Artillería",
+      "numero": "848"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.758325,
+      "y": 41.592738
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pío del Río Hortega 9",
+      "numero": "847"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740419,
+      "y": 41.651737
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Renedo 29",
+      "numero": "846"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "17"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "poligonos": [
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714884,
+      "y": 41.652282
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Estación del Norte esquina Recondo",
+      "numero": "844"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "9"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.727124,
+      "y": 41.643233
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fidel Recio 1 esquina Alonso Pesquera",
+      "numero": "842"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "matinales": [
+        "M6"
+      ],
+      "poligonos": [
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720126,
+      "y": 41.649643
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Real de Burgos frente Iglesia San Pedro Apóstol",
+      "numero": "840"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "17",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M6"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.718166,
+      "y": 41.657371
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Real 85 frente Plaza Damián Tascón Prieto",
+      "numero": "839"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.790695,
+      "y": 41.554298
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Real frente 7",
+      "numero": "838"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.788941,
+      "y": 41.558249
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Real 106 Plaza Damián Tascón Prieto",
+      "numero": "837"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.791014,
+      "y": 41.554255
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Real 7",
+      "numero": "836"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.788755,
+      "y": 41.55819
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Rastrojo 6 Colegio Giner de los Ríos",
+      "numero": "835"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.743603,
+      "y": 41.651998
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Rastrojo 7 frente Colegio Giner de los Ríos",
+      "numero": "834"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.743811,
+      "y": 41.652059
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Ramón y Cajal 3 Hospital Clínico",
+      "numero": "833"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "8",
+        "17",
+        "24"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719882,
+      "y": 41.655561
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Zorrilla 3 esquina Santiago",
+      "numero": "832"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "4",
+        "7",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "poligonos": [
+        "P1",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.729851,
+      "y": 41.648346
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Vadillos 7 esquina Palacio Valdés",
+      "numero": "830"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713172,
+      "y": 41.651392
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Uruguay esquina Honduras",
+      "numero": "829"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.750834,
+      "y": 41.630857
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Universidad esquina López Gómez",
+      "numero": "828"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F5"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1",
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.721988,
+      "y": 41.652776
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Alfonso X",
+      "numero": "827"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.706828,
+      "y": 41.690953
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Colegio Santa Cruz 9",
+      "numero": "826"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719967,
+      "y": 41.650911
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza San Nicolás 13",
+      "numero": "825"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24",
+        "C1"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.730977,
+      "y": 41.659165
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza San Juan",
+      "numero": "824"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "8",
+        "17"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "matinales": [
+        "M6"
+      ],
+      "poligonos": [
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.717396,
+      "y": 41.651117
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Doctor Quemada Iglesia Santo Domingo Guzmán",
+      "numero": "823"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "10"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741249,
+      "y": 41.632955
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Mayor 29 (La Cistérniga)",
+      "numero": "820"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.686154,
+      "y": 41.611967
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Mayor frente 29 (La Cistérniga)",
+      "numero": "819"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.686093,
+      "y": 41.611972
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Madrid 2",
+      "numero": "818"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "6",
+        "9"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "matinales": [
+        "M3",
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.725482,
+      "y": 41.648145
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Doctor Jiménez Díaz esquina Penitencia",
+      "numero": "817"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.715364,
+      "y": 41.659435
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Carmen Ferreiro",
+      "numero": "816"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.706917,
+      "y": 41.667536
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza España 13 frente Bola del Mundo",
+      "numero": "815"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.725319,
+      "y": 41.648647
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza España 12 Iglesia Capuchinos",
+      "numero": "814"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "13"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.724833,
+      "y": 41.648688
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza España Bola del Mundo",
+      "numero": "813"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "4",
+        "7",
+        "8"
+      ],
+      "buho": [
+        "B1",
+        "B3"
+      ],
+      "futbol": [
+        "F4",
+        "F5"
+      ],
+      "matinales": [
+        "M2",
+        "M4",
+        "M5",
+        "M6"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.725155,
+      "y": 41.648803
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Fuente Dorada",
+      "numero": "812"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "6",
+        "8",
+        "24"
+      ],
+      "buho": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5"
+      ],
+      "futbol": [
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "matinales": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.726188,
+      "y": 41.652243
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Cruz Verde 5",
+      "numero": "811"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B2",
+        "B5"
+      ],
+      "futbol": [
+        "F2",
+        "F3"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720113,
+      "y": 41.648088
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Circular 7 esquina Industrias",
+      "numero": "809"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "17",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B2",
+        "B5"
+      ],
+      "futbol": [
+        "F2",
+        "F3"
+      ],
+      "matinales": [
+        "M3",
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.716419,
+      "y": 41.647344
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Circular 11 Iglesia Corazón de María",
+      "numero": "808"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "17",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B2",
+        "B5"
+      ],
+      "futbol": [
+        "F2",
+        "F3"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.717184,
+      "y": 41.646813
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Caño Argales",
+      "numero": "807"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "6",
+        "9",
+        "13",
+        "14",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B2",
+        "B5"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "matinales": [
+        "M3",
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722663,
+      "y": 41.64602
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón 1 esquina Plaza San Bartolomé",
+      "numero": "805"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "5",
+        "6",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734535,
+      "y": 41.660354
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Juan de Austria Centro Comercial",
+      "numero": "804"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740608,
+      "y": 41.637722
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Plaza Juan de Austria frente Centro Comercial",
+      "numero": "803"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "10",
+        "C2"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.740826,
+      "y": 41.638081
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Puente La Reina 67",
+      "numero": "802"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.704943,
+      "y": 41.651745
+    }
+  },
+  {
+    "parada": {
+      "nombre": "C/ San Isidro 43 entrada Túnel",
+      "numero": "801"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17",
+        "19"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714384,
+      "y": 41.64453
+    }
+  },
+  {
+    "parada": {
+      "nombre": "C/ San Isidro 30 esquina Cádiz",
+      "numero": "800"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17",
+        "19"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713759,
+      "y": 41.643552
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Prado de La Magdalena 6 frente Residencia Alfonso VIII",
+      "numero": "799"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.715299,
+      "y": 41.655127
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Prado de La Magdalena 18 Filosofía y Letras",
+      "numero": "798"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71427,
+      "y": 41.657866
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Ramón Pradera 15-17",
+      "numero": "797"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "24"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736549,
+      "y": 41.659281
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Ramón Pradera Feria de Valladolid",
+      "numero": "796"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "5",
+        "6",
+        "24"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.738434,
+      "y": 41.654252
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Ramón Pradera frente Hotel",
+      "numero": "795"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "5",
+        "6",
+        "24"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73721,
+      "y": 41.6568
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Ramón Pradera frente Feria de Valladolid",
+      "numero": "794"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.738242,
+      "y": 41.654148
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Páramo San Isidro 38",
+      "numero": "793"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.703706,
+      "y": 41.635902
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Páramo San Isidro 15",
+      "numero": "792"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704229,
+      "y": 41.638582
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Páramo San Isidro 1",
+      "numero": "791"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.705521,
+      "y": 41.640673
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Páramo San Isidro esquina Avenida Soria",
+      "numero": "790"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.705443,
+      "y": 41.634465
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Páramo San Isidro frente 38",
+      "numero": "789"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.703832,
+      "y": 41.635827
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Páramo San Isidro frente 17",
+      "numero": "788"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704298,
+      "y": 41.638379
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Páramo San Isidro frente 1",
+      "numero": "787"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.705662,
+      "y": 41.640674
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pirita 10",
+      "numero": "786"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "13",
+        "17",
+        "19"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.706032,
+      "y": 41.623206
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pirita frente 10 esquina Aluminio",
+      "numero": "785"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9",
+        "13",
+        "17",
+        "19"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.705841,
+      "y": 41.623297
+    }
+  },
+  {
+    "parada": {
+      "nombre": "El Pinar de Antequera sentido centro",
+      "numero": "784"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.755724,
+      "y": 41.588131
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Alonso Pesquera 5 esquina Fidel Recio",
+      "numero": "782"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ],
+      "futbol": [
+        "F4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7206435,
+      "y": 41.6497303
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Panaderos 2 esquina Plaza España",
+      "numero": "781"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9"
+      ],
+      "buho": [
+        "B2",
+        "B5"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.724327,
+      "y": 41.648588
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Palencia frente 41 esquina Amor de Dios",
+      "numero": "780"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.715947,
+      "y": 41.661842
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Palencia 41 Policía Municipal",
+      "numero": "779"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.716878,
+      "y": 41.661293
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Palencia 2",
+      "numero": "778"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.718928,
+      "y": 41.659229
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Títulos frente puente de hierro",
+      "numero": "776"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719529,
+      "y": 41.681729
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Títulos esquina Los Traductores",
+      "numero": "775"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.721022,
+      "y": 41.67856
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Títulos puente de hierro",
+      "numero": "774"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719141,
+      "y": 41.682907
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Títulos frente Los Traductores",
+      "numero": "773"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.721241,
+      "y": 41.678479
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Títulos frente Guindal",
+      "numero": "772"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713726,
+      "y": 41.691395
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Títulos esquina Guindal",
+      "numero": "771"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713723,
+      "y": 41.691286
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Daniel del Olmo 9",
+      "numero": "770"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71",
+        "C2"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.734084,
+      "y": 41.628197
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Daniel del Olmo frente 20 ITV",
+      "numero": "769"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.731225,
+      "y": 41.62755
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Daniel del Olmo 6",
+      "numero": "768"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "C1"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734907,
+      "y": 41.628268
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Daniel del Olmo esquina Paseo Zorrilla",
+      "numero": "767"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "C1"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740638,
+      "y": 41.630131
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Daniel del Olmo 18 frente ITV",
+      "numero": "766"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732398,
+      "y": 41.627689
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Mundial 82 Estadio José Zorrilla",
+      "numero": "761"
+    },
+    "lineas": {
+      "futbol": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.759583,
+      "y": 41.644557
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gloria Fuertes 4 esquina Avenida Salamanca",
+      "numero": "759"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736603,
+      "y": 41.653542
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gloria Fuertes 1 esquina Joaquín Velasco Martín",
+      "numero": "757"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "6",
+        "24"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736618,
+      "y": 41.65338
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle La Morena 3 Bloque 2",
+      "numero": "755"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.742446,
+      "y": 41.656826
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle La Morena edificio Antares",
+      "numero": "754"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.742591,
+      "y": 41.659785
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Moradas 31 esquina Nebrija",
+      "numero": "752"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "C1"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720048,
+      "y": 41.662753
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Moradas 21 esquina Cardenal Cisneros",
+      "numero": "751"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "C1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722049,
+      "y": 41.660962
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Mieses 40",
+      "numero": "749"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C1"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.744722,
+      "y": 41.653264
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Mieses frente 16",
+      "numero": "747"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7407,
+      "y": 41.659398
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Mieses frente 40",
+      "numero": "744"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.744419,
+      "y": 41.653183
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Adolfo Miaja de la Muela 6 esquina Hernando de Acuña",
+      "numero": "743"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.75398,
+      "y": 41.637609
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Adolfo Miaja de la Muela esquina Remigio Cabello Toral",
+      "numero": "742"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7555,
+      "y": 41.634556
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Vázquez de Menchaca 9",
+      "numero": "738"
+    },
+    "lineas": {
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.733474,
+      "y": 41.622543
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Vázquez de Menchaca 5",
+      "numero": "737"
+    },
+    "lineas": {
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.731749,
+      "y": 41.62462
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Vázquez de Menchaca 19",
+      "numero": "736"
+    },
+    "lineas": {
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734554,
+      "y": 41.620451
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Vázquez de Menchaca 40 esquina Avenida Zamora",
+      "numero": "735"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.735575,
+      "y": 41.618771
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Vázquez de Menchaca 33",
+      "numero": "734"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736608,
+      "y": 41.616411
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Vázquez de Menchaca 21 esquina Avenida Zamora",
+      "numero": "733"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16",
+        "71"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.735381,
+      "y": 41.618839
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Medina del Campo frente 19 Centro Salud Arturo Eyríes",
+      "numero": "732"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748126,
+      "y": 41.633711
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Medina del Campo esquina Barlovento",
+      "numero": "731"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "10"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.744836,
+      "y": 41.633227
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Medina del Campo frente Barlovento",
+      "numero": "730"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "10"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.744999,
+      "y": 41.633367
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Medina del Campo 15 frente Centro Salud Arturo Eyríes",
+      "numero": "729"
+    },
+    "lineas": {
+      "ordinarias": [
+        "10"
+      ],
+      "buho": [
+        "B4"
+      ],
+      "futbol": [
+        "F1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.748014,
+      "y": 41.633577
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Carretera Madrid Centro San Juan de Dios",
+      "numero": "726"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.724688,
+      "y": 41.604153
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Madre de Dios 29 frente Facultad de Comercio",
+      "numero": "724"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714306,
+      "y": 41.659471
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Madre de Dios 20 Facultad de Comercio",
+      "numero": "723"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.714389,
+      "y": 41.659287
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Madre de Dios 15",
+      "numero": "722"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F5"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71604,
+      "y": 41.658718
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Antonio Machado esquina José María Pemán",
+      "numero": "720"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.753564,
+      "y": 41.61419
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Antonio Machado esquina Pío Baroja",
+      "numero": "719"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.753421,
+      "y": 41.614
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle López Gómez 13 esquina Fray Luis de León",
+      "numero": "717"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "4",
+        "6"
+      ],
+      "buho": [
+        "B2",
+        "B5"
+      ],
+      "futbol": [
+        "F3",
+        "F4"
+      ],
+      "matinales": [
+        "M4",
+        "M5"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.723276,
+      "y": 41.650823
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Bajada de La Libertad 10 frente Teatro Calderón",
+      "numero": "716"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "24"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.724348,
+      "y": 41.653551
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Julián Merino Lápice Piscinas Municipales",
+      "numero": "715"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.683004,
+      "y": 41.609231
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Arco Ladrillo 31 esquina Paseo Farnesio",
+      "numero": "711"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.729957,
+      "y": 41.6378525
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle José María Lacort 8 esquina Plaza España",
+      "numero": "709"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.723796664000504,
+      "y": 41.64911269943169
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Labradores 45 esquina Niña Guapa",
+      "numero": "708"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "13",
+        "14"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720629,
+      "y": 41.645373
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Labradores 38 túnel",
+      "numero": "707"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "13",
+        "14"
+      ],
+      "poligonos": [
+        "P6",
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720751,
+      "y": 41.645828
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Labradores 1 esquina Plaza Cruz Verde",
+      "numero": "706"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ],
+      "futbol": [
+        "F4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.720431,
+      "y": 41.647895
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Juan Carlos I 109",
+      "numero": "703"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704237,
+      "y": 41.651388
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Ciudad de La Habana frente 3 esquina Juan G. Hortelano",
+      "numero": "700"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "C2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.760322,
+      "y": 41.636999
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Ciudad de La Habana 1 esquina Amadeo Arias",
+      "numero": "699"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "10",
+        "C1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.760092,
+      "y": 41.63692
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Gondomar 12 esquina Santa Clara",
+      "numero": "698"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2",
+        "17",
+        "24"
+      ],
+      "buho": [
+        "B1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.721063,
+      "y": 41.657807
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón 6 Plaza San Bartolomé",
+      "numero": "697"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734965,
+      "y": 41.660591
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón 3 frente Canal",
+      "numero": "696"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "5",
+        "6",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740103,
+      "y": 41.661074
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón 26 Canal",
+      "numero": "695"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "5",
+        "6",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740114,
+      "y": 41.661235
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón Cristo Rey",
+      "numero": "694"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.745792,
+      "y": 41.660814
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón 29 esquina Chopos",
+      "numero": "692"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.751126,
+      "y": 41.660605
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón 71 Cementerio Las Contiendas",
+      "numero": "691"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.757004,
+      "y": 41.659865
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón 82 frente Chopos",
+      "numero": "688"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.751633,
+      "y": 41.660759
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Gijón frente Cristo Rey",
+      "numero": "687"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.745357,
+      "y": 41.661029
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Gamazo 17 esquina Bailén",
+      "numero": "686"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "7",
+        "9",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.726066,
+      "y": 41.646111
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fuente El Sol 21",
+      "numero": "684"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734529,
+      "y": 41.664639
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fuente El Sol 2 esquina Plaza San Bartolomé",
+      "numero": "683"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.733665,
+      "y": 41.661431
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Fray Luis de León 14 esquina López Gómez",
+      "numero": "682"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "buho": [
+        "B3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722937,
+      "y": 41.650901
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Farnesio frente 19 frente Arca Real",
+      "numero": "680"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7221,
+      "y": 41.640112
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Valle Esgueva 41 frente Económicas",
+      "numero": "679"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.710733,
+      "y": 41.659562
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Valle Esgueva 6 Económicas",
+      "numero": "678"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.711188,
+      "y": 41.65948
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Valle Esgueva 87 esquina Paseo Belén",
+      "numero": "677"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.706376,
+      "y": 41.659608
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Enseñanza esquina Avenida Gijón",
+      "numero": "675"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.747777,
+      "y": 41.660547
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores 92 esquina Transición",
+      "numero": "674"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722965,
+      "y": 41.630913
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores 74 esquina Hornija",
+      "numero": "673"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72264,
+      "y": 41.632978
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores 57 esquina Transición",
+      "numero": "672"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722728,
+      "y": 41.6314491857
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores 4 esquina Paseo Farnesio",
+      "numero": "671"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "13",
+        "14",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P6",
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72175,
+      "y": 41.639765
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores frente 58 escuela Oficial de Idiomas",
+      "numero": "670"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722158,
+      "y": 41.635512
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores frente 72 esquina Hornija",
+      "numero": "669"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "9",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722376,
+      "y": 41.633682
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Embajadores 60 frente Escuela Oficial de Idiomas",
+      "numero": "668"
+    },
+    "lineas": {
+      "ordinarias": [
+        "6",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.722303,
+      "y": 41.63551
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Venezuela Instituto Antonio Tovar",
+      "numero": "667"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.7471940010188005,
+      "y": 41.630775071265056
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Duque de La Victoria 23 esquina Plaza España",
+      "numero": "666"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1",
+        "B5"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.726073,
+      "y": 41.649378
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Don Sancho 7",
+      "numero": "665"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719281,
+      "y": 41.648465
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Miguel Delibes 40 esquina Unamuno",
+      "numero": "664"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.753091,
+      "y": 41.610623
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Miguel Delibes 19B esquina Unamuno",
+      "numero": "663"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.753012,
+      "y": 41.610737
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Chile Instituto Antonio Tovar",
+      "numero": "661"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.749006,
+      "y": 41.631293
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Chancillería 4 Biblioteca Reina Sofía",
+      "numero": "658"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8"
+      ],
+      "futbol": [
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.719501,
+      "y": 41.657108
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Las Contiendas frente 109",
+      "numero": "657"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74731,
+      "y": 41.65887
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Puente Colgante 18 esquina Gabilondo",
+      "numero": "653"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "9"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.734837,
+      "y": 41.641006
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Puente Colgante 2 Estación de Autobuses",
+      "numero": "651"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "9"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732134,
+      "y": 41.641156
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Puente Colgante 1 frente Est. de Autobuses",
+      "numero": "649"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2",
+        "9"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F2"
+      ],
+      "matinales": [
+        "M1"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.731126,
+      "y": 41.641103
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cobalto 42 esquina Galena",
+      "numero": "648"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.70869,
+      "y": 41.619222
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cobalto 21 esquina Pirita",
+      "numero": "647"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "17"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704564,
+      "y": 41.620861
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cobalto frente 69 esquina Topacio",
+      "numero": "646"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.712886,
+      "y": 41.617351
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cobalto 49 esquina Galena",
+      "numero": "645"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.708616,
+      "y": 41.619126
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cobalto 28 esquina Pirita",
+      "numero": "644"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "17"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.704686,
+      "y": 41.621024
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cobalto 69 esquina Topacio",
+      "numero": "643"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "14",
+        "17"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.712804,
+      "y": 41.617256
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cardenal Cisneros esquina San Juan de Ávila",
+      "numero": "642"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17",
+        "C2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.7223045,
+      "y": 41.6614535251935
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cigüeña 4 Iglesia San Isidro",
+      "numero": "641"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "18",
+        "C1"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.713201,
+      "y": 41.644306
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cigüeña 41 esquina Villabáñez",
+      "numero": "640"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.708406,
+      "y": 41.648736
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cigüeña 40 esquina Villabáñez",
+      "numero": "639"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.70795,
+      "y": 41.649109
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cigüeña 1 esquina Paseo San Isidro",
+      "numero": "636"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "18",
+        "C2"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.713599,
+      "y": 41.644229
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cigüeña 14",
+      "numero": "635"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "18",
+        "C1"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.710922,
+      "y": 41.645431
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cigüeña 21",
+      "numero": "634"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "18",
+        "C2"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.710948,
+      "y": 41.645547
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Los Cerros frente Plaza Cine Castilla",
+      "numero": "633"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C2"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.746966,
+      "y": 41.655295
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Los Cerros Plaza Cine Castilla",
+      "numero": "632"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "C1"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74679,
+      "y": 41.655132
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Cerrada 1 esquina Santa Clara",
+      "numero": "629"
+    },
+    "lineas": {
+      "ordinarias": [
+        "17",
+        "C2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.719713,
+      "y": 41.65932
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo del Cauce Centro Salud Pilarica",
+      "numero": "628"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.711273,
+      "y": 41.65379
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo del Cauce Industriales",
+      "numero": "627"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.710935,
+      "y": 41.656374
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo del Cauce frente Centro Salud Pilarica",
+      "numero": "625"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F4"
+      ],
+      "poligonos": [
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.711416,
+      "y": 41.653799
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo del Cauce frente Industriales",
+      "numero": "624"
+    },
+    "lineas": {
+      "ordinarias": [
+        "7",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.711082,
+      "y": 41.656392
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Isabel La Católica 27 esquina Conde Benavente",
+      "numero": "623"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73132,
+      "y": 41.658017
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Isabel La Católica Instituto Núñez de Arce",
+      "numero": "622"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.731808,
+      "y": 41.654583
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Isabel La Católica Plaza Poniente",
+      "numero": "621"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732088,
+      "y": 41.653327
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Castillejo frente 4-6",
+      "numero": "619"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ],
+      "matinales": [
+        "M7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.684007,
+      "y": 41.610962
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Soria esquina Diego Velázquez",
+      "numero": "618"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13",
+        "18",
+        "19"
+      ],
+      "buho": [
+        "B5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.684207,
+      "y": 41.608761
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real 560",
+      "numero": "617"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.766346,
+      "y": 41.597129
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real Hípica",
+      "numero": "611"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.760917,
+      "y": 41.606016
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real 220 Colegio El Pilar",
+      "numero": "610"
+    },
+    "lineas": {
+      "poligonos": [
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.758241,
+      "y": 41.610378
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real frente Hípica",
+      "numero": "608"
+    },
+    "lineas": {},
+    "ubicacion": {
+      "x": -4.761164,
+      "y": 41.606089
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Cañada Real frente Colegio El Pilar",
+      "numero": "607"
+    },
+    "lineas": {
+      "ordinarias": [
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F1"
+      ],
+      "matinales": [
+        "M1"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.757974,
+      "y": 41.610268
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos 72",
+      "numero": "604"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.727516,
+      "y": 41.668162
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos 54",
+      "numero": "603"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.729606,
+      "y": 41.665443
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos 39",
+      "numero": "601"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.727944,
+      "y": 41.668287
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos 38 frente Policía Municipal",
+      "numero": "600"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.731593,
+      "y": 41.663068
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos 9 esquina La Victoria",
+      "numero": "599"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.733139,
+      "y": 41.661489
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos 27",
+      "numero": "598"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.730004,
+      "y": 41.665565
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos 14 esquina Pisuerga",
+      "numero": "597"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.732911,
+      "y": 41.661367
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Burgos Policía Municipal",
+      "numero": "596"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73179,
+      "y": 41.663143
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Bronce 3 AUVASA",
+      "numero": "593"
+    },
+    "lineas": {
+      "ordinarias": [
+        "16"
+      ],
+      "poligonos": [
+        "P1",
+        "P2",
+        "P6",
+        "P7"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.736963,
+      "y": 41.615927
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Jardín Botánico Parcela 8 Centro Salud La Victoria",
+      "numero": "591"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.735269,
+      "y": 41.666783
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Jardín Botánico Parcela 7 frente Centro Salud La Victoria",
+      "numero": "590"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.735167,
+      "y": 41.666697
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Jardín Botánico 6",
+      "numero": "589"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.731933,
+      "y": 41.669418
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Jardín Botánico frente Jara",
+      "numero": "588"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73202,
+      "y": 41.670828
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Paseo Jardín Botánico frente 6",
+      "numero": "587"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P3",
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73208,
+      "y": 41.669453
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pío Baroja 9 Iglesia San Simón de Rojas",
+      "numero": "586"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.753692,
+      "y": 41.612595
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Pío Baroja 14 esquina Miguel Delibes",
+      "numero": "583"
+    },
+    "lineas": {
+      "ordinarias": [
+        "18",
+        "19"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.754529,
+      "y": 41.611723
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Barbecho frente Arado",
+      "numero": "581"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.746623,
+      "y": 41.650005
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Barbecho esquina Mieses",
+      "numero": "580"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.74695,
+      "y": 41.65035
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Bálago esquina Sementera",
+      "numero": "577"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "matinales": [
+        "M4"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.739701,
+      "y": 41.657757
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Bálago esquina Ramón Pradera",
+      "numero": "576"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5",
+        "6"
+      ],
+      "buho": [
+        "B2"
+      ],
+      "futbol": [
+        "F6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.737345,
+      "y": 41.657641
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Azucena 18 esquina Dalia",
+      "numero": "575"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "matinales": [
+        "M6"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.694179,
+      "y": 41.643683
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Azalea esquina Alhelí",
+      "numero": "574"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.693861,
+      "y": 41.644912
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Azalea esquina Flor de Acebo",
+      "numero": "573"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "futbol": [
+        "F3"
+      ],
+      "matinales": [
+        "M6"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.693565,
+      "y": 41.644867
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Miguel Ángel Blanco 5 esquina Avenida Salamanca",
+      "numero": "572"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "5"
+      ],
+      "futbol": [
+        "F6"
+      ],
+      "poligonos": [
+        "P3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.740152,
+      "y": 41.651152
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Miguel Ángel Blanco Plaza del Milenio",
+      "numero": "570"
+    },
+    "lineas": {
+      "ordinarias": [
+        "5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.73532,
+      "y": 41.649647
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Miguel Ángel Blanco frente 23 esquina Pío del Río Hortega",
+      "numero": "569"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.741182,
+      "y": 41.651672
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Avenida Miguel Ángel Blanco 2 frente Plaza del Milenio",
+      "numero": "568"
+    },
+    "lineas": {
+      "ordinarias": [
+        "3",
+        "5",
+        "6",
+        "8"
+      ],
+      "buho": [
+        "B2",
+        "B3"
+      ],
+      "futbol": [
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.735271,
+      "y": 41.649801
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Arrabal 13",
+      "numero": "567"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.71043,
+      "y": 41.691388
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Arrabal 12",
+      "numero": "566"
+    },
+    "lineas": {
+      "ordinarias": [
+        "24"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.710433,
+      "y": 41.691313
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Argales 4",
+      "numero": "565"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.726101,
+      "y": 41.638165
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Argales frente 21 Inst. Arca Real",
+      "numero": "564"
+    },
+    "lineas": {
+      "ordinarias": [
+        "9"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.72518,
+      "y": 41.636164
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Arca Real Centro Madrid",
+      "numero": "561"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C1"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.72776,
+      "y": 41.62844
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Arca Real frente Centro Madrid",
+      "numero": "560"
+    },
+    "lineas": {
+      "ordinarias": [
+        "C2",
+        "71"
+      ],
+      "poligonos": [
+        "P6"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.727908,
+      "y": 41.628493
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Angustias 5 Teatro Calderón",
+      "numero": "558"
+    },
+    "lineas": {
+      "ordinarias": [
+        "1",
+        "2"
+      ],
+      "buho": [
+        "B1"
+      ],
+      "futbol": [
+        "F5"
+      ],
+      "matinales": [
+        "M2"
+      ],
+      "poligonos": [
+        "P1",
+        "P2"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.724023,
+      "y": 41.654139
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Aluminio 7 esquina Turquesa",
+      "numero": "556"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13"
+      ],
+      "poligonos": [
+        "P13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.702598,
+      "y": 41.625299
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Aluminio frente 5",
+      "numero": "555"
+    },
+    "lineas": {
+      "ordinarias": [
+        "13"
+      ]
+    },
+    "ubicacion": {
+      "x": -4.702102,
+      "y": 41.625677
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Padre Benito Menni esquina Caamaño",
+      "numero": "554"
+    },
+    "lineas": {
+      "ordinarias": [
+        "4",
+        "C1"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.724271,
+      "y": 41.629007
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña Parcela 21 esquina Juan de Valladolid",
+      "numero": "553"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.754667,
+      "y": 41.6382
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña 18 esquina Manuel Silvela",
+      "numero": "552"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9",
+        "C2"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.75823,
+      "y": 41.63816
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña 13 esquina Manuel Silvela",
+      "numero": "551"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.758232,
+      "y": 41.637989
+    }
+  },
+  {
+    "parada": {
+      "nombre": "Calle Hernando de Acuña 1 esquina Mateo Seoane Sobral",
+      "numero": "550"
+    },
+    "lineas": {
+      "ordinarias": [
+        "8",
+        "9",
+        "C1"
+      ],
+      "buho": [
+        "B3"
+      ],
+      "matinales": [
+        "M5"
+      ],
+      "poligonos": null
+    },
+    "ubicacion": {
+      "x": -4.755554,
+      "y": 41.638006
+    }
+  }
+]
