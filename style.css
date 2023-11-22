@@ -190,6 +190,29 @@ button#installButton {
     font-style: italic;
 }
 
+.foot-note a {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #1DA1F2; /* Azul de Twitter */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.foot-note  a:hover {
+    background-color: #0d8bf2;
+}
+
+.foot-note a:nth-of-type(2) {
+    background-color: #3B5998; /* Azul de Facebook */
+}
+
+.foot-note a:nth-of-type(2):hover {
+    background-color: #334d84;
+}
+
+
 footer {
     font-size: 0.8rem;
     text-align: center;
