@@ -107,6 +107,9 @@ async function updateBusList() {
 
     // Eliminar elementos obsoletos del DOM
     removeObsoleteElements(stops);
+
+    // Actualiza la hora de últimos cambios
+    updateLastUpdatedTime();
 }
 
 function updateStopName(stopElement, newName) {
@@ -227,6 +230,12 @@ function removeAllBusLines() {
         // El usuario eligió no eliminar las líneas de autobús
         console.log("Eliminación cancelada.");
     }
+}
+
+function updateLastUpdatedTime() {
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString(); // Formatea la hora como prefieras
+    document.getElementById('last-update').textContent = 'Última actualización: ' + formattedTime;
 }
 
 
