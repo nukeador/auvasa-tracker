@@ -7,12 +7,18 @@ body {
 }
 
 h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background-image: url('img/logo.png');
     background-repeat: no-repeat;
     background-size: contain;
-    max-height: 1.5em;
-    padding: 1.6em 1em 1em 5em;
+    background-position: 1em;
+    padding: 1em 0 0 4.5em;
+    height: 100px;
 }
+  
 
 
 input[type=number], input[type=text] {
@@ -240,6 +246,9 @@ button#installButton {
     background-color: #334d84;
 }
 
+.foot-note button#theme-toggle {
+    background-color: #ffffff;
+}
 
 footer {
     font-size: 0.8rem;
@@ -257,6 +266,43 @@ footer a:hover {
     text-decoration: underline;
 }
 
+/* Dark mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
+}
+
+.dark-mode h1 {
+    background-image: url('img/logo-dark.png');
+}
+
+.dark-mode #autocompleteResults, .dark-mode #lineSuggestions {
+    background-color: #333;
+}
+
+.dark-mode .stop-block {
+    background-color: #333; /* Fondo más oscuro */
+    color: #fff; /* Texto en color claro */
+    border-left-color: #aaa; /* Borde izquierdo más claro */
+}
+
+.dark-mode .highlight {
+    background-color: #565b5e9c;
+}
+
+.dark-mode .line-info {
+    border-top: 1px solid #404040;
+}
+
+.dark-mode input[type=number], .dark-mode input[type=text] {
+    border: 1px solid #444;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.dark-mode .foot-note button#theme-toggle {
+    background-color: #222;
+}
+
 /* Estilos para pantallas pequeñas */
 @media (max-width: 576px) {
     .container {
@@ -272,7 +318,6 @@ footer a:hover {
 }
 
 /* Colores de las lineas */
-
 .linea-1 h3 {
     background-color: #5ebd5a;
     color: #fff;

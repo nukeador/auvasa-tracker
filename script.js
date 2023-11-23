@@ -268,9 +268,17 @@ function updateLastUpdatedTime() {
 
 
 window.onload = function() {
+
+    // Al cargar la página, comprobar el theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+        themeToggleIcon.textContent = savedTheme === 'dark' ? '🌜' : '🌞';
+    }
+
     // Cargamos la lista de paradas para buscador.js
     loadBusStops();
-    
+
     // Acciones para botones añadir y quitar
     var addButton = document.getElementById('addButton');
     var removeAllButton = document.getElementById('removeAllButton');
@@ -288,9 +296,26 @@ window.onload = function() {
 // Tiempo de actualización, por defecto 30s
 setInterval(updateBusList, 30000);
 
+// Dark mode
+const themeToggle = document.getElementById('theme-toggle');
+const themeToggleIcon = document.getElementById('theme-toggle-icon');
+
+themeToggle.addEventListener('click', () => {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    themeToggleIcon.textContent = isDarkMode ? '🌜' : '🌞';
+    // Guardar la preferencia del usuario
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark-mode');
+        themeToggleIcon.textContent = '🌜';
+    }
+});
+
 
 // Código para la instalación como PWA 
-
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
