@@ -241,11 +241,20 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
 }
 
 function removeBusLine(stopNumber, lineNumber) {
-    busLines = busLines.filter(function(line) {
-        return !(line.stopNumber === stopNumber && line.lineNumber === lineNumber);
-    });
-    saveBusLines();
-    updateBusList();
+   
+    let avisoBorrado = '¿Seguro que quieres borrar la línea ' + lineNumber + ' de la parada ' + stopNumber + '?';
+
+    if (confirm(avisoBorrado)) {
+        busLines = busLines.filter(function(line) {
+            return !(line.stopNumber === stopNumber && line.lineNumber === lineNumber);
+        });
+
+        saveBusLines();
+        updateBusList();
+    } else {
+        // El usuario eligió no eliminar las líneas de autobús
+        console.log("Eliminación cancelada.");
+    }
 }
 
 function removeAllBusLines() {
@@ -308,6 +317,7 @@ themeToggle.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Detección del theme del usuario
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark-mode');
         themeToggleIcon.textContent = '🌜';
