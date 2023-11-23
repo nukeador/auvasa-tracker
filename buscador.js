@@ -73,7 +73,7 @@ window.addEventListener('click', function(event) {
     var searchBox = document.getElementById('autocompleteResults');
     var searchButton = document.getElementById('stopNumber');
 
-    // Ignora los clics que se originen en el searchBox o en el searchButton
+    // Ignora los clics que se originen en los elementos
     if (event.target !== searchBox && 
         !searchBox.contains(event.target) &&
         event.target !== searchButton) {

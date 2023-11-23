@@ -188,10 +188,33 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
             if (data.buses && data.buses.length > 0) {
                 var paradaInfo = data.parada;
                 var busInfo = data.buses[0];
+                
+                let horaLlegada = "";
+
                 // Si el tiempo no es exacto añadimos un + al inicio del tiempo
-                if (!busInfo.esExacto)
+                if (!busInfo.esExacto) {
                     busInfo.tiempoRestante = '+' + busInfo.tiempoRestante;
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p></div>';
+                }
+                // Si es exacto calculamos la hora aproximada de llegada
+                else {
+                    let horaActual = new Date(); // Representa el momento actual
+                    let minutosAdicionales = busInfo.tiempoRestante; // Tiempo restante hasta la llegada del bus, en minutos
+
+                    // Añade los minutos adicionales a la hora actual
+                    horaActual.setMinutes(horaActual.getMinutes() + minutosAdicionales);
+
+                    // Extrae las horas y minutos actualizados
+                    let horasEstimadasLlegada = horaActual.getHours();
+                    let minutosEstimadosLlegada = horaActual.getMinutes();
+
+                    // Formatea los minutos para asegurar dos dígitos
+                    minutosEstimadosLlegada = minutosEstimadosLlegada < 10 ? '0' + minutosEstimadosLlegada : minutosEstimadosLlegada;
+
+                    // Construye la cadena de tiempo de llegada estimada
+                    horaLlegada = '~ ' + horasEstimadasLlegada + ":" + minutosEstimadosLlegada;
+                }
+
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p><p class="horaLlegada">' + horaLlegada + '</p></div>';
             } else {
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';;
             }
