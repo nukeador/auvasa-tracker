@@ -78,7 +78,7 @@ async function updateBusList() {
             if (!busElement) {
                 // Crear un nuevo elemento si no existe
                 busElement = document.createElement('div');
-                busElement.className = 'line-info ' + line.lineNumber;
+                busElement.className = 'line-info ' + 'linea-' + line.lineNumber;
                 busElement.id = busId;
 
                 // Elementos pares tienen una clase especial

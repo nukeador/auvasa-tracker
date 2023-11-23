@@ -146,6 +146,12 @@ button#installButton {
     background-color: #c03e2b;
 }
 
+.line-info h3 {
+    border-radius: 10px;
+    text-align: center;
+    max-width: 40px;
+}
+
 .line-info .linea, .line-info .tiempo {
     flex: 1;
 }
@@ -265,5 +271,29 @@ footer a:hover {
     }
 }
 
+/* Colores de las lineas */
 
+.linea-1 h3 {
+    background-color: #5ebd5a;
+    color: #fff;
+}
 
+.linea-2 h3 {
+    background-color: #f2c435;
+    color: #000;
+}
+
+.linea-5 h3 {
+    background-color: #2fb7b7;
+    color: #fff;
+}
+
+.linea-18 h3 {
+    background-color: #b9b8b8;
+    color: #000;
+}
+
+.linea-19 h3 {
+    background-color: #eaa874;
+    color: #000;
+}
