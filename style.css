@@ -119,6 +119,17 @@ button#installButton {
     font-size: 1.3em;
 }
 
+.stop-block a#mapIcon {
+    background-image: url("img/map.png");
+    background-size: cover;
+    display: inline-block;
+    width: 1em;
+    height: 1em; 
+    text-indent: -9999px;
+    overflow: hidden;
+    margin-right: 0.5em;
+  }  
+
 .line-info {
     border-top: 1px solid #eee;
     display: flex;
@@ -302,6 +313,10 @@ body.dark-mode {
 .dark-mode .foot-note button#theme-toggle {
     background-color: #222;
 }
+
+.dark-mode .stop-block a#mapIcon {
+    background-image: url("img/map-dark.png");
+  }  
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 576px) {

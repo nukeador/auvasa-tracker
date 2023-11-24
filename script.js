@@ -104,9 +104,11 @@ async function updateBusList() {
         }
 
         const stopName = await getStopName(stopId);
+        const stopGeo = await getStopGeo(stopId);
+
         if (stopName) {
             let updatedName = stopName + ' (' + stopId + ')';
-            updateStopName(stopElement, updatedName);
+            updateStopName(stopElement, updatedName, stopGeo);
         }
 
         stops[stopId].forEach((line, index) => {
@@ -152,11 +154,11 @@ async function updateBusList() {
     updateLastUpdatedTime();
 }
 
-function updateStopName(stopElement, newName) {
+function updateStopName(stopElement, newName, stopGeo) {
     // Actualiza el nombre de la parada en el DOM
     var nameElement = stopElement.querySelector('h2');
     if (nameElement) {
-        nameElement.textContent = '🚏 ' + newName;
+        nameElement.innerHTML = ' <a id="mapIcon" title="Ver en el mapa" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>' + newName;
     }
 }
 
@@ -170,10 +172,10 @@ function groupByStops(busLines) {
     }, {});
 }
 
-// Función para obtener el nombre de la parada del API
+// Función para obtener el nombre de la parada del JSON
 async function getStopName(stopId) {
     try {
-        // Buscar la parada por su número en los datos JSON
+        // Buscar la parada por su número
         const stop = busStops.find(stop => stop.parada.numero === stopId);
 
         if (!stop) {
@@ -181,6 +183,23 @@ async function getStopName(stopId) {
         }
 
         return stop.parada.nombre;
+    } catch (error) {
+        console.error('Error al obtener datos del JSON:', error);
+        return null;
+    }
+}
+
+// Función para obtener la ubicación de la parada del JSON
+async function getStopGeo(stopId) {
+    try {
+        // Buscar la parada por su número
+        const stop = busStops.find(stop => stop.parada.numero === stopId);
+
+        if (!stop) {
+            throw new Error(`No se encontró la parada con el ID: ${stopId}`);
+        }
+
+        return stop.ubicacion;
     } catch (error) {
         console.error('Error al obtener datos del JSON:', error);
         return null;
