@@ -2,8 +2,23 @@ var busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getIte
 
 // Agregar función para consultar API
 async function stopAndLineExist(stopNumber, lineNumber) {
-    const response = await fetch(`https://api-auvasa.vercel.app/${stopNumber}/${lineNumber}`);
-    return response.ok;
+    // Buscar la parada en busStops usando stopNumber
+    const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
+
+    if (!stopData) {
+        return false; // Si la parada no existe, retorna false
+    }
+
+    // Revisar si la línea proporcionada existe en alguna de las categorías de líneas para esa parada
+    const lineExists = 
+        stopData.lineas.ordinarias.includes(lineNumber) || 
+        stopData.lineas.poligonos.includes(lineNumber) ||
+        stopData.lineas.matinales.includes(lineNumber) ||
+        stopData.lineas.futbol.includes(lineNumber) ||
+        stopData.lineas.buho.includes(lineNumber) ||
+        stopData.lineas.universidad.includes(lineNumber);
+
+    return lineExists;
 }
 
 async function addBusLine() {
@@ -12,10 +27,18 @@ async function addBusLine() {
 
     console.log(stopNumber, lineNumber);
 
-    if (stopNumber && lineNumber) {
-        
-        const existsInApi = await stopAndLineExist(stopNumber, lineNumber);
+    // Buscar la parada en busStops usando stopNumber
+    const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
 
+    if (!stopData) {
+        alert('Error: Parada no encontrada');
+        return;
+    }
+
+    // Si se ha proporcionado tanto la parada como la línea
+    if (stopNumber && lineNumber) {
+        const existsInApi = await stopAndLineExist(stopNumber, lineNumber);
+        
         // Crear div para el mensaje 
         const errorMessage = document.createElement('div');
         errorMessage.textContent = 'Error: Actualmente no hay información para esa línea en esa parada';
@@ -42,7 +65,22 @@ async function addBusLine() {
             }
         }
     }
+    // Si solo se ha proporcionado la parada, añadir todas las líneas de esa parada
+    else if (stopNumber && !lineNumber) {
+        const allLines = [...stopData.lineas.ordinarias, ...stopData.lineas.poligonos, ...stopData.lineas.matinales, ...stopData.lineas.futbol, ...stopData.lineas.buho, ...stopData.lineas.universidad];
+
+        allLines.forEach(line => {
+            var exists = busLines.some(busLine => busLine.stopNumber === stopNumber && busLine.lineNumber === line);
+            if (!exists) {
+                busLines.push({ stopNumber: stopNumber, lineNumber: line });
+            }
+        });
+
+        saveBusLines();
+        updateBusList();
+    }
 }
+
 
 function saveBusLines() {
     localStorage.setItem('busLines', JSON.stringify(busLines));
@@ -134,18 +172,17 @@ function groupByStops(busLines) {
 
 // Función para obtener el nombre de la parada del API
 async function getStopName(stopId) {
-
-    // FIXME: Añadir un cache de al menos 1h para evitar consultar el nombre cada 30s
-
     try {
-        const response = await fetch(`https://api-auvasa.vercel.app/${stopId}/`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        // Buscar la parada por su número en los datos JSON
+        const stop = busStops.find(stop => stop.parada.numero === stopId);
+
+        if (!stop) {
+            throw new Error(`No se encontró la parada con el ID: ${stopId}`);
         }
-        const data = await response.json();
-        return data.parada.nombre;
+
+        return stop.parada.nombre;
     } catch (error) {
-        console.error('Error al obtener datos de la API:', error);
+        console.error('Error al obtener datos del JSON:', error);
         return null;
     }
 }
@@ -276,7 +313,7 @@ function updateLastUpdatedTime() {
 }
 
 
-window.onload = function() {
+window.onload = async function() {
 
     // Al cargar la página, comprobar el theme
     const savedTheme = localStorage.getItem('theme');
@@ -286,7 +323,7 @@ window.onload = function() {
     }
 
     // Cargamos la lista de paradas para buscador.js
-    loadBusStops();
+    await loadBusStops();
 
     // Acciones para botones añadir y quitar
     var addButton = document.getElementById('addButton');

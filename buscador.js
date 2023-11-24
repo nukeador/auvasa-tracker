@@ -2,15 +2,14 @@
 let busStops = [];
 
 // Función para cargar el JSON
-function loadBusStops() {
-    fetch('paradas.json')
-        .then(response => response.json())
-        .then(data => {
-            busStops = data; // Almacenamos los datos en la variable
-        })
-        .catch(error => {
-            console.error('Error al cargar el archivo JSON:', error);
-        });
+async function loadBusStops() {
+    try {
+        const response = await fetch('paradas.json');
+        const data = await response.json();
+        busStops = data; // Almacenamos los datos en la variable
+    } catch (error) {
+        console.error('Error al cargar el archivo JSON:', error);
+    }
 }
 
 // Llamamos a la función al cargar la página
@@ -91,12 +90,18 @@ document.getElementById('lineNumber').addEventListener('focus', function() {
         return; // No muestra sugerencias si lineNumber ya tiene un valor o stopNumber no es numérico
     }
 
-    fetch(`https://api-auvasa.vercel.app/${stopNumber}`)
-        .then(response => response.json())
-        .then(data => {
-            displayLineSuggestions(data.buses);
-        })
-        .catch(error => console.error('Error al cargar datos de la API:', error));
+    // Encuentra la parada en busStops usando stopNumber
+    const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
+
+    if (stopData) {
+        const lineSuggestions = [...stopData.lineas.ordinarias, ...stopData.lineas.poligonos, ...stopData.lineas.matinales, ...stopData.lineas.futbol, ...stopData.lineas.buho, ...stopData.lineas.universidad]
+    .map(line => ({ linea: line })); // Convierte cada línea en un objeto
+
+
+        displayLineSuggestions(lineSuggestions);
+    } else {
+        console.error('Error: Parada no encontrada en los datos locales');
+    }
 });
 
 function displayLineSuggestions(buses) {
