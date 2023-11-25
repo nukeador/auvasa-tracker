@@ -346,6 +346,10 @@ button#installButton {
     background-color: #334d84;
 }
 
+.foot-note a#telegramButton {
+    background-color: #24a1dd;
+}
+
 .foot-note button#theme-toggle {
     background-color: #ffffff;
 }
