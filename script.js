@@ -386,7 +386,7 @@ function removeAllBusLines() {
         welcomeBox.style.display = 'block';
 
         // Ocultamos el boton removeallbutton
-        removeAllButton = document.getElementById('removeallbutton');
+        removeAllButton = document.getElementById('removeAllButton');
         removeAllButton.style.display = 'none';
     } else {
         // El usuario eligió no eliminar las líneas de autobús
