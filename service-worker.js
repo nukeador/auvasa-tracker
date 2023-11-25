@@ -3,13 +3,15 @@
 
 const CACHE_NAME = 'webapp-cache-v1';
 const urlsToCache = [
-    'https://nukeador.github.io/auvasa-tracker/',
-    'https://nukeador.github.io/auvasa-tracker/index.html',
-    'https://nukeador.github.io/auvasa-tracker/style.css',
-    'https://nukeador.github.io/auvasa-tracker/script.js',
-    'https://nukeador.github.io/auvasa-tracker/buscador.js',
-    'https://nukeador.github.io/auvasa-tracker/favicon.png',
-    'https://nukeador.github.io/auvasa-tracker/img/logo.png',
+    'https://auvasatracker.com/',
+    'https://auvasatracker.com/index.html',
+    'https://auvasatracker.com/style.css',
+    'https://auvasatracker.com/script.js',
+    'https://auvasatracker.com/buscador.js',
+    'https://auvasatracker.com/favicon.png',
+    'https://auvasatracker.com/img/logo.png',
+    'https://auvasatracker.com/img/welcome-logo.png',
+    'https://auvasatracker.com/img/welcome-logo-white.png',
 ];
 
 // Instalación del Service Worker y precarga de los recursos
