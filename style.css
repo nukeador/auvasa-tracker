@@ -1,42 +1,70 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: Helvetica, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 10px;
+    padding: 0;
     color: #333;
 }
 
-h1 {
+header {
+    background: #054a32;
+    margin: 0;
+    padding: 0;
+    color: #a1c7bf;
+    height: 112px;
+    display: flex;
+}
+
+header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url('img/logo.png');
+    background-image: url('img/logo-dark.png');
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 1em;
-    padding: 1em 0 0 4.5em;
-    height: 100px;
+    background-size: 62px;
+    background-position: 1.2em;
+    padding: 0em 0 0 2em;
+    margin: 0;
+    font-size: 1.6em;
+    width: 100%;
+    height: 100%;
 }
-  
-
 
 input[type=number], input[type=text] {
+    margin-left: 10px;
     padding: 10px;
     margin-right: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    border: none;
+    outline: none;
     font-size: 16px;
-    width: 6em;
+    width: 100%;
     -webkit-appearance: none;
     -moz-appearance: textfield;
     appearance: textfield;
+        
+}
+
+input#stopNumber {
+    border-bottom: 1px solid #DDD;
+    background: url(img/location-gray.png) no-repeat;
+    background-size: 18px;
+}
+
+input#lineNumber {
+    background: url(img/bus-gray.png) no-repeat;
+    background-size: 24px;
+}
+
+input#stopNumber, input#lineNumber {
+    height: auto;
+    padding: 14px 0 15px 35px;
+    background-position: 1px 12px;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #215940;
+    background-color: #054a32;
     border: none;
     border-radius: 4px;
     color: white;
@@ -50,36 +78,61 @@ button:hover {
 }
 
 button#addButton {
-    margin: 1em auto;
+    margin: 0em 1.2em;
     display: block;
+    color: #676f7b;
+    background-color: #c1c4ca;
+}
+
+button#addButton:hover {
+    background-color: #054a32;
+    color: #FFF;
 }
 
 button#removeAllButton {
-    background-color: #db4d4d;
-}
-
-button#removeAllButton:hover {
-    background-color: #b63e3e;
+    background: url(img/trash-gray.png) no-repeat #EAEAEA;
+    background-size: 20px;
+    background-position: 15px center;
+    color: #686868;
+    padding: 10px 30px;
+    width: 271px;
+    justify-content: center;
+    display: none; /* Oculto por defecto */
+    align-items: center;
 }
 
 button#installButton {
-    display: block;
     background-color: #6aa8ff;
     border-radius: 2em;
-    float: right;
     color: #000000;
+    height: 39px;
+    position: absolute;
+    right: 0.2em;
+    top: 0.2em;
+    padding: 14px;
 }
 
 #formulario {
+    padding: 14px;
+    margin-top: -30px;
+}
+
+#formulario form {
+    background: #FFF;
+    margin: 2px auto 4px auto;
+    position: relative;
+    border-radius: 8px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    box-shadow: 0 2px 16px 0 rgba(12,12,14,.2),0 4px 8px 0 rgba(12,12,14,.12);
+    height: auto;
+    max-width: 385px;
 }
 
 #formulario #inputs {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -98,11 +151,36 @@ button#installButton {
     border-bottom: 1px solid #eee;
 }
 
-
 .bus-list {
     list-style: none;
     padding: 0;
     margin-top: 1em;
+}
+
+#welcome-box {
+    position: relative;
+    border-radius: 12px;
+    overflow: auto;
+    background: #fff;
+    box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
+    width: 305px;
+    margin: 0 auto;
+    padding: 307px 0 5px 0;
+    background: url("img/welcome-logo.png") no-repeat #FFF center 0;
+}
+
+#welcome-box h2 {
+    font-size: 1em;
+    line-height: 1em;
+    color: #0c0c0e;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+#welcome-box p {
+    padding: 0 20px;
+    font-size: 0.9em;
+    text-align: center;
 }
 
 .stop-block {
@@ -111,12 +189,13 @@ button#installButton {
     margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 4px;
+    margin: 0 4px;
 }
 
 .stop-block h2 {
-    padding: 1em 0 0 0;
+    padding: 1em 0.2em 0 0.4em;
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
 .stop-block a#mapIcon {
@@ -214,8 +293,7 @@ button#installButton {
     display: inline; /* Mostrar cuando se pasa el ratón por encima */
 }
 
-.error {
-    background-color: #b63e3e;
+.error, .success {
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -227,12 +305,23 @@ button#installButton {
     transition: opacity 0.3s ease-in-out;
 }
 
-.error.show {
+.error.show, .success.show {
     opacity: 1;
+}
+
+.error {
+    background-color: #b63e3e;
+}
+
+.success {
+    background-color: #3eb65c;
 }
 
 .foot-note {
     font-style: italic;
+    padding: 1em;
+    margin-top: 1em;
+    font-size: 0.9em;
 }
 
 .foot-note a {
@@ -287,8 +376,44 @@ body.dark-mode {
     background-image: url('img/logo-dark.png');
 }
 
+.dark-mode #formulario form {
+    box-shadow: 0 2px 16px 0 rgba(41, 41, 48, 0.2);
+    background-color: #323232;
+}
+
+.dark-mode #formulario form input {
+    background-color: #323232;
+    color: #FFF;
+}
+
+.dark-mode input#stopNumber {
+    border-bottom: 1px solid #EEE;
+    background: url(img/location-white.png) no-repeat;
+    background-size: 18px;
+    background-position: 1px 12px;
+}
+
+.dark-mode input#lineNumber {
+    background: url(img/bus-white.png) no-repeat;
+    background-size: 24px;
+    background-position: 1px 12px;
+}
+
 .dark-mode #autocompleteResults, .dark-mode #lineSuggestions {
     background-color: #333;
+}
+
+.dark-mode #welcome-box {
+    box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
+    background: url("img/welcome-logo-white.png") no-repeat #2d2d2d center 0;
+}
+
+.dark-mode #welcome-box h2 {
+    color: #FFF;
+}
+
+.dark-mode #welcome-box p {
+    color: #edebeb;
 }
 
 .dark-mode .stop-block {
@@ -304,12 +429,6 @@ body.dark-mode {
 .dark-mode .line-info {
     border-top: 1px solid #404040;
 }
-
-.dark-mode input[type=number], .dark-mode input[type=text] {
-    border: 1px solid #444;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
 .dark-mode .foot-note button#theme-toggle {
     background-color: #222;
 }
@@ -317,6 +436,13 @@ body.dark-mode {
 .dark-mode .stop-block a#mapIcon {
     background-image: url("img/map-dark.png");
   }  
+
+.dark-mode button#removeAllButton {
+    background: url(img/trash-white.png) no-repeat #323232;
+    background-size: 20px;
+    background-position: 15px center;
+    color: #b1b1b1;
+}
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 576px) {

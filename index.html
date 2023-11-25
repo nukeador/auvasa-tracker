@@ -43,18 +43,23 @@
 </head>
 
 <body>
-    <button id="installButton" style="display: none;">Instalar</button>
-
-    <h1>AUVASA Tracker</h1>
+    <header>
+        <h1>AUVASA Tracker</h1>
+        <button id="installButton" style="display: none;">Instalar</button>
+    </header>
  
     <div id="formulario">
-        <div id="inputs">
-            <input type="text" id="stopNumber" placeholder="Parada" /> <input type="text" id="lineNumber" placeholder="Línea" />
-        </div>
-        <div id="autocompleteResults"></div>
-        <div id="lineSuggestions"></div>
-        <button id="addButton">Añadir a seguimiento</button>
+        <form>
+            <div id="inputs">
+                <input type="text" id="stopNumber" placeholder="Introduzca una parada" />
+                <input type="text" id="lineNumber" placeholder="Introduzca una línea" />
+            </div>
+            <button id="addButton" title="Añadir a seguimiento" type="button">+</button>
+        </form>
     </div>
+
+    <div id="autocompleteResults"></div>
+    <div id="lineSuggestions"></div>
 
     <!-- Cuadro de búsqueda oculto inicialmente -->
     <div id="searchBox" style="display:none;">
@@ -63,7 +68,10 @@
     </div>
 
     <div class="bus-list" id="busList">
-        <!-- Aquí se mostrarán las líneas de autobús y tiempos de espera -->
+        <div id="welcome-box">
+            <h2>Empiece a añadir lineas y paradas</h2>
+            <p>Puedes añadir paradas completas o líneas individuales usando el buscador de la parte superior. </p>
+        </div>
     </div>
 
     <div class="foot-note">
@@ -78,7 +86,7 @@
             Compartir en Facebook
         </a>          
         <button id="theme-toggle">
-            <span id="theme-toggle-icon">🌞</span> <!-- Icono de sol por defecto -->
+            <span id="theme-toggle-icon" title="Cambiar a tema claro/oscuro">🌞</span> <!-- Icono de sol por defecto -->
         </button>              
     </div>
 

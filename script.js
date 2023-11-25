@@ -30,8 +30,35 @@ async function addBusLine() {
     // Buscar la parada en busStops usando stopNumber
     const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
 
+    // Si se ha proporcionado solo la parada
+    if (!stopNumber && lineNumber) {
+        // Crear div para el mensaje 
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = 'Error: Debe especificar una parada';
+        errorMessage.classList.add('error');
+        document.body.appendChild(errorMessage);
+    
+        // Mostrar y ocultar mensaje
+        errorMessage.classList.add('show');
+        setTimeout(() => {
+            errorMessage.classList.remove('show');
+        }, 3000); // ocultar después de 3 segundos
+        return;
+    }
+
+    // Si no hay parada o datos de la parada
     if (!stopData) {
-        alert('Error: Parada no encontrada');
+        // Crear div para el mensaje 
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = 'Error: Parada no encontrada o vacía';
+        errorMessage.classList.add('error');
+        document.body.appendChild(errorMessage);
+
+        // Mostrar y ocultar mensaje
+        errorMessage.classList.add('show');
+        setTimeout(() => {
+            errorMessage.classList.remove('show');
+        }, 3000); // ocultar después de 3 segundos
         return;
     }
 
@@ -62,6 +89,18 @@ async function addBusLine() {
                 busLines.push({ stopNumber: stopNumber, lineNumber: lineNumber });
                 saveBusLines();
                 updateBusList();
+
+                // Crear div para el mensaje 
+                const sucessMessage = document.createElement('div');
+                sucessMessage.textContent = 'Línea añadida con éxito';
+                sucessMessage.classList.add('success');
+                document.body.appendChild(sucessMessage);
+
+                // Mostrar y ocultar mensaje
+                sucessMessage.classList.add('show');
+                setTimeout(() => {
+                    sucessMessage.classList.remove('show');
+                }, 3000); // ocultar después de 3 segundos
             }
         }
     }
@@ -78,6 +117,18 @@ async function addBusLine() {
 
         saveBusLines();
         updateBusList();
+
+        // Crear div para el mensaje 
+        const sucessMessage = document.createElement('div');
+        sucessMessage.textContent = 'Todas las líneas de la parada añadidas';
+        sucessMessage.classList.add('success');
+        document.body.appendChild(sucessMessage);
+
+        // Mostrar y ocultar mensaje
+        sucessMessage.classList.add('show');
+        setTimeout(() => {
+            sucessMessage.classList.remove('show');
+        }, 3000); // ocultar después de 3 segundos
     }
 }
 
@@ -89,10 +140,20 @@ function saveBusLines() {
 async function updateBusList() {
     var stops = groupByStops(busLines);
 
+    // Si hay paradas añadidas mostramos boton borrar todas
+    if (busLines.length > 0) {
+        removeAllButton = document.getElementById('removeAllButton');
+        removeAllButton.style.display = 'flex';
+    }
+
     for (var stopId in stops) {
         let stopElement = document.getElementById(stopId);
 
         if (!stopElement) {
+            // Borramos el mensaje de bienvenida
+            welcomeBox = document.getElementById('welcome-box');
+            welcomeBox.style.display = 'none';
+            
             // Crear el stopElement si no existe
             stopElement = document.createElement('div');
             stopElement.id = stopId;
@@ -319,6 +380,14 @@ function removeAllBusLines() {
         busLines = [];
         saveBusLines();
         updateBusList();
+
+        // Volvemos a mostrar el welcome-box
+        welcomeBox = document.getElementById('welcome-box');
+        welcomeBox.style.display = 'block';
+
+        // Ocultamos el boton removeallbutton
+        removeAllButton = document.getElementById('removeallbutton');
+        removeAllButton.style.display = 'none';
     } else {
         // El usuario eligió no eliminar las líneas de autobús
         console.log("Eliminación cancelada.");
