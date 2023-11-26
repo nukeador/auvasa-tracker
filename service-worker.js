@@ -1,17 +1,31 @@
 
 // Este es el Service Worker de la web app
 
-const CACHE_NAME = 'webapp-cache-v1';
+const CACHE_NAME = 'auvasatracker-v1';
 const urlsToCache = [
-    'https://auvasatracker.com/',
-    'https://auvasatracker.com/index.html',
-    'https://auvasatracker.com/style.css',
-    'https://auvasatracker.com/script.js',
-    'https://auvasatracker.com/buscador.js',
-    'https://auvasatracker.com/favicon.png',
-    'https://auvasatracker.com/img/logo.png',
-    'https://auvasatracker.com/img/welcome-logo.png',
-    'https://auvasatracker.com/img/welcome-logo-white.png',
+    '/',
+    '/index.html',
+    '/style.css',
+    '/script.js',
+    '/buscador.js',
+    '/favicon.png',
+    // Imágenes
+    "/img/bus-black.png",
+    "/img/bus-gray.png",
+    "/img/bus-white.png",
+    "/img/ios-share.svg",
+    "/img/location-gray.png",
+    "/img/location-white.png",
+    "/img/logo-dark.png",
+    "/img/map-dark.png",
+    "/img/map.png",
+    "/img/screenshot.jpg",
+    "/img/trash-gray.png",
+    "/img/trash.png",
+    "/img/trash-white.png",
+    "/img/welcome-logo-2.png",
+    "/img/welcome-logo.png",
+    "/img/welcome-logo-white.png",
 ];
 
 // Instalación del Service Worker y precarga de los recursos
