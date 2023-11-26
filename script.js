@@ -475,8 +475,10 @@ function showInstallButton() {
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
                 console.log('Usuario aceptó la instalación');
+                _paq.push(['trackEvent', 'installbutton', 'click', 'accepted']);
             } else {
                 console.log('Usuario rechazó la instalación');
+                _paq.push(['trackEvent', 'installbutton', 'click', 'rejected']);
             }
             deferredPrompt = null;
         });
