@@ -2,7 +2,7 @@
 
 Esta aplicación web permite a los usuarios llevar un seguimiento de las líneas de autobús y paradas que les interesan del sistema AUVASA en Valladolid, España.
 
-**[🚏 Acceder a la web e instalar](https://nukeador.github.io/auvasa-tracker/)**
+**[🚏 Acceder a la web e instalar](https://auvasatracker.com/)**
 
 ![Captura de pantalla](img/screenshot.jpg)
 
