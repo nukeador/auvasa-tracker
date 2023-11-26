@@ -19,7 +19,6 @@ const urlsToCache = [
     "/img/logo-dark.png",
     "/img/map-dark.png",
     "/img/map.png",
-    "/img/screenshot.jpg",
     "/img/trash-gray.png",
     "/img/trash.png",
     "/img/trash-white.png",
