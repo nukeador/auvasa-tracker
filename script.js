@@ -342,7 +342,7 @@ function removeObsoleteElements(stops) {
 }
 
 async function fetchAllBusAlerts() {
-    return fetch('https://api-auvasa.vercel.app/alertas/')
+    return fetch('https://api.auvasatracker.com/alertas/')
         .then(response => response.json()) // Parse la respuesta a JSON
         .catch(error => console.error('Error:', error));
 }
@@ -353,7 +353,7 @@ function filterBusAlerts(alerts, busLine) {
 }
 
 function fetchBusTime(stopNumber, lineNumber, lineItem) {
-    var apiUrl = 'https://api-auvasa.vercel.app/' + stopNumber + '/' + lineNumber;
+    var apiUrl = 'https://api.auvasatracker.com/' + stopNumber + '/' + lineNumber;
 
     fetch(apiUrl)
         .then(function(response) { return response.json(); })
