@@ -335,6 +335,16 @@ function removeObsoleteElements(stops) {
     });
 }
 
+async function fetchAllBusAlerts() {
+    return fetch('https://api-auvasa.vercel.app/alertas/')
+        .then(response => response.json()) // Parse la respuesta a JSON
+        .catch(error => console.error('Error:', error));
+}
+
+function filterBusAlerts(alerts, busLine) {
+    // Filtra las alertas para la línea de autobús específica
+    return alerts.filter(alert => alert.ruta.linea === busLine);
+}
 
 function fetchBusTime(stopNumber, lineNumber, lineItem) {
     var apiUrl = 'https://api-auvasa.vercel.app/' + stopNumber + '/' + lineNumber;
@@ -345,6 +355,19 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
             if (data.buses && data.buses.length > 0) {
                 var paradaInfo = data.parada;
                 var busInfo = data.buses[0];
+
+                // Recuperamos si hay alertas para este bus
+                const busLineAlerts = filterBusAlerts(allAlerts, lineNumber);
+                let alertHTML = '';
+                let alertIcon = '';
+                if (busLineAlerts.length > 0) {
+                    alertHTML = `<div class="alert-box"><h2>Avisos para la línea ${lineNumber}</h2><ul>`;
+                    busLineAlerts.forEach(alert => {
+                        alertHTML += `<li>${alert.descripcion}"</li>`;
+                    });
+                    alertHTML += '</ul><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="alerts-close">Cerrar</button></div>';
+                    alertIcon = '⚠️';
+                }
                 
                 let horaLlegada = "";
 
@@ -371,7 +394,7 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     horaLlegada = '~ ' + horasEstimadasLlegada + ":" + minutosEstimadosLlegada;
                 }
 
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p><p class="horaLlegada">' + horaLlegada + '</p></div>';
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a>' + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p><p class="horaLlegada">' + horaLlegada + '</p></div>';
                 // Guarda si el elemento tenía la clase 'highlight'
                 let hadHighlight = lineItem.classList.contains('highlight');
 
@@ -390,15 +413,38 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         lineItem.classList.add('highlight');
                     }
                 }, 500);
+
+                // Cuadro de alertas
+                lineItem.innerHTML += alertHTML;
+
+                // Agrega un controlador de eventos de clic a alert-icon
+                lineItem.querySelector('.alert-icon').addEventListener('click', function() {
+                    const alertBox = this.parentNode.parentNode.parentNode.querySelector('.alert-box');
+                    if (alertBox) {
+                        alertBox.style.display = 'flex';
+                        // Paramos las actualizaciones para que no se cierre el cuadro
+                        clearInterval(intervalId);
+
+                        // Agrega un controlador de eventos de clic a alerts-close
+                        alertBox.querySelector('.alerts-close').addEventListener('click', function() {
+                            this.parentNode.style.display = 'none';
+                            // Reanudamos y ejecutamos las actualizaciones
+                            intervalId = setInterval(updateBusList, 30000);
+                            updateBusList();
+                        });
+                    }
+                });
             } else {
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';;
             }
-            // Crea y agrega el botón de eliminación cada vez que se actualiza la información.
+            // Crea y agrega botones cada vez que se actualiza la información.
+
             // Crear el botón de eliminar
             const removeButton = createButton('remove-button', '&#128465;', function() {
                 removeBusLine(stopNumber, lineNumber);
             });
             lineItem.appendChild(removeButton);
+
             // Crear el botón de flecha
             const arrowButton = createArrowButton();
             lineItem.appendChild(arrowButton);
@@ -460,6 +506,10 @@ function updateLastUpdatedTime() {
     document.getElementById('last-update').textContent = 'Última actualización: ' + formattedTime;
 }
 
+let allAlerts = [];
+
+// Declaración global de intervalId
+let intervalId;
 
 window.onload = async function() {
 
@@ -484,12 +534,15 @@ window.onload = async function() {
     if (addButton) {
         addButton.addEventListener('click', addBusLine);
     }
-    
+
+    // Recuperamos todas las alertas vigentes
+    allAlerts = await fetchAllBusAlerts();
+
     updateBusList();
 }
 
 // Tiempo de actualización, por defecto 30s
-setInterval(updateBusList, 30000);
+intervalId = setInterval(updateBusList, 30000);
 
 // Dark mode
 const themeToggle = document.getElementById('theme-toggle');

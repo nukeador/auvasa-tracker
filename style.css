@@ -240,6 +240,37 @@ button#installButton {
     max-width: 40px;
 }
 
+.line-info .alert-icon {
+    position: absolute;
+    font-size: 0.7em;
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+.line-info .alert-box {
+    position: fixed; /* Cambia a fixed para posicionarlo en relación a la ventana del navegador */
+    border-radius: 12px;
+    overflow: auto;
+    background: #fff;
+    box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
+    width: 305px;
+    margin: 0 auto;
+    padding: 1em;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Desplaza el elemento hacia atrás para centrarlo perfectamente */
+    z-index: 1;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.line-info .alert-box .notice {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
 .line-info .linea, .line-info .tiempo {
     flex: 1;
 }
@@ -419,11 +450,16 @@ body.dark-mode {
     background: url("img/welcome-logo-white.png") no-repeat #2d2d2d center 0;
 }
 
-.dark-mode #welcome-box h2 {
+.dark-mode .alert-box {
+    box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
+    background: #2d2d2d;
+}
+
+.dark-mode #welcome-box h2, .dark-mode .alert-box h2 {
     color: #FFF;
 }
 
-.dark-mode #welcome-box p {
+.dark-mode #welcome-box p, .dark-mode .alert-box p {
     color: #edebeb;
 }
 
