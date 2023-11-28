@@ -21,6 +21,46 @@ async function stopAndLineExist(stopNumber, lineNumber) {
     return lineExists;
 }
 
+function createButton(className, text, onClick) {
+    const button = document.createElement('button');
+    button.className = className;
+    button.innerHTML = text;
+    if (onClick) {
+        button.addEventListener('click', onClick);
+    }
+    return button;
+}
+
+function createArrowButton() {
+    const button = createButton('arrow-button', '⮞', function() {
+        // Encuentra el botón de eliminar correspondiente
+        const removeButton = this.parentElement.querySelector('.remove-button');
+    
+        // Muestra u oculta el botón de eliminar
+        if (window.getComputedStyle(removeButton).display === 'none') {
+            removeButton.style.display = 'block';
+            setTimeout(function() {
+                removeButton.style.transform = 'translateX(0)';
+                removeButton.style.opacity = '1';
+            }, 200);
+        } else {
+            removeButton.style.transform = 'translateX(100%)';
+            removeButton.style.opacity = '0';
+            setTimeout(function() {
+                removeButton.style.display = 'none';
+            }, 300); // Debe coincidir con la duración de la transición
+        }
+
+        // Cambia la imagen de fondo del botón
+        if (window.getComputedStyle(this).backgroundImage.endsWith('arrow-light.png")')) {
+            this.style.backgroundImage = "url('img/arrow-left-light.png')";
+        } else {
+            this.style.backgroundImage = "url('img/arrow-light.png')";
+        }
+    });
+    return button;
+}
+
 async function addBusLine() {
     const stopNumber = document.getElementById('stopNumber').value;
     const lineNumber = document.getElementById('lineNumber').value;
@@ -190,14 +230,14 @@ async function updateBusList() {
                 // Place holder inicial
                 busElement.innerHTML = '<div class="linea"><h3>' + line.lineNumber + '</h3></div> <div class="tiempo">...</div>';
                 
-                // Añadir el botón de eliminar
-                const removeButton = document.createElement('button');
-                removeButton.innerHTML = '&#128465;';
-                removeButton.className = 'remove-button';
-                removeButton.addEventListener('click', function() {
+                // Crear el botón de eliminar
+                const removeButton = createButton('remove-button', '&#128465;', function() {
                     removeBusLine(line.stopNumber, line.lineNumber);
                 });
                 busElement.appendChild(removeButton);
+                // Crear el botón de flecha
+                const arrowButton = createArrowButton();
+                busElement.appendChild(arrowButton);
 
                 // Añadir el nuevo elemento al bloque de la parada
                 stopElement.appendChild(busElement);
@@ -332,28 +372,48 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 }
 
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p><p class="horaLlegada">' + horaLlegada + '</p></div>';
+                // Guarda si el elemento tenía la clase 'highlight'
+                let hadHighlight = lineItem.classList.contains('highlight');
+
+                // Elimina la clase 'highlight' temporalmente si la tenía
+                if (hadHighlight) {
+                    lineItem.classList.remove('highlight');
+                }
+
+                // Aplica la clase 'highlight-update'
+                lineItem.classList.add('highlight-update');
+
+                // Espera 1 segundo, luego elimina 'highlight-update' y restaura 'highlight' si es necesario
+                setTimeout(function() {
+                    lineItem.classList.remove('highlight-update');
+                    if (hadHighlight) {
+                        lineItem.classList.add('highlight');
+                    }
+                }, 500);
             } else {
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';;
             }
             // Crea y agrega el botón de eliminación cada vez que se actualiza la información.
-            var removeButton = document.createElement('button');
-            removeButton.innerHTML = '&#128465;';
-            removeButton.className = 'remove-button';
-            removeButton.onclick = function() {
+            // Crear el botón de eliminar
+            const removeButton = createButton('remove-button', '&#128465;', function() {
                 removeBusLine(stopNumber, lineNumber);
-            };
+            });
             lineItem.appendChild(removeButton);
+            // Crear el botón de flecha
+            const arrowButton = createArrowButton();
+            lineItem.appendChild(arrowButton);
         })
         .catch(function(error) {
             lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Error</div>';
             // Asegúrate de agregar también aquí el botón de eliminar
-            var removeButton = document.createElement('button');
-            removeButton.innerHTML = '&#128465;';
-            removeButton.className = 'remove-button';
-            removeButton.onclick = function() {
+            // Crear el botón de eliminar
+            const removeButton = createButton('remove-button', '&#128465;', function() {
                 removeBusLine(stopNumber, lineNumber);
-            };
+            });
             lineItem.appendChild(removeButton);
+            // Crear el botón de flecha
+            const arrowButton = createArrowButton();
+            lineItem.appendChild(arrowButton);
         });
 }
 
@@ -424,6 +484,7 @@ window.onload = async function() {
     if (addButton) {
         addButton.addEventListener('click', addBusLine);
     }
+    
     updateBusList();
 }
 

@@ -212,7 +212,7 @@ button#installButton {
 .line-info {
     border-top: 1px solid #eee;
     display: flex;
-    padding: 0em 1em;
+    padding: 0em 0 0 1em;
 }
 
 /* Animaciones */
@@ -229,17 +229,13 @@ button#installButton {
     background-color: #f0f9ff9c;
 }
 
+.highlight-update {
+    background-color: #ffff99; /* Cambia esto al color que quieras */
+    transition: background-color 1s ease;
+}
+
 .line-info:first-child {
     border-top: none;
-}
-
-.line-info button {
-    background-color: #b63e3e;
-    margin-left: 15px;
-}
-
-.line-info button:hover {
-    background-color: #c03e2b;
 }
 
 .line-info h3 {
@@ -286,12 +282,27 @@ button#installButton {
     background: none;
     border: none;
     font-size: 16px;
+    background-color: #b63e3e;
+    margin-left: 15px;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transform: translateX(100%);
+    opacity: 0;
 }
 
-/* Mostrar el botón solo cuando se pasa el ratón por encima del contenedor de la parada */
-.line-info:hover .remove-button {
-    display: inline; /* Mostrar cuando se pasa el ratón por encima */
+.remove-button:hover {
+    background-color: #c03e2b;
 }
+
+.arrow-button {
+    background: transparent no-repeat center center;
+    background-image: url('img/arrow-light.png');
+    background-size: 40px 40px;
+    border: none;
+    font-size: 0;
+    cursor: pointer;
+}
+
+
 
 .error, .success {
     color: white;

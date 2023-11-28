@@ -1,7 +1,7 @@
 
 // Este es el Service Worker de la web app
 
-const CACHE_NAME = 'auvasatracker-v1';
+const CACHE_NAME = 'auvasatracker-v1.0.1';
 const urlsToCache = [
     '/',
     '/index.html',
@@ -10,6 +10,8 @@ const urlsToCache = [
     '/buscador.js',
     '/favicon.png',
     // Imágenes
+    "/img/arrow-light.png",
+    "/img/arrow-left-light.png",
     "/img/bus-black.png",
     "/img/bus-gray.png",
     "/img/bus-white.png",
