@@ -141,6 +141,9 @@ async function addBusLine() {
                 setTimeout(() => {
                     sucessMessage.classList.remove('show');
                 }, 3000); // ocultar después de 3 segundos
+
+                // Limpiar el contenido del input lineNumber
+                document.getElementById('lineNumber').value = '';
             }
         }
     }
@@ -169,6 +172,9 @@ async function addBusLine() {
         setTimeout(() => {
             sucessMessage.classList.remove('show');
         }, 3000); // ocultar después de 3 segundos
+
+        // Limpiar el contenido del input stopNumber
+        document.getElementById('stopNumber').value = '';
     }
 }
 
