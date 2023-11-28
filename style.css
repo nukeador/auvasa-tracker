@@ -73,10 +73,6 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: rgb(1, 46, 55);
-}
-
 button#addButton {
     margin: 0em 1.2em;
     display: block;
