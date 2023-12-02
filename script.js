@@ -382,7 +382,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         // Cortamos destino a máximo 22 caracteres
         if (destino.length > 25) {
             destino = destino.substring(0, 22) + "...";
-        }*
+        }
 
         // Combinar datos
         const combinedData = combineBusData(busesRT, scheduledData);
