@@ -377,11 +377,12 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         const response = await fetch(apiUrl);
         const scheduledData = await response.json();
         let destino = scheduledData.buses[0].destino;
-        destino = destino.split("-").pop().trim();
+        // TODO: El API no da bien el destino
+        // destino = destino.split("-").pop().trim();
         // Cortamos destino a máximo 22 caracteres
         if (destino.length > 25) {
             destino = destino.substring(0, 22) + "...";
-        }
+        }*
 
         // Combinar datos
         const combinedData = combineBusData(busesRT, scheduledData);
@@ -439,7 +440,6 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             horaLlegadaProgramada = busMasCercano.scheduled.llegada.split(':');
             horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
 
-            console.log(diferencia);
             // Calculos de retrasos/adelantos
             if (diferencia > 0) {
                 diferencia = `Retraso ${diferencia} min.`;
@@ -582,10 +582,8 @@ function elegirBusMasCercano(buses) {
     let tripIdMasCercanoHoy = null;
     let busMasCercanoHoy = null;
     let diferenciaMinima = Infinity;
-
+    let busesAdelantados = new Set();
     let tripIdPrimerBusSiguienteDia = null;
-    let primerBusSiguienteDia = null;
-    let horaPrimerBusSiguienteDia = new Date('1970-01-02T23:59:59'); // Última hora del día siguiente
 
     const hoy = new Date();
     const fechaHoy = hoy.toISOString().split('T')[0]; // Fecha de hoy en formato YYYY-MM-DD
@@ -593,24 +591,27 @@ function elegirBusMasCercano(buses) {
     Object.entries(buses).forEach(([tripId, bus]) => {
         let horaLlegada = null;
 
-        // Guardamos los datos realtime si están disponibles, de lo contrario, los programados
-        // TODO: Si un bus llego con adelanto en realtime, no debemos mostrar el programado
         if (bus.realTime && bus.realTime.llegada) {
             horaLlegada = new Date(`${fechaHoy}T${bus.realTime.llegada}`);
-        } else if (bus.scheduled && bus.scheduled.llegada) {
-            horaLlegada = new Date(`${fechaHoy}T${bus.scheduled.llegada}`);
+            // Si el bus ya llegó, añadirlo al conjunto de buses adelantados
+            if (horaLlegada - hoy < 0) {
+                busesAdelantados.add(tripId);
+            }
         }
 
-        if (horaLlegada) {
-            let diferencia = horaLlegada - hoy;
-            if (diferencia > 0 && diferencia < diferenciaMinima) {
-                diferenciaMinima = diferencia;
-                tripIdMasCercanoHoy = tripId;
-                busMasCercanoHoy = bus;
-            } else if (diferencia < 0 && horaLlegada < horaPrimerBusSiguienteDia) {
-                horaPrimerBusSiguienteDia = horaLlegada;
-                tripIdPrimerBusSiguienteDia = tripId;
-                primerBusSiguienteDia = bus;
+        // Continuar solo si el bus no está en el conjunto de buses adelantados
+        if (!busesAdelantados.has(tripId)) {
+            if (bus.scheduled && bus.scheduled.llegada) {
+                horaLlegada = new Date(`${fechaHoy}T${bus.scheduled.llegada}`);
+            }
+
+            if (horaLlegada) {
+                let diferencia = horaLlegada - hoy;
+                if (diferencia > 0 && diferencia < diferenciaMinima) {
+                    diferenciaMinima = diferencia;
+                    tripIdMasCercanoHoy = tripId;
+                    busMasCercanoHoy = bus;
+                }
             }
         }
     });
