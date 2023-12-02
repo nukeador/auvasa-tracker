@@ -178,7 +178,6 @@ async function addBusLine() {
     }
 }
 
-
 function saveBusLines() {
     localStorage.setItem('busLines', JSON.stringify(busLines));
 }
@@ -205,7 +204,7 @@ async function updateBusList() {
             stopElement.id = stopId;
             stopElement.className = 'stop-block';
             
-            stopElement.innerHTML = '<h2>🚏 '+ stopId + '</h2>';
+            stopElement.innerHTML = '<h2>'+ stopId + '</h2>';
 
             document.getElementById('busList').appendChild(stopElement);
         }
@@ -352,81 +351,146 @@ function filterBusAlerts(alerts, busLine) {
     return alerts.filter(alert => alert.ruta.linea === busLine);
 }
 
-function fetchBusTime(stopNumber, lineNumber, lineItem) {
-    var apiUrl = 'https://api.auvasatracker.com/' + stopNumber + '/' + lineNumber;
+async function fetchBusTimeRT(stopNumber, lineNumber) {
+    var apiRTUrl = 'https://gtfs.auvasatracker.com/realtime/' + stopNumber;
+    const response = await fetch(apiRTUrl);
+    const data = await response.json();
 
-    fetch(apiUrl)
-        .then(function(response) { return response.json(); })
-        .then(function(data) {
-            if (data.buses && data.buses.length > 0) {
-                var paradaInfo = data.parada;
-                var busInfo = data.buses[0];
+    let busesLinea = [];
 
-                // Recuperamos si hay alertas para este bus
-                const busLineAlerts = filterBusAlerts(allAlerts, lineNumber);
-                let alertHTML = '';
-                let alertIcon = '';
-                if (busLineAlerts.length > 0) {
-                    alertHTML = `<div class="alert-box"><h2>Avisos para la línea ${lineNumber}</h2><ul>`;
-                    busLineAlerts.forEach(alert => {
-                        alertHTML += `<li>${alert.descripcion}"</li>`;
-                    });
-                    alertHTML += '</ul><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="alerts-close">Cerrar</button></div>';
-                    alertIcon = '⚠️';
+    if (data.buses && data.buses.length > 0) {
+        busesLinea = data.buses.filter(bus => bus.linea === lineNumber);
+    }
+
+    return busesLinea;
+}
+
+async function fetchBusTime(stopNumber, lineNumber, lineItem) {
+    // URL del API con estáticos y tiempo real
+    var apiUrl = 'https://gtfs.auvasatracker.com/parada/' + stopNumber + '/' + lineNumber;
+
+    try {
+        // Datos en tiempo real (array de buses)
+        let busesRT = await fetchBusTimeRT(stopNumber, lineNumber);
+
+        // Datos programados
+        const response = await fetch(apiUrl);
+        const scheduledData = await response.json();
+        let destino = scheduledData.buses[0].destino;
+        destino = destino.split("-").pop().trim();
+        // Cortamos destino a máximo 22 caracteres
+        if (destino.length > 25) {
+            destino = destino.substring(0, 22) + "...";
+        }
+
+        // Combinar datos
+        const combinedData = combineBusData(busesRT, scheduledData);
+
+        // Filtrar y encontrar el bus más cercano para la línea específica
+        let busesLinea = combinedData[lineNumber];
+        if (busesLinea) {
+
+        // Recuperamos si hay alertas para esa linea
+        const busLineAlerts = filterBusAlerts(allAlerts, lineNumber);
+        let alertHTML = '';
+        let alertIcon = '';
+        if (busLineAlerts.length > 0) {
+            alertHTML = `<div class="alert-box"><h2>Avisos para la línea ${lineNumber}</h2><ul>`;
+            busLineAlerts.forEach(alert => {
+                alertHTML += `<li>${alert.descripcion}"</li>`;
+            });
+            alertHTML += '</ul><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="alerts-close">Cerrar</button></div>';
+            alertIcon = '⚠️';
+        }
+
+        const busMasCercano = elegirBusMasCercano(busesLinea);
+
+        if (busMasCercano) {
+            let horaLlegada;
+            let tiempoRestante;
+            let diferencia;
+
+            // Si hay datos en tiempo real, usarlos, de lo contrario, usar los programados
+            if (busMasCercano.realTime) {
+                horaLlegada = busMasCercano.realTime.llegada;
+                tiempoRestante = busMasCercano.realTime.tiempoRestante;
+                // Comparamos la hora de llegada programada con la hora de llegada en tiempo real
+                diferencia = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`)) / 60000);
+                lineItem.classList.add('realtime');
+            } else {
+                horaLlegada = busMasCercano.scheduled.llegada;
+                // Calculamos el tiempo restante a partir de la hora de llegada programada en busMasCercano.scheduled.llegada
+                tiempoRestante = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000);
+
+                if (tiempoRestante < 0) {
+                    // El bus está programado para el día siguiente
+                    tiempoRestante = 1440 + tiempoRestante; // Sumamos 24 horas (en minutos) al tiempoRestante negativo
+                    let horas = Math.floor(tiempoRestante / 60);
+                    let minutos = tiempoRestante % 60;
+                    tiempoRestante = `${horas}h ${minutos}`;
                 }
-                
-                let horaLlegada = "";
+                lineItem.classList.add('programado');
+            }
 
-                // Si el tiempo no es exacto añadimos un + al inicio del tiempo
-                if (!busInfo.esExacto) {
-                    busInfo.tiempoRestante = '+' + busInfo.tiempoRestante;
-                }
-                // Si es exacto calculamos la hora aproximada de llegada
-                else {
-                    let horaActual = new Date(); // Representa el momento actual
-                    let minutosAdicionales = busInfo.tiempoRestante; // Tiempo restante hasta la llegada del bus, en minutos
+            // Pasamos la horas de llegada a formato HH:MM
+            horaLlegada = horaLlegada.split(':');
+            horaLlegada = horaLlegada[0] + ':' + horaLlegada[1];
 
-                    // Añade los minutos adicionales a la hora actual
-                    horaActual.setMinutes(horaActual.getMinutes() + minutosAdicionales);
+            horaLlegadaProgramada = busMasCercano.scheduled.llegada.split(':');
+            horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
 
-                    // Extrae las horas y minutos actualizados
-                    let horasEstimadasLlegada = horaActual.getHours();
-                    let minutosEstimadosLlegada = horaActual.getMinutes();
+            console.log(diferencia);
+            // Calculos de retrasos/adelantos
+            if (diferencia > 0) {
+                diferencia = `Retraso ${diferencia} min.`;
+                lineItem.classList.remove('adelantado');
+                lineItem.classList.add('retrasado');
+            }
+            else if (diferencia < 0) {
+                diferencia = `Adelanto ${diferencia * -1} min.`;
+                lineItem.classList.add('adelantado');
+                lineItem.classList.remove('retrasado');
+            }
+            else if (diferencia == 0) {
+                diferencia = "(En hora)";
+                lineItem.classList.remove('adelantado');
+                lineItem.classList.remove('retrasado');
+            }
+            else {
+                diferencia = "";
+                lineItem.classList.remove('adelantado');
+                lineItem.classList.remove('retrasado');
+            }
 
-                    // Formatea los minutos para asegurar dos dígitos
-                    minutosEstimadosLlegada = minutosEstimadosLlegada < 10 ? '0' + minutosEstimadosLlegada : minutosEstimadosLlegada;
+            // Actualizar el HTML con los datos del bus más cercano
+            lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div> <div class="hora-tiempo"><div class="tiempo">' + tiempoRestante + ' <p>min.</div><div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
 
-                    // Construye la cadena de tiempo de llegada estimada
-                    horaLlegada = '~ ' + horasEstimadasLlegada + ":" + minutosEstimadosLlegada;
-                }
+            // Guarda si el elemento tenía la clase 'highlight'
+            let hadHighlight = lineItem.classList.contains('highlight');
 
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a>' + '</h3><p class="destino">→ ' + busInfo.destino + '</p></div> <div class="tiempo">' + busInfo.tiempoRestante + ' <p>min.</p><p class="horaLlegada">' + horaLlegada + '</p></div>';
-                // Guarda si el elemento tenía la clase 'highlight'
-                let hadHighlight = lineItem.classList.contains('highlight');
+            // Elimina la clase 'highlight' temporalmente si la tenía
+            if (hadHighlight) {
+                lineItem.classList.remove('highlight');
+            }
 
-                // Elimina la clase 'highlight' temporalmente si la tenía
-                if (hadHighlight) {
-                    lineItem.classList.remove('highlight');
-                }
+            // Aplica la clase 'highlight-update'
+            lineItem.classList.add('highlight-update');
 
-                // Aplica la clase 'highlight-update'
-                lineItem.classList.add('highlight-update');
-
-                // Espera 1 segundo, luego elimina 'highlight-update' y restaura 'highlight' si es necesario
-                setTimeout(function() {
+            // Espera 1 segundo, luego elimina 'highlight-update' y restaura 'highlight' si es necesario
+            setTimeout(function() {
                     lineItem.classList.remove('highlight-update');
                     if (hadHighlight) {
                         lineItem.classList.add('highlight');
                     }
-                }, 500);
+            }, 500);
 
-                // Cuadro de alertas
-                lineItem.innerHTML += alertHTML;
+            // Cuadro de alertas
+            lineItem.innerHTML += alertHTML;
 
-                // Agrega un controlador de eventos de clic a alert-icon
-                lineItem.querySelector('.alert-icon').addEventListener('click', function() {
-                    const alertBox = this.parentNode.parentNode.parentNode.querySelector('.alert-box');
-                    if (alertBox) {
+            // Agrega un controlador de eventos de clic a alert-icon
+            lineItem.querySelector('.alert-icon').addEventListener('click', function() {
+                const alertBox = this.parentNode.parentNode.parentNode.querySelector('.alert-box');
+                if (alertBox) {
                         alertBox.style.display = 'flex';
                         // Paramos las actualizaciones para que no se cierre el cuadro
                         clearInterval(intervalId);
@@ -438,11 +502,14 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
                             intervalId = setInterval(updateBusList, 30000);
                             updateBusList();
                         });
-                    }
-                });
+                }
+            });
             } else {
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';;
             }
+        } else {
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';
+        }
             // Crea y agrega botones cada vez que se actualiza la información.
 
             // Crear el botón de eliminar
@@ -454,8 +521,8 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
             // Crear el botón de flecha
             const arrowButton = createArrowButton();
             lineItem.appendChild(arrowButton);
-        })
-        .catch(function(error) {
+        } catch (error) {
+            console.error('Error en fetchBusTime:', error);
             lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Error</div>';
             // Asegúrate de agregar también aquí el botón de eliminar
             // Crear el botón de eliminar
@@ -466,7 +533,122 @@ function fetchBusTime(stopNumber, lineNumber, lineItem) {
             // Crear el botón de flecha
             const arrowButton = createArrowButton();
             lineItem.appendChild(arrowButton);
+        };
+}
+
+function combineBusData(busesRT, scheduledData) {
+    let combined = {};
+
+    // Procesar los datos programados
+    scheduledData.buses.forEach(bus => {
+        const linea = bus.linea;
+        if (!combined[linea]) {
+            combined[linea] = {};
+        }
+
+        bus.horarios.forEach(schedule => {
+            if (!combined[linea][schedule.trip_id]) {
+                combined[linea][schedule.trip_id] = { scheduled: null, realTime: null };
+            }
+            combined[linea][schedule.trip_id].scheduled = {
+                llegada: schedule.llegada
+                // tiempoRestante eliminado ya que no está disponible en los datos programados
+            };
         });
+    });
+
+    // Procesar los datos en tiempo real
+    busesRT.forEach(bus => {
+        const linea = bus.linea;
+        if (!combined[linea]) {
+            combined[linea] = {};
+        }
+
+        if (!combined[linea][bus.trip_id]) {
+            combined[linea][bus.trip_id] = { scheduled: null, realTime: null };
+        }
+        combined[linea][bus.trip_id].realTime = {
+            llegada: bus.llegada,
+            tiempoRestante: bus.tiempoRestante
+        };
+    });
+
+    return combined;
+}
+
+function elegirBusMasCercano(buses) {
+    if (!buses) return null;
+
+    let tripIdMasCercanoHoy = null;
+    let busMasCercanoHoy = null;
+    let diferenciaMinima = Infinity;
+
+    let tripIdPrimerBusSiguienteDia = null;
+    let primerBusSiguienteDia = null;
+    let horaPrimerBusSiguienteDia = new Date('1970-01-02T23:59:59'); // Última hora del día siguiente
+
+    const hoy = new Date();
+    const fechaHoy = hoy.toISOString().split('T')[0]; // Fecha de hoy en formato YYYY-MM-DD
+
+    Object.entries(buses).forEach(([tripId, bus]) => {
+        let horaLlegada = null;
+
+        // Guardamos los datos realtime si están disponibles, de lo contrario, los programados
+        // TODO: Si un bus llego con adelanto en realtime, no debemos mostrar el programado
+        if (bus.realTime && bus.realTime.llegada) {
+            horaLlegada = new Date(`${fechaHoy}T${bus.realTime.llegada}`);
+        } else if (bus.scheduled && bus.scheduled.llegada) {
+            horaLlegada = new Date(`${fechaHoy}T${bus.scheduled.llegada}`);
+        }
+
+        if (horaLlegada) {
+            let diferencia = horaLlegada - hoy;
+            if (diferencia > 0 && diferencia < diferenciaMinima) {
+                diferenciaMinima = diferencia;
+                tripIdMasCercanoHoy = tripId;
+                busMasCercanoHoy = bus;
+            } else if (diferencia < 0 && horaLlegada < horaPrimerBusSiguienteDia) {
+                horaPrimerBusSiguienteDia = horaLlegada;
+                tripIdPrimerBusSiguienteDia = tripId;
+                primerBusSiguienteDia = bus;
+            }
+        }
+    });
+
+    // Si no se encontró un bus para hoy, seleccionar el primero de la mañana del día siguiente
+    if (diferenciaMinima === Infinity) {
+        let horaMinima = new Date('1970-01-02T23:59:59');
+        Object.entries(buses).forEach(([tripId, bus]) => {
+            if (bus.scheduled && bus.scheduled.llegada) {
+                let horaLlegadaSiguienteDia = new Date(`1970-01-02T${bus.scheduled.llegada}`);
+                if (horaLlegadaSiguienteDia < horaMinima) {
+                    horaMinima = horaLlegadaSiguienteDia;
+                    tripIdPrimerBusSiguienteDia = tripId;
+                    primerBusSiguienteDia = bus;
+                }
+            }
+        });
+    }
+
+    if (tripIdPrimerBusSiguienteDia && primerBusSiguienteDia) {
+        return { 
+            trip_id: tripIdPrimerBusSiguienteDia, 
+            scheduled: primerBusSiguienteDia.scheduled, 
+            realTime: primerBusSiguienteDia.realTime 
+        };
+    }
+
+    // Si hay buses disponibles para hoy, devolver el más cercano
+    if (tripIdMasCercanoHoy && busMasCercanoHoy) {
+        return { 
+            trip_id: tripIdMasCercanoHoy, 
+            scheduled: busMasCercanoHoy.scheduled, 
+            realTime: busMasCercanoHoy.realTime 
+        };
+    }
+
+    // Si no se encontró ningún bus, devolver null
+    return null;
 }
 
 function removeBusLine(stopNumber, lineNumber) {
