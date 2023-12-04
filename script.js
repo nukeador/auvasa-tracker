@@ -376,9 +376,10 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         // Datos programados
         const response = await fetch(apiUrl);
         const scheduledData = await response.json();
-        let destino = scheduledData.buses[0].destino;
-        // TODO: El API no da bien el destino
-        // destino = destino.split("-").pop().trim();
+        let destino = "";
+        if (scheduledData.buses && scheduledData.buses[0] && scheduledData.buses[0].destino) {
+            destino = scheduledData.buses[0].destino;
+        }
         // Cortamos destino a máximo 22 caracteres
         if (destino.length > 25) {
             destino = destino.substring(0, 22) + "...";
@@ -417,6 +418,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 tiempoRestante = busMasCercano.realTime.tiempoRestante;
                 // Comparamos la hora de llegada programada con la hora de llegada en tiempo real
                 diferencia = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`)) / 60000);
+                lineItem.classList.remove('programado');
                 lineItem.classList.add('realtime');
             } else {
                 horaLlegada = busMasCercano.scheduled.llegada;
@@ -430,6 +432,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     let minutos = tiempoRestante % 60;
                     tiempoRestante = `${horas}h ${minutos}`;
                 }
+                lineItem.classList.remove('realtime');
                 lineItem.classList.add('programado');
             }
 
