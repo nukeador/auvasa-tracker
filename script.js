@@ -419,7 +419,7 @@ async function displayScheduledBuses(stopNumber) {
         horariosBuses = await fetchScheduledBuses(stopNumber);
         horariosElement.innerHTML += '<h2>' + horariosBuses.parada.nombre + '</h2><p>Horarios programados para hoy</p>';
         horariosBuses.buses.forEach(bus => {
-            horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p>';
+            horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p>';
             bus.horarios.forEach(horario => {
                 // Eliminamos los segundos de la hora de llegada
                 let timeParts = horario.llegada.split(':'); 
@@ -427,7 +427,7 @@ async function displayScheduledBuses(stopNumber) {
                 horariosElement.innerHTML += '<span class="hora">' + timeHHMM + '</span> ';
             });
         });
-        horariosElement.innerHTML += '</p></div><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="horarios-close">Cerrar</button></div>';
+        horariosElement.innerHTML += '</div><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="horarios-close">Cerrar</button></div>';
         return horariosElement;
     }
 }
