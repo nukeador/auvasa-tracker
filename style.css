@@ -295,7 +295,7 @@ button.mostrar-horarios {
 #horarios-box {
     width: 85%;
     overflow: auto;
-    padding-left: 3em;
+    padding-left: 1em;
     max-height: 98%;
 }
 

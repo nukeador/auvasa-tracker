@@ -1,3 +1,6 @@
+// Definir la URL base del API
+const apiEndPoint = 'https://gtfs.auvasatracker.com';
+
 var busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
 
 // Agregar función para consultar API
@@ -64,8 +67,6 @@ function createArrowButton() {
 async function addBusLine() {
     const stopNumber = document.getElementById('stopNumber').value;
     const lineNumber = document.getElementById('lineNumber').value;
-
-    console.log(stopNumber, lineNumber);
 
     // Buscar la parada en busStops usando stopNumber
     const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
@@ -372,7 +373,7 @@ function removeObsoleteElements(stops) {
 }
 
 async function fetchAllBusAlerts() {
-    return fetch('https://api.auvasatracker.com/alertas/')
+    return fetch( apiEndPoint + '/alertas/')
         .then(response => response.json()) // Parse la respuesta a JSON
         .catch(error => console.error('Error:', error));
 }
@@ -382,23 +383,9 @@ function filterBusAlerts(alerts, busLine) {
     return alerts.filter(alert => alert.ruta.linea === busLine);
 }
 
-async function fetchBusTimeRT(stopNumber, lineNumber) {
-    var apiRTUrl = 'https://gtfs.auvasatracker.com/realtime/' + stopNumber;
-    const response = await fetch(apiRTUrl);
-    const data = await response.json();
-
-    let busesLinea = [];
-
-    if (data.buses && data.buses.length > 0) {
-        busesLinea = data.buses.filter(bus => bus.linea === lineNumber);
-    }
-
-    return busesLinea;
-}
-
 async function fetchScheduledBuses(stopNumber) {
     try {
-        const url = `https://gtfs.auvasatracker.com/parada/${stopNumber}`;
+        const url = apiEndPoint + `/v2/parada/${stopNumber}`;
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -417,8 +404,8 @@ async function displayScheduledBuses(stopNumber) {
         horariosElement.className = 'horarios';
         horariosElement.id = 'horarios-' + stopNumber;
         horariosBuses = await fetchScheduledBuses(stopNumber);
-        horariosElement.innerHTML += '<h2>' + horariosBuses.parada.nombre + '</h2><p>Horarios programados para hoy</p>';
-        horariosBuses.buses.forEach(bus => {
+        horariosElement.innerHTML += '<h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados para hoy</p>';
+        horariosBuses.lineas.forEach(bus => {
             horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p>';
             bus.horarios.forEach(horario => {
                 // Eliminamos los segundos de la hora de llegada
@@ -434,18 +421,15 @@ async function displayScheduledBuses(stopNumber) {
 
 async function fetchBusTime(stopNumber, lineNumber, lineItem) {
     // URL del API con estáticos y tiempo real
-    var apiUrl = 'https://gtfs.auvasatracker.com/parada/' + stopNumber + '/' + lineNumber;
+    var apiUrl = apiEndPoint + '/v2/parada/' + stopNumber + '/' + lineNumber;
 
     try {
-        // Datos en tiempo real (array de buses)
-        let busesRT = await fetchBusTimeRT(stopNumber, lineNumber);
-
-        // Datos programados
         const response = await fetch(apiUrl);
         const scheduledData = await response.json();
+
         let destino = "";
-        if (scheduledData.buses && scheduledData.buses[0] && scheduledData.buses[0].destino) {
-            destino = scheduledData.buses[0].destino;
+        if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
+            destino = scheduledData.lineas[0].destino;
         }
         // Cortamos destino a máximo 22 caracteres
         if (destino.length > 25) {
@@ -453,7 +437,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         }
 
         // Combinar datos
-        const combinedData = combineBusData(busesRT, scheduledData);
+        const combinedData = combineBusData(scheduledData);
 
         // Filtrar y encontrar el bus más cercano para la línea específica
         let busesLinea = combinedData[lineNumber];
@@ -613,11 +597,12 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         };
 }
 
-function combineBusData(busesRT, scheduledData) {
+// Combina los datos programados y en tiempo real agrupados por trip_id
+function combineBusData(scheduledData) {
     let combined = {};
 
     // Procesar los datos programados
-    scheduledData.buses.forEach(bus => {
+    scheduledData.lineas.forEach(bus => {
         const linea = bus.linea;
         if (!combined[linea]) {
             combined[linea] = {};
@@ -629,31 +614,26 @@ function combineBusData(busesRT, scheduledData) {
             }
             combined[linea][schedule.trip_id].scheduled = {
                 llegada: schedule.llegada
-                // tiempoRestante eliminado ya que no está disponible en los datos programados
             };
         });
+
+        bus.realtime.forEach(schedule => {
+            if (!combined[linea][schedule.trip_id]) {
+                combined[linea][schedule.trip_id] = { scheduled: null, realTime: null };
+            }
+
+            combined[linea][schedule.trip_id].realTime = {
+                llegada: schedule.llegada,
+                //tiempoRestante: schedule.tiempoRestante
+            };
+        });
+
     });
-
-    // Procesar los datos en tiempo real
-    busesRT.forEach(bus => {
-        const linea = bus.linea;
-        if (!combined[linea]) {
-            combined[linea] = {};
-        }
-
-        if (!combined[linea][bus.trip_id]) {
-            combined[linea][bus.trip_id] = { scheduled: null, realTime: null };
-        }
-        combined[linea][bus.trip_id].realTime = {
-            llegada: bus.llegada,
-            tiempoRestante: bus.tiempoRestante
-        };
-    });
-
     return combined;
 }
 
 function elegirBusMasCercano(buses) {
+
     if (!buses) return null;
 
     let tripIdMasCercanoHoy = null;
