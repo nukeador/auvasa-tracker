@@ -384,6 +384,15 @@ function filterBusAlerts(alerts, busLine) {
 }
 
 async function fetchScheduledBuses(stopNumber) {
+    const cacheKey = 'busSchedule_' + stopNumber;
+    const cachedData = getCachedData(cacheKey);
+
+    // Comprueba si los datos en caché son válidos
+    if (cachedData) {
+        return cachedData;
+    }
+
+    // Si no hay datos en caché o están desactualizados, realiza una llamada a la API
     try {
         const url = apiEndPoint + `/v2/parada/${stopNumber}`;
         const response = await fetch(url);
@@ -391,11 +400,41 @@ async function fetchScheduledBuses(stopNumber) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+
+        // Almacena los nuevos datos en el caché
+        setCacheData(cacheKey, data);
         return data;
     } catch (error) {
-        console.error('Error al recuperar la información sobre los buses:', error);
+        console.error('Error al recuperar y cachear la información sobre los buses:', error);
         return null;
     }
+}
+
+function getCachedData(cacheKey) {
+    const cached = localStorage.getItem(cacheKey);
+    if (!cached) {
+        return null;
+    }
+
+    const { data, timestamp } = JSON.parse(cached);
+    const twelveHours = 12 * 60 * 60 * 1000; // milisegundos en 12 horas
+
+    // Verifica si los datos del caché tienen menos de 12 horas
+    if (new Date() - new Date(timestamp) < twelveHours) {
+        return data;
+    }
+
+    // Si los datos del caché son antiguos, limpia el caché
+    localStorage.removeItem(cacheKey);
+    return null;
+}
+
+function setCacheData(cacheKey, data) {
+    const cacheEntry = JSON.stringify({
+        data: data,
+        timestamp: new Date().toISOString()
+    });
+    localStorage.setItem(cacheKey, cacheEntry);
 }
 
 async function displayScheduledBuses(stopNumber) {
