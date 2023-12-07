@@ -417,10 +417,11 @@ function getCachedData(cacheKey) {
     }
 
     const { data, timestamp } = JSON.parse(cached);
-    const twelveHours = 12 * 60 * 60 * 1000; // milisegundos en 12 horas
+    // Tiempo de expiración en milisegundos
+    const expTime = 1 * 60 * 60 * 1000; // 1 hora
 
-    // Verifica si los datos del caché tienen menos de 12 horas
-    if (new Date() - new Date(timestamp) < twelveHours) {
+    // Verifica si los datos del caché tienen menos del tiempo de expiración
+    if (new Date() - new Date(timestamp) < expTime) {
         return data;
     }
 
@@ -688,13 +689,19 @@ function elegirBusMasCercano(buses) {
         let horaLlegada = null;
 
         if (bus.realTime && bus.realTime.llegada) {
-            horaLlegada = new Date(`${fechaHoy}T${bus.realTime.llegada}`);
-            // Si el bus ya llegó, añadirlo al conjunto de buses adelantados
+            let [hora, minuto, segundo] = bus.realTime.llegada.split(":").map(Number);
+            horaLlegada = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate(), hora, minuto, segundo);
+            // Si el bus ya llegó, añadirlo al conjunto de buses adelantados y saltar al siguiente bus
             if (horaLlegada - hoy < 0) {
                 busesAdelantados.add(tripId);
+                return;
             }
         }
 
+        // Saltar al siguiente bus si este bus está en el conjunto de buses adelantados
+        if (busesAdelantados.has(tripId)) {
+            return;
+        }
         // Continuar solo si el bus no está en el conjunto de buses adelantados
         if (!busesAdelantados.has(tripId)) {
             // Para evitar conflictos con buses retrasados que llegan después del
