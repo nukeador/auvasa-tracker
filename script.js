@@ -496,6 +496,19 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
     // URL del API con estáticos y tiempo real
     var apiUrl = apiEndPoint + '/v2/parada/' + stopNumber + '/' + lineNumber;
 
+    // Recuperamos si hay alertas para esa linea
+    const busLineAlerts = filterBusAlerts(allAlerts, lineNumber);
+    let alertHTML = '';
+    let alertIcon = '';
+    if (busLineAlerts.length > 0) {
+        alertHTML = `<div class="alert-box"><h2>Avisos para la línea ${lineNumber}</h2><ul>`;
+        busLineAlerts.forEach(alert => {
+            alertHTML += `<li>${alert.descripcion}"</li>`;
+        });
+        alertHTML += '</ul><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="alerts-close">Cerrar</button></div>';
+        alertIcon = '⚠️';
+    }
+
     try {
         const response = await fetch(apiUrl);
         const scheduledData = await response.json();
@@ -515,19 +528,6 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         // Filtrar y encontrar el bus más cercano para la línea específica
         let busesLinea = combinedData[lineNumber];
         if (busesLinea) {
-
-        // Recuperamos si hay alertas para esa linea
-        const busLineAlerts = filterBusAlerts(allAlerts, lineNumber);
-        let alertHTML = '';
-        let alertIcon = '';
-        if (busLineAlerts.length > 0) {
-            alertHTML = `<div class="alert-box"><h2>Avisos para la línea ${lineNumber}</h2><ul>`;
-            busLineAlerts.forEach(alert => {
-                alertHTML += `<li>${alert.descripcion}"</li>`;
-            });
-            alertHTML += '</ul><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="alerts-close">Cerrar</button></div>';
-            alertIcon = '⚠️';
-        }
 
         const busMasCercano = elegirBusMasCercano(busesLinea);
 
@@ -617,7 +617,12 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         lineItem.classList.add('highlight');
                     }
             }, 500);
-
+            } else {
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3></div> <div class="tiempo">Sin info</div>';
+            }
+        } else {
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3></div> <div class="tiempo">Sin info</div>';
+        }
             // Cuadro de alertas
             lineItem.innerHTML += alertHTML;
 
@@ -638,12 +643,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         });
                 }
             });
-            } else {
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';;
-            }
-        } else {
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Sin info</div>';
-        }
+
             // Crea y agrega botones cada vez que se actualiza la información.
 
             // Crear el botón de eliminar
