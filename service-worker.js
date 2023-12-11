@@ -1,7 +1,7 @@
 
 // Este es el Service Worker de la web app
 
-const CACHE_NAME = 'auvasatracker-v2.3.a';
+const CACHE_NAME = 'auvasatracker-v2.3.9';
 const urlsToCache = [
     '/',
     '/index.html',

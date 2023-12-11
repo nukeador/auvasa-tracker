@@ -1,21 +1,3 @@
-// Variable para almacenar los datos de las paradas
-let busStops = [];
-
-// Función para cargar el JSON
-async function loadBusStops() {
-    try {
-        const response = await fetch('paradas.json');
-        const data = await response.json();
-        busStops = data; // Almacenamos los datos en la variable
-    } catch (error) {
-        console.error('Error al cargar el archivo JSON:', error);
-    }
-}
-
-// Llamamos a la función al cargar la página
-// Esto se llamará desde el script.js principal
-// window.onload = loadBusStops;
-
 document.getElementById('stopNumber').addEventListener('input', function() {
     var inputText = this.value;
     var matchingStops = searchByStopNumber(inputText);
@@ -94,9 +76,14 @@ document.getElementById('lineNumber').addEventListener('focus', function() {
     const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
 
     if (stopData) {
-        const lineSuggestions = [...stopData.lineas.ordinarias, ...stopData.lineas.poligonos, ...stopData.lineas.matinales, ...stopData.lineas.futbol, ...stopData.lineas.buho, ...stopData.lineas.universidad]
-    .map(line => ({ linea: line })); // Convierte cada línea en un objeto
-
+        const lineSuggestions = [
+            ...(stopData.lineas.ordinarias || []), 
+            ...(stopData.lineas.poligonos || []), 
+            ...(stopData.lineas.matinales || []), 
+            ...(stopData.lineas.futbol || []), 
+            ...(stopData.lineas.buho || []), 
+            ...(stopData.lineas.universidad || [])
+        ].map(line => ({ linea: line })); // Convierte cada línea en un objeto
 
         displayLineSuggestions(lineSuggestions);
     } else {

@@ -13,13 +13,16 @@ async function stopAndLineExist(stopNumber, lineNumber) {
     }
 
     // Revisar si la línea proporcionada existe en alguna de las categorías de líneas para esa parada
-    const lineExists = 
-        stopData.lineas.ordinarias.includes(lineNumber) || 
-        stopData.lineas.poligonos.includes(lineNumber) ||
-        stopData.lineas.matinales.includes(lineNumber) ||
-        stopData.lineas.futbol.includes(lineNumber) ||
-        stopData.lineas.buho.includes(lineNumber) ||
-        stopData.lineas.universidad.includes(lineNumber);
+    const allLines = [
+        ...(stopData.lineas.ordinarias || []), 
+        ...(stopData.lineas.poligonos || []), 
+        ...(stopData.lineas.matinales || []), 
+        ...(stopData.lineas.futbol || []), 
+        ...(stopData.lineas.buho || []), 
+        ...(stopData.lineas.universidad || [])
+    ];
+
+    const lineExists = allLines.includes(lineNumber);
 
     return lineExists;
 }
@@ -153,7 +156,14 @@ async function addBusLine() {
     }
     // Si solo se ha proporcionado la parada, añadir todas las líneas de esa parada
     else if (stopNumber && !lineNumber) {
-        const allLines = [...stopData.lineas.ordinarias, ...stopData.lineas.poligonos, ...stopData.lineas.matinales, ...stopData.lineas.futbol, ...stopData.lineas.buho, ...stopData.lineas.universidad];
+        const allLines = [
+            ...(stopData.lineas.ordinarias || []), 
+            ...(stopData.lineas.poligonos || []), 
+            ...(stopData.lineas.matinales || []), 
+            ...(stopData.lineas.futbol || []), 
+            ...(stopData.lineas.buho || []), 
+            ...(stopData.lineas.universidad || [])
+        ];
 
         allLines.forEach(line => {
             var exists = busLines.some(busLine => busLine.stopNumber === stopNumber && busLine.lineNumber === line);
@@ -826,6 +836,37 @@ function updateLastUpdatedTime() {
     const now = new Date();
     const formattedTime = now.toLocaleTimeString(); // Formatea la hora como prefieras
     document.getElementById('last-update').textContent = 'Última actualización: ' + formattedTime;
+}
+
+// Variable para almacenar los datos de las paradas
+let busStops = [];
+
+// Función para cargar el JSON
+async function loadBusStops() {
+    const cacheKey = 'busStops';
+    const cachedData = getCachedData(cacheKey);
+
+    // Si hay datos en caché, usarlos
+    if (cachedData) {
+        busStops = cachedData;
+    }
+
+    // Si no hay datos en caché o están desactualizados, realiza una llamada al API
+    try {
+        const url = apiEndPoint + '/paradas/';
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        busStops = data;
+
+        // Guardar datos nuevos en el cache
+        setCacheData(cacheKey, data);
+    } catch (error) {
+        console.error('Error al recuperar y cachear los datos de paradas:', error);
+        return null;
+    }
 }
 
 let allAlerts = [];
