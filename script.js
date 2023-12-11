@@ -853,7 +853,7 @@ async function loadBusStops() {
 
     // Si no hay datos en caché o están desactualizados, realiza una llamada al API
     try {
-        const url = apiEndPoint + '/paradas/';
+        const url = apiEndPoint + '/v2/paradas/';
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
