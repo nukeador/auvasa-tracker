@@ -67,9 +67,9 @@ document.getElementById('lineNumber').addEventListener('focus', function() {
     var lineNumber = this.value;
     var stopNumber = document.getElementById('stopNumber').value;
 
-    // Verifica si lineNumber ya está rellenado o si stopNumber no es numérico
-    if (lineNumber.trim() !== '' || !(/^\d+$/.test(stopNumber))) {
-        return; // No muestra sugerencias si lineNumber ya tiene un valor o stopNumber no es numérico
+    // Verifica si lineNumber ya está rellenado o si stopNumber no es alfanumérico
+    if (lineNumber.trim() !== '' || !(/^[a-zA-Z0-9]+$/.test(stopNumber))) {
+        return; // No muestra sugerencias si lineNumber ya tiene un valor o stopNumber no es alfanumérico
     }
 
     // Encuentra la parada en busStops usando stopNumber
