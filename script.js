@@ -145,6 +145,9 @@ async function addBusLine() {
 
                 // Limpiar el contenido del input lineNumber
                 document.getElementById('lineNumber').value = '';
+
+                // Limpiamos sugerencias de lineas
+                document.getElementById('lineSuggestions').innerHTML = '';
             }
         }
     }
@@ -176,6 +179,9 @@ async function addBusLine() {
 
         // Limpiar el contenido del input stopNumber
         document.getElementById('stopNumber').value = '';
+
+        // Limpiamos sugerencias de lineas
+        document.getElementById('lineSuggestions').innerHTML = '';
     }
 }
 
@@ -265,6 +271,14 @@ async function updateBusList() {
             mostrarHorarios.id = 'mostrar-horarios-' + stopId;
             mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
             stopElement.appendChild(mostrarHorarios);
+        } else {
+            // Si ya está creado, lo eliminamos y lo volvemos a crear para que quede al final
+            mostrarHorarios.remove();
+            mostrarHorarios = document.createElement('button');
+            mostrarHorarios.classList.add('mostrar-horarios');
+            mostrarHorarios.id = 'mostrar-horarios-' + stopId;
+            mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
+            stopElement.appendChild(mostrarHorarios);
         }
 
         // Añadimos los horarios programados despues de busList cuando hagamos clic
@@ -276,11 +290,15 @@ async function updateBusList() {
             clearInterval(intervalId);
 
             // Agrega un controlador de eventos de clic a alerts-close
-            horariosBox.querySelector('.horarios-close').addEventListener('click', function() {
-                this.parentNode.style.display = 'none';
-                // Reanudamos y ejecutamos las actualizaciones
-                intervalId = setInterval(updateBusList, 30000);
-                updateBusList();
+            let closeButtons = horariosBox.querySelectorAll('.horarios-close');
+            closeButtons.forEach(function(button) {
+                // Click event
+                button.addEventListener('click', function() {
+                    this.parentNode.style.display = 'none';
+                    // Reanudamos y ejecutamos las actualizaciones
+                    intervalId = setInterval(updateBusList, 30000);
+                    updateBusList();
+                });
             });
         });
     }
@@ -444,9 +462,14 @@ async function displayScheduledBuses(stopNumber) {
         horariosElement.className = 'horarios';
         horariosElement.id = 'horarios-' + stopNumber;
         horariosBuses = await fetchScheduledBuses(stopNumber);
-        horariosElement.innerHTML += '<h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados para hoy</p>';
+        horariosElement.innerHTML += '<button class="horarios-close">Cerrar</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados para hoy</p>';
         horariosBuses.lineas.forEach(bus => {
             horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p>';
+            // Si no hay horarios mostramos mensaje
+            if (bus.horarios.length === 0) {
+                horariosElement.innerHTML += '<p class="hora">No hay horarios programados para hoy</p>';
+            }
+
             bus.horarios.forEach(horario => {
                 // Eliminamos los segundos de la hora de llegada
                 let timeParts = horario.llegada.split(':'); 

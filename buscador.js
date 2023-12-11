@@ -108,7 +108,6 @@ function displayLineSuggestions(buses) {
     var resultsContainer = document.getElementById('lineSuggestions');
 
     const lineNumber = document.getElementById('lineNumber');
-    const suggestions = document.getElementById('lineSuggestions');
 
     resultsContainer.innerHTML = '';
 
@@ -117,7 +116,7 @@ function displayLineSuggestions(buses) {
         resultElement.textContent = 'Línea ' + bus.linea;
         resultElement.classList.add('line-suggestion');
         resultElement.addEventListener('click', function() {
-            document.getElementById('lineNumber').value = bus.linea;
+            lineNumber.value = bus.linea;
             resultsContainer.innerHTML = ''; // Limpia los resultados después de seleccionar
         });
         resultsContainer.appendChild(resultElement);

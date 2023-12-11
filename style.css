@@ -133,10 +133,10 @@ button#installButton {
 }
 
 #autocompleteResults, #lineSuggestions {
-    margin-top: 5px; /* Ajusta según sea necesario */
+    margin-top: 5px; 
     background-color: white;
-    width: 100%; /* O la anchura que prefieras */
-    box-sizing: border-box; /* Para incluir el padding y el borde en el ancho total */
+    width: 100%; 
+    box-sizing: border-box;
 }
 
 
