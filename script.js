@@ -541,7 +541,12 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 horaLlegada = busMasCercano.realTime.llegada;
                 //tiempoRestante = busMasCercano.realTime.tiempoRestante;
                 // Calculamos el tiempo en el cliente porque el api puede tener cacheado este cálculo
-                tiempoRestante = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000);
+                // Si el busMasCercano.realTime.llegada es menor de 60 segundos, mostramos 0 minutos
+                if (Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000) < 1) {
+                    tiempoRestante = 0;
+                } else {
+                    tiempoRestante = Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000);
+                }
                 // Comparamos la hora de llegada programada con la hora de llegada en tiempo real
                 diferencia = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`)) / 60000);
                 lineItem.classList.remove('programado');
@@ -549,7 +554,12 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             } else {
                 horaLlegada = busMasCercano.scheduled.llegada;
                 // Calculamos el tiempo restante a partir de la hora de llegada programada en busMasCercano.scheduled.llegada
-                tiempoRestante = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000);
+                // Si el busMasCercano.scheduled.llegada es menor de 60 segundos, mostramos 0 minutos
+                if (Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000) < 1) {
+                    tiempoRestante = 0;
+                } else {
+                    tiempoRestante = Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000);
+                }
 
                 let ahora = new Date();
                 let horaLlegadaProgramada = new Date(`1970-01-01T${busMasCercano.scheduled.llegada}Z`);
@@ -557,6 +567,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 // El bus está programado para el día siguiente
                 if (horaLlegadaProgramada.getUTCHours() < ahora.getUTCHours() ||
                     (horaLlegadaProgramada.getUTCHours() === ahora.getUTCHours() && horaLlegadaProgramada.getUTCMinutes() < ahora.getUTCMinutes())) {
+                        tiempoRestante = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000);
                         tiempoRestante = 1440 + tiempoRestante; // Sumamos 24 horas (en minutos) al tiempoRestante negativo
                         let horas = Math.floor(tiempoRestante / 60);
                         let minutos = tiempoRestante % 60;
