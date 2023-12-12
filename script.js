@@ -324,7 +324,7 @@ function updateStopName(stopElement, newName, stopGeo) {
     // Actualiza el nombre de la parada en el DOM
     var nameElement = stopElement.querySelector('h2');
     if (nameElement) {
-        nameElement.innerHTML = ' <a id="mapIcon" title="Ver en el mapa" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>' + newName;
+        nameElement.innerHTML = ' <a class="mapIcon" title="Ver en el mapa" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>' + newName;
     }
 }
 
@@ -535,10 +535,18 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             let horaLlegada;
             let tiempoRestante;
             let diferencia;
+            let ubicacionLat;
+            let ubicacionLon;
+            let velocidad;
+            let tripId;
 
             // Si hay datos en tiempo real, usarlos, de lo contrario, usar los programados
             if (busMasCercano.realTime) {
                 horaLlegada = busMasCercano.realTime.llegada;
+                ubicacionLat = busMasCercano.realTime.latitud;
+                ubicacionLon = busMasCercano.realTime.longitud;
+                velocidad = busMasCercano.realTime.velocidad;
+                tripId = busMasCercano.scheduled.tripId;
                 //tiempoRestante = busMasCercano.realTime.tiempoRestante;
                 // Calculamos el tiempo en el cliente porque el api puede tener cacheado este cálculo
                 // Si el busMasCercano.realTime.llegada es menor de 60 segundos, mostramos 0 minutos
@@ -614,8 +622,13 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 lineItem.classList.remove('retrasado');
             }
 
+            let mapElement = '';
+            if (ubicacionLat && ubicacionLon) {
+                mapElement = '<a class="showMapIcon" title="Ver en el mapa">Mapa</a>';
+            }
+
             // Actualizar el HTML con los datos del bus más cercano
-            lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div> <div class="hora-tiempo"><div class="tiempo">' + tiempoRestante + ' <p>min.</div><div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
+            lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestante + ' <p>min.</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
 
             // Guarda si el elemento tenía la clase 'highlight'
             let hadHighlight = lineItem.classList.contains('highlight');
@@ -662,6 +675,38 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 }
             });
 
+            // Agrega un controlador de eventos de clic mostrar el mapa si hay datos
+            let showMapIcon = lineItem.querySelector('.showMapIcon');
+            if (showMapIcon) {
+                showMapIcon.addEventListener('click', function(event) {
+                    const mapBox = document.querySelector('#mapContainer');
+                    // Obtenemos el tripId del elemento hermano llamado .linea
+                    const brotherElement = this.parentElement.previousElementSibling;
+                    const tripId = brotherElement.getAttribute('data-trip-id');
+                
+                    let intervalMap;
+
+                    if (mapBox) {
+                        mapBox.classList.add('show');
+                        updateBusMap(tripId, lineNumber);
+
+                        intervalMap = setInterval(() => updateBusMap(tripId, lineNumber), 30000);
+                
+                        document.addEventListener('click', function(e) {
+                            if (!mapBox.contains(e.target)) {
+                                mapBox.classList.remove('show');
+                            }
+                            if (intervalMap) {
+                                // Paramos las actualizaciones
+                                clearInterval(intervalMap);
+                            }
+                        });
+                
+                        event.stopPropagation();
+                    }
+                });
+            }
+
             // Crea y agrega botones cada vez que se actualiza la información.
 
             // Crear el botón de eliminar
@@ -704,7 +749,8 @@ function combineBusData(scheduledData) {
                 combined[linea][schedule.trip_id] = { scheduled: null, realTime: null };
             }
             combined[linea][schedule.trip_id].scheduled = {
-                llegada: schedule.llegada
+                llegada: schedule.llegada,
+                tripId: schedule.trip_id ? schedule.trip_id.toString() : undefined
             };
         });
 
@@ -715,6 +761,9 @@ function combineBusData(scheduledData) {
 
             combined[linea][schedule.trip_id].realTime = {
                 llegada: schedule.llegada,
+                latitud: schedule.latitud ? schedule.latitud.toString() : undefined,
+                longitud: schedule.longitud ? schedule.longitud.toString() : undefined,
+                velocidad: schedule.velocidad ? schedule.velocidad.toString() : undefined
                 //tiempoRestante: schedule.tiempoRestante
             };
         });

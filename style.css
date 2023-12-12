@@ -194,7 +194,7 @@ button#installButton {
     font-size: 1.1em;
 }
 
-.stop-block a#mapIcon {
+.stop-block .mapIcon {
     background-image: url("img/map.png");
     background-size: cover;
     display: inline-block;
@@ -205,7 +205,20 @@ button#installButton {
     position: absolute;
     left: 50px;
     font-size: 1.4em;
+    cursor: pointer;
   }  
+
+.showMapIcon {
+    background-image: url("img/location-light.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 3px;
+    line-height: 15px;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding: 0 0 0 20px;
+    margin: 0 0 5px 0;
+}
 
 .line-info {
     border-top: 1px solid #eee;
@@ -339,6 +352,63 @@ button.mostrar-horarios {
     font-style: italic;
 }
 
+#mapContainer {
+    position: fixed;
+    width: 96%;
+    height: 500px;
+    margin: 0 auto;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Desplaza el elemento hacia atrás para centrarlo perfectamente */
+    z-index: 1;
+    /* Agrega las siguientes líneas */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s linear, visibility 0.3s linear;
+}
+
+#mapContainer.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#mapContainer #busMap {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
+    background: #fff;
+    border-radius: 12px;
+}
+
+#mapContainer #busMap .bus-icon {
+    border-radius: 10px;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    box-shadow: 1px 1px 10px 0 rgba(12,12,14,.2),0 4px 8px 0 rgba(6, 6, 7, 0.12);
+    font-weight: bold;
+    font-size: 1.8em;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mapContainer #mapFooter {
+    background: #fff;
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-style: italic;
+    margin: 10px 0 0 0;
+}
+
+.dark-mode #mapContainer #mapFooter {
+    background: #333;
+    color: #fff;
+}
+
 .line-info .hora-programada .hora {
     background: url(img/clock.png) no-repeat;
     background-size: 15px;
@@ -377,7 +447,7 @@ button.mostrar-horarios {
 }
 
 .line-info .hora-tiempo .horaLlegada {
-    margin: 0 0 1.4em 0;
+    margin: 0 0 0.9em 0;
 }
 
 .line-info.realtime .hora-tiempo .horaLlegada {
@@ -628,7 +698,7 @@ body.dark-mode {
     background-color: #222;
 }
 
-.dark-mode .stop-block a#mapIcon {
+.dark-mode .stop-block .mapIcon {
     background-image: url("img/map-dark.png");
   }  
 
@@ -654,122 +724,122 @@ body.dark-mode {
 }
 
 /* Colores de las lineas */
-.linea-1 h3 {
+.bus-icon.linea-1, .linea-1 h3 {
     background-color: #5ebd5a;
     color: #fff;
 }
 
-.linea-2 h3 {
+.bus-icon.linea-2, .linea-2 h3 {
     background-color: #f2c435;
     color: #000;
 }
 
-.linea-3 h3 {
+.bus-icon.linea-3, .linea-3 h3 {
     background-color: #ee4ba4;
     color: #000;
 }
 
-.linea-4 h3 {
+.bus-icon.linea-4, .linea-4 h3 {
     background-color: #aa541a;
     color: #FFF;
 }
 
-.linea-5 h3 {
+.bus-icon.linea-5, .linea-5 h3 {
     background-color: #2fb7b7;
     color: #fff;
 }
 
-.linea-6 h3 {
+.bus-icon.linea-6, .linea-6 h3 {
     background-color: #f29cc2;
     color: #000;
 }
 
-.linea-7 h3 {
+.bus-icon.linea-7, .linea-7 h3 {
     background-color: #7a2b37;
     color: #FFF;
 }
 
-.linea-8 h3 {
+.bus-icon.linea-8, .linea-8 h3 {
     background-color: #ea5d00;
     color: #FFF;
 }
 
-.linea-9 h3 {
+.bus-icon.linea-9, .linea-9 h3 {
     background-color: #009ee6;
     color: #FFF;
 }
 
-.linea-10 h3 {
+.bus-icon.linea-10, .linea-10 h3 {
     background-color: #a01a4a;
     color: #FFF;
 }
 
-.linea-13 h3 {
+.bus-icon.linea-13, .linea-13 h3 {
     background-color: #0051a1;
     color: #FFF;
 }
 
-.linea-14 h3 {
+.bus-icon.linea-14 , .linea-14 h3 {
     background-color: #887cb9;
     color: #000;
 }
 
-.linea-16 h3 {
+.bus-icon.linea-16, .linea-16 h3 {
     background-color:#84cef5;
     color: #000;
 }
 
-.linea-17 h3 {
+.bus-icon.linea-17, .linea-17 h3 {
     background-color: #c2d403;
     color: #000;
 }
 
-.linea-18 h3 {
+.bus-icon.linea-18, .linea-18 h3 {
     background-color: #b9b8b8;
     color: #000;
 }
 
-.linea-19 h3 {
+.bus-icon.linea-19, .linea-19 h3 {
     background-color: #eaa874;
     color: #000;
 }
 
-.linea-24 h3 {
+.bus-icon.linea-24, .linea-24 h3 {
     background-color: #11459f;
     color: #FFF;
 }
 
-.linea-C1 h3, .linea-C2 h3 {
+.bus-icon.linea-C1, .bus-icon.linea-C2, .linea-C1 h3, .linea-C2 h3 {
     background-color: #555553;
     color: #FFF;
 }
 
-.linea-H h3 {
+.bus-icon.linea-H, .linea-H h3 {
     background-color: #e5232e;
     color: #000;
 }
 
-.linea-B1 h3 {
+.bus-icon.linea-B1, .linea-B1 h3 {
     background-color: #000;
     color: #FFF;
 }
 
-.linea-B2 h3 {
+.bus-icon.linea-B2, .linea-B2 h3 {
     background-color: #000;
     color: #FFF;
 }
 
-.linea-B3 h3 {
+.bus-icon.linea-B3, .linea-B3 h3 {
     background-color: #000;
     color: #FFF;
 }
 
-.linea-B4 h3 {
+.bus-icon.linea-B4, .linea-B4 h3 {
     background-color: #000;
     color: #FFF;
 }
 
-.linea-B5 h3 {
+.bus-icon.linea-B5, .linea-B5 h3 {
     background-color: #000;
     color: #FFF;
 }
