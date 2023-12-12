@@ -306,7 +306,7 @@ async function updateBusList() {
                 button.addEventListener('click', function() {
                     this.parentNode.style.display = 'none';
                     // Reanudamos y ejecutamos las actualizaciones
-                    intervalId = setInterval(updateBusList, 30000);
+                    iniciarIntervalo(updateBusList);
                     updateBusList();
                 });
             });
@@ -649,7 +649,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         alertBox.querySelector('.alerts-close').addEventListener('click', function() {
                             this.parentNode.style.display = 'none';
                             // Reanudamos y ejecutamos las actualizaciones
-                            intervalId = setInterval(updateBusList, 30000);
+                            iniciarIntervalo(updateBusList);
                             updateBusList();
                         });
                 }
@@ -915,18 +915,22 @@ window.onload = async function() {
     updateBusList();
 }
 
-// Hacemos coincidir el intervalo con el inicio de cada minuto
-let ahora = new Date();
-// Calcula cuántos segundos han pasado desde el inicio del minuto actual
-let segundos = ahora.getSeconds();
-// Calcula cuánto tiempo queda hasta el próximo intervalo de 30 segundos
-let tiempoHastaProximoIntervalo = segundos < 30 ? 30 - segundos : 60 - segundos;
+function iniciarIntervalo(updateBusList) {
+    // Hacemos coincidir el intervalo con el inicio de cada minuto
+    let ahora = new Date();
+    // Calcula cuántos segundos han pasado desde el inicio del minuto actual
+    let segundos = ahora.getSeconds();
+    // Calcula cuánto tiempo queda hasta el próximo intervalo de 30 segundos
+    let tiempoHastaProximoIntervalo = segundos < 30 ? 30 - segundos : 60 - segundos;
 
-// Establece un temporizador para iniciar el intervalo
-setTimeout(function() {
-    // Inicia el intervalo
-    intervalId = setInterval(updateBusList, 30000);
-}, tiempoHastaProximoIntervalo * 1000);
+    // Establece un temporizador para iniciar el intervalo
+    setTimeout(function() {
+        // Inicia el intervalo
+        intervalId = setInterval(updateBusList, 30000);
+    }, tiempoHastaProximoIntervalo * 1000);
+}
+
+iniciarIntervalo(updateBusList);
 
 // Dark mode
 const themeToggle = document.getElementById('theme-toggle');
