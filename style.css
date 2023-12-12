@@ -94,7 +94,7 @@ button#removeAllButton {
     width: 271px;
     justify-content: center;
     display: none; /* Oculto por defecto */
-    align-items: center;
+    margin: auto;
 }
 
 button#installButton {
@@ -133,10 +133,10 @@ button#installButton {
 }
 
 #autocompleteResults, #lineSuggestions {
-    margin-top: 5px; /* Ajusta según sea necesario */
+    margin-top: 5px; 
     background-color: white;
-    width: 100%; /* O la anchura que prefieras */
-    box-sizing: border-box; /* Para incluir el padding y el borde en el ancho total */
+    width: 100%; 
+    box-sizing: border-box;
 }
 
 
@@ -239,19 +239,42 @@ button#installButton {
 .line-info h3 {
     border-radius: 10px;
     text-align: center;
-    max-width: 48px;
+    max-width: 76px;
+    min-width: 48px;
     box-shadow: 1px 1px 10px 0 rgba(12,12,14,.2),0 4px 8px 0 rgba(6, 6, 7, 0.12);
+    font-weight: bold;
+    font-size: 1.8em;
+    margin: 0.4em 0.2em 0 0;
+    display: inline-block;
 }
 
 .line-info .alert-icon {
-    position: absolute;
     font-size: 0.7em;
     cursor: pointer;
-    margin-left: 1em;
+    background: url(img/warning.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px 2px;
+    text-indent: -9999px;
+    overflow: hidden;
+    width: 15px;
+    position: absolute;
+    margin-left: 0.6em;
+    margin-top: -0.3em;
 }
 
-.line-info .alert-box {
-    position: fixed; /* Cambia a fixed para posicionarlo en relación a la ventana del navegador */
+button.mostrar-horarios {
+    cursor: pointer;
+    background: url(img/bus-gray.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px;
+    color: #CCC;
+    font-size: 0.8em;
+    display: block;
+    margin: auto;
+}
+
+.line-info .alert-box, #horarios-box {
+    position: fixed;
     border-radius: 12px;
     overflow: auto;
     background: #fff;
@@ -269,19 +292,116 @@ button#installButton {
     justify-content: center;
 }
 
-.line-info .alert-box .notice {
+#horarios-box {
+    width: 85%;
+    overflow: auto;
+    padding-left: 1em;
+    max-height: 98%;
+}
+
+#horarios-box div {
+    margin: 1em 0;
+}
+
+#horarios-box .hora {
+    border-left: 2px solid #7B7B7B;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    margin: 3px 3px;
+    display: inline-block;
+}
+
+#horarios-box .destino {
+    display: inline-block;
+    margin-left: 1em;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.line-info .alert-box h2, #horarios-box h2 {
+    padding: 0;
+}
+
+#horarios-box h3 {
+    border-radius: 10px;
+    text-align: center;
+    max-width: 76px;
+    min-width: 48px;
+    box-shadow: 1px 1px 10px 0 rgba(12,12,14,.2),0 4px 8px 0 rgba(6, 6, 7, 0.12);
+    font-weight: bold;
+    font-size: 1.8em;
+    margin: 0.4em 0.2em 0 0;
+    display: inline-block;
+}
+
+.line-info .alert-box .notice, #horarios-box .notice {
     font-size: 0.9em;
     font-style: italic;
+}
+
+.line-info .hora-programada .hora {
+    background: url(img/clock.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px;
+    padding: 0 0 0 20px;
+    font-size: 0.8em;
+    color: #868686;
+}
+
+.hora-tiempo {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1em;
+}
+
+.line-info .horaLlegada {
+    display: flex;
+    align-items: center;
+}
+
+.line-info .diferencia {
+    font-size: 0.8em;
+    color: #868686;
+}
+
+.line-info.retrasado .hora-programada .hora, .line-info.adelantado .hora-programada .hora {
+    text-decoration: line-through;
+}
+
+.line-info.retrasado .diferencia {
+    color: rgb(167, 60, 60);
+}
+
+.line-info.adelantado .diferencia {
+    color: rgb(60, 167, 60);
+}
+
+.line-info .hora-tiempo .horaLlegada {
+    margin: 0 0 1.4em 0;
+}
+
+.line-info.realtime .hora-tiempo .horaLlegada {
+    background: url(img/feed.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px;
+    padding: 0 0 0 20px;
+}
+
+.line-info.programado .hora-tiempo .horaLlegada {
+    background: url(img/clock.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px;
+    padding: 0 0 0 20px;
 }
 
 .line-info .linea, .line-info .tiempo {
     flex: 1;
 }
 
-.line-info .linea h3 {
-    font-weight: bold;
-    font-size: 1.8em;
-    margin: 0.4em;
+.line-info .destino {
+    display: inline-block;
+    font-size: 0.8em; 
+    margin: 0 0 0 0.3em;
 }
 
 .line-info .tiempo {
@@ -296,12 +416,6 @@ button#installButton {
     font-size: 0.5em;
     display: block;
     margin: 0 0.4em;
-}
-
-.line-info .tiempo p.horaLlegada {
-    width: 100%;
-    text-align: end;
-    margin: -3em 0.6em 0 0.4em;
 }
 
 
@@ -366,29 +480,50 @@ button#installButton {
 }
 
 .foot-note a {
+    color: #828282;
+}
+
+.foot-note a#twitter-share-button, .foot-note a#telegram-button, .foot-note a#facebook-share-button {
     display: inline-block;
     padding: 10px 15px;
     margin: 5px;
-    background-color: #1DA1F2; /* Azul de Twitter */
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
-.foot-note  a:hover {
-    background-color: #0d8bf2;
+.foot-note a#twitter-share-button {
+    background-color: #0d8bf2; /* Azul de Twitter */
 }
 
-.foot-note a:nth-of-type(2) {
+.foot-note  a#twitter-share-button:hover {
+    background-color: #0a76cf;
+}
+.foot-note #legend {
+    color: #333;
+    text-align: center;
+}
+
+.foot-note #legend img {
+    width: 15px;
+    height: 15px;
+    margin-left: 1em;
+}
+
+.foot-note a#facebook-share-button {
     background-color: #3B5998; /* Azul de Facebook */
 }
 
-.foot-note a:nth-of-type(2):hover {
+.foot-note a#facebook-share-button:hover {
     background-color: #334d84;
 }
 
-.foot-note a#telegramButton {
+.foot-note a#telegram-button {
     background-color: #24a1dd;
+}
+
+.foot-note a#telegram-button:hover {
+    background-color: #1f8bbc;
 }
 
 .foot-note button#theme-toggle {
@@ -453,16 +588,16 @@ body.dark-mode {
     background: url("img/welcome-logo-white.png") no-repeat #2d2d2d center 0;
 }
 
-.dark-mode .alert-box {
+.dark-mode .alert-box, .dark-mode #horarios-box {
     box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
     background: #2d2d2d;
 }
 
-.dark-mode #welcome-box h2, .dark-mode .alert-box h2 {
+.dark-mode #welcome-box h2, .dark-mode .alert-box h2, .dark-mode #horarios-box h2 {
     color: #FFF;
 }
 
-.dark-mode #welcome-box p, .dark-mode .alert-box p {
+.dark-mode #welcome-box p, .dark-mode .alert-box p, .dark-mode  #horarios-box p {
     color: #edebeb;
 }
 

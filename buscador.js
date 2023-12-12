@@ -1,21 +1,3 @@
-// Variable para almacenar los datos de las paradas
-let busStops = [];
-
-// Función para cargar el JSON
-async function loadBusStops() {
-    try {
-        const response = await fetch('paradas.json');
-        const data = await response.json();
-        busStops = data; // Almacenamos los datos en la variable
-    } catch (error) {
-        console.error('Error al cargar el archivo JSON:', error);
-    }
-}
-
-// Llamamos a la función al cargar la página
-// Esto se llamará desde el script.js principal
-// window.onload = loadBusStops;
-
 document.getElementById('stopNumber').addEventListener('input', function() {
     var inputText = this.value;
     var matchingStops = searchByStopNumber(inputText);
@@ -85,18 +67,23 @@ document.getElementById('lineNumber').addEventListener('focus', function() {
     var lineNumber = this.value;
     var stopNumber = document.getElementById('stopNumber').value;
 
-    // Verifica si lineNumber ya está rellenado o si stopNumber no es numérico
-    if (lineNumber.trim() !== '' || !(/^\d+$/.test(stopNumber))) {
-        return; // No muestra sugerencias si lineNumber ya tiene un valor o stopNumber no es numérico
+    // Verifica si lineNumber ya está rellenado o si stopNumber no es alfanumérico
+    if (lineNumber.trim() !== '' || !(/^[a-zA-Z0-9]+$/.test(stopNumber))) {
+        return; // No muestra sugerencias si lineNumber ya tiene un valor o stopNumber no es alfanumérico
     }
 
     // Encuentra la parada en busStops usando stopNumber
     const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
 
     if (stopData) {
-        const lineSuggestions = [...stopData.lineas.ordinarias, ...stopData.lineas.poligonos, ...stopData.lineas.matinales, ...stopData.lineas.futbol, ...stopData.lineas.buho, ...stopData.lineas.universidad]
-    .map(line => ({ linea: line })); // Convierte cada línea en un objeto
-
+        const lineSuggestions = [
+            ...(stopData.lineas.ordinarias || []), 
+            ...(stopData.lineas.poligonos || []), 
+            ...(stopData.lineas.matinales || []), 
+            ...(stopData.lineas.futbol || []), 
+            ...(stopData.lineas.buho || []), 
+            ...(stopData.lineas.universidad || [])
+        ].map(line => ({ linea: line })); // Convierte cada línea en un objeto
 
         displayLineSuggestions(lineSuggestions);
     } else {
@@ -108,7 +95,6 @@ function displayLineSuggestions(buses) {
     var resultsContainer = document.getElementById('lineSuggestions');
 
     const lineNumber = document.getElementById('lineNumber');
-    const suggestions = document.getElementById('lineSuggestions');
 
     resultsContainer.innerHTML = '';
 
@@ -117,7 +103,7 @@ function displayLineSuggestions(buses) {
         resultElement.textContent = 'Línea ' + bus.linea;
         resultElement.classList.add('line-suggestion');
         resultElement.addEventListener('click', function() {
-            document.getElementById('lineNumber').value = bus.linea;
+            lineNumber.value = bus.linea;
             resultsContainer.innerHTML = ''; // Limpia los resultados después de seleccionar
         });
         resultsContainer.appendChild(resultElement);
