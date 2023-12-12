@@ -483,7 +483,7 @@ button.mostrar-horarios {
     color: #828282;
 }
 
-.foot-note a#twitter-share-button, .foot-note a#telegram-button, .foot-note a#facebook-share-button {
+.foot-note a#twitter-share-button, .foot-note a#telegram-button, .foot-note a#facebook-share-button, .foot-note a#whatsapp-share-button {
     display: inline-block;
     padding: 10px 15px;
     margin: 5px;
@@ -499,6 +499,11 @@ button.mostrar-horarios {
 .foot-note  a#twitter-share-button:hover {
     background-color: #0a76cf;
 }
+
+.foot-note a#whatsapp-share-button {
+    background-color: #25d366;
+}
+
 .foot-note #legend {
     color: #333;
     text-align: center;
