@@ -548,7 +548,14 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     tiempoRestante = Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000);
                 }
                 // Comparamos la hora de llegada programada con la hora de llegada en tiempo real
-                diferencia = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`)) / 60000);
+                let realTimeArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`);
+                let scheduledArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`);
+
+                realTimeArrival.setSeconds(0);
+                scheduledArrival.setSeconds(0);
+
+                diferencia = Math.ceil((realTimeArrival - scheduledArrival) / 60000);
+
                 lineItem.classList.remove('programado');
                 lineItem.classList.add('realtime');
             } else {
@@ -592,7 +599,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 lineItem.classList.add('retrasado');
             }
             else if (diferencia < 0) {
-                diferencia = `Adelanto ${diferencia * -1} min.`;
+                diferencia = `Adelanto ${Math.abs(diferencia)} min.`;
                 lineItem.classList.add('adelantado');
                 lineItem.classList.remove('retrasado');
             }
