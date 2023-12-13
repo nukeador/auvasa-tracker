@@ -1,10 +1,6 @@
 const CACHE_NAME = 'auvasatracker-v2.8'; // Incrementar esta versión con cada cambio
 const urlsToCache = [
     // Lista de URLs a cachear
-    '/style.css',
-    '/script.js',
-    '/buscador.js',
-    'mapa.js',
     '/favicon.png',
     // Imágenes
     "/img/arrow-light.png",
