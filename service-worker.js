@@ -1,4 +1,4 @@
-const CACHE_NAME = 'auvasatracker-v2.7'; // Incrementar esta versión con cada cambio
+const CACHE_NAME = 'auvasatracker-v2.8'; // Incrementar esta versión con cada cambio
 const urlsToCache = [
     // Lista de URLs a cachear
     '/style.css',
@@ -34,34 +34,32 @@ self.addEventListener('install', event => {
                 console.log('Cache abierto');
                 return cache.addAll(urlsToCache);
             })
-        .then(() => self.skipWaiting()) // Fuerza al Service Worker a activarse
+            .then(() => self.skipWaiting()) // Fuerza al Service Worker a activarse
     );
 });
 
-// Intercepta las solicitudes de red y responde con los recursos cacheados
+// Estrategia "Network First"
 self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request);
-            })
+        fetch(event.request).then(networkResponse => {
+            return caches.open(CACHE_NAME).then(cache => {
+                cache.put(event.request, networkResponse.clone());
+                return networkResponse;
+            });
+        }).catch(() => {
+            return caches.match(event.request);
+        })
     );
 });
 
-// Elimina los recursos antiguos del cache y toma control de las páginas abiertas inmediatamente
+// Elimina los recursos antiguos del cache
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all([
                 self.clients.claim(), // Toma control de las páginas abiertas inmediatamente
-                ...cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
-                        return caches.delete(cacheName);
-                    }
-                }),
+                ...cacheNames.filter(cacheName => cacheName !== CACHE_NAME)
+                            .map(cacheName => caches.delete(cacheName)),
             ]);
         })
     );
