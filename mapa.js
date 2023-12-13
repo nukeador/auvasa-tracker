@@ -20,13 +20,18 @@ L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1e
     subdomains: 'abc'
 }).addTo(myMap);
 
-async function updateBusMap(tripId, lineNumber) {
+async function updateBusMap(tripId, lineNumber, paradaData) {
     // Limpiamos de marcadores previos
     myMap.eachLayer(function(layer) {
         if (layer instanceof L.Marker) {
             myMap.removeLayer(layer);
         }
     });
+
+    // Añadimos marcador de la parada
+    // Agregar el marcador rojo al mapa
+    L.marker([paradaData.latitud, paradaData.longitud]).addTo(myMap).bindPopup(paradaData.nombre).openPopup();
+
     
     const response = await fetch(`https://gtfs.auvasatracker.com/v2/busPosition/${tripId}`);
     const data = await response.json();
@@ -37,5 +42,5 @@ async function updateBusMap(tripId, lineNumber) {
         icon: crearIconoBus(lineNumber)
     }).addTo(myMap);
 
-    myMap.setView([lat, lon], 16);
+    myMap.panTo([lat, lon]);
 }

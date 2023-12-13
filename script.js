@@ -687,15 +687,20 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     let intervalMap;
 
                     if (mapBox) {
-                        mapBox.classList.add('show');
-                        updateBusMap(tripId, lineNumber);
+                        let paradaData = {
+                            latitud: scheduledData.parada[0].latitud,
+                            longitud: scheduledData.parada[0].longitud,
+                            nombre: scheduledData.parada[0].parada,
+                        };
 
-                        intervalMap = setInterval(() => updateBusMap(tripId, lineNumber), 30000);
+                        mapBox.classList.add('show');
+                        updateBusMap(tripId, lineNumber, paradaData);
+
+                        intervalMap = setInterval(() => updateBusMap(tripId, lineNumber, paradaData), 15000);
                 
-                        document.addEventListener('click', function(e) {
-                            if (!mapBox.contains(e.target)) {
-                                mapBox.classList.remove('show');
-                            }
+                        // Agrega un controlador de eventos de clic a alerts-close
+                        mapBox.querySelector('.map-close').addEventListener('click', function() {
+                            mapBox.classList.remove('show');
                             if (intervalMap) {
                                 // Paramos las actualizaciones
                                 clearInterval(intervalMap);
@@ -704,6 +709,8 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 
                         event.stopPropagation();
                     }
+
+                    this.parentElement.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             }
 
