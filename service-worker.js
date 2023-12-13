@@ -1,13 +1,12 @@
-
-// Este es el Service Worker de la web app
-
-const CACHE_NAME = 'auvasatracker-v2.5';
+const CACHE_NAME = 'auvasatracker-v2.6'; // Actualizar esta versión con cada cambio significativo
 const urlsToCache = [
+    // Lista de URLs a cachear
     '/',
     '/index.html',
     '/style.css',
     '/script.js',
     '/buscador.js',
+    'mapa.js',
     '/favicon.png',
     // Imágenes
     "/img/arrow-light.png",
@@ -41,6 +40,7 @@ self.addEventListener('install', event => {
 });
 
 // Intercepta las solicitudes de red y responde con los recursos cacheados
+// Considera cambiar la estrategia de caché si necesitas actualizaciones más frecuentes
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
@@ -53,17 +53,18 @@ self.addEventListener('fetch', event => {
     );
 });
 
-// Elimina los recursos antiguos del cache
+// Elimina los recursos antiguos del cache y toma control de las páginas abiertas inmediatamente
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
+            return Promise.all([
+                self.clients.claim(), // Toma control de las páginas abiertas inmediatamente
+                ...cacheNames.map(cacheName => {
                     if (cacheName !== CACHE_NAME) {
                         return caches.delete(cacheName);
                     }
-                })
-            );
+                }),
+            ]);
         })
     );
 });
