@@ -1,12 +1,14 @@
-var myMap = L.map('busMap').setView([41.64817, -4.72974], 16);
+let myMap = L.map('busMap').setView([41.64817, -4.72974], 16);
+let centerControl;
+let paradaMarker;
+let marcadorAutobus;
 
 function crearIconoBus(numeroBus) {
-    var iconoBus = L.divIcon({
+    return L.divIcon({
         className: 'bus-icon' + (numeroBus ? ' linea-' + numeroBus : ''),
         html: '<div>' + numeroBus + '</div>',
         iconSize: [40, 40]
     });
-    return iconoBus;
 }
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -20,93 +22,88 @@ L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1e
     subdomains: 'abc'
 }).addTo(myMap);
 
-// Mantener una referencia al control
-let centerControl;
-let paradaMarker;
-
 async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
-
     if (!paradaData || !paradaData.latitud || !paradaData.longitud) {
         console.error('Datos de la parada no disponibles o inválidos');
-        return; // Detener la ejecución si los datos no son válidos
+        return;
     }
 
-    // Limpiamos de marcadores previos
-    myMap.eachLayer(function(layer) {
-        if (layer instanceof L.Marker) {
-                myMap.removeLayer(layer); 
+    try {
+        const response = await fetch(apiEndPoint + `/v2/busPosition/${tripId}`);
+        if (!response.ok) {
+            throw new Error('Falló la respuesta de la API');
         }
-    });
+        const data = await response.json();
 
-    // Obtener los datos de la API
-    const response = await fetch(`https://gtfs.auvasatracker.com/v2/busPosition/${tripId}`);
-    const data = await response.json();
+        if (!data || !data.length || !data[0].latitud || !data[0].longitud) {
+            throw new Error('Datos de la API inválidos o incompletos');
+        }
 
-    const lat = data[0].latitud ? data[0].latitud.toString() : undefined;
-    const lon = data[0].longitud ? data[0].longitud.toString() : undefined;
+        const lat = parseFloat(data[0].latitud);
+        const lon = parseFloat(data[0].longitud);
 
-    // Crear un botón de control personalizado
-    var CenterControl = L.Control.extend({
-        onAdd: function (map) {
-            var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        if (isNaN(lat) || isNaN(lon)) {
+            throw new Error('Datos de ubicación inválidos');
+        }
 
-            container.style.backgroundColor = 'white'; 
-            container.style.backgroundImage = "url('img/bus-black.png')";
-            container.style.backgroundSize = "30px 30px";
-            container.style.width = '30px';
-            container.style.height = '30px';
-            container.style.cursor = 'pointer';
+        actualizarControlCentro(myMap, lat, lon);
+        actualizarMarcadores(paradaData, lat, lon, lineNumber);
+        actualizarUltimaActualizacion(data[0].timestamp);
 
-            container.onclick = function () {
-                map.panTo([lat, lon]);
+        if (centerMap) {
+            myMap.panTo([lat, lon]);
+        }
+
+    } catch (error) {
+        console.error('Error al actualizar el mapa de buses:', error.message);
+    }
+}
+
+function actualizarControlCentro(map, lat, lon) {
+    if (!centerControl) {
+        var CenterControl = L.Control.extend({
+            onAdd: function () {
+                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                container.style.backgroundColor = 'white'; 
+                container.style.backgroundImage = "url('img/bus-black.png')";
+                container.style.backgroundSize = "30px 30px";
+                container.style.width = '30px';
+                container.style.height = '30px';
+                container.style.cursor = 'pointer';
+                return container;
             }
+        });
 
-            return container;
-        },
-    });
-
-    // Si el control ya existe, eliminarlo
-    if (centerControl) {
-        myMap.removeControl(centerControl);
+        centerControl = new CenterControl();
+        map.addControl(centerControl);
     }
 
-    // Crear un nuevo control y añadirlo al mapa
-    centerControl = new CenterControl();
-    myMap.addControl(centerControl);
+    centerControl.getContainer().onclick = function () {
+        map.panTo([lat, lon]);
+    };
+}
 
-    paradaMarker = L.marker([paradaData.latitud, paradaData.longitud])
-    .addTo(myMap)
-    .bindPopup(paradaData.nombre);
-
-    // Crear un objeto Date a partir del timestamp
-    let timestampDate = new Date(data[0].timestamp);
-
-    // Crear un objeto Date para la hora actual
-    let currentDate = new Date();
-
-    // Calcular la diferencia en milisegundos
-    let diff = currentDate - timestampDate;
-
-    // Convertir la diferencia en minutos y segundos
-    let minutes = Math.floor(diff / 60000); // 1 minuto = 60000 milisegundos
-    let seconds = ((diff % 60000) / 1000).toFixed(0);
-
-    // Verificar si los minutos son menos de 1
-    let lastUpdate;
-    if (minutes < 1) {
-        lastUpdate = `${seconds}s`;
+function actualizarMarcadores(paradaData, lat, lon, lineNumber) {
+    if (!paradaMarker) {
+        paradaMarker = L.marker([paradaData.latitud, paradaData.longitud]).addTo(myMap).bindPopup(paradaData.nombre);
     } else {
-        lastUpdate = `${minutes} min ${seconds}s`;
+        paradaMarker.setLatLng([paradaData.latitud, paradaData.longitud]).update();
     }
 
+    const nuevoIconoBus = crearIconoBus(lineNumber);
+    if (!marcadorAutobus) {
+        marcadorAutobus = L.marker([lat, lon], {icon: nuevoIconoBus}).addTo(myMap);
+    } else {
+        marcadorAutobus.setLatLng([lat, lon]).setIcon(nuevoIconoBus).update();
+    }
+}
+
+function actualizarUltimaActualizacion(timestamp) {
+    let timestampDate = new Date(timestamp);
+    let currentDate = new Date();
+    let diff = currentDate - timestampDate;
+    let minutes = Math.floor(diff / 60000);
+    let seconds = ((diff % 60000) / 1000).toFixed(0);
+    let lastUpdate = minutes < 1 ? `${seconds}s` : `${minutes} min ${seconds}s`;
     document.getElementById('busMapLastUpdate').textContent = lastUpdate;
-
-    let marcadorAutobus = L.marker([lat, lon], {
-        icon: crearIconoBus(lineNumber)
-    }).addTo(myMap);
-
-    if (centerMap) {
-        myMap.panTo([lat, lon]);
-        isMapCentered = true;
-    }
 }
