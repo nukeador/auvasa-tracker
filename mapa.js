@@ -84,17 +84,26 @@ function actualizarControlCentro(map, lat, lon) {
 }
 
 function actualizarMarcadores(paradaData, lat, lon, lineNumber) {
-    if (!paradaMarker) {
-        paradaMarker = L.marker([paradaData.latitud, paradaData.longitud]).addTo(myMap).bindPopup(paradaData.nombre);
+    // Actualizar o crear el marcador de la parada
+    if (paradaMarker) {
+        // Si ya existe, actualizamos su posición y su popup
+        paradaMarker.setLatLng([paradaData.latitud, paradaData.longitud]);
+        paradaMarker.getPopup().setContent(paradaData.nombre);
     } else {
-        paradaMarker.setLatLng([paradaData.latitud, paradaData.longitud]).update();
+        // Si no existe, creamos uno nuevo
+        paradaMarker = L.marker([paradaData.latitud, paradaData.longitud], {
+            title: paradaData.nombre
+        }).addTo(myMap).bindPopup(paradaData.nombre);
     }
 
+    // Actualizar o crear el marcador del autobús
     const nuevoIconoBus = crearIconoBus(lineNumber);
-    if (!marcadorAutobus) {
-        marcadorAutobus = L.marker([lat, lon], {icon: nuevoIconoBus}).addTo(myMap);
+    if (marcadorAutobus) {
+        // Si ya existe, actualizamos su posición y su icono
+        marcadorAutobus.setLatLng([lat, lon]).setIcon(nuevoIconoBus);
     } else {
-        marcadorAutobus.setLatLng([lat, lon]).setIcon(nuevoIconoBus).update();
+        // Si no existe, creamos uno nuevo
+        marcadorAutobus = L.marker([lat, lon], {icon: nuevoIconoBus}).addTo(myMap);
     }
 }
 
