@@ -1,4 +1,4 @@
-const CACHE_NAME = 'auvasatracker-v2.6'; // Actualizar esta versión con cada cambio significativo
+const CACHE_NAME = 'auvasatracker-v2.7'; // Incrementar esta versión con cada cambio
 const urlsToCache = [
     // Lista de URLs a cachear
     '/',
@@ -36,11 +36,11 @@ self.addEventListener('install', event => {
                 console.log('Cache abierto');
                 return cache.addAll(urlsToCache);
             })
+        .then(() => self.skipWaiting()) // Fuerza al Service Worker a activarse
     );
 });
 
 // Intercepta las solicitudes de red y responde con los recursos cacheados
-// Considera cambiar la estrategia de caché si necesitas actualizaciones más frecuentes
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
