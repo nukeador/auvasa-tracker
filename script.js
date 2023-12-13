@@ -676,6 +676,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             });
 
             // Agrega un controlador de eventos de clic mostrar el mapa si hay datos
+            let intervalMap;
             let showMapIcon = lineItem.querySelector('.showMapIcon');
             if (showMapIcon) {
                 showMapIcon.addEventListener('click', function(event) {
@@ -684,7 +685,6 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     const brotherElement = this.parentElement.previousElementSibling;
                     const tripId = brotherElement.getAttribute('data-trip-id');
                 
-                    let intervalMap;
 
                     if (mapBox) {
                         let paradaData = {
@@ -694,9 +694,14 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         };
 
                         mapBox.classList.add('show');
-                        updateBusMap(tripId, lineNumber, paradaData);
+                        updateBusMap(tripId, lineNumber, paradaData, true);
 
-                        intervalMap = setInterval(() => updateBusMap(tripId, lineNumber, paradaData), 15000);
+                        // Si intervalMap ya está definido, limpiar el intervalo existente
+                        if (intervalMap) {
+                            clearInterval(intervalMap);
+                        }
+
+                        intervalMap = setInterval(() => updateBusMap(tripId, lineNumber, paradaData, false), 5000);
                 
                         // Agrega un controlador de eventos de clic a alerts-close
                         mapBox.querySelector('.map-close').addEventListener('click', function() {
