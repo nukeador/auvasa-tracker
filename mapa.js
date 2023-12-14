@@ -47,6 +47,7 @@ async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
         }
 
         actualizarControlCentro(myMap, lat, lon);
+        addRouteShapesToMap(tripId, lineNumber);
         actualizarMarcadores(paradaData, lat, lon, lineNumber);
         actualizarUltimaActualizacion(data[0].timestamp);
 
@@ -115,4 +116,36 @@ function actualizarUltimaActualizacion(timestamp) {
     let seconds = ((diff % 60000) / 1000).toFixed(0);
     let lastUpdate = minutes < 1 ? `${seconds}s` : `${minutes} min ${seconds}s`;
     document.getElementById('busMapLastUpdate').textContent = lastUpdate;
+}
+
+let currentShapesLayer = null;
+// Route shapes de un trip_id al mapa
+async function addRouteShapesToMap(tripId, lineNumber) {
+    try {
+        const shapesResponse = await fetch(apiEndPoint + `/v2/geojson/${tripId}`);
+        if (!shapesResponse.ok) {
+            throw new Error('Failed to fetch route shapes');
+        }
+        const shapesData = await shapesResponse.json();
+
+        // Remove the existing shapes layer if it exists
+        if (currentShapesLayer) {
+            myMap.removeLayer(currentShapesLayer);
+        }
+
+        // Add the new GeoJSON to the map with a custom class
+        currentShapesLayer = L.geoJSON(shapesData, {
+            onEachFeature: (feature, layer) => {
+                if (layer.setStyle) {
+                    // Set the class name based on the line number
+                    const className = `linea-${lineNumber}`;
+                    layer.setStyle({
+                        className: className
+                    });
+                }
+            }
+        }).addTo(myMap);
+    } catch (error) {
+        console.error('Error adding route shapes to the map:', error.message);
+    }
 }

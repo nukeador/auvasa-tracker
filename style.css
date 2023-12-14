@@ -724,122 +724,146 @@ body.dark-mode {
 }
 
 /* Colores de las lineas */
-.bus-icon.linea-1, .linea-1 h3 {
+.bus-icon.linea-1, .linea-1 h3,  #busMap .linea-1 {
     background-color: #5ebd5a;
+    stroke: #5ebd5a;;
     color: #fff;
 }
 
-.bus-icon.linea-2, .linea-2 h3 {
+.bus-icon.linea-2, .linea-2 h3, #busMap .linea-2 {
     background-color: #f2c435;
+    stroke: #f2c435;
     color: #000;
 }
 
-.bus-icon.linea-3, .linea-3 h3 {
+.bus-icon.linea-3, .linea-3 h3,   #busMap .linea-3 {
     background-color: #ee4ba4;
+    stroke: #ee4ba4;
     color: #000;
 }
 
-.bus-icon.linea-4, .linea-4 h3 {
+.bus-icon.linea-4, .linea-4 h3, #busMap .linea-4 {
     background-color: #aa541a;
+    stroke: #aa541a;
     color: #FFF;
 }
 
-.bus-icon.linea-5, .linea-5 h3 {
+.bus-icon.linea-5, .linea-5 h3, #busMap .linea-5 {
     background-color: #2fb7b7;
+    stroke: #2fb7b7;
     color: #fff;
 }
 
-.bus-icon.linea-6, .linea-6 h3 {
+.bus-icon.linea-6, .linea-6 h3, #busMap .linea-6 {
     background-color: #f29cc2;
+    stroke: #f29cc2;
     color: #000;
 }
 
-.bus-icon.linea-7, .linea-7 h3 {
+.bus-icon.linea-7, .linea-7 h3, #busMap .linea-7 {
     background-color: #7a2b37;
+    stroke: #7a2b37;
     color: #FFF;
 }
 
-.bus-icon.linea-8, .linea-8 h3 {
+.bus-icon.linea-8, .linea-8 h3, #busMap .linea-8 {
     background-color: #ea5d00;
+    stroke: #ea5d00;
     color: #FFF;
 }
 
-.bus-icon.linea-9, .linea-9 h3 {
+.bus-icon.linea-9, .linea-9 h3, #busMap .linea-9 {
     background-color: #009ee6;
+    stroke: #009ee6;
     color: #FFF;
 }
 
-.bus-icon.linea-10, .linea-10 h3 {
+.bus-icon.linea-10, .linea-10 h3, #busMap .linea-10 {
     background-color: #a01a4a;
+    stroke: #a01a4a;
     color: #FFF;
 }
 
-.bus-icon.linea-13, .linea-13 h3 {
+.bus-icon.linea-13, .linea-13 h3, #busMap .linea-13 {
     background-color: #0051a1;
+    stroke: #0051a1;
     color: #FFF;
 }
 
-.bus-icon.linea-14 , .linea-14 h3 {
+.bus-icon.linea-14 , .linea-14 h3, #busMap .linea-14 {
     background-color: #887cb9;
+    stroke: #887cb9;
     color: #000;
 }
 
-.bus-icon.linea-16, .linea-16 h3 {
+.bus-icon.linea-16, .linea-16 h3, #busMap .linea-16 {
     background-color:#84cef5;
+    stroke: #84cef5;
     color: #000;
 }
 
-.bus-icon.linea-17, .linea-17 h3 {
+.bus-icon.linea-17, .linea-17 h3, #busMap .linea-17 {
     background-color: #c2d403;
+    stroke: #c2d403;
     color: #000;
 }
 
-.bus-icon.linea-18, .linea-18 h3 {
+.bus-icon.linea-18, .linea-18 h3, #busMap .linea-18 {
     background-color: #b9b8b8;
+    stroke: #b9b8b8;
     color: #000;
 }
 
-.bus-icon.linea-19, .linea-19 h3 {
+.bus-icon.linea-19, .linea-19 h3, #busMap .linea-19 {
     background-color: #eaa874;
+    stroke: #eaa874;
     color: #000;
 }
 
-.bus-icon.linea-24, .linea-24 h3 {
+.bus-icon.linea-24, .linea-24 h3, #busMap .linea-24 {
     background-color: #11459f;
+    stroke: #11459f;
     color: #FFF;
 }
 
-.bus-icon.linea-C1, .bus-icon.linea-C2, .linea-C1 h3, .linea-C2 h3 {
+.bus-icon.linea-C1, .bus-icon.linea-C2, .linea-C1 h3, .linea-C2 h3, #busMap .linea-C1, #busMap .linea-C2 {
     background-color: #555553;
+    stroke: #555553;
     color: #FFF;
 }
 
-.bus-icon.linea-H, .linea-H h3 {
+.bus-icon.linea-H, .linea-H h3, #busMap .linea-H {
     background-color: #e5232e;
+    stroke: #e5232e;
     color: #000;
 }
 
-.bus-icon.linea-B1, .linea-B1 h3 {
+.bus-icon.linea-B1, .linea-B1 h3, #busMap .linea-B1 {
     background-color: #000;
+    stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B2, .linea-B2 h3 {
+.bus-icon.linea-B2, .linea-B2 h3, #busMap .linea-B2 {
     background-color: #000;
+    stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B3, .linea-B3 h3 {
+.bus-icon.linea-B3, .linea-B3 h3, #busMap .linea-B3 {
     background-color: #000;
+    stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B4, .linea-B4 h3 {
+.bus-icon.linea-B4, .linea-B4 h3, #busMap .linea-B4 {
     background-color: #000;
+    stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B5, .linea-B5 h3 {
+.bus-icon.linea-B5, .linea-B5 h3, #busMap .linea-B5 {
     background-color: #000;
+    stroke: #000;
     color: #FFF;
 }
