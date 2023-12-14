@@ -355,11 +355,11 @@ button.mostrar-horarios {
 #mapContainer {
     position: fixed;
     width: 96%;
-    height: 50%;
+    height: 60%;
     margin: 0 auto;
-    bottom: 100px;
+    top: 400px;
     left: 50%;
-    transform: translate(-50%, -100px);
+    transform: translate(-50%, -290px);
     z-index: 1;
     opacity: 0;
     visibility: hidden;
