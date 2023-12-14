@@ -1,6 +1,5 @@
 // Definir la URL base del API
-// const apiEndPoint = 'https://gtfs.auvasatracker.com';
-const apiEndPoint = 'http://localhost:3000';
+const apiEndPoint = 'https://gtfs.auvasatracker.com';
 
 var busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
 
