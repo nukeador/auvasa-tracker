@@ -7,7 +7,7 @@ function crearIconoBus(numeroBus) {
     return L.divIcon({
         className: 'bus-icon' + (numeroBus ? ' linea-' + numeroBus : ''),
         html: '<div>' + numeroBus + '</div>',
-        iconSize: [40, 40]
+        iconSize: [30, 30]
     });
 }
 
@@ -48,6 +48,7 @@ async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
 
         actualizarControlCentro(myMap, lat, lon);
         addRouteShapesToMap(tripId, lineNumber);
+        addStopsToMap(tripId, lineNumber);
         actualizarMarcadores(paradaData, lat, lon, lineNumber);
         actualizarUltimaActualizacion(data[0].timestamp);
 
@@ -149,3 +150,41 @@ async function addRouteShapesToMap(tripId, lineNumber) {
         console.error('Error adding route shapes to the map:', error.message);
     }
 }
+
+let currentStopsLayer = null;
+// Función para añadir paradas de un trip_id al mapa
+async function addStopsToMap(tripId, lineNumber) {
+    try {
+        const stopsResponse = await fetch(apiEndPoint + `/v2/geojson/paradas/${tripId}`);
+        if (!stopsResponse.ok) {
+            throw new Error('Failed to fetch stops');
+        }
+        const stopsData = await stopsResponse.json();
+
+        // Remove the existing stops layer if it exists
+        if (currentStopsLayer) {
+            myMap.removeLayer(currentStopsLayer);
+        }
+
+        // Add the new stops to the map
+        currentStopsLayer = L.geoJSON(stopsData, {
+            pointToLayer: (feature, latlng) => {
+                const busStopIcon = L.icon({
+                    iconUrl: 'img/bus-stop.png', 
+                    iconSize: [12, 12], 
+                    iconAnchor: [0, 0], 
+                    popupAnchor: [0, -12]
+                });
+                return L.marker(latlng, { icon: busStopIcon });
+            },
+            onEachFeature: (feature, layer) => {
+                if (layer.bindPopup) {
+                    layer.bindPopup(`<strong>${feature.properties.stop_name}</strong><br>${feature.properties.stop_desc}`);
+                }
+            }
+        }).addTo(myMap);
+    } catch (error) {
+        console.error('Error adding stops to the map:', error.message);
+    }
+}
+
