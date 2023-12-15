@@ -158,9 +158,14 @@ async function addRouteShapesToMap(tripId, lineNumber) {
 }
 
 let currentStopsLayer = null;
+let currentTripId = null;
 // Función para añadir paradas de un trip_id al mapa
 async function addStopsToMap(tripId, lineNumber) {
     try {
+        // Si el tripId no ha cambiado, no hagas nada
+        if (tripId === currentTripId) {
+            return;
+        }
         const stopsResponse = await fetch(apiEndPoint + `/v2/geojson/paradas/${tripId}`);
         if (!stopsResponse.ok) {
             throw new Error('Failed to fetch stops');
@@ -171,6 +176,9 @@ async function addStopsToMap(tripId, lineNumber) {
         if (currentStopsLayer) {
             myMap.removeLayer(currentStopsLayer);
         }
+
+        // Actualizar el tripId actual
+        currentTripId = tripId;
 
         // Add the new stops to the map
         currentStopsLayer = L.geoJSON(stopsData, {
