@@ -189,7 +189,7 @@ button#installButton {
 }
 
 .stop-block h2 {
-    padding: 1em 0 0 30px;
+    padding: 1em 0 0 56px;
     text-align: center;
     font-size: 0.9em;
     line-height: 1.6em;
@@ -204,7 +204,7 @@ button#installButton {
     text-indent: -9999px;
     overflow: hidden;
     position: absolute;
-    left: 50px;
+    left: 1.8em;
     font-size: 1.4em;
     cursor: pointer;
   }  
