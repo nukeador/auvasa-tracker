@@ -82,7 +82,7 @@ function actualizarControlCentro(map, lat, lon) {
     }
 
     centerControl.getContainer().onclick = function () {
-        map.panTo([lat, lon]);
+        map.panTo([lat, lon], {animate: true, duration: 1});
     };
 }
 
@@ -107,7 +107,7 @@ function actualizarMarcadores(paradaData, lat, lon, lineNumber) {
         if (marcadorAutobus.getLatLng().lat!== lat || marcadorAutobus.getLatLng().lng!== lon) {
             marcadorAutobus.setLatLng([lat, lon]).setIcon(nuevoIconoBus);
             // Centramos la vista en la nueva ubicación
-            myMap.panTo([lat, lon]);
+            myMap.panTo([lat, lon], {animate: true, duration: 1});
         }
     } else {
         // Si no existe, creamos uno nuevo
