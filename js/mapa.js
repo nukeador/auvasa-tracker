@@ -103,7 +103,12 @@ function actualizarMarcadores(paradaData, lat, lon, lineNumber) {
     const nuevoIconoBus = crearIconoBus(lineNumber);
     if (marcadorAutobus) {
         // Si ya existe, actualizamos su posición y su icono
-        marcadorAutobus.setLatLng([lat, lon]).setIcon(nuevoIconoBus);
+        // Pero solo si lat y lon ha cambiado
+        if (marcadorAutobus.getLatLng().lat!== lat || marcadorAutobus.getLatLng().lng!== lon) {
+            marcadorAutobus.setLatLng([lat, lon]).setIcon(nuevoIconoBus);
+            // Centramos la vista en la nueva ubicación
+            myMap.panTo([lat, lon]);
+        }
     } else {
         // Si no existe, creamos uno nuevo
         marcadorAutobus = L.marker([lat, lon], {icon: nuevoIconoBus}).addTo(myMap);
