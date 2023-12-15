@@ -472,7 +472,7 @@ async function displayScheduledBuses(stopNumber) {
         horariosElement.className = 'horarios';
         horariosElement.id = 'horarios-' + stopNumber;
         horariosBuses = await fetchScheduledBuses(stopNumber);
-        horariosElement.innerHTML += '<button class="horarios-close">Cerrar</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados para hoy</p>';
+        horariosElement.innerHTML += '<button class="horarios-close">Cerrar</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada</strong> hoy</p>';
         horariosBuses.lineas.forEach(bus => {
             horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p>';
             // Si no hay horarios mostramos mensaje

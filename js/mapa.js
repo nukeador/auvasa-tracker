@@ -66,12 +66,13 @@ function actualizarControlCentro(map, lat, lon) {
         var CenterControl = L.Control.extend({
             onAdd: function () {
                 var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-                container.style.backgroundColor = 'white'; 
-                container.style.backgroundImage = "url('img/bus-black.png')";
+                container.style.backgroundColor = 'white';
+                container.style.backgroundImage = "url('img/bus-location-center.png')";
                 container.style.backgroundSize = "30px 30px";
                 container.style.width = '30px';
                 container.style.height = '30px';
                 container.style.cursor = 'pointer';
+                container.title = "Centrar mapa en el bus";
                 return container;
             }
         });
