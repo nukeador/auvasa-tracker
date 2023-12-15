@@ -126,9 +126,15 @@ function actualizarUltimaActualizacion(timestamp) {
 }
 
 let currentShapesLayer = null;
+let currentShapesTripId = null;
 // Route shapes de un trip_id al mapa
 async function addRouteShapesToMap(tripId, lineNumber) {
     try {
+        // Si el tripId no ha cambiado, no hacemos nada
+        if (tripId === currentShapesTripId) {
+            return;
+        }
+
         const shapesResponse = await fetch(apiEndPoint + `/v2/geojson/${tripId}`);
         if (!shapesResponse.ok) {
             throw new Error('Failed to fetch route shapes');
@@ -139,6 +145,9 @@ async function addRouteShapesToMap(tripId, lineNumber) {
         if (currentShapesLayer) {
             myMap.removeLayer(currentShapesLayer);
         }
+
+        // Actualizar el tripId actual para las shapes
+        currentShapesTripId = tripId;
 
         // Add the new GeoJSON to the map with a custom class
         currentShapesLayer = L.geoJSON(shapesData, {
