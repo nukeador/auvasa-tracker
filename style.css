@@ -189,17 +189,18 @@ button#installButton {
 }
 
 .stop-block h2 {
-    padding: 1em 0.2em 0 72px;
+    padding: 1em 0 0 30px;
     text-align: center;
-    font-size: 1.1em;
+    font-size: 0.9em;
+    line-height: 1.6em;
 }
 
 .stop-block .mapIcon {
     background-image: url("img/stop-route.png");
     background-size: cover;
     display: inline-block;
-    width: 1em;
-    height: 1em; 
+    width: 1.2em;
+    height: 1.2em; 
     text-indent: -9999px;
     overflow: hidden;
     position: absolute;
