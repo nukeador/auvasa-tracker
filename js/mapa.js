@@ -22,6 +22,9 @@ L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1e
     subdomains: 'abc'
 }).addTo(myMap);
 
+let lat = null;
+let lon = null;
+
 async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
     if (!paradaData || !paradaData.latitud || !paradaData.longitud) {
         console.error('Datos de la parada no disponibles o inválidos');
@@ -30,32 +33,36 @@ async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
 
     try {
         const response = await fetch(apiEndPoint + `/v2/busPosition/${tripId}`);
+        // Si no hay datos de ubicación, los dejamos como null
         if (!response.ok) {
-            throw new Error('Falló la respuesta de la API');
+            console.log('Error al consultar el API de ubicación');
         }
-        const data = await response.json();
+        else {
+            const data = await response.json();
 
-        if (!data || !data.length || !data[0].latitud || !data[0].longitud) {
-            throw new Error('Datos de la API inválidos o incompletos');
+            if (!data || !data.length || !data[0].latitud || !data[0].longitud) {
+                // Si no hay datos simplemente centramos el mapa en la parada
+                if (centerMap) {
+                    myMap.panTo([paradaData.latitud, paradaData.longitud]);
+                }
+                document.getElementById('busMapLastUpdate').innerHTML = "Actualmente no hay datos de ubicación para esta línea";
+            }
+            else {
+                // Si tenemos datos de ubicación los guardamos y mostramos
+                lat = parseFloat(data[0].latitud);
+                lon = parseFloat(data[0].longitud);
+                actualizarBus(lat, lon, lineNumber);
+                actualizarControlCentro(myMap, lat, lon);
+                actualizarUltimaActualizacion(data[0].timestamp);
+                if (centerMap) {
+                    myMap.panTo([lat, lon]);
+                }
+            }
+
+            actualizarParada(paradaData);
+            addRouteShapesToMap(tripId, lineNumber);
+            addStopsToMap(tripId, lineNumber);
         }
-
-        const lat = parseFloat(data[0].latitud);
-        const lon = parseFloat(data[0].longitud);
-
-        if (isNaN(lat) || isNaN(lon)) {
-            throw new Error('Datos de ubicación inválidos');
-        }
-
-        actualizarControlCentro(myMap, lat, lon);
-        addRouteShapesToMap(tripId, lineNumber);
-        addStopsToMap(tripId, lineNumber);
-        actualizarMarcadores(paradaData, lat, lon, lineNumber);
-        actualizarUltimaActualizacion(data[0].timestamp);
-
-        if (centerMap) {
-            myMap.panTo([lat, lon]);
-        }
-
     } catch (error) {
         console.error('Error al actualizar el mapa de buses:', error.message);
     }
@@ -86,7 +93,35 @@ function actualizarControlCentro(map, lat, lon) {
     };
 }
 
-function actualizarMarcadores(paradaData, lat, lon, lineNumber) {
+var UbicacionUsuarioControl = L.Control.extend({
+    options: {
+        position: 'topleft' // Posición del control en el mapa
+    },
+
+    onAdd: function (map) {
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        
+        container.style.backgroundColor = 'white';
+        container.style.backgroundImage = "url('img/location.svg')";
+        container.style.backgroundSize = "20px 20px";
+        container.style.backgroundRepeat = "no-repeat";
+        container.style.backgroundPosition = "center";
+        container.style.width = '30px';
+        container.style.height = '30px';
+        container.style.cursor = 'pointer';
+        container.title = "Mostrar mi ubicación";
+
+        container.onclick = function(){
+            actualizarUbicacionUsuario(true);
+        }
+
+        return container;
+    }
+});
+
+myMap.addControl(new UbicacionUsuarioControl());
+
+function actualizarParada(paradaData) {
     // Actualizar o crear el marcador de la parada
     if (paradaMarker) {
         // Si ya existe, actualizamos su posición y su popup
@@ -98,7 +133,9 @@ function actualizarMarcadores(paradaData, lat, lon, lineNumber) {
             title: paradaData.nombre
         }).addTo(myMap).bindPopup(paradaData.nombre);
     }
+}
 
+function actualizarBus(lat, lon, lineNumber) {
     // Actualizar o crear el marcador del autobús
     const nuevoIconoBus = crearIconoBus(lineNumber);
     if (marcadorAutobus) {
@@ -122,7 +159,8 @@ function actualizarUltimaActualizacion(timestamp) {
     let minutes = Math.floor(diff / 60000);
     let seconds = ((diff % 60000) / 1000).toFixed(0);
     let lastUpdate = minutes < 1 ? `${seconds}s` : `${minutes} min ${seconds}s`;
-    document.getElementById('busMapLastUpdate').textContent = lastUpdate;
+    updateHTML = "Última ubicación <strong>aproximada</strong>. Actualizada hace " + lastUpdate;
+    document.getElementById('busMapLastUpdate').innerHTML = updateHTML;
 }
 
 let currentShapesLayer = null;
@@ -211,3 +249,66 @@ async function addStopsToMap(tripId, lineNumber) {
     }
 }
 
+let userLocationMarker;
+
+function actualizarUbicacionUsuario(mapCenter) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => mostrarUbicacionUsuario(position, mapCenter), mostrarErrorUbicacion, {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        });
+    } else {
+        console.error('Geolocalización no soportada por este navegador.');
+    }
+}
+
+function mostrarUbicacionUsuario(position, mapCenter) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    // Si ya existe un marcador de ubicación del usuario, actualiza su posición
+    if (userLocationMarker) {
+        userLocationMarker.setLatLng([lat, lon]);
+    } else {
+        // Si no, crea un nuevo marcador
+        userLocationMarker = L.marker([lat, lon], {
+            icon: L.divIcon({
+                className: 'user-location-icon',
+                html: '<div class="location-icon"></div>',
+                iconSize: [15, 15]
+            })
+        }).addTo(myMap);
+    }
+
+    // Dibuja un círculo alrededor de la ubicación del usuario
+    L.circle([lat, lon], {
+        color: '#FFF',
+        fillColor: '#1da1f2',
+        fillOpacity: 0.7,
+        radius: 50
+    }).addTo(myMap);
+
+    if (mapCenter) {
+        // Centramos el mapa en la ubicación
+        myMap.panTo([lat, lon], {animate: true, duration: 1});
+    }
+}
+
+function mostrarErrorUbicacion(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            console.error("Usuario negó la solicitud de geolocalización.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            console.error("Información de ubicación no disponible.");
+            break;
+        case error.TIMEOUT:
+            console.error("La solicitud para obtener la ubicación del usuario expiró.");
+            break;
+        case error.UNKNOWN_ERROR:
+            console.error("Un error desconocido ocurrió.");
+            break;
+    }
+}

@@ -215,10 +215,16 @@ button#installButton {
     background-repeat: no-repeat;
     background-position: 0px;
     line-height: 16px;
-    font-size: 0.85em;
+    font-size: 0.7em;
     cursor: pointer;
     padding: 0 0 0 23px;
-    margin: 0 0 3px 0;
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.dark-mode .showMapIcon {
+    background-image: url("img/bus-location-white.png");
 }
 
 .line-info {
@@ -396,6 +402,18 @@ button.mostrar-horarios {
     align-items: center;
     z-index: 100;
 }
+
+@keyframes glowing {
+    0% { box-shadow: 0 0 10px 2px #1da1f2; }
+    50% { box-shadow: 0 0 30px 10px #1da1f2; }
+    100% { box-shadow: 0 0 10px 2px #1da1f2; }
+}
+
+#mapContainer #busMap .user-location-icon {
+    animation: glowing 1s ease-in-out infinite;
+    border-radius: 50%;
+}
+
 
 #mapContainer #mapFooter {
     background: #fff;

@@ -538,7 +538,8 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             let ubicacionLat;
             let ubicacionLon;
             let velocidad;
-            let tripId;
+
+            let tripId = busMasCercano.scheduled.tripId;
 
             // Si hay datos en tiempo real, usarlos, de lo contrario, usar los programados
             if (busMasCercano.realTime) {
@@ -546,7 +547,6 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 ubicacionLat = busMasCercano.realTime.latitud;
                 ubicacionLon = busMasCercano.realTime.longitud;
                 velocidad = busMasCercano.realTime.velocidad;
-                tripId = busMasCercano.scheduled.tripId;
                 //tiempoRestante = busMasCercano.realTime.tiempoRestante;
                 // Calculamos el tiempo en el cliente porque el api puede tener cacheado este cálculo
                 // Si el busMasCercano.realTime.llegada es menor de 60 segundos, mostramos 0 minutos
@@ -622,10 +622,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 lineItem.classList.remove('retrasado');
             }
 
-            let mapElement = '';
-            if (ubicacionLat && ubicacionLon) {
-                mapElement = '<a class="showMapIcon" title="Ver en el mapa">Mapa</a>';
-            }
+            let mapElement = '<a class="showMapIcon" title="Ver linea en el mapa">Mapa</a>';
 
             // Actualizar el HTML con los datos del bus más cercano
             lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestante + ' <p>min.</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
