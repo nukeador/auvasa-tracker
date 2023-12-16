@@ -4,7 +4,7 @@
     "start_url": "index.html",
     "display": "standalone",
     "background_color": "#FFFFFF",
-    "description": "Seguimiento de las líneas de autobús y paradas de AUVASA (Valladolid)",
+    "description": "La forma más rápida de saber cuánto le queda a tu bus en Valladolid",
     "icons": [
         {
             "src": "favicon.png",
