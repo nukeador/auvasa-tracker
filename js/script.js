@@ -436,6 +436,47 @@ async function fetchScheduledBuses(stopNumber) {
     }
 }
 
+// Cache para los destinos de lineas
+const stopsDestinationsCache = {
+    data: {}, // Almacenará los datos de las paradas
+    lastUpdated: 0, // Marca de tiempo de la última actualización
+    cacheDuration: 24 * 60 * 60 * 1000 // 24 horas de cache de destinos 
+};
+
+async function getBusDestinationsForStop(stopNumber) {
+    const currentTime = Date.now();
+
+    // Verificar si los datos están en caché y aún son válidos
+    if (stopsDestinationsCache.data[stopNumber] && (currentTime - stopsDestinationsCache.lastUpdated < stopsDestinationsCache.cacheDuration)) {
+        return stopsDestinationsCache.data[stopNumber];
+    }
+
+    const apiUrl = apiEndPoint + `/v2/parada/${stopNumber}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        let destinations = {};
+        if (data.lineas) {
+            data.lineas.forEach(linea => {
+                if (linea.destino) {
+                    destinations[linea.linea] = linea.destino;
+                }
+            });
+        }
+
+        // Actualizar la caché
+        stopsDestinationsCache.data[stopNumber] = destinations;
+        stopsDestinationsCache.lastUpdated = currentTime;
+
+        return destinations;
+    } catch (error) {
+        console.error("Error al obtener destinos para la parada", stopNumber, ":", error);
+        return {};
+    }
+}
+
 function getCachedData(cacheKey) {
     const cached = localStorage.getItem(cacheKey);
     if (!cached) {
@@ -949,6 +990,113 @@ async function loadBusStops() {
     }
 }
 
+// Función para mostrar el spinner de carga
+function displayLoadingSpinner() {
+    let spinnerOverlay = document.getElementById('spinnerOverlay');
+    spinnerOverlay.style.display = 'flex';
+}
+
+// Función para ocultar el spinner de carga
+function hideLoadingSpinner() {
+    let spinnerOverlay = document.getElementById('spinnerOverlay');
+    spinnerOverlay.style.display = 'none';
+}
+
+// Función para mostrar las paradas más cercanas
+function showNearestStops(position) {
+    const userLocation = { x: position.coords.longitude, y: position.coords.latitude };
+    let sortedStops = busStops.map(stop => {
+        let distance = calculateDistance(userLocation, stop.ubicacion);
+        return { ...stop, distance: distance };
+    }).sort((a, b) => a.distance - b.distance).slice(0, 10);
+
+    displayNearestStopsResults(sortedStops, userLocation);
+}
+
+// Función para mostrar los resultados de las paradas más cercanas
+async function displayNearestStopsResults(stops, userLocation) {
+    let resultsDiv = document.getElementById('nearestStopsResults');
+    resultsDiv.style.display = 'block';
+    resultsDiv.innerHTML = '<button id="close-nearest-stops">Cerrar</button>';
+
+    // Añadir otros elementos estáticos al resultsDiv
+    resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
+
+    for (let stop of stops) {
+        // Obtener destino para todas las líneas de la parada
+        let lineasDestinos = await getBusDestinationsForStop(stop.parada.numero);
+
+        // Procesar cada línea y su destino
+        let lineasHTML = stop.lineas.ordinarias.map(linea => {
+            let destino = lineasDestinos[linea] || 'Destino desconocido';
+            return `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea} - ${destino}</span>`;
+        }).join(" ");
+
+        // Crear y añadir el div para cada parada
+        let stopDiv = document.createElement('div');
+        stopDiv.classList.add('stopResult');
+
+        stopDiv.innerHTML = '<button class="addStopButton" data-stop-number="' + stop.parada.numero + '">+</button><h4>' + stop.parada.nombre + ' (' + stop.parada.numero + ')</h4><ul><li>' +
+            lineasHTML + '</li><li>Distancia: ' +
+            stop.distance + 'm</li></ul><a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A' + stop.ubicacion.y + ':' + stop.ubicacion.x + '&amp;origin=latlon%3A' + userLocation.y + '%3A' + userLocation.x + '#map=19.00/' + stop.ubicacion.x + '/' + stop.ubicacion.x + '" target="_blank">Mapa</a>';
+
+        resultsDiv.appendChild(stopDiv);
+    }
+
+    // Manejar los eventos de clic usando delegación de eventos
+    resultsDiv.addEventListener('click', function (event) {
+        if (event.target.matches('#close-nearest-stops')) {
+            resultsDiv.style.display = 'none';
+        } else if (event.target.matches('.addStopButton')) {
+            let stopNumber = event.target.getAttribute('data-stop-number');
+            addBusLine(stopNumber);
+            resultsDiv.style.display = 'none';
+        } else if (event.target.matches('.addLineButton')) {
+            let stopNumber = event.target.getAttribute('data-stop-number');
+            let lineNumber = event.target.getAttribute('data-line-number');
+            addBusLine(stopNumber, lineNumber);
+            resultsDiv.style.display = 'none';
+        }
+    });
+
+    hideLoadingSpinner();
+}
+
+// Función para calcular la distancia entre dos puntos
+function calculateDistance(loc1, loc2) {
+    const rad = function(x) { return x * Math.PI / 180; };
+    const R = 6378137; // Radio de la Tierra en metros
+    const dLat = rad(loc2.y - loc1.y);
+    const dLong = rad(loc2.x - loc1.x);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(rad(loc1.y)) * Math.cos(rad(loc2.y)) *
+        Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance.toFixed(2); // Devuelve la distancia en metros
+}    
+
+function showError(error) {
+    let message;
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            message = "Usuario negó la solicitud de geolocalización.";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            message = "Información de ubicación no disponible.";
+            break;
+        case error.TIMEOUT:
+            message = "La solicitud para obtener la ubicación del usuario expiró.";
+            break;
+        default:
+            message = "Un error desconocido ocurrió.";
+            break;
+    }
+    document.getElementById('nearestStopsResults').innerHTML = message;
+
+    hideLoadingSpinner();
+}    
+
 let allAlerts = [];
 
 // Declaración global de intervalId
@@ -1033,106 +1181,7 @@ document.addEventListener('DOMContentLoaded', () => {
            console.log("Geolocalización no soportada por este navegador.");
         }
     });
-
-    // Función para mostrar el spinner de carga
-    function displayLoadingSpinner() {
-        let spinnerOverlay = document.getElementById('spinnerOverlay');
-        spinnerOverlay.style.display = 'flex';
-    }
-
-    // Función para ocultar el spinner de carga
-    function hideLoadingSpinner() {
-        let spinnerOverlay = document.getElementById('spinnerOverlay');
-        spinnerOverlay.style.display = 'none';
-    }
-
-    // Función para mostrar las paradas más cercanas
-    function showNearestStops(position) {
-        const userLocation = { x: position.coords.longitude, y: position.coords.latitude };
-        let sortedStops = busStops.map(stop => {
-            let distance = calculateDistance(userLocation, stop.ubicacion);
-            return { ...stop, distance: distance };
-        }).sort((a, b) => a.distance - b.distance).slice(0, 10);
-
-        displayNearestStopsResults(sortedStops, userLocation);
-    }
-
-    // Función para mostrar los resultados de las paradas más cercanas
-    function displayNearestStopsResults(stops, userLocation) {
-        let resultsDiv = document.getElementById('nearestStopsResults');
-        resultsDiv.style.display = 'block';
-        resultsDiv.innerHTML = '<button id="close-nearest-stops">Cerrar</button>';
-        resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
-        stops.forEach(stop => {
-            let lineasHTML = stop.lineas.ordinarias.map(linea => `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea}</span>`).join(" ");
-            resultsDiv.innerHTML += '<div class="stopResult"><button class="addStopButton" data-stop-number="' + stop.parada.numero + '">+</button><h4>' + stop.parada.nombre + ' (' + stop.parada.numero + ')</h4><ul><li>' + 
-                                    lineasHTML + '</li><li>Distancia: ' + 
-                                    stop.distance + 'm</li></ul><a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A' + stop.ubicacion.y + ':' + stop.ubicacion.x + '&amp;origin=latlon%3A' + userLocation.y + '%3A' + userLocation.x + '#map=19.00/' + stop.ubicacion.x + '/' + stop.ubicacion.x + '" target="_blank">Mapa</a></div>';
-        });
-        // Evento de clic para cerrar los resultados
-        var closeNearestStopsButton = document.getElementById('close-nearest-stops');
-        closeNearestStopsButton.addEventListener('click', function() {
-                resultsDiv.style.display = 'none';
-        });
-        // Evento clic a añadir que añadirá la parada con el numero
-        var addStopButtons = document.querySelectorAll('.addStopButton');
-        addStopButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                let stopNumber = button.getAttribute('data-stop-number');
-                addBusLine(stopNumber);
-                resultsDiv.style.display = 'none';
-            });
-        });
-        // Evento clic a añadir que añadirá la linea con el numero
-        var addStopButtons = document.querySelectorAll('.addLineButton');
-        addStopButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                let stopNumber = button.getAttribute('data-stop-number');
-                let lineNumber = button.getAttribute('data-line-number');
-                addBusLine(stopNumber, lineNumber);
-                resultsDiv.style.display = 'none';
-            });
-        });
-
-        hideLoadingSpinner();
-    }
-
-    // Función para calcular la distancia entre dos puntos
-    function calculateDistance(loc1, loc2) {
-        const rad = function(x) { return x * Math.PI / 180; };
-        const R = 6378137; // Radio de la Tierra en metros
-        const dLat = rad(loc2.y - loc1.y);
-        const dLong = rad(loc2.x - loc1.x);
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(rad(loc1.y)) * Math.cos(rad(loc2.y)) *
-            Math.sin(dLong / 2) * Math.sin(dLong / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const distance = R * c;
-        return distance.toFixed(2); // Devuelve la distancia en metros
-    }    
-
-    function showError(error) {
-        let message;
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                message = "Usuario negó la solicitud de geolocalización.";
-                break;
-            case error.POSITION_UNAVAILABLE:
-                message = "Información de ubicación no disponible.";
-                break;
-            case error.TIMEOUT:
-                message = "La solicitud para obtener la ubicación del usuario expiró.";
-                break;
-            default:
-                message = "Un error desconocido ocurrió.";
-                break;
-        }
-        document.getElementById('nearestStopsResults').innerHTML = message;
-
-        hideLoadingSpinner();
-    }    
 });
-
 
 // Código para la instalación como PWA 
 let deferredPrompt;
