@@ -1065,9 +1065,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
         stops.forEach(stop => {
             let lineasHTML = stop.lineas.ordinarias.map(linea => `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea}</span>`).join(" ");
-            resultsDiv.innerHTML += '<div class="stopResult"><h4>' + stop.parada.nombre + ' (' + stop.parada.numero + ')</h4><ul><li>' + 
+            resultsDiv.innerHTML += '<div class="stopResult"><button class="addStopButton" data-stop-number="' + stop.parada.numero + '">+</button><h4>' + stop.parada.nombre + ' (' + stop.parada.numero + ')</h4><ul><li>' + 
                                     lineasHTML + '</li><li>Distancia: ' + 
-                                    stop.distance + 'm</li></ul><button class="addStopButton" data-stop-number="' + stop.parada.numero + '">+</button></div>';
+                                    stop.distance + 'm</li></ul></div>';
         });
         // Evento de clic para cerrar los resultados
         var closeNearestStopsButton = document.getElementById('close-nearest-stops');
