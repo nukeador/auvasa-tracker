@@ -622,7 +622,13 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 lineItem.classList.remove('retrasado');
             }
 
-            let mapElement = '<a class="showMapIcon" title="Ver linea en el mapa">Mapa</a>';
+            let mapElementClass = "showMapIcon";
+            // Si no tenemos datos de ubicación añadimos una clase
+            if (!ubicacionLat && !ubicacionLon) {
+                mapElementClass += " noLocationData";
+            }
+            
+            let mapElement = '<a class="' + mapElementClass + '" title="Ver linea en el mapa">Mapa</a>';
 
             // Actualizar el HTML con los datos del bus más cercano
             lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestante + ' <p>min.</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;

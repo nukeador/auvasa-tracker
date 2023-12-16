@@ -223,6 +223,12 @@ button#installButton {
     font-weight: bold;
 }
 
+.showMapIcon.noLocationData {
+    background-image: url("img/bus-location-white.png");
+    font-weight: normal;
+    color: #CCC;
+}
+
 .dark-mode .showMapIcon {
     background-image: url("img/bus-location-white.png");
 }
@@ -387,6 +393,18 @@ button.mostrar-horarios {
     overflow: auto;
 }
 
+@keyframes glowing-white {
+    0% {
+        box-shadow: 0 0 5px #1da1f2, 0 0 10px #1da1f2; /* Starting state */
+      }
+      50% {
+        box-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2; /* Mid-state */
+      }
+      100% {
+        box-shadow: 0 0 5px #1da1f2, 0 0 10px #1da1f2; /* Returning to starting state */
+      }
+}
+
 #mapContainer #busMap .bus-icon {
     border-radius: 50%;
     border: 1px solid #fff;
@@ -401,6 +419,7 @@ button.mostrar-horarios {
     justify-content: center;
     align-items: center;
     z-index: 100;
+    animation: glowing-white 1s ease-in-out infinite;
 }
 
 @keyframes glowing {
