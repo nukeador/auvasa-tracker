@@ -109,7 +109,7 @@ button#installButton {
 }
 
 #formulario {
-    padding: 14px;
+    padding: 14px 14px 0 14px;
     margin-top: -30px;
 }
 
@@ -139,7 +139,6 @@ button#installButton {
     box-sizing: border-box;
 }
 
-
 .autocomplete-result, .line-suggestion {
     cursor: pointer;
     margin: 2px;
@@ -147,10 +146,85 @@ button#installButton {
     border-bottom: 1px solid #eee;
 }
 
+#nearestStops {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+#nearestStopsResults {
+    overflow: auto;
+    max-height: 98%;
+}
+
+#nearestStopsResults p {
+    font-size: 0.8em;
+}
+
+#nearestStops .stopResult {
+    overflow: auto;
+    border: 1px solid #CCC;
+    border-radius: 20px;
+    padding: 10px 10px;
+    margin: 1em 0;
+}
+
+#nearestStops .stopResult h4 {
+    font-size: 0.85em;
+    margin: 0;
+    text-align: center;
+}
+
+#nearestStops .stopResult span {
+    display: inline-block;
+    padding: 6px 8px;
+    border-radius: 50%;
+    margin: 0;
+    min-width: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#nearestStops .stopResult ul {
+    font-size: 0.8em;
+    margin: 5px 0 0 0;
+    padding: 0;
+}
+
+#nearestStops .stopResult ul li {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+#nearestStops .stopResult button {
+    background-color: #054a32;
+    font-size: 0.8em;
+    color: #FFF;
+    max-width: 70px;
+    padding: 5px 10px;
+    float: right;
+    font-weight: bold;
+    }
+
+#nearestStops #searchNearStops {
+    background-color: transparent;
+    background-image: url(img/find-nearby.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    color: #CCC;
+    font-size: 0.9em;
+    text-align: center;
+    margin: 0 0;
+    padding: 0 0 0 20px;
+    max-width: 135px;
+}
+
 .bus-list {
     list-style: none;
     padding: 0;
-    margin-top: 1em;
+    margin-top: 0;
 }
 
 #welcome-box {
@@ -160,7 +234,7 @@ button#installButton {
     background: #fff;
     box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
     width: 305px;
-    margin: 0 auto;
+    margin: 1em auto 0 auto;
     padding: 307px 0 5px 0;
     background: url("img/welcome-logo.png") no-repeat #FFF center 0;
 }
@@ -191,7 +265,7 @@ button#installButton {
 .stop-block h2 {
     text-align: center;
     font-size: 0.9em;
-    padding: 0.7em 21px 0 0;
+    padding: 0.7em 21px 0 10px;
 }
 
 .stop-block h2 span.stopId {
@@ -301,7 +375,7 @@ button.mostrar-horarios {
     margin: auto;
 }
 
-.line-info .alert-box, #horarios-box {
+.line-info .alert-box, #horarios-box, #nearestStopsResults {
     position: fixed;
     border-radius: 12px;
     overflow: auto;
@@ -657,6 +731,37 @@ footer a:hover {
     text-decoration: underline;
 }
 
+#spinnerOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* Dark mode */
 body.dark-mode {
     background-color: #121212;
@@ -699,16 +804,16 @@ body.dark-mode {
     background: url("img/welcome-logo-white.png") no-repeat #2d2d2d center 0;
 }
 
-.dark-mode .alert-box, .dark-mode #horarios-box {
+.dark-mode .alert-box, .dark-mode #horarios-box, .dark-mode #nearestStopsResults {
     box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
     background: #2d2d2d;
 }
 
-.dark-mode #welcome-box h2, .dark-mode .alert-box h2, .dark-mode #horarios-box h2 {
+.dark-mode #welcome-box h2, .dark-mode .alert-box h2, .dark-mode #horarios-box h2, .dark-mode #nearestStopsResults h2 {
     color: #FFF;
 }
 
-.dark-mode #welcome-box p, .dark-mode .alert-box p, .dark-mode  #horarios-box p {
+.dark-mode #welcome-box p, .dark-mode .alert-box p, .dark-mode  #horarios-box p, .dark-mode #nearestStopsResults p {
     color: #edebeb;
 }
 
@@ -760,145 +865,145 @@ body.dark-mode {
 }
 
 /* Colores de las lineas */
-.bus-icon.linea-1, .linea-1 h3,  #busMap .linea-1 {
+.bus-icon.linea-1, .linea-1 h3,  #busMap .linea-1, span.linea-1 {
     background-color: #5ebd5a;
     stroke: #5ebd5a;;
     color: #fff;
 }
 
-.bus-icon.linea-2, .linea-2 h3, #busMap .linea-2 {
+.bus-icon.linea-2, .linea-2 h3, #busMap .linea-2, span.linea-2 {
     background-color: #f2c435;
     stroke: #f2c435;
     color: #000;
 }
 
-.bus-icon.linea-3, .linea-3 h3,   #busMap .linea-3 {
+.bus-icon.linea-3, .linea-3 h3,   #busMap .linea-3, span.linea-3 {
     background-color: #ee4ba4;
     stroke: #ee4ba4;
     color: #000;
 }
 
-.bus-icon.linea-4, .linea-4 h3, #busMap .linea-4 {
+.bus-icon.linea-4, .linea-4 h3, #busMap .linea-4, span.linea-4 {
     background-color: #aa541a;
     stroke: #aa541a;
     color: #FFF;
 }
 
-.bus-icon.linea-5, .linea-5 h3, #busMap .linea-5 {
+.bus-icon.linea-5, .linea-5 h3, #busMap .linea-5, span.linea-5 {
     background-color: #2fb7b7;
     stroke: #2fb7b7;
     color: #fff;
 }
 
-.bus-icon.linea-6, .linea-6 h3, #busMap .linea-6 {
+.bus-icon.linea-6, .linea-6 h3, #busMap .linea-6, span.linea-6 {
     background-color: #f29cc2;
     stroke: #f29cc2;
     color: #000;
 }
 
-.bus-icon.linea-7, .linea-7 h3, #busMap .linea-7 {
+.bus-icon.linea-7, .linea-7 h3, #busMap .linea-7, span.linea-7 {
     background-color: #7a2b37;
     stroke: #7a2b37;
     color: #FFF;
 }
 
-.bus-icon.linea-8, .linea-8 h3, #busMap .linea-8 {
+.bus-icon.linea-8, .linea-8 h3, #busMap .linea-8, span.linea-8 {
     background-color: #ea5d00;
     stroke: #ea5d00;
     color: #FFF;
 }
 
-.bus-icon.linea-9, .linea-9 h3, #busMap .linea-9 {
+.bus-icon.linea-9, .linea-9 h3, #busMap .linea-9, span.linea-9 {
     background-color: #009ee6;
     stroke: #009ee6;
     color: #FFF;
 }
 
-.bus-icon.linea-10, .linea-10 h3, #busMap .linea-10 {
+.bus-icon.linea-10, .linea-10 h3, #busMap .linea-10, span.linea-10 {
     background-color: #a01a4a;
     stroke: #a01a4a;
     color: #FFF;
 }
 
-.bus-icon.linea-13, .linea-13 h3, #busMap .linea-13 {
+.bus-icon.linea-13, .linea-13 h3, #busMap .linea-13, span.linea-13 {
     background-color: #0051a1;
     stroke: #0051a1;
     color: #FFF;
 }
 
-.bus-icon.linea-14 , .linea-14 h3, #busMap .linea-14 {
+.bus-icon.linea-14 , .linea-14 h3, #busMap .linea-14, span.linea-14 {
     background-color: #887cb9;
     stroke: #887cb9;
     color: #000;
 }
 
-.bus-icon.linea-16, .linea-16 h3, #busMap .linea-16 {
+.bus-icon.linea-16, .linea-16 h3, #busMap .linea-16, span.linea-16 {
     background-color:#84cef5;
     stroke: #84cef5;
     color: #000;
 }
 
-.bus-icon.linea-17, .linea-17 h3, #busMap .linea-17 {
+.bus-icon.linea-17, .linea-17 h3, #busMap .linea-17, span.linea-17 {
     background-color: #c2d403;
     stroke: #c2d403;
     color: #000;
 }
 
-.bus-icon.linea-18, .linea-18 h3, #busMap .linea-18 {
+.bus-icon.linea-18, .linea-18 h3, #busMap .linea-18, span.linea-18 {
     background-color: #b9b8b8;
     stroke: #b9b8b8;
     color: #000;
 }
 
-.bus-icon.linea-19, .linea-19 h3, #busMap .linea-19 {
+.bus-icon.linea-19, .linea-19 h3, #busMap .linea-19, span.linea-19 {
     background-color: #eaa874;
     stroke: #eaa874;
     color: #000;
 }
 
-.bus-icon.linea-24, .linea-24 h3, #busMap .linea-24 {
+.bus-icon.linea-24, .linea-24 h3, #busMap .linea-24, span.linea-24 {
     background-color: #11459f;
     stroke: #11459f;
     color: #FFF;
 }
 
-.bus-icon.linea-C1, .bus-icon.linea-C2, .linea-C1 h3, .linea-C2 h3, #busMap .linea-C1, #busMap .linea-C2 {
+.bus-icon.linea-C1, .bus-icon.linea-C2, .linea-C1 h3, .linea-C2 h3, #busMap .linea-C1, #busMap .linea-C2, span.linea-C1, span.linea-C2 {
     background-color: #555553;
     stroke: #555553;
     color: #FFF;
 }
 
-.bus-icon.linea-H, .linea-H h3, #busMap .linea-H {
+.bus-icon.linea-H, .linea-H h3, #busMap .linea-H, span.linea-H {
     background-color: #e5232e;
     stroke: #e5232e;
     color: #000;
 }
 
-.bus-icon.linea-B1, .linea-B1 h3, #busMap .linea-B1 {
+.bus-icon.linea-B1, .linea-B1 h3, #busMap .linea-B1, span.linea-B1 {
     background-color: #000;
     stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B2, .linea-B2 h3, #busMap .linea-B2 {
+.bus-icon.linea-B2, .linea-B2 h3, #busMap .linea-B2, span.linea-B2 {
     background-color: #000;
     stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B3, .linea-B3 h3, #busMap .linea-B3 {
+.bus-icon.linea-B3, .linea-B3 h3, #busMap .linea-B3, span.linea-B3 {
     background-color: #000;
     stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B4, .linea-B4 h3, #busMap .linea-B4 {
+.bus-icon.linea-B4, .linea-B4 h3, #busMap .linea-B4, span.linea-B4 {
     background-color: #000;
     stroke: #000;
     color: #FFF;
 }
 
-.bus-icon.linea-B5, .linea-B5 h3, #busMap .linea-B5 {
+.bus-icon.linea-B5, .linea-B5 h3, #busMap .linea-B5, span.linea-B5 {
     background-color: #000;
     stroke: #000;
     color: #FFF;

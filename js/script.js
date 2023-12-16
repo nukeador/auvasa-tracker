@@ -67,9 +67,7 @@ function createArrowButton() {
     return button;
 }
 
-async function addBusLine() {
-    const stopNumber = document.getElementById('stopNumber').value;
-    const lineNumber = document.getElementById('lineNumber').value;
+async function addBusLine(stopNumber, lineNumber) {
 
     // Buscar la parada en busStops usando stopNumber
     const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
@@ -977,7 +975,11 @@ window.onload = async function() {
     }
 
     if (addButton) {
-        addButton.addEventListener('click', addBusLine);
+        addButton.addEventListener('click', function() {
+            const stopNumber = document.getElementById('stopNumber').value;
+            const lineNumber = document.getElementById('lineNumber').value;
+            addBusLine(stopNumber, lineNumber);
+        });
     }
 
     // Recuperamos todas las alertas vigentes
@@ -1020,6 +1022,115 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-mode');
         themeToggleIcon.textContent = '🌜';
     }
+
+    // Botón para encontrar las paradas más cercanas
+    var nearestStopsButton = document.querySelector('#nearestStops button');
+    nearestStopsButton.addEventListener('click', function() {
+        if (navigator.geolocation) {
+            displayLoadingSpinner();
+            navigator.geolocation.getCurrentPosition(showNearestStops, showError);
+        } else {
+           console.log("Geolocalización no soportada por este navegador.");
+        }
+    });
+
+    // Función para mostrar el spinner de carga
+    function displayLoadingSpinner() {
+        let spinnerOverlay = document.getElementById('spinnerOverlay');
+        spinnerOverlay.style.display = 'flex';
+    }
+
+    // Función para ocultar el spinner de carga
+    function hideLoadingSpinner() {
+        let spinnerOverlay = document.getElementById('spinnerOverlay');
+        spinnerOverlay.style.display = 'none';
+    }
+
+    // Función para mostrar las paradas más cercanas
+    function showNearestStops(position) {
+        const userLocation = { x: position.coords.longitude, y: position.coords.latitude };
+        let sortedStops = busStops.map(stop => {
+            let distance = calculateDistance(userLocation, stop.ubicacion);
+            return { ...stop, distance: distance };
+        }).sort((a, b) => a.distance - b.distance).slice(0, 10);
+
+        displayNearestStopsResults(sortedStops);
+    }
+
+    // Función para mostrar los resultados de las paradas más cercanas
+    function displayNearestStopsResults(stops) {
+        let resultsDiv = document.getElementById('nearestStopsResults');
+        resultsDiv.style.display = 'block';
+        resultsDiv.innerHTML = '<button id="close-nearest-stops">Cerrar</button>';
+        resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
+        stops.forEach(stop => {
+            let lineasHTML = stop.lineas.ordinarias.map(linea => `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea}</span>`).join(" ");
+            resultsDiv.innerHTML += '<div class="stopResult"><h4>' + stop.parada.nombre + ' (' + stop.parada.numero + ')</h4><ul><li>' + 
+                                    lineasHTML + '</li><li>Distancia: ' + 
+                                    stop.distance + 'm</li></ul><button class="addStopButton" data-stop-number="' + stop.parada.numero + '">+</button></div>';
+        });
+        // Evento de clic para cerrar los resultados
+        var closeNearestStopsButton = document.getElementById('close-nearest-stops');
+        closeNearestStopsButton.addEventListener('click', function() {
+                resultsDiv.style.display = 'none';
+        });
+        // Evento clic a añadir que añadirá la parada con el numero
+        var addStopButtons = document.querySelectorAll('.addStopButton');
+        addStopButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                let stopNumber = button.getAttribute('data-stop-number');
+                addBusLine(stopNumber);
+                resultsDiv.style.display = 'none';
+            });
+        });
+        // Evento clic a añadir que añadirá la linea con el numero
+        var addStopButtons = document.querySelectorAll('.addLineButton');
+        addStopButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                let stopNumber = button.getAttribute('data-stop-number');
+                let lineNumber = button.getAttribute('data-line-number');
+                addBusLine(stopNumber, lineNumber);
+                resultsDiv.style.display = 'none';
+            });
+        });
+
+        hideLoadingSpinner();
+    }
+
+    // Función para calcular la distancia entre dos puntos
+    function calculateDistance(loc1, loc2) {
+        const rad = function(x) { return x * Math.PI / 180; };
+        const R = 6378137; // Radio de la Tierra en metros
+        const dLat = rad(loc2.y - loc1.y);
+        const dLong = rad(loc2.x - loc1.x);
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(rad(loc1.y)) * Math.cos(rad(loc2.y)) *
+            Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = R * c;
+        return distance.toFixed(2); // Devuelve la distancia en metros
+    }    
+
+    function showError(error) {
+        let message;
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                message = "Usuario negó la solicitud de geolocalización.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                message = "Información de ubicación no disponible.";
+                break;
+            case error.TIMEOUT:
+                message = "La solicitud para obtener la ubicación del usuario expiró.";
+                break;
+            default:
+                message = "Un error desconocido ocurrió.";
+                break;
+        }
+        document.getElementById('nearestStopsResults').innerHTML = message;
+
+        hideLoadingSpinner();
+    }    
 });
 
 
