@@ -232,7 +232,7 @@ async function updateBusList() {
         const stopGeo = await getStopGeo(stopId);
 
         if (stopName) {
-            let updatedName = stopName + ' (' + stopId + ')';
+            let updatedName = stopName + ' <span class="stopId">(' + stopId + ')</span>';
             updateStopName(stopElement, updatedName, stopGeo);
         }
 
@@ -324,7 +324,7 @@ function updateStopName(stopElement, newName, stopGeo) {
     // Actualiza el nombre de la parada en el DOM
     var nameElement = stopElement.querySelector('h2');
     if (nameElement) {
-        nameElement.innerHTML = ' <a class="mapIcon" title="Ver en el mapa" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>' + newName;
+        nameElement.innerHTML = newName + ' <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>';
     }
 }
 

@@ -189,25 +189,27 @@ button#installButton {
 }
 
 .stop-block h2 {
-    padding: 1em 0 0 56px;
     text-align: center;
     font-size: 0.9em;
-    line-height: 1.6em;
+    padding: 0.7em 21px 0 0;
+}
+
+.stop-block h2 span.stopId {
+    font-weight: normal;
+    color: #CCC;
 }
 
 .stop-block .mapIcon {
-    background-image: url("img/stop-route.png");
+    background-image: url("img/directions.png");
     background-size: cover;
     display: inline-block;
-    width: 1.2em;
-    height: 1.2em; 
+    width: 22px;
+    height: 22px;
     text-indent: -9999px;
-    overflow: hidden;
-    position: absolute;
-    left: 1.8em;
-    font-size: 1.4em;
     cursor: pointer;
-  }  
+    position: absolute;
+    right: 17px;
+}  
 
 .showMapIcon {
     background-image: url("img/bus-location.png");
@@ -393,15 +395,15 @@ button.mostrar-horarios {
     overflow: auto;
 }
 
-@keyframes glowing-white {
+@keyframes glowing {
     0% {
-        box-shadow: 0 0 5px #1da1f2, 0 0 10px #1da1f2; /* Starting state */
+        box-shadow: 0 0 5px #1da1f2, 0 0 10px #1da1f2;
       }
       50% {
-        box-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2; /* Mid-state */
+        box-shadow: 0 0 10px #1da1f2, 0 0 20px #1da1f2;
       }
       100% {
-        box-shadow: 0 0 5px #1da1f2, 0 0 10px #1da1f2; /* Returning to starting state */
+        box-shadow: 0 0 5px #1da1f2, 0 0 10px #1da1f2;
       }
 }
 
@@ -419,13 +421,7 @@ button.mostrar-horarios {
     justify-content: center;
     align-items: center;
     z-index: 100;
-    animation: glowing-white 1s ease-in-out infinite;
-}
-
-@keyframes glowing {
-    0% { box-shadow: 0 0 10px 2px #1da1f2; }
-    50% { box-shadow: 0 0 30px 10px #1da1f2; }
-    100% { box-shadow: 0 0 10px 2px #1da1f2; }
+    animation: glowing 1s ease-in-out infinite;
 }
 
 #mapContainer #busMap .user-location-icon {
@@ -739,7 +735,7 @@ body.dark-mode {
 }
 
 .dark-mode .stop-block .mapIcon {
-    background-image: url("img/stop-route-white.png");
+    background-image: url("img/directions.png");
   }  
 
 .dark-mode button#removeAllButton {
