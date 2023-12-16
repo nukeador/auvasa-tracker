@@ -1054,11 +1054,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return { ...stop, distance: distance };
         }).sort((a, b) => a.distance - b.distance).slice(0, 10);
 
-        displayNearestStopsResults(sortedStops);
+        displayNearestStopsResults(sortedStops, userLocation);
     }
 
     // Función para mostrar los resultados de las paradas más cercanas
-    function displayNearestStopsResults(stops) {
+    function displayNearestStopsResults(stops, userLocation) {
         let resultsDiv = document.getElementById('nearestStopsResults');
         resultsDiv.style.display = 'block';
         resultsDiv.innerHTML = '<button id="close-nearest-stops">Cerrar</button>';
@@ -1067,7 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let lineasHTML = stop.lineas.ordinarias.map(linea => `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea}</span>`).join(" ");
             resultsDiv.innerHTML += '<div class="stopResult"><button class="addStopButton" data-stop-number="' + stop.parada.numero + '">+</button><h4>' + stop.parada.nombre + ' (' + stop.parada.numero + ')</h4><ul><li>' + 
                                     lineasHTML + '</li><li>Distancia: ' + 
-                                    stop.distance + 'm</li></ul></div>';
+                                    stop.distance + 'm</li></ul><a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A' + stop.ubicacion.y + ':' + stop.ubicacion.x + '&amp;origin=latlon%3A' + userLocation.y + '%3A' + userLocation.x + '#map=19.00/' + stop.ubicacion.x + '/' + stop.ubicacion.x + '" target="_blank">Mapa</a></div>';
         });
         // Evento de clic para cerrar los resultados
         var closeNearestStopsButton = document.getElementById('close-nearest-stops');

@@ -207,7 +207,20 @@ button#installButton {
     padding: 5px 10px;
     float: right;
     font-weight: bold;
-    }
+}
+
+#nearestStops .stopResult .mapIcon {
+    background-image: url("img/directions.png");
+    background-size: 26px;
+    width: 15px;
+    height: 15px;
+    text-indent: -9999px;
+    cursor: pointer;
+    padding: 5px 5px;
+    float: right;
+    background-repeat: no-repeat;
+    margin-top: -2em;
+}
 
 #nearestStops #searchNearStops {
     background-color: transparent;
@@ -219,7 +232,6 @@ button#installButton {
     text-align: center;
     margin: 0 0;
     padding: 0 0 0 20px;
-    max-width: 135px;
 }
 
 .bus-list {
@@ -284,7 +296,7 @@ button#installButton {
     cursor: pointer;
     position: absolute;
     right: 17px;
-}  
+}
 
 .showMapIcon {
     background-image: url("img/bus-location.png");
