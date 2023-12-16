@@ -46,6 +46,10 @@ async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
                     myMap.panTo([paradaData.latitud, paradaData.longitud]);
                 }
                 document.getElementById('busMapLastUpdate').innerHTML = "Actualmente no hay datos de ubicación para esta línea";
+                if (marcadorAutobus)   {
+                    marcadorAutobus.remove();
+                    marcadorAutobus = null;
+                }
             }
             else {
                 // Si tenemos datos de ubicación los guardamos y mostramos
