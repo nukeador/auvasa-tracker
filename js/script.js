@@ -542,7 +542,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
     if (busLineAlerts.length > 0) {
         alertHTML = `<div class="alert-box"><h2>Avisos para la línea ${lineNumber}</h2><ul>`;
         busLineAlerts.forEach(alert => {
-            alertHTML += `<li>${alert.descripcion}"</li>`;
+            alertHTML += `<li>${alert.descripcion}</li>`;
         });
         alertHTML += '</ul><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="alerts-close">Cerrar</button></div>';
         alertIcon = '⚠️';
