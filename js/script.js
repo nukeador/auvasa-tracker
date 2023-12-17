@@ -101,7 +101,13 @@ function createInfoPanel(busesProximos, stopNumber, lineNumber) {
     document.body.appendChild(infoPanel);
 
     // Añadimos el manejador de eventos a arrowButton
-    arrowButton.addEventListener('click', function() {
+    arrowButton.addEventListener('click', togglePanel);
+    arrowButton.addEventListener('touchstart', function(event) {
+        event.preventDefault(); // Esto evita el comportamiento predeterminado del navegador, que podría incluir el desplazamiento de la página
+        togglePanel.call(this); // Usamos call para asegurarnos de que 'this' se refiere al arrowButton dentro de togglePanel
+    });
+
+    function togglePanel() {
         const panel = this.parentElement;
 
         // Alternar la visibilidad del panel
@@ -113,7 +119,7 @@ function createInfoPanel(busesProximos, stopNumber, lineNumber) {
         } else {
             this.style.backgroundImage = "url('img/arrow-left-light.png')";
         }
-    });
+    }
 
     // Añadimos el botón de eliminar al div de actions-buttons
     const removeButton = createButton('remove-button', '&#128465;', function() {

@@ -338,7 +338,7 @@ button#installButton {
     top: 0;
     bottom: 0;
     right: -40%; /* Inicialmente oculto a la derecha */
-    background-color: #f5f5f5; 
+    background-color: #FFF; 
     overflow-x: hidden; /* Asegúrate de que el contenido no se desborde */
     transition: right 0.5s ease-in-out; /* Transición suave para la propiedad right */
     z-index: 2; /* Por encima de otros elementos */
@@ -351,7 +351,7 @@ button#installButton {
 }
 
 .highlight .additional-info-panel {
-    background-color: #ecf0f4;
+    background-color: #f6fbff;
 }
 
 .dark-mode .additional-info-panel {
