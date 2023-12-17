@@ -278,7 +278,7 @@ button#installButton {
 .stop-block h2 {
     text-align: center;
     font-size: 0.9em;
-    padding: 0.7em 21px 0 10px;
+    padding: 0.7em 23px 0 10px;
 }
 
 .stop-block h2 span.stopId {
@@ -341,7 +341,7 @@ button#installButton {
     background-color: #FFF; 
     overflow-x: hidden; /* Asegúrate de que el contenido no se desborde */
     transition: right 0.5s ease-in-out; /* Transición suave para la propiedad right */
-    z-index: 2; /* Por encima de otros elementos */
+    z-index: 1; /* Por encima de otros elementos */
     font-size: 0.85em;
     display: flex;
     justify-content: space-between;
