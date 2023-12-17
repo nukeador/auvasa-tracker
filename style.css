@@ -346,8 +346,14 @@ button#installButton {
     justify-content: space-between;
     align-items: center;
     padding: 0 15px 0 15px;
-    box-shadow: -11px 0px 72px rgba(0,0,0,.2);
+    box-shadow: -11px 0px 72px rgba(149, 149, 149, 0.2);
     border-radius: 12px 0 0 12px;
+}
+
+.dark-mode .additional-info-panel {
+    background-color: #393838;
+    color: #FFF;
+    box-shadow: -11px 0px 72px rgba(255,255,255,.2);
 }
 
 .additional-info-panel.open {
