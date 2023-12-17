@@ -61,7 +61,13 @@ function createArrowButton() {
 function createInfoPanel(busesProximos, stopNumber, lineNumber) {
     let infoPanel = document.createElement('div');
     infoPanel.className = 'additional-info-panel';
-    
+
+    // Creamos la flecha de menú
+    const arrowButton = document.createElement('button');
+    arrowButton.className = 'arrow-button';
+    arrowButton.textContent = '⮞';
+    infoPanel.appendChild(arrowButton);
+
     let innerHTML = '<div class="proximos-buses"><ul>';
 
     // Añadimos cada autobús
@@ -86,9 +92,28 @@ function createInfoPanel(busesProximos, stopNumber, lineNumber) {
         }
     });
 
-    
     innerHTML += '</ul></div><div class="actions-buttons"></div>';
-    infoPanel.innerHTML = innerHTML;
+
+    // Añadimos el HTML a infoPanel
+    infoPanel.insertAdjacentHTML('beforeend', innerHTML);
+
+    // Añadimos infoPanel al DOM
+    document.body.appendChild(infoPanel);
+
+    // Añadimos el manejador de eventos a arrowButton
+    arrowButton.addEventListener('click', function() {
+        const panel = this.parentElement;
+
+        // Alternar la visibilidad del panel
+        panel.classList.toggle('open');
+
+        // Cambia la imagen de fondo del botón
+        if (this.style.backgroundImage.endsWith('arrow-left-light.png")')) {
+            this.style.backgroundImage = "url('img/arrow-light.png')";
+        } else {
+            this.style.backgroundImage = "url('img/arrow-left-light.png')";
+        }
+    });
 
     // Añadimos el botón de eliminar al div de actions-buttons
     const removeButton = createButton('remove-button', '&#128465;', function() {
@@ -726,10 +751,10 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     }
             }, 500);
             } else {
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3></div> <div class="tiempo">Sin info</div>';
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
             }
         } else {
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3></div> <div class="tiempo">Sin info</div>';
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
         }
             // Cuadro de alertas
             lineItem.innerHTML += alertHTML;
@@ -795,10 +820,6 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     this.parentElement.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             }
-
-            // Añadimos la flecha de menú
-            const arrowButton = createArrowButton();
-            lineItem.appendChild(arrowButton);
             
             // Creamos el panel informativo desplegable
             const infoPanel = createInfoPanel(busesProximos, stopNumber, lineNumber);

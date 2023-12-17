@@ -325,19 +325,20 @@ button#installButton {
 .line-info {
     border-top: 1px solid #eee;
     display: flex;
-    padding: 0em 0 0 1em;
+    padding: 0em 35px 0 1em;
     position: relative;
     overflow: hidden;
+    min-height: 60px;
 }
 
 .additional-info-panel {
-    width: 35%;
+    width: 45%;
     height: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
-    right: -50%; /* Inicialmente oculto a la derecha */
-    background-color: #fafdff; 
+    right: -40%; /* Inicialmente oculto a la derecha */
+    background-color: #f5f5f5; 
     overflow-x: hidden; /* Asegúrate de que el contenido no se desborde */
     transition: right 0.5s ease-in-out; /* Transición suave para la propiedad right */
     z-index: 2; /* Por encima de otros elementos */
@@ -345,19 +346,32 @@ button#installButton {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px 0 15px;
+    padding: 0 15px 0 0;
     box-shadow: -11px 0px 72px rgba(149, 149, 149, 0.2);
     border-radius: 12px 0 0 12px;
 }
 
+.highlight .additional-info-panel {
+    background-color: #ecf0f4;
+}
+
 .dark-mode .additional-info-panel {
-    background-color: #393838;
+    background-color: #333333;
     color: #FFF;
-    box-shadow: -11px 0px 72px rgba(255,255,255,.2);
+    box-shadow: none;
+}
+
+.dark-mode .highlight .additional-info-panel {
+    background-color: #484b4d;
 }
 
 .additional-info-panel.open {
-    right: 35px; 
+    right: 0; 
+    background-color: #FFF;
+}
+
+.dark-mode .additional-info-panel.open {
+    background-color: #121212;
 }
 
 .additional-info-panel p, .additional-info-panel h2, .additional-info-panel ul, .additional-info-panel li {
@@ -668,6 +682,11 @@ button.mostrar-horarios {
     flex-wrap: wrap;
 }
 
+.line-info .tiempo.sin-servicio {
+    font-size: 1em;
+    color: #CCC;
+}
+
 .line-info .tiempo p {
     font-size: 0.5em;
     display: block;
@@ -677,17 +696,17 @@ button.mostrar-horarios {
 
 /* Estilos para el botón de eliminar, que por defecto está oculto */
 .remove-button {
-    cursor: pointer;
-    background: none;
+    background: transparent no-repeat center center;
+    background-image: url('img/trash-gray.png');
+    background-size: 15px 15px;
     border: none;
+    font-size: 0;
+    cursor: pointer;
     font-size: 16px;
-    color: #CCC;
     margin: 0;
     padding: 0 10px;
-}
-
-.remove-button:hover {
-    background-color: #c03e2b;
+    width: 15px;
+    text-indent: -9999px;
 }
 
 .arrow-button {
@@ -697,6 +716,8 @@ button.mostrar-horarios {
     border: none;
     font-size: 0;
     cursor: pointer;
+    padding: 13px;
+    width: 15px;
 }
 
 .error, .success {
