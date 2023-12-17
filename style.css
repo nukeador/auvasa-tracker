@@ -326,6 +326,64 @@ button#installButton {
     border-top: 1px solid #eee;
     display: flex;
     padding: 0em 0 0 1em;
+    position: relative;
+    overflow: hidden;
+}
+
+.additional-info-panel {
+    width: 35%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -50%; /* Inicialmente oculto a la derecha */
+    background-color: #fafdff; 
+    overflow-x: hidden; /* Asegúrate de que el contenido no se desborde */
+    transition: right 0.5s ease-in-out; /* Transición suave para la propiedad right */
+    z-index: 2; /* Por encima de otros elementos */
+    font-size: 0.85em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 0 15px;
+    box-shadow: -11px 0px 72px rgba(0,0,0,.2);
+    border-radius: 12px 0 0 12px;
+}
+
+.additional-info-panel.open {
+    right: 35px; 
+}
+
+.additional-info-panel p, .additional-info-panel h2, .additional-info-panel ul, .additional-info-panel li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.additional-info-panel .proximos-buses {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.additional-info-panel .proximos-buses span.programado {
+    background: url(img/clock.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px;
+    padding: 0 0 0 20px;
+}
+
+.additional-info-panel .proximos-buses span.realtime {
+    background: url(img/feed.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px;
+    padding: 0 0 0 20px;
+}
+
+.additional-info-panel .actions-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Animaciones */
@@ -544,7 +602,6 @@ button.mostrar-horarios {
 .hora-tiempo {
     display: flex;
     flex-direction: column;
-    margin-right: 1em;
 }
 
 .line-info .horaLlegada {
@@ -614,16 +671,13 @@ button.mostrar-horarios {
 
 /* Estilos para el botón de eliminar, que por defecto está oculto */
 .remove-button {
-    display: none; /* Ocultar por defecto */
     cursor: pointer;
     background: none;
     border: none;
     font-size: 16px;
-    background-color: #b63e3e;
-    margin-left: 15px;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-    transform: translateX(100%);
-    opacity: 0;
+    color: #CCC;
+    margin: 0;
+    padding: 0 10px;
 }
 
 .remove-button:hover {
@@ -633,13 +687,11 @@ button.mostrar-horarios {
 .arrow-button {
     background: transparent no-repeat center center;
     background-image: url('img/arrow-light.png');
-    background-size: 40px 40px;
+    background-size: 25px 25px;
     border: none;
     font-size: 0;
     cursor: pointer;
 }
-
-
 
 .error, .success {
     color: white;

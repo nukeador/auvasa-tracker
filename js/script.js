@@ -38,33 +38,65 @@ function createButton(className, text, onClick) {
 }
 
 function createArrowButton() {
-    const button = createButton('arrow-button', '⮞', function() {
-        // Encuentra el botón de eliminar correspondiente
-        const removeButton = this.parentElement.querySelector('.remove-button');
-    
-        // Muestra u oculta el botón de eliminar
-        if (window.getComputedStyle(removeButton).display === 'none') {
-            removeButton.style.display = 'block';
-            setTimeout(function() {
-                removeButton.style.transform = 'translateX(0)';
-                removeButton.style.opacity = '1';
-            }, 200);
-        } else {
-            removeButton.style.transform = 'translateX(100%)';
-            removeButton.style.opacity = '0';
-            setTimeout(function() {
-                removeButton.style.display = 'none';
-            }, 300); // Debe coincidir con la duración de la transición
-        }
+    const button = document.createElement('button');
+    button.className = 'arrow-button';
+    button.textContent = '⮞';
+    button.addEventListener('click', function() {
+        const lineInfo = this.parentElement;
+        const panel = lineInfo.querySelector('.additional-info-panel');
+
+        // Alternar la visibilidad del panel
+        panel.classList.toggle('open');
 
         // Cambia la imagen de fondo del botón
-        if (window.getComputedStyle(this).backgroundImage.endsWith('arrow-light.png")')) {
-            this.style.backgroundImage = "url('img/arrow-left-light.png')";
-        } else {
+        if (this.style.backgroundImage.endsWith('arrow-left-light.png")')) {
             this.style.backgroundImage = "url('img/arrow-light.png')";
+        } else {
+            this.style.backgroundImage = "url('img/arrow-left-light.png')";
         }
     });
     return button;
+}
+
+function createInfoPanel(busesProximos, stopNumber, lineNumber) {
+    let infoPanel = document.createElement('div');
+    infoPanel.className = 'additional-info-panel';
+    
+    let innerHTML = '<div class="proximos-buses"><ul>';
+
+    // Añadimos cada autobús
+    busesProximos.forEach(bus => {
+        let horaLlegada;
+        let llegadaClass;
+
+        if (bus.realTime && bus.realTime.llegada) {
+            horaLlegada = bus.realTime.llegada;
+            llegadaClass = 'realtime';
+        } else {
+            horaLlegada = bus.scheduled.llegada;
+            llegadaClass = 'programado';
+        }
+
+        // Verificamos que horaLlegada no sea null o vacío
+        if (horaLlegada) {
+            // Eliminamos los segundos de la hora HH:MM:SS
+            horaLlegada = horaLlegada.substring(0, horaLlegada.length - 3);
+
+            innerHTML += '<li><span class="' + llegadaClass + '">' + horaLlegada + '</span></li>';
+        }
+    });
+
+    
+    innerHTML += '</ul></div><div class="actions-buttons"></div>';
+    infoPanel.innerHTML = innerHTML;
+
+    // Añadimos el botón de eliminar al div de actions-buttons
+    const removeButton = createButton('remove-button', '&#128465;', function() {
+        removeBusLine(stopNumber, lineNumber);
+    });
+    infoPanel.querySelector('.actions-buttons').appendChild(removeButton);
+
+    return infoPanel;
 }
 
 async function addBusLine(stopNumber, lineNumber) {
@@ -548,6 +580,8 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         alertIcon = '⚠️';
     }
 
+    let busesProximos;
+
     try {
         const response = await fetch(apiUrl);
         const scheduledData = await response.json();
@@ -569,6 +603,7 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         if (busesLinea) {
 
         const busMasCercano = elegirBusMasCercano(busesLinea);
+        busesProximos = getNextBuses(busMasCercano, busesLinea, 3);
 
         if (busMasCercano) {
             let horaLlegada;
@@ -761,17 +796,14 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 });
             }
 
-            // Crea y agrega botones cada vez que se actualiza la información.
-
-            // Crear el botón de eliminar
-            const removeButton = createButton('remove-button', '&#128465;', function() {
-                removeBusLine(stopNumber, lineNumber);
-            });
-            lineItem.appendChild(removeButton);
-
-            // Crear el botón de flecha
+            // Añadimos la flecha de menú
             const arrowButton = createArrowButton();
             lineItem.appendChild(arrowButton);
+            
+            // Creamos el panel informativo desplegable
+            const infoPanel = createInfoPanel(busesProximos, stopNumber, lineNumber);
+            lineItem.appendChild(infoPanel);
+
         } catch (error) {
             console.error('Error en fetchBusTime:', error);
             lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Error</div>';
@@ -912,6 +944,30 @@ function elegirBusMasCercano(buses) {
 
     // Si no se encontró ningún bus, devolver null
     return null;
+}
+
+function getNextBuses(busMasCercano, busesLinea, numBuses) {
+    // Convertir busesLinea a un array
+    const busesArray = Object.values(busesLinea);
+
+    // Función auxiliar para obtener la hora de llegada
+    const getArrivalTime = (bus) => {
+        return bus.realTime && bus.realTime.llegada ? bus.realTime.llegada : bus.scheduled.llegada;
+    };
+
+    // Ordenar el array por hora de llegada
+    busesArray.sort((a, b) => {
+        return new Date('1970/01/01 ' + getArrivalTime(a)) - new Date('1970/01/01 ' + getArrivalTime(b));
+    });
+
+    // Encontrar el índice de busMasCercano en el array
+    const indexBusMasCercano = busesArray.findIndex(bus => bus.scheduled.tripId === busMasCercano.scheduled.tripId);
+
+    // Seleccionar los 'numBuses' buses siguientes
+    const nextBuses = busesArray.slice(indexBusMasCercano + 1, indexBusMasCercano + 1 + numBuses);
+
+    // Devolver los datos de los buses seleccionados
+    return nextBuses;
 }
 
 function removeBusLine(stopNumber, lineNumber) {
