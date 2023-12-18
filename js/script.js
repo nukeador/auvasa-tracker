@@ -92,31 +92,79 @@ function registerNotification(title, message) {
 
 function subscribeToPushNotifications() {
     navigator.serviceWorker.ready.then(registration => {
-        return registration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: 'BEJe_JXnnuzZlAp-jyKK7xFRddgP-SjV3-YvOjRi0VqWOxGKmf8Jq7hn8IKbfI06lNZOdGsWpvAHgqPsCFaBz6U'
+        return registration.pushManager.getSubscription().then(existingSubscription => {
+            if (existingSubscription) {
+                // Verificar si la suscripción todavía está activa en el servidor
+                return fetch(pushApi + '/verify-subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        clientId: clientId, // Incluir el ID del cliente
+                        subscription: existingSubscription
+                    })
+                }).then(response => response.json()).then(data => {
+                    if (data.isActive) {
+                        console.log('El usuario ya está suscrito:', existingSubscription);
+                        return existingSubscription;
+                    } else {
+                        // La suscripción no está activa en el servidor, crear una nueva
+                        return registration.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: 'BEJe_JXnnuzZlAp-jyKK7xFRddgP-SjV3-YvOjRi0VqWOxGKmf8Jq7hn8IKbfI06lNZOdGsWpvAHgqPsCFaBz6U'
+                        }).then(newSubscription => {
+                            console.log('Nueva suscripción a push:', newSubscription);
+                            // Enviar la nueva suscripción y el ID del cliente al servidor intermediario
+                            return fetch(pushApi + '/register-subscription', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    clientId: clientId, // Incluir el ID del cliente
+                                    subscription: newSubscription
+                                })
+                            }).then(response => {
+                                if (response && response.ok) {
+                                    console.log('Nueva suscripción registrada en el servidor');
+                                } else if (response) {
+                                    return response.text().then(text => {
+                                        console.error('Error al registrar la nueva suscripción en el servidor:', text);
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
+            } else {
+                return registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: 'BEJe_JXnnuzZlAp-jyKK7xFRddgP-SjV3-YvOjRi0VqWOxGKmf8Jq7hn8IKbfI06lNZOdGsWpvAHgqPsCFaBz6U'
+                }).then(newSubscription => {
+                    console.log('Nueva suscripción a push:', newSubscription);
+                    // Enviar la nueva suscripción y el ID del cliente al servidor intermediario
+                    return fetch(pushApi + '/register-subscription', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            clientId: clientId, // Incluir el ID del cliente
+                            subscription: newSubscription
+                        })
+                    }).then(response => {
+                        if (response && response.ok) {
+                            console.log('Nueva suscripción registrada en el servidor');
+                        } else if (response) {
+                            return response.text().then(text => {
+                                console.error('Error al registrar la nueva suscripción en el servidor:', text);
+                            });
+                        }
+                    });
+                });
+            }
         });
-    })
-    .then(subscription => {
-        console.log('Suscripción a push:', subscription);
-        // Enviar la suscripción y el ID del cliente al servidor intermediario
-        return fetch(pushApi + '/register-subscription', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                clientId: clientId, // Incluir el ID del cliente
-                subscription: subscription
-            })
-        });
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Suscripción registrada en el servidor');
-        } else {
-            console.error('Error al registrar la suscripción en el servidor');
-        }
     })
     .catch(error => {
         console.error('Error al suscribirse a push:', error);
@@ -160,6 +208,7 @@ function addLineNotification(bellButton, stopNumber, lineNumber) {
                 }
             });
         } else if (Notification.permission === 'granted') {
+            subscribeToPushNotifications();
             updateNotifications(bellButton, stopNumber, lineNumber);
         } else {
             alert('Las notificaciones están desactivadas. Por favor, habilita las notificaciones en la configuración del navegador.');
@@ -193,12 +242,15 @@ function updateNotifications(bellButton, stopNumber, lineNumber) {
     localStorage.setItem('busNotifications', JSON.stringify(notifications));
 }
 
+// La función principal que lee las notificaciones guardadas y las ejecuta si toca
 function checkAndSendBusArrivalNotification(tiempoRestante, lineNumber, stopNumber, stopName) {
     if (tiempoRestante <= 3) {
         let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
         let notificationExists = notifications.some(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
 
         if (notificationExists) {
+            // Comprobamos que el cliente esté registrado en el servidor push
+            subscribeToPushNotifications();
             registerNotification(`Notificación de llegada`, `La línea ${lineNumber} llegará en ${tiempoRestante} minutos a ${stopName}`);
         }
 
