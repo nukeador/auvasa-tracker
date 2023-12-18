@@ -59,20 +59,35 @@ function createArrowButton() {
     return button;
 }
 
-function registerNotification(title, message) {
+// Generar o recuperar el ID único del cliente
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
 
-    fetch( pushApi + '/push-notification', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: title,
-                    message: message
-                })
-            }).then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
+let clientId = localStorage.getItem('clientId');
+if (!clientId) {
+    clientId = uuidv4();
+    localStorage.setItem('clientId', clientId);
+}
+
+function registerNotification(title, message) {
+    fetch(pushApi + '/push-notification', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            clientId: clientId, // Incluir el ID del cliente
+            title: title,
+            message: message
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
 }
 
 function subscribeToPushNotifications() {
@@ -81,23 +96,29 @@ function subscribeToPushNotifications() {
             userVisibleOnly: true,
             applicationServerKey: 'BEJe_JXnnuzZlAp-jyKK7xFRddgP-SjV3-YvOjRi0VqWOxGKmf8Jq7hn8IKbfI06lNZOdGsWpvAHgqPsCFaBz6U'
         });
-    }).then(subscription => {
+    })
+    .then(subscription => {
         console.log('Suscripción a push:', subscription);
-        // Enviar la suscripción al servidor intermediario
+        // Enviar la suscripción y el ID del cliente al servidor intermediario
         return fetch(pushApi + '/register-subscription', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(subscription)
+            body: JSON.stringify({
+                clientId: clientId, // Incluir el ID del cliente
+                subscription: subscription
+            })
         });
-    }).then(response => {
+    })
+    .then(response => {
         if (response.ok) {
             console.log('Suscripción registrada en el servidor');
         } else {
             console.error('Error al registrar la suscripción en el servidor');
         }
-    }).catch(error => {
+    })
+    .catch(error => {
         console.error('Error al suscribirse a push:', error);
     });
 }
@@ -173,12 +194,12 @@ function updateNotifications(bellButton, stopNumber, lineNumber) {
 }
 
 function checkAndSendBusArrivalNotification(tiempoRestante, lineNumber, stopNumber, stopName) {
-    if (tiempoRestante === 3) {
+    if (tiempoRestante <= 3) {
         let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
         let notificationExists = notifications.some(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
 
         if (notificationExists) {
-            registerNotification(`Notificación de llegada`, `La línea ${lineNumber} llegará en 3 minutos a ${stopName}`);
+            registerNotification(`Notificación de llegada`, `La línea ${lineNumber} llegará en ${tiempoRestante} minutos a ${stopName}`);
         }
 
         // Borramos la notificación
