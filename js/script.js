@@ -107,8 +107,6 @@ function updateNotifications(bellButton, stopNumber, lineNumber) {
         localStorage.removeItem('busNotifications');
         return;
     }
-
-    
     
     let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
     let index = notifications.findIndex(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
@@ -118,15 +116,14 @@ function updateNotifications(bellButton, stopNumber, lineNumber) {
         if (bellButton) {
             notifications.push({ stopNumber, lineNumber });
             bellButton.style.backgroundImage = "url('img/bell-solid.png')";
+            showNotice(lineNumber);
         }
-        showNotice(lineNumber);
     } else {
         notifications.splice(index, 1);
         if (bellButton) {
             bellButton.style.backgroundImage = "url('img/bell-gray.png')";
         }
     }
-
     localStorage.setItem('busNotifications', JSON.stringify(notifications));
 }
 
