@@ -58,6 +58,95 @@ function createArrowButton() {
     return button;
 }
 
+function showNotice(lineNumber) {
+    // Crear el elemento de notificación
+    const notification = document.createElement('div');
+    notification.className = 'notification-popup';
+    notification.textContent = `Se te notificará cuando queden 3 minutos para que llegue la línea ${lineNumber}`;
+
+    // Agregar al cuerpo del documento
+    document.body.appendChild(notification);
+
+    // Mostrar la notificación
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100); // Pequeña demora para la transición
+
+    // Ocultar y eliminar la notificación después de 4 segundos
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 500); // Esperar a que termine la transición de desvanecimiento
+    }, 4000);
+}
+
+function addLineNotification(bellButton, stopNumber, lineNumber) {
+    const currentNotification = JSON.parse(localStorage.getItem('busNotification'));
+    if (currentNotification && currentNotification.stopNumber === stopNumber && currentNotification.lineNumber === lineNumber) {
+        localStorage.removeItem('busNotification');
+        bellButton.style.backgroundImage = "url('img/bell-gray.png')";
+    } else {
+        if (Notification.permission === 'default') {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    updateNotifications(bellButton, stopNumber, lineNumber);
+                }
+            });
+        } else if (Notification.permission === 'granted') {
+            updateNotifications(bellButton, stopNumber, lineNumber);
+        } else {
+            alert('Las notificaciones están desactivadas. Por favor, habilita las notificaciones en la configuración del navegador.');
+        }
+    }
+}
+
+function updateNotifications(bellButton, stopNumber, lineNumber) {
+    // Si stopNumber y lineNumber son null, borramos del localstorage todo y salimos
+    if (!stopNumber ||!lineNumber) {
+        localStorage.removeItem('busNotifications');
+        return;
+    }
+
+    
+    
+    let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
+    let index = notifications.findIndex(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
+
+    // Si no existe la creamos, si existe, la borramos
+    if (index === -1) {
+        if (bellButton) {
+            notifications.push({ stopNumber, lineNumber });
+            bellButton.style.backgroundImage = "url('img/bell-solid.png')";
+        }
+        showNotice(lineNumber);
+    } else {
+        notifications.splice(index, 1);
+        if (bellButton) {
+            bellButton.style.backgroundImage = "url('img/bell-gray.png')";
+        }
+    }
+
+    localStorage.setItem('busNotifications', JSON.stringify(notifications));
+}
+
+// Función para comprobar y mandar notifiaciones
+function checkAndSendBusArrivalNotification(tiempoRestante, lineNumber, stopNumber, stopName) {
+    if (tiempoRestante === 3) {
+        let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
+        let notificationExists = notifications.some(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
+
+        if (notificationExists && Notification.permission === "granted") {
+            new Notification(`La línea ${lineNumber} llegará en 3 minutos a ${stopName}.`);
+        } else {
+            console.log(`Notificación: La línea ${lineNumber} llegará en 3 minutos a ${stopName}.`);
+        }
+
+        // Borramos la notificación
+        updateNotifications(null, stopNumber, lineNumber);
+    }
+}
+
 function createInfoPanel(busesProximos, stopNumber, lineNumber) {
     let infoPanel = document.createElement('div');
     infoPanel.className = 'additional-info-panel';
@@ -120,6 +209,18 @@ function createInfoPanel(busesProximos, stopNumber, lineNumber) {
             this.style.backgroundImage = "url('img/arrow-left-light.png')";
         }
     }
+
+    // Revisar si ya existe una notificación para esta parada y línea
+    let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
+    let isNotificationSet = notifications.some(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
+
+    const bellButton = createButton('bell-button', '&#128276;', function() {
+        addLineNotification(this, stopNumber, lineNumber);
+    });
+
+    bellButton.style.backgroundImage = isNotificationSet ? "url('img/bell-solid.png')" : "url('img/bell-gray.png')";
+
+    infoPanel.querySelector('.actions-buttons').appendChild(bellButton);
 
     // Añadimos el botón de eliminar al div de actions-buttons
     const removeButton = createButton('remove-button', '&#128465;', function() {
@@ -756,6 +857,10 @@ async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         lineItem.classList.add('highlight');
                     }
             }, 500);
+
+            // Comprobamos si hay que mandar notifiaciones
+            checkAndSendBusArrivalNotification(tiempoRestante, lineNumber, stopNumber, scheduledData.parada[0].parada);
+
             } else {
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
             }
@@ -1008,6 +1113,7 @@ function removeBusLine(stopNumber, lineNumber) {
 
         saveBusLines();
         updateBusList();
+        updateNotifications(null, stopNumber, lineNumber);
     } else {
         // El usuario eligió no eliminar las líneas de autobús
         console.log("Eliminación cancelada.");
@@ -1020,6 +1126,9 @@ function removeAllBusLines() {
         busLines = [];
         saveBusLines();
         updateBusList();
+
+        // Borramos todas las notifiaciones
+        updateNotifications(null, null, null);
 
         // Volvemos a mostrar el welcome-box
         welcomeBox = document.getElementById('welcome-box');

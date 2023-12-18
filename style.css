@@ -403,7 +403,7 @@ button#installButton {
 .additional-info-panel .actions-buttons {
     display: flex;
     align-items: center;
-    justify-content: center;
+    flex-direction: column;
 }
 
 /* Animaciones */
@@ -693,8 +693,20 @@ button.mostrar-horarios {
     margin: 0 0.4em;
 }
 
+.bell-button {
+    background: transparent no-repeat center center;
+    background-image: url('img/bell-gray.png');
+    background-size: 15px 15px;
+    border: none;
+    font-size: 0;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    padding: 0 10px;
+    width: 15px;
+    text-indent: -9999px;
+}
 
-/* Estilos para el botón de eliminar, que por defecto está oculto */
 .remove-button {
     background: transparent no-repeat center center;
     background-image: url('img/trash-gray.png');
@@ -742,6 +754,27 @@ button.mostrar-horarios {
 
 .success {
     background-color: #3eb65c;
+}
+
+.notification-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1000; /* Ensure it is above other elements */
+}
+
+.notification-popup.show {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .foot-note {
