@@ -78,7 +78,7 @@ function showNotice(lineNumber) {
         setTimeout(() => {
             document.body.removeChild(notification);
         }, 500); // Esperar a que termine la transición de desvanecimiento
-    }, 4000);
+    }, 3000);
 }
 
 function addLineNotification(bellButton, stopNumber, lineNumber) {
