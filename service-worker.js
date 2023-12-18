@@ -1,4 +1,4 @@
-const CACHE_NAME = 'auvasatracker-v3.1';
+const CACHE_NAME = 'auvasatracker-v3.1.4';
 const urlsToCache = [
     // Lista de URLs a cachear
     '/favicon.png',
@@ -59,4 +59,20 @@ self.addEventListener('activate', event => {
             ]);
         })
     );
+});
+
+self.addEventListener('push', event => {
+    console.log('Received a push message', event);
+
+    const data = event.data.json();
+    console.log('Push data: ', data);
+
+    const title = data.title || 'Nueva Notificación';
+    const options = {
+        body: data.message,
+        icon: '/favicon.png',
+        badge: '/favicon.png'
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
 });

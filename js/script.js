@@ -1,5 +1,6 @@
 // Definir la URL base del API
 const apiEndPoint = 'https://gtfs.auvasatracker.com';
+const pushApi = 'https://push.auvasatracker.com';
 
 var busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
 
@@ -58,6 +59,49 @@ function createArrowButton() {
     return button;
 }
 
+function registerNotification(title, message) {
+
+    fetch( pushApi + '/push-notification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    message: message
+                })
+            }).then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+}
+
+function subscribeToPushNotifications() {
+    navigator.serviceWorker.ready.then(registration => {
+        return registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: 'BEJe_JXnnuzZlAp-jyKK7xFRddgP-SjV3-YvOjRi0VqWOxGKmf8Jq7hn8IKbfI06lNZOdGsWpvAHgqPsCFaBz6U'
+        });
+    }).then(subscription => {
+        console.log('Suscripción a push:', subscription);
+        // Enviar la suscripción al servidor intermediario
+        return fetch(pushApi + '/register-subscription', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(subscription)
+        });
+    }).then(response => {
+        if (response.ok) {
+            console.log('Suscripción registrada en el servidor');
+        } else {
+            console.error('Error al registrar la suscripción en el servidor');
+        }
+    }).catch(error => {
+        console.error('Error al suscribirse a push:', error);
+    });
+}
+
 function showNotice(lineNumber) {
     // Crear el elemento de notificación
     const notification = document.createElement('div');
@@ -90,6 +134,7 @@ function addLineNotification(bellButton, stopNumber, lineNumber) {
         if (Notification.permission === 'default') {
             Notification.requestPermission().then(permission => {
                 if (permission === 'granted') {
+                    subscribeToPushNotifications();
                     updateNotifications(bellButton, stopNumber, lineNumber);
                 }
             });
@@ -127,16 +172,13 @@ function updateNotifications(bellButton, stopNumber, lineNumber) {
     localStorage.setItem('busNotifications', JSON.stringify(notifications));
 }
 
-// Función para comprobar y mandar notifiaciones
 function checkAndSendBusArrivalNotification(tiempoRestante, lineNumber, stopNumber, stopName) {
     if (tiempoRestante === 3) {
         let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
         let notificationExists = notifications.some(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
 
-        if (notificationExists && Notification.permission === "granted") {
-            new Notification(`La línea ${lineNumber} llegará en 3 minutos a ${stopName}.`);
-        } else {
-            console.log(`Notificación: La línea ${lineNumber} llegará en 3 minutos a ${stopName}.`);
+        if (notificationExists) {
+            registerNotification(`Notificación de llegada`, `La línea ${lineNumber} llegará en 3 minutos a ${stopName}`);
         }
 
         // Borramos la notificación
