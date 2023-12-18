@@ -4,6 +4,8 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
+    margin: auto;
+    max-width: 900px;
 }
 
 header {
@@ -273,6 +275,7 @@ button#installButton {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 4px;
     margin: 0 4px;
+    position: relative;
 }
 
 .stop-block h2 {
@@ -337,7 +340,7 @@ button#installButton {
     position: absolute;
     top: 0;
     bottom: 0;
-    right: -40%; /* Inicialmente oculto a la derecha */
+    right: -43%; /* Inicialmente oculto a la derecha */
     background-color: #FFF; 
     overflow-x: hidden; /*Que el contenido no se desborde */
     transition: right 0.5s ease-in-out; /* Transición suave para la propiedad right */
@@ -557,7 +560,7 @@ button.mostrar-horarios {
     box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
     background: #fff;
     border-radius: 12px 12px 0 0;
-    overflow: auto;
+    overflow: none;
 }
 
 @keyframes glowing {
