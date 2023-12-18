@@ -331,8 +331,12 @@ function createInfoPanel(busesProximos, stopNumber, lineNumber) {
     });
 
     bellButton.style.backgroundImage = isNotificationSet ? "url('img/bell-solid.png')" : "url('img/bell-gray.png')";
+    // No añadimos la campana en iOS porque no es compatible con las notificaciones
+    const isOS = navigator.userAgent.match(/(iPad|iPhone|iPod)/g)? true : false;
 
-    infoPanel.querySelector('.actions-buttons').appendChild(bellButton);
+    if (!isOS) {
+        infoPanel.querySelector('.actions-buttons').appendChild(bellButton);
+    }
 
     // Añadimos el botón de eliminar al div de actions-buttons
     const removeButton = createButton('remove-button', '&#128465;', function() {
