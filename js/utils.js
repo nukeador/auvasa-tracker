@@ -1,5 +1,5 @@
 import { addLineNotification } from './notifications.js';
-import { removeBusLine } from './api.js';
+import { removeBusLine, displayScheduledBuses, updateBusList } from './api.js';
 
 // Declaración global de intervalId
 let intervalId;
@@ -160,6 +160,68 @@ export function updateStopName(stopElement, newName, stopGeo) {
     if (nameElement) {
         nameElement.innerHTML = newName + ' <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>';
     }
+}
+
+export function createStopElement(stopId, busList) {
+    let welcomeBox = document.getElementById('welcome-box');
+    welcomeBox.style.display = 'none';
+    
+    let stopElement = document.createElement('div');
+    stopElement.id = stopId;
+    stopElement.className = 'stop-block';
+    stopElement.innerHTML = '<h2>'+ stopId + '</h2>';
+
+    busList.appendChild(stopElement);
+    return stopElement;
+}
+
+export function createBusElement(busId, line, index, stopElement) {
+    let busElement = document.createElement('div');
+    busElement.className = 'line-info linea-' + line.lineNumber;
+    busElement.id = busId;
+
+    if (index % 2 === 0) {
+        busElement.classList.add('highlight');
+    }
+
+    busElement.innerHTML = '<div class="linea" data-trip-id=""><h3>' + line.linenumber + '<a class="alert-icon"></a></h3><p class="destino"></p><p class="hora-programada"><span class="hora"></span> <span class="diferencia"></span></p></div><div class="hora-tiempo"><div class="tiempo"><p>min.</div><a class="showMapIcon" title="Ver linea en el mapa">Mapa</a></a><div class="horaLlegada"></div></div>';
+    
+    const removeButton = createButton('remove-button', '&#128465;', function() {
+        removeBusLine(line.stopNumber, line.lineNumber);
+    });
+    busElement.appendChild(removeButton);
+    const arrowButton = createArrowButton();
+    busElement.appendChild(arrowButton);
+
+    stopElement.appendChild(busElement);
+    return busElement;
+}
+
+export function setupMostrarHorariosEventListener(mostrarHorarios, stopId, horariosBox) {
+    mostrarHorarios.addEventListener('click', async function() {
+        let horariosElement = await displayScheduledBuses(stopId);
+        horariosBox.innerHTML = horariosElement.innerHTML;
+        horariosBox.style.display = 'block';
+        clearInterval(intervalId);
+
+        let closeButtons = horariosBox.querySelectorAll('.horarios-close');
+        closeButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                this.parentNode.style.display = 'none';
+                iniciarIntervalo(updateBusList);
+                updateBusList();
+            });
+        });
+    });
+}
+
+export function createMostrarHorariosButton(stopId, stopElement) {
+    let mostrarHorarios = document.createElement('button');
+    mostrarHorarios.classList.add('mostrar-horarios');
+    mostrarHorarios.id = 'mostrar-horarios-' + stopId;
+    mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
+    stopElement.appendChild(mostrarHorarios);
+    return mostrarHorarios;
 }
 
 export function removeObsoleteElements(stops) {

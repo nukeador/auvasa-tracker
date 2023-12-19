@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -319,127 +319,62 @@ export function saveBusLines(busLines) {
     localStorage.setItem('busLines', JSON.stringify(busLines));
 }
 
+// Función principal que crea y actualiza la lista de paradas y líneas
 export async function updateBusList() {
+    // Recuperamos las paradas y líneas añadidas
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
     var stops = groupByStops(busLines);
 
-    // Si hay paradas añadidas mostramos boton borrar todas
-    if (busLines.length > 0) {
-        let removeAllButton = document.getElementById('removeAllButton');
-        removeAllButton.style.display = 'flex';
-    }
+    // No mostramos el botón de borrar todas si no hay lineas añadidas
+    let removeAllButton = document.getElementById('removeAllButton');
+    removeAllButton.style.display = busLines.length > 0 ? 'flex' : 'none';
 
     let horariosBox = document.getElementById('horarios-box');
+    let busList = document.getElementById('busList');
 
     for (var stopId in stops) {
         let stopElement = document.getElementById(stopId);
-
+        // Solo creamos las paradas que no estaban creadas previamente
         if (!stopElement) {
-            // Borramos el mensaje de bienvenida
-            let welcomeBox = document.getElementById('welcome-box');
-            welcomeBox.style.display = 'none';
-            
-            // Crear el stopElement si no existe
-            stopElement = document.createElement('div');
-            stopElement.id = stopId;
-            stopElement.className = 'stop-block';
-            
-            stopElement.innerHTML = '<h2>'+ stopId + '</h2>';
-
-            document.getElementById('busList').appendChild(stopElement);
+            stopElement = createStopElement(stopId, busList);
         }
 
         const stopName = await getStopName(stopId);
         const stopGeo = await getStopGeo(stopId);
-
+        // Actualizamos el nombre de la parada si ha cambiado
         if (stopName) {
             let updatedName = stopName + ' <span class="stopId">(' + stopId + ')</span>';
-            updateStopName(stopElement, updatedName, stopGeo);
+            if (!stopElement.querySelector('.stopId') || stopElement.querySelector('.stopId').textContent !== '(' + stopId + ')') {
+                updateStopName(stopElement, updatedName, stopGeo);
+            }
         }
+
 
         stops[stopId].forEach((line, index) => {
             const busId = stopId + '-' + line.lineNumber;
             let busElement = document.getElementById(busId);
-
+            // Solo creamos las líneas que no estaban creadas previamente
             if (!busElement) {
-                // Crear un nuevo elemento si no existe
-                busElement = document.createElement('div');
-                busElement.className = 'line-info ' + 'linea-' + line.lineNumber;
-                busElement.id = busId;
-
-                // Elementos pares tienen una clase especial
-                if (index % 2 === 0) {
-                    busElement.classList.add('highlight');
-                }
-
-                // Place holder inicial
-                busElement.innerHTML = '<div class="linea"><h3>' + line.lineNumber + '</h3></div> <div class="tiempo">...</div>';
-                
-                // Crear el botón de eliminar
-                const removeButton = createButton('remove-button', '&#128465;', function() {
-                    removeBusLine(line.stopNumber, line.lineNumber);
-                });
-                busElement.appendChild(removeButton);
-                // Crear el botón de flecha
-                const arrowButton = createArrowButton();
-                busElement.appendChild(arrowButton);
-
-                // Añadir el nuevo elemento al bloque de la parada
-                stopElement.appendChild(busElement);
+                busElement = createBusElement(busId, line, index, stopElement);
             }
-
-            // Actualizar el tiempo del autobús
+            // Llamar a fetchBusTime independientemente de si el busElement es nuevo o ya existía
             fetchBusTime(line.stopNumber, line.lineNumber, busElement);
         });
 
-        // AÑadimos boton para ver todos los horarios si no está ya creado
-        let mostrarHorarios = document.querySelector('#mostrar-horarios-' + stopId);
-        let horariosElement = await displayScheduledBuses(stopId);
-
-        if (!mostrarHorarios) {
-            mostrarHorarios = document.createElement('button');
-            mostrarHorarios.classList.add('mostrar-horarios');
-            mostrarHorarios.id = 'mostrar-horarios-' + stopId;
-            mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
-            stopElement.appendChild(mostrarHorarios);
-        } else {
-            // Si ya está creado, lo eliminamos y lo volvemos a crear para que quede al final
+        // Botón para motrar horarios al final
+        let mostrarHorarios = stopElement.querySelector('.mostrar-horarios');
+        // Para asegurarnos que queda al final al añadir una linea lo borramos y lo volvemos a colocar
+        if (mostrarHorarios) {
             mostrarHorarios.remove();
-            mostrarHorarios = document.createElement('button');
-            mostrarHorarios.classList.add('mostrar-horarios');
-            mostrarHorarios.id = 'mostrar-horarios-' + stopId;
-            mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
-            stopElement.appendChild(mostrarHorarios);
         }
-
-        // Añadimos los horarios programados despues de busList cuando hagamos clic
-        // en el botón .mostrar-horarios
-        mostrarHorarios.addEventListener('click', function() {
-            horariosBox.innerHTML = horariosElement.innerHTML;
-            horariosBox.style.display = 'block';
-            // Paramos las actualizaciones para que no se cierre el cuadro
-            clearInterval(intervalId);
-
-            // Agrega un controlador de eventos de clic a alerts-close
-            let closeButtons = horariosBox.querySelectorAll('.horarios-close');
-            closeButtons.forEach(function(button) {
-                // Click event
-                button.addEventListener('click', function() {
-                    this.parentNode.style.display = 'none';
-                    // Reanudamos y ejecutamos las actualizaciones
-                    iniciarIntervalo(updateBusList);
-                    updateBusList();
-                });
-            });
-        });
+        mostrarHorarios = createMostrarHorariosButton(stopId, stopElement);
+        setupMostrarHorariosEventListener(mostrarHorarios, stopId, horariosBox);
     }
 
-    // Eliminar elementos obsoletos del DOM
     removeObsoleteElements(stops);
-
-    // Actualiza la hora de últimos cambios
     updateLastUpdatedTime();
 }
+// Función principal que actualiza los datos de una línea
 export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
     // URL del API con estáticos y tiempo real
     var apiUrl = apiEndPoint + '/v2/parada/' + stopNumber + '/' + lineNumber;
@@ -463,6 +398,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         const response = await fetch(apiUrl);
         const scheduledData = await response.json();
 
+        // Recuperamos el destino para esa línea
         let destino = "";
         if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
             destino = scheduledData.lineas[0].destino;
@@ -473,12 +409,13 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         }
 
         // Combinar datos
+        // FIXME: Esto quizá no sea necesario si usamos los datos directamente de scheduledData
         const combinedData = combineBusData(scheduledData);
-
-        // Filtrar y encontrar el bus más cercano para la línea específica
         let busesLinea = combinedData[lineNumber];
-        if (busesLinea) {
 
+        // Si no hay datos para esa línea, no hacemos nada
+        if (busesLinea) {
+        // Filtrar y encontrar el bus más cercano para la línea específica
         const busMasCercano = elegirBusMasCercano(busesLinea);
         busesProximos = getNextBuses(busMasCercano, busesLinea, 3);
 
@@ -498,7 +435,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 ubicacionLat = busMasCercano.realTime.latitud;
                 ubicacionLon = busMasCercano.realTime.longitud;
                 velocidad = busMasCercano.realTime.velocidad;
-                //tiempoRestante = busMasCercano.realTime.tiempoRestante;
+                // tiempoRestante = busMasCercano.realTime.tiempoRestante;
                 // Calculamos el tiempo en el cliente porque el api puede tener cacheado este cálculo
                 // Si el busMasCercano.realTime.llegada es menor de 60 segundos, mostramos 0 minutos
                 if (Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000) < 1) {
@@ -506,7 +443,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 } else {
                     tiempoRestante = Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000);
                 }
-                // Comparamos la hora de llegada programada con la hora de llegada en tiempo real
+                // Comparamos la hora de llegada programada con la hora de llegada en tiempo real sin mirar los segundos
                 let realTimeArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`);
                 let scheduledArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`);
 
@@ -518,8 +455,8 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 lineItem.classList.remove('programado');
                 lineItem.classList.add('realtime');
             } else {
+                // Si no hay datos en tiempo real calculamos el tiempo restante a partir de la hora de llegada programada
                 horaLlegada = busMasCercano.scheduled.llegada;
-                // Calculamos el tiempo restante a partir de la hora de llegada programada en busMasCercano.scheduled.llegada
                 // Si el busMasCercano.scheduled.llegada es menor de 60 segundos, mostramos 0 minutos
                 if (Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000) < 1) {
                     tiempoRestante = 0;
@@ -530,7 +467,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 let ahora = new Date();
                 let horaLlegadaProgramada = new Date(`1970-01-01T${busMasCercano.scheduled.llegada}Z`);
 
-                // El bus está programado para el día siguiente
+                // Fix al tiempo restante si el bus está programado para el día siguiente
                 if (horaLlegadaProgramada.getUTCHours() < ahora.getUTCHours() ||
                     (horaLlegadaProgramada.getUTCHours() === ahora.getUTCHours() && horaLlegadaProgramada.getUTCMinutes() < ahora.getUTCMinutes())) {
                         tiempoRestante = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000);
@@ -581,6 +518,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             
             let mapElement = '<a class="' + mapElementClass + '" title="Ver linea en el mapa">Mapa</a>';
 
+            // TODO: Solo actualizar los datos que hayan cambiado desde la anterior actualización cambiado el texto de dentro de los elementos placeholder creados por createBusElement()
             // Actualizar el HTML con los datos del bus más cercano
             lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestante + ' <p>min.</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
 
@@ -603,10 +541,11 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     }
             }, 500);
 
-            // Comprobamos si hay que mandar notifiaciones
+            // Comprobamos si hay que mandar notificaciones
             checkAndSendBusArrivalNotification(tiempoRestante, lineNumber, stopNumber, scheduledData.parada[0].parada);
 
             } else {
+                // Si no hay bus más cercano
                 lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
             }
         } else {
@@ -684,8 +623,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         } catch (error) {
             console.error('Error en fetchBusTime:', error);
             lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Error</div>';
-            // Asegúrate de agregar también aquí el botón de eliminar
-            // Crear el botón de eliminar
+            // Agregar también aquí el botón de eliminar
             const removeButton = createButton('remove-button', '&#128465;', function() {
                 removeBusLine(stopNumber, lineNumber);
             });

@@ -12,15 +12,18 @@ function main() {
     updateBusList();
     iniciarIntervalo(updateBusList);
 
-    // Al cargar la página, comprobar el theme
-
+    // Detección del theme del usuario
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleIcon = document.getElementById('theme-toggle-icon');
-    
     const savedTheme = localStorage.getItem('theme');
+    
     if (savedTheme) {
         document.body.classList.toggle('dark-mode', savedTheme === 'dark');
         themeToggleIcon.textContent = savedTheme === 'dark' ? '🌜' : '🌞';
+    }
+    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark-mode');
+        themeToggleIcon.textContent = '🌜';
     }
 
     // Acciones para botones añadir y quitar
@@ -45,12 +48,6 @@ function main() {
         // Guardar la preferencia del usuario
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
     });
-
-    // Detección del theme del usuario
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark-mode');
-        themeToggleIcon.textContent = '🌜';
-    }
 
     // Botón para encontrar las paradas más cercanas
     var nearestStopsButton = document.querySelector('#nearestStops button');
