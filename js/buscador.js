@@ -1,6 +1,8 @@
-document.getElementById('stopNumber').addEventListener('input', function() {
+import { loadBusStops } from './api.js';
+
+document.getElementById('stopNumber').addEventListener('input', async function() {
     var inputText = this.value;
-    var matchingStops = searchByStopNumber(inputText);
+    var matchingStops = await searchByStopNumber(inputText);
 
     // Limpia resultados previos
     var resultsContainer = document.getElementById('autocompleteResults');
@@ -27,9 +29,10 @@ document.getElementById('stopNumber').addEventListener('input', function() {
 });
 
 // Función para buscar paradas por nombre
-function searchByStopNumber(name) {
+async function searchByStopNumber(name) {
     // Normaliza y elimina los acentos del nombre buscado
     var normalizedSearchName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const busStops = await loadBusStops();
 
     // Devuelve todas las paradas que coincidan con el nombre buscado, ignorando acentos
     return busStops.filter(stop => {
@@ -63,7 +66,7 @@ window.addEventListener('click', function(event) {
 });
 
 // Sugerencias de lineas si hemos introducido parada
-document.getElementById('lineNumber').addEventListener('focus', function() {
+document.getElementById('lineNumber').addEventListener('focus', async function() {
     var lineNumber = this.value;
     var stopNumber = document.getElementById('stopNumber').value;
 
@@ -73,6 +76,7 @@ document.getElementById('lineNumber').addEventListener('focus', function() {
     }
 
     // Encuentra la parada en busStops usando stopNumber
+    const busStops = await loadBusStops();
     const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
 
     if (stopData) {

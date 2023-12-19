@@ -475,7 +475,7 @@ button.mostrar-horarios {
     overflow: auto;
     background: #fff;
     box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
-    width: 305px;
+    width: 85%;
     margin: 0 auto;
     padding: 1em;
     top: 50%; /* Centra verticalmente */
