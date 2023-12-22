@@ -1,3 +1,5 @@
+import { apiEndPoint } from './api.js';
+
 let myMap = L.map('busMap').setView([41.64817, -4.72974], 16);
 let centerControl;
 let paradaMarker;
@@ -25,7 +27,7 @@ L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1e
 let lat = null;
 let lon = null;
 
-async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
+export async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
     if (!paradaData || !paradaData.latitud || !paradaData.longitud) {
         console.error('Datos de la parada no disponibles o inválidos');
         return;
@@ -163,7 +165,7 @@ function actualizarUltimaActualizacion(timestamp) {
     let minutes = Math.floor(diff / 60000);
     let seconds = ((diff % 60000) / 1000).toFixed(0);
     let lastUpdate = minutes < 1 ? `${seconds}s` : `${minutes} min ${seconds}s`;
-    updateHTML = "Última ubicación <strong>aproximada</strong>. Actualizada hace " + lastUpdate;
+    let updateHTML = "Última ubicación <strong>aproximada</strong>. Actualizada hace " + lastUpdate;
     document.getElementById('busMapLastUpdate').innerHTML = updateHTML;
 }
 

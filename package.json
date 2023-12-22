@@ -1,0 +1,14 @@
+{
+  "name": "auvasa-tracker",
+  "version": "3.0.0",
+  "description": "Seguimiento de paradas y líneas de bus en Valladolid",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}
