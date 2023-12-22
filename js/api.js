@@ -408,8 +408,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             destino = destino.substring(0, 22) + "...";
         }
 
-        // Combinar datos
-        // FIXME: Esto quizá no sea necesario si usamos los datos directamente de scheduledData
+        // Agrupar los datos por trip_id para una mejor búsqueda
         const combinedData = combineBusData(scheduledData);
         let busesLinea = combinedData[lineNumber];
 
@@ -417,6 +416,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         if (busesLinea) {
         // Filtrar y encontrar el bus más cercano para la línea específica
         const busMasCercano = elegirBusMasCercano(busesLinea);
+        // Obtener los próximos 3 buses
         busesProximos = getNextBuses(busMasCercano, busesLinea, 3);
 
         if (busMasCercano) {
@@ -655,17 +655,17 @@ export function combineBusData(scheduledData) {
             };
         });
 
-        bus.realtime.forEach(schedule => {
-            if (!combined[linea][schedule.trip_id]) {
-                combined[linea][schedule.trip_id] = { scheduled: null, realTime: null };
+        bus.realtime.forEach(realtime => {
+            if (!combined[linea][realtime.trip_id]) {
+                combined[linea][realtime.trip_id] = { scheduled: null, realTime: null };
             }
 
-            combined[linea][schedule.trip_id].realTime = {
-                llegada: schedule.llegada,
-                latitud: schedule.latitud ? schedule.latitud.toString() : undefined,
-                longitud: schedule.longitud ? schedule.longitud.toString() : undefined,
-                velocidad: schedule.velocidad ? schedule.velocidad.toString() : undefined
-                //tiempoRestante: schedule.tiempoRestante
+            combined[linea][realtime.trip_id].realTime = {
+                llegada: realtime.llegada,
+                latitud: realtime.latitud ? realtime.latitud.toString() : undefined,
+                longitud: realtime.longitud ? realtime.longitud.toString() : undefined,
+                velocidad: realtime.velocidad ? realtime.velocidad.toString() : undefined
+                //tiempoRestante: realtime.tiempoRestante
             };
         });
 
