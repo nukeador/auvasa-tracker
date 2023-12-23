@@ -184,7 +184,14 @@ export function createBusElement(busId, line, index, stopElement) {
         busElement.classList.add('highlight');
     }
 
-    busElement.innerHTML = '<div class="linea" data-trip-id=""><h3>' + line.linenumber + '<a class="alert-icon"></a></h3><p class="destino"></p><p class="hora-programada"><span class="hora"></span> <span class="diferencia"></span></p></div><div class="hora-tiempo"><div class="tiempo"><p>min.</div><a class="showMapIcon" title="Ver linea en el mapa">Mapa</a></a><div class="horaLlegada"></div></div>';
+    // Evitamos mostrar undefined mietras carga el DOM
+    let lineNumber = "";
+    if (line.linenumber) {
+        lineNumber = line.linenumber;
+    }
+
+    // Elemento con placeholders HTML
+    busElement.innerHTML = '<div class="linea" data-trip-id=""><h3>' + lineNumber + '<a class="alert-icon"></a></h3><p class="destino"></p><p class="hora-programada"><span class="hora"></span> <span class="diferencia"></span></p></div><div class="hora-tiempo"><div class="tiempo"><p>min.</div><a class="showMapIcon" title="Ver linea en el mapa">Mapa</a></a><div class="horaLlegada"></div></div>';
     
     const removeButton = createButton('remove-button', '&#128465;', function() {
         removeBusLine(line.stopNumber, line.lineNumber);

@@ -35,12 +35,22 @@ function main() {
     }
 
     if (addButton) {
+        let isClickAllowed = true; // Variable para controlar si se permite el clic
+    
         addButton.addEventListener('click', async function() {
-            const stopNumber = document.getElementById('stopNumber').value;
-            const lineNumber = document.getElementById('lineNumber').value;
-            await addBusLine(stopNumber, lineNumber);
+            if (isClickAllowed) { // Verifica si se permite el clic
+                isClickAllowed = false; // Deshabilita nuevos clics
+    
+                const stopNumber = document.getElementById('stopNumber').value;
+                const lineNumber = document.getElementById('lineNumber').value;
+                await addBusLine(stopNumber, lineNumber);
+    
+                setTimeout(() => {
+                    isClickAllowed = true; // Habilita nuevamente los clics
+                }, 1000);
+            }
         });
-    }
+    }    
 
     themeToggle.addEventListener('click', () => {
         const isDarkMode = document.body.classList.toggle('dark-mode');
