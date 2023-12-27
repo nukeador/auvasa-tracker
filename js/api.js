@@ -3,7 +3,7 @@ import { checkAndSendBusArrivalNotification, updateNotifications } from './notif
 import { updateBusMap } from './mapa.js';
 
 // Definir la URL base del API
-export const apiEndPoint = 'https://gtfs.auvasatracker.com';
+export const apiEndPoint = 'https://api.auvasatracker.com';
 
 // Recuperamos todas las alertas vigentes
 const allAlerts = await fetchAllBusAlerts();
