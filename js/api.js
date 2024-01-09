@@ -96,9 +96,15 @@ export async function fetchAllBusAlerts() {
 }
 
 export function filterBusAlerts(alerts, busLine) {
+    // Verifica si alerts es array y no está vacío
+    if (!Array.isArray(alerts) || alerts.length === 0) {
+        return [];
+    }
+
     // Filtra las alertas para la línea de autobús específica
-    return alerts.filter(alert => alert.ruta.linea === busLine);
+    return alerts.filter(alert => alert.ruta && alert.ruta.linea === busLine);
 }
+
 
 export async function fetchScheduledBuses(stopNumber) {
     const cacheKey = 'busSchedule_' + stopNumber;
