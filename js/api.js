@@ -90,9 +90,28 @@ export async function getStopGeo(stopId) {
 }
 
 export async function fetchAllBusAlerts() {
-    return fetch( apiEndPoint + '/alertas/')
-        .then(response => response.json()) // Parse la respuesta a JSON
-        .catch(error => console.error('Error:', error));
+    try {
+        const response = await fetch(apiEndPoint + '/alertas/');
+
+        if (!response.ok) {
+            // Si la respuesta no es exitosa, devuelve un array vacío
+            return [];
+        }
+
+        const data = await response.text(); // Obtiene la respuesta como texto
+
+        try {
+            // Intenta parsear el texto a JSON
+            return JSON.parse(data);
+        } catch (error) {
+            // Si el parseo falla (por ejemplo, si está vacío o no es JSON válido), devuelve un array vacío
+            console.log('Error al recuperar alertas:', error);
+            return [];
+        }
+    } catch (error) {
+        console.error('Error al recuperar alertas:', error);
+        return []; // Retorna un arreglo vacío en caso de error
+    }
 }
 
 export function filterBusAlerts(alerts, busLine) {
