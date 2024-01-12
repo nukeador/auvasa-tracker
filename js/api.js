@@ -470,13 +470,17 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     tiempoRestante = Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000);
                 }
                 // Comparamos la hora de llegada programada con la hora de llegada en tiempo real sin mirar los segundos
-                let realTimeArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`);
-                let scheduledArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`);
+                // Check por si en scheduled no hay datos o es null
+                if (busMasCercano.scheduled) {
+                    let realTimeArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`);
+                    let scheduledArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`);
+                    realTimeArrival.setSeconds(0);
+                    scheduledArrival.setSeconds(0);
 
-                realTimeArrival.setSeconds(0);
-                scheduledArrival.setSeconds(0);
-
-                diferencia = Math.ceil((realTimeArrival - scheduledArrival) / 60000);
+                    diferencia = Math.ceil((realTimeArrival - scheduledArrival) / 60000);
+                } else {
+                    diferencia = 0;
+                }
 
                 lineItem.classList.remove('programado');
                 lineItem.classList.add('realtime');
@@ -511,8 +515,14 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             horaLlegada = horaLlegada.split(':');
             horaLlegada = horaLlegada[0] + ':' + horaLlegada[1];
 
-            let horaLlegadaProgramada = busMasCercano.scheduled.llegada.split(':');
-            horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
+            let horaLlegadaProgramada;
+            if (busMasCercano.scheduled) {
+                horaLlegadaProgramada = busMasCercano.scheduled.llegada.split(':');
+                horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
+            } else {
+                horaLlegadaProgramada = busMasCercano.realTime.llegada.split(':');
+                horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
+            }
 
             // Calculos de retrasos/adelantos
             if (diferencia > 0) {
