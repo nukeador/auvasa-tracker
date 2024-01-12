@@ -452,7 +452,8 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             let ubicacionLon;
             let velocidad;
 
-            let tripId = busMasCercano.scheduled.tripId;
+            
+            let tripId = busMasCercano.trip_id;
 
             // Si hay datos en tiempo real, usarlos, de lo contrario, usar los programados
             if (busMasCercano.realTime) {
@@ -791,9 +792,16 @@ export function getNextBuses(busMasCercano, busesLinea, numBuses) {
     // Convertir busesLinea a un array
     const busesArray = Object.values(busesLinea);
 
-    // Función auxiliar para obtener la hora de llegada
     const getArrivalTime = (bus) => {
-        return bus.realTime && bus.realTime.llegada ? bus.realTime.llegada : bus.scheduled.llegada;
+        // Primero intentar usar bus.realTime.llegada
+        if (bus.realTime && bus.realTime.llegada) {
+            return bus.realTime.llegada;
+        }
+        // Si no está disponible, intentar usar bus.scheduled.llegada, verificando primero que bus.scheduled no sea null
+        if (bus.scheduled && bus.scheduled.llegada) {
+            return bus.scheduled.llegada;
+        }
+        return null; // Devolver null si ninguna de las dos está disponible
     };
 
     // Ordenar el array por hora de llegada
@@ -802,7 +810,14 @@ export function getNextBuses(busMasCercano, busesLinea, numBuses) {
     });
 
     // Encontrar el índice de busMasCercano en el array
-    const indexBusMasCercano = busesArray.findIndex(bus => bus.scheduled.tripId === busMasCercano.scheduled.tripId);
+    // Verificar si hay busMasCercano y si busMasCercano.scheduled es null antes de buscar su índice
+    // Hay veces que los datos en realTime traen tripID que no existen en los progamados, por eso este check
+    let indexBusMasCercano;
+    if (busMasCercano && busMasCercano.scheduled) {
+        indexBusMasCercano = busesArray.findIndex(bus => bus.scheduled && bus.scheduled.tripId === busMasCercano.scheduled.tripId);
+    } else {
+        return [];
+    }
 
     // Seleccionar los 'numBuses' buses siguientes
     const nextBuses = busesArray.slice(indexBusMasCercano + 1, indexBusMasCercano + 1 + numBuses);
