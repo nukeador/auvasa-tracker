@@ -1,4 +1,4 @@
-const CACHE_NAME = 'auvasatracker-v3.5.7';
+const CACHE_NAME = 'auvasatracker-v3.5.8';
 const urlsToCache = [
     // Lista de URLs a cachear
     '/favicon.png',
@@ -20,6 +20,7 @@ const urlsToCache = [
     "/img/welcome-logo-2.png",
     "/img/welcome-logo.png",
     "/img/welcome-logo-white.png",
+    "img/share.png",
 ];
 
 // Instalación del Service Worker y precarga de los recursos
