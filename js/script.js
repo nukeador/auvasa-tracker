@@ -78,7 +78,7 @@ function main() {
             if (e.target.tagName === 'A') {
                 // Mostramos el id del padre del enlace
                 console.log('Click en ' + e.target.parentElement.id);
-                _paq.push(['trackEvent', 'tips-banner', 'click', 'e.target.parentElement.id']);
+                _paq.push(['trackEvent', 'tips-banner', 'click', e.target.parentElement.id]);
             }
         });
     }
