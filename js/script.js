@@ -69,6 +69,19 @@ function main() {
            console.log("Geolocalización no soportada por este navegador.");
         }
     });
+
+    // Banner con tips
+    var tipsBanner = document.getElementById('tips-banner');
+    if (tipsBanner) {
+        // Guardamos cada vez que se hace click en un enlace dentro de un parrafor hijo
+        tipsBanner.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                // Mostramos el id del padre del enlace
+                console.log('Click en ' + e.target.parentElement.id);
+                _paq.push(['trackEvent', 'tips-banner', 'click', e.target.parentElement.id]);
+            }
+        });
+    }
 }
 
 let deferredPrompt;
