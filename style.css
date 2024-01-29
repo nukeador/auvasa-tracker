@@ -801,6 +801,10 @@ button.mostrar-horarios {
     background-position: 15px center;
 }
 
+.dark-mode #share-whatsapp {
+    background-image: url('img/share-gray.png');
+}
+
 #share-whatsapp a {
     color: #0e4f0b; 
     text-decoration: none; 
@@ -809,9 +813,17 @@ button.mostrar-horarios {
     border-radius: 10px; /* Bordes redondeados para el enlace */
 }
 
+.dark-mode #share-whatsapp a {
+    color: #868686;
+}
+
 #share-whatsapp:hover, #share-whatsapp:focus {
     background-color: rgba(255, 255, 255, 0.2); /* Efecto sutil al pasar el mouse */
     text-decoration: none; /* Continuar sin subrayado */
+}
+
+.dark-mode #share-whatsapp:hover, #share-whatsapp:focus {
+    background-color: rgba(0, 0, 0, 0.2); /* Efecto sutil al pasar el mouse */
 }
 
 .foot-note {
