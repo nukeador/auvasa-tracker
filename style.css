@@ -809,7 +809,7 @@ button.mostrar-horarios {
     color: #0e4f0b; 
     text-decoration: none; 
     display: inline-block; 
-    padding: 5px 5px 5px 24px;
+    padding: 5px 5px 5px 26px;
     border-radius: 10px; /* Bordes redondeados para el enlace */
 }
 
