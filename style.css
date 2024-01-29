@@ -781,7 +781,7 @@ button.mostrar-horarios {
 }
 
 #tips-banner {
-    font-size: 0.88em;
+    font-size: 0.8em;
     background-color: #25d36636;
     border-radius: 25px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
@@ -796,7 +796,7 @@ button.mostrar-horarios {
     margin: 0; 
     color: #0e4f0b; 
     background-image: url('img/share.png');
-    background-size: 15px;
+    background-size: 12px;
     background-repeat: no-repeat;
     background-position: 15px center;
 }
@@ -809,7 +809,7 @@ button.mostrar-horarios {
     color: #0e4f0b; 
     text-decoration: none; 
     display: inline-block; 
-    padding: 5px 5px 5px 24px;
+    padding: 5px 5px 5px 26px;
     border-radius: 10px; /* Bordes redondeados para el enlace */
 }
 
