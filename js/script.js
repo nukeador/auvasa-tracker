@@ -27,8 +27,8 @@ function main() {
     }
 
     // Acciones para botones añadir y quitar
-    var addButton = document.getElementById('addButton');
-    var removeAllButton = document.getElementById('removeAllButton');
+    const addButton = document.getElementById('addButton');
+    const removeAllButton = document.getElementById('removeAllButton');
 
     if (removeAllButton) {
         removeAllButton.addEventListener('click', removeAllBusLines);
@@ -60,7 +60,7 @@ function main() {
     });
 
     // Botón para encontrar las paradas más cercanas
-    var nearestStopsButton = document.querySelector('#nearestStops button');
+    const nearestStopsButton = document.querySelector('#nearestStops button');
     nearestStopsButton.addEventListener('click', function() {
         if (navigator.geolocation) {
             displayLoadingSpinner();
@@ -71,7 +71,7 @@ function main() {
     });
 
     // Banner con tips
-    var tipsBanner = document.getElementById('tips-banner');
+    const tipsBanner = document.getElementById('tips-banner');
     if (tipsBanner) {
         // Guardamos cada vez que se hace click en un enlace dentro de un parrafor hijo
         tipsBanner.addEventListener('click', function(e) {
@@ -95,6 +95,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     // Actualiza la interfaz para mostrar el botón de instalación
     showInstallButton();
 });
+
 
 function showInstallButton() {
     const installButton = document.getElementById('installButton');

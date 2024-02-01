@@ -271,7 +271,7 @@ export async function addBusLine(stopNumber, lineNumber) {
         }
     
         if (stopNumber && lineNumber) {
-            var exists = busLines.some(function(line) {
+            const exists = busLines.some(function(line) {
                 return line.stopNumber === stopNumber && line.lineNumber === lineNumber;
             });
             if (!exists) {
@@ -311,7 +311,7 @@ export async function addBusLine(stopNumber, lineNumber) {
         ];
 
         allLines.forEach(line => {
-            var exists = busLines.some(busLine => busLine.stopNumber === stopNumber && busLine.lineNumber === line);
+            const exists = busLines.some(busLine => busLine.stopNumber === stopNumber && busLine.lineNumber === line);
             if (!exists) {
                 busLines.push({ stopNumber: stopNumber, lineNumber: line });
             }
@@ -348,7 +348,7 @@ export function saveBusLines(busLines) {
 export async function updateBusList() {
     // Recuperamos las paradas y líneas añadidas
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
-    var stops = groupByStops(busLines);
+    const stops = groupByStops(busLines);
 
     // No mostramos el botón de borrar todas si no hay lineas añadidas
     let removeAllButton = document.getElementById('removeAllButton');
@@ -357,7 +357,7 @@ export async function updateBusList() {
     let horariosBox = document.getElementById('horarios-box');
     let busList = document.getElementById('busList');
 
-    for (var stopId in stops) {
+    for (let stopId in stops) {
         let stopElement = document.getElementById(stopId);
         // Solo creamos las paradas que no estaban creadas previamente
         if (!stopElement) {
@@ -402,7 +402,7 @@ export async function updateBusList() {
 // Función principal que actualiza los datos de una línea
 export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
     // URL del API con estáticos y tiempo real
-    var apiUrl = apiEndPoint + '/v2/parada/' + stopNumber + '/' + lineNumber;
+    const apiUrl = apiEndPoint + '/v2/parada/' + stopNumber + '/' + lineNumber;
 
     // Recuperamos si hay alertas para esa linea
     const busLineAlerts = filterBusAlerts(allAlerts, lineNumber);
