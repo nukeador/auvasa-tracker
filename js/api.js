@@ -110,7 +110,7 @@ export async function fetchAllBusAlerts() {
         }
     } catch (error) {
         console.error('Error al recuperar alertas:', error);
-        return []; // Retorna un arreglo vacío en caso de error
+        return []; // Retorna un array vacío en caso de error
     }
 }
 
@@ -121,6 +121,7 @@ export function filterBusAlerts(alerts, busLine) {
     }
 
     // Filtra las alertas para la línea de autobús específica
+    // TODO: Añadir también las alertas globales que tienen gtfsRouteId null
     return alerts.filter(alert => alert.ruta && alert.ruta.linea === busLine);
 }
 
