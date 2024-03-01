@@ -76,9 +76,9 @@ export async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
 
 function actualizarControlCentro(map, lat, lon) {
     if (!centerControl) {
-        var CenterControl = L.Control.extend({
+        let CenterControl = L.Control.extend({
             onAdd: function () {
-                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                let container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
                 container.style.backgroundColor = 'white';
                 container.style.backgroundImage = "url('img/bus-location-center.png')";
                 container.style.backgroundSize = "30px 30px";
@@ -99,13 +99,13 @@ function actualizarControlCentro(map, lat, lon) {
     };
 }
 
-var UbicacionUsuarioControl = L.Control.extend({
+let UbicacionUsuarioControl = L.Control.extend({
     options: {
         position: 'topleft' // Posición del control en el mapa
     },
 
     onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        let container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
         
         container.style.backgroundColor = 'white';
         container.style.backgroundImage = "url('img/location.svg')";

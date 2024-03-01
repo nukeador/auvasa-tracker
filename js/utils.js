@@ -7,7 +7,7 @@ let intervalId;
 // Generar o recuperar el ID único del cliente
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
@@ -93,8 +93,11 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
 
         // Verificamos que horaLlegada no sea null o vacío
         if (horaLlegada) {
-            // Eliminamos los segundos de la hora HH:MM:SS
-            horaLlegada = horaLlegada.substring(0, horaLlegada.length - 3);
+            // Verificamos si horaLlegada tiene el formato "HH:MM:SS"
+            if (horaLlegada.includes(":") && horaLlegada.split(":").length === 3) {
+                // Eliminamos los segundos de la hora HH:MM:SS
+                horaLlegada = horaLlegada.substring(0, horaLlegada.lastIndexOf(":"));
+            }
 
             innerHTML += '<li><span class="' + llegadaClass + '">' + horaLlegada + '</span></li>';
         }
@@ -156,7 +159,7 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
 
 export function updateStopName(stopElement, newName, stopGeo) {
     // Actualiza el nombre de la parada en el DOM
-    var nameElement = stopElement.querySelector('h2');
+    const nameElement = stopElement.querySelector('h2');
     if (nameElement) {
         nameElement.innerHTML = newName + ' <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>';
     }

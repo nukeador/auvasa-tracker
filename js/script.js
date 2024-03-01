@@ -12,7 +12,8 @@ function main() {
     updateBusList();
     iniciarIntervalo(updateBusList);
 
-    // Detección del theme del usuario
+    // Determina el tema del usuario basándose en la preferencia guardada en localStorage
+    // o en la preferencia del sistema operativo.
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleIcon = document.getElementById('theme-toggle-icon');
     const savedTheme = localStorage.getItem('theme');
@@ -27,8 +28,8 @@ function main() {
     }
 
     // Acciones para botones añadir y quitar
-    var addButton = document.getElementById('addButton');
-    var removeAllButton = document.getElementById('removeAllButton');
+    const addButton = document.getElementById('addButton');
+    const removeAllButton = document.getElementById('removeAllButton');
 
     if (removeAllButton) {
         removeAllButton.addEventListener('click', removeAllBusLines);
@@ -59,8 +60,9 @@ function main() {
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
     });
 
-    // Botón para encontrar las paradas más cercanas
-    var nearestStopsButton = document.querySelector('#nearestStops button');
+    // Solicita la geolocalización del usuario para encontrar las paradas más cercanas.
+    // Muestra un spinner de carga mientras se obtiene la posición.
+    const nearestStopsButton = document.querySelector('#nearestStops button');
     nearestStopsButton.addEventListener('click', function() {
         if (navigator.geolocation) {
             displayLoadingSpinner();
@@ -71,7 +73,7 @@ function main() {
     });
 
     // Banner con tips
-    var tipsBanner = document.getElementById('tips-banner');
+    const tipsBanner = document.getElementById('tips-banner');
     if (tipsBanner) {
         // Guardamos cada vez que se hace click en un enlace dentro de un parrafor hijo
         tipsBanner.addEventListener('click', function(e) {
@@ -86,7 +88,8 @@ function main() {
 
 let deferredPrompt;
 
-// Código para la instalación como PWA 
+// Escucha el evento 'beforeinstallprompt' para preparar la instalación de la aplicación como PWA.
+// Guarda el evento para su uso posterior y muestra el botón de instalación.
 window.addEventListener('beforeinstallprompt', (e) => {
     // Previene que Chrome 67 y anteriores muestren automáticamente el prompt de instalación
     e.preventDefault();
@@ -96,7 +99,10 @@ window.addEventListener('beforeinstallprompt', (e) => {
     showInstallButton();
 });
 
+
 function showInstallButton() {
+    // Muestra el botón de instalación y maneja el evento de clic para mostrar el prompt de instalación.
+    // Espera la elección del usuario y registra el resultado.
     const installButton = document.getElementById('installButton');
     installButton.style.display = 'block';
 
