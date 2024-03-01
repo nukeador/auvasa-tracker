@@ -93,8 +93,11 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
 
         // Verificamos que horaLlegada no sea null o vacío
         if (horaLlegada) {
-            // Eliminamos los segundos de la hora HH:MM:SS
-            horaLlegada = horaLlegada.substring(0, horaLlegada.length - 3);
+            // Verificamos si horaLlegada tiene el formato "HH:MM:SS"
+            if (horaLlegada.includes(":") && horaLlegada.split(":").length === 3) {
+                // Eliminamos los segundos de la hora HH:MM:SS
+                horaLlegada = horaLlegada.substring(0, horaLlegada.lastIndexOf(":"));
+            }
 
             innerHTML += '<li><span class="' + llegadaClass + '">' + horaLlegada + '</span></li>';
         }
