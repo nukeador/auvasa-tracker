@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -414,6 +414,10 @@ export async function updateBusList() {
     // No mostramos el botón de borrar todas si no hay lineas añadidas
     let removeAllButton = document.getElementById('removeAllButton');
     removeAllButton.style.display = busLines.length > 0 ? 'flex' : 'none';
+
+    // Verificar si hay alertas globales y mostrar el banner si es necesario
+    const globalAlerts = filterBusAlerts(allAlerts, null);
+    displayGlobalAlertsBanner(globalAlerts);
 
     let horariosBox = document.getElementById('horarios-box');
     let busList = document.getElementById('busList');

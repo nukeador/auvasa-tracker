@@ -826,6 +826,26 @@ button.mostrar-horarios {
     background-color: rgba(0, 0, 0, 0.2); /* Efecto sutil al pasar el mouse */
 }
 
+.global-alerts-box {
+    background-color: #f8f5d7;
+    color: #72711c;
+    border: 1px solid #f5f4c6;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: none; /* Inicialmente oculto */
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.global-alerts-box ul {
+    padding: 0;
+    margin: 0;
+}
+.global-alerts-box ul li {
+    list-style: none;
+}
+
 .foot-note {
     font-style: italic;
     padding: 1em;
