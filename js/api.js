@@ -169,10 +169,22 @@ export async function getBusDestinationsForStop(stopNumber) {
         let destinations = {};
         if (data.lineas) {
             data.lineas.forEach(linea => {
-                if (linea.destino) {
-                    destinations[linea.linea] = linea.destino;
+                if (linea.horarios) {
+                    linea.horarios.forEach(horario => {
+                        if (horario.destino) {
+                            if (!destinations[linea.linea]) {
+                                destinations[linea.linea] = new Set();
+                            }
+                            destinations[linea.linea].add(horario.destino);
+                        }
+                    });
                 }
             });
+        }
+
+        // Convertir los conjuntos de destinos en arrays y contar los destinos únicos
+        for (let line in destinations) {
+            destinations[line] = Array.from(destinations[line]);
         }
 
         // Actualizar la caché
@@ -187,29 +199,53 @@ export async function getBusDestinationsForStop(stopNumber) {
 }
 
 export async function displayScheduledBuses(stopNumber) {
-    if (fetchScheduledBuses(stopNumber)) {
-        let horariosElement = document.createElement('div');
-        horariosElement.className = 'horarios';
-        horariosElement.id = 'horarios-' + stopNumber;
-        let horariosBuses = await fetchScheduledBuses(stopNumber);
-        horariosElement.innerHTML += '<button class="horarios-close">Cerrar</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada</strong> hoy</p>';
-        horariosBuses.lineas.forEach(bus => {
-            horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p>';
-            // Si no hay horarios mostramos mensaje
-            if (bus.horarios.length === 0) {
-                horariosElement.innerHTML += '<p class="hora">No hay horarios programados para hoy</p>';
-            }
+    let horariosElement = document.createElement('div');
+    horariosElement.className = 'horarios';
+    horariosElement.id = 'horarios-' + stopNumber;
+    let horariosBuses = await fetchScheduledBuses(stopNumber);
+    horariosElement.innerHTML += '<button class="horarios-close">Cerrar</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada</strong> hoy</p>';
 
-            bus.horarios.forEach(horario => {
+    // Agrupar los horarios por línea y destino
+    const groupedHorarios = {};
+    horariosBuses.lineas.forEach(bus => {
+        bus.horarios.forEach(horario => {
+            const key = `${bus.linea}-${horario.destino}`;
+            if (!groupedHorarios[key]) {
+                groupedHorarios[key] = {
+                    linea: bus.linea,
+                    destino: horario.destino,
+                    horarios: []
+                };
+            }
+            groupedHorarios[key].horarios.push(horario);
+        });
+    });
+
+    // Mostrar los horarios agrupados
+    Object.values(groupedHorarios).forEach(group => {
+        horariosElement.innerHTML += '<div class="linea-' + group.linea + '"><h3>' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
+        if (group.horarios.length === 0) {
+            horariosElement.innerHTML += '<p class="hora">No hay horarios programados para hoy</p>';
+        } else {
+            group.horarios.forEach(horario => {
                 // Eliminamos los segundos de la hora de llegada
                 let timeParts = horario.llegada.split(':'); 
                 let timeHHMM = `${timeParts[0]}:${timeParts[1]}`;
                 horariosElement.innerHTML += '<span class="hora">' + timeHHMM + '</span> ';
             });
-        });
-        horariosElement.innerHTML += '</div><p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="horarios-close">Cerrar</button></div>';
-        return horariosElement;
-    }
+        }
+        horariosElement.innerHTML += '</div>';
+    });
+
+    // Agregar líneas sin horarios
+    horariosBuses.lineas.forEach(bus => {
+        if (!groupedHorarios[`${bus.linea}-${bus.destino}`]) {
+            horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para hoy</p></div>';
+        }
+    });
+
+    horariosElement.innerHTML += '<p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="horarios-close">Cerrar</button></div>';
+    return horariosElement;
 }
 
 export async function addBusLine(stopNumber, lineNumber) {
@@ -941,7 +977,7 @@ export async function displayNearestStopsResults(stops, userLocation) {
 
         // Procesar cada línea y su destino
         let lineasHTML = stop.lineas.ordinarias.map(linea => {
-            let destino = lineasDestinos[linea] || 'Destino desconocido';
+            let destino = lineasDestinos[linea] || '';
             return `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea} - ${destino}</span>`;
         }).join(" ");
 
