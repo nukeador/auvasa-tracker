@@ -120,9 +120,16 @@ export function filterBusAlerts(alerts, busLine) {
         return [];
     }
 
-    // Filtra las alertas para la línea de autobús específica
-    // TODO: Añadir también las alertas globales que tienen gtfsRouteId null
-    return alerts.filter(alert => alert.ruta && alert.ruta.linea === busLine);
+    // Filtra las alertas para la línea de autobús específica y las alertas globales
+    return alerts.filter(alert => {
+        // Si la alerta es global o no tiene línea especificada, la incluimos
+        if (alert.ruta.parada === null && alert.ruta.linea === null) {
+            return true;
+        }
+        // Si la alerta es para una línea específica, la incluimos si coincide con busLine
+        // o si no tiene parada especificada
+        return alert.ruta.linea === busLine;
+    });
 }
 
 
