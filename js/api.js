@@ -619,10 +619,18 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
             } else {
                 // Si no hay bus más cercano
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
+                let destino = "";
+                if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
+                    destino = scheduledData.lineas[0].destino;
+                }
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
             }
         } else {
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
+                let destino = "";
+                if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
+                    destino = scheduledData.lineas[0].destino;
+                }
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
         }
             // Cuadro de alertas
             lineItem.innerHTML += alertHTML;
