@@ -122,7 +122,7 @@ export function filterBusAlerts(alerts, busLine) {
 
     // Filtra las alertas para la línea de autobús específica y las alertas globales
     return alerts.filter(alert => {
-        // Si la alerta es global o no tiene línea especificada, la incluimos
+        // Si la alerta es global (no tiene ni parada ni línea especificada) la incluimos
         if (alert.ruta.parada === null && alert.ruta.linea === null) {
             return true;
         }
@@ -132,6 +132,23 @@ export function filterBusAlerts(alerts, busLine) {
     });
 }
 
+// TODO: Añadir la llamada cuando mostrarmos el nombre de las paradas
+export function filterAlertsByStop(alerts, stopNumber) {
+    // Verifica si alerts es array y no está vacío
+    if (!Array.isArray(alerts) || alerts.length === 0) {
+        return [];
+    }
+
+    // Filtra las alertas para la parada específica
+    return alerts.filter(alert => {
+        // Si la alerta es global (no tiene ni parada ni línea especificada) la incluimos
+        if (alert.ruta.parada === null && alert.ruta.linea === null) {
+            return true;
+        }
+        // Si la alerta es para una parada específica, la incluimos si coincide con stopNumber
+        return alert.ruta.parada === stopNumber;
+    });
+}
 
 export async function fetchScheduledBuses(stopNumber) {
     const cacheKey = 'busSchedule_' + stopNumber;
