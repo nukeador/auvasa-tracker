@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -120,11 +120,35 @@ export function filterBusAlerts(alerts, busLine) {
         return [];
     }
 
-    // Filtra las alertas para la línea de autobús específica
-    // TODO: Añadir también las alertas globales que tienen gtfsRouteId null
-    return alerts.filter(alert => alert.ruta && alert.ruta.linea === busLine);
+    // Filtra las alertas para la línea de autobús específica y las alertas globales
+    return alerts.filter(alert => {
+        // Si la alerta es global (no tiene ni parada ni línea especificada) la incluimos
+        if (alert.ruta.parada === null && alert.ruta.linea === null) {
+            return true;
+        }
+        // Si la alerta es para una línea específica, la incluimos si coincide con busLine
+        // o si no tiene parada especificada
+        return alert.ruta.linea === busLine;
+    });
 }
 
+// TODO: Añadir la llamada cuando mostrarmos el nombre de las paradas
+export function filterAlertsByStop(alerts, stopNumber) {
+    // Verifica si alerts es array y no está vacío
+    if (!Array.isArray(alerts) || alerts.length === 0) {
+        return [];
+    }
+
+    // Filtra las alertas para la parada específica
+    return alerts.filter(alert => {
+        // Si la alerta es global (no tiene ni parada ni línea especificada) la incluimos
+        if (alert.ruta.parada === null && alert.ruta.linea === null) {
+            return true;
+        }
+        // Si la alerta es para una parada específica, la incluimos si coincide con stopNumber
+        return alert.ruta.parada === stopNumber;
+    });
+}
 
 export async function fetchScheduledBuses(stopNumber) {
     const cacheKey = 'busSchedule_' + stopNumber;
@@ -390,6 +414,10 @@ export async function updateBusList() {
     // No mostramos el botón de borrar todas si no hay lineas añadidas
     let removeAllButton = document.getElementById('removeAllButton');
     removeAllButton.style.display = busLines.length > 0 ? 'flex' : 'none';
+
+    // Verificar si hay alertas globales y mostrar el banner si es necesario
+    const globalAlerts = filterBusAlerts(allAlerts, null);
+    displayGlobalAlertsBanner(globalAlerts);
 
     let horariosBox = document.getElementById('horarios-box');
     let busList = document.getElementById('busList');

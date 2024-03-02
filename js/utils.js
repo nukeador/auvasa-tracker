@@ -357,3 +357,30 @@ export function iniciarIntervalo(updateBusList) {
         intervalId = setInterval(updateBusList, 30000);
     }, tiempoHastaProximoIntervalo * 1000);
 }
+
+export function displayGlobalAlertsBanner(alerts) {
+    let alertsBox = document.getElementById('globalAlertsBox');
+    if (!alertsBox) {
+        alertsBox = document.createElement('div');
+        alertsBox.id = 'globalAlertsBox';
+        alertsBox.className = 'global-alerts-box';
+        alertsBox.innerHTML = '<ul></ul>';
+        document.body.insertBefore(alertsBox, document.getElementById('busList'));
+    }
+
+    const alertsList = alertsBox.querySelector('ul');
+    alertsList.innerHTML = '';
+
+    if (alerts && alerts.length > 0) {
+        alerts.forEach(alert => {
+            if (alert.ruta.parada === null && alert.ruta.linea === null) {
+                const listItem = document.createElement('li');
+                listItem.textContent = alert.descripcion;
+                alertsList.appendChild(listItem);
+            }
+        });
+        alertsBox.style.display = 'block';
+    } else {
+        alertsBox.style.display = 'none';
+    }
+}
