@@ -424,16 +424,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         const response = await fetch(apiUrl);
         const scheduledData = await response.json();
 
-        // Recuperamos el destino para esa línea
-        let destino = "";
-        if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
-            destino = scheduledData.lineas[0].destino;
-        }
-        // Cortamos destino a máximo 22 caracteres
-        if (destino.length > 25) {
-            destino = destino.substring(0, 22) + "...";
-        }
-
         // Agrupar los datos por trip_id para una mejor búsqueda
         const combinedData = combineBusData(scheduledData);
         let busesLinea = combinedData[lineNumber];
@@ -554,6 +544,16 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             }
             
             let mapElement = '<a class="' + mapElementClass + '" title="Ver linea en el mapa">Mapa</a>';
+
+            // Recuperamos el destino desde los datos del trip_id, buses con la misma línea pueden tener destinos diferentes.
+            let destino = "";
+            if (busMasCercano.scheduled.destino) {
+                destino = busMasCercano.scheduled.destino;
+            }
+            // Cortamos destino a máximo 22 caracteres
+            if (destino.length > 25) {
+                destino = destino.substring(0, 22) + "...";
+            }
 
             // TODO: Solo actualizar los datos que hayan cambiado desde la anterior actualización cambiado el texto de dentro de los elementos placeholder creados por createBusElement()
             // Actualizar el HTML con los datos del bus más cercano
@@ -688,7 +688,8 @@ export function combineBusData(scheduledData) {
             }
             combined[linea][schedule.trip_id].scheduled = {
                 llegada: schedule.llegada,
-                tripId: schedule.trip_id ? schedule.trip_id.toString() : undefined
+                tripId: schedule.trip_id ? schedule.trip_id.toString() : undefined,
+                destino: schedule.destino
             };
         });
 
@@ -781,6 +782,7 @@ export function elegirBusMasCercano(buses) {
     if (tripIdPrimerBusSiguienteDia && primerBusSiguienteDia) {
         return { 
             trip_id: tripIdPrimerBusSiguienteDia, 
+            destination: primerBusSiguienteDia.scheduled.destino,
             scheduled: primerBusSiguienteDia.scheduled, 
             realTime: primerBusSiguienteDia.realTime 
         };
@@ -790,6 +792,7 @@ export function elegirBusMasCercano(buses) {
     if (tripIdMasCercanoHoy && busMasCercanoHoy) {
         return { 
             trip_id: tripIdMasCercanoHoy, 
+            destination: busMasCercanoHoy.scheduled.destino,
             scheduled: busMasCercanoHoy.scheduled, 
             realTime: busMasCercanoHoy.realTime 
         };
