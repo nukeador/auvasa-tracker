@@ -398,6 +398,30 @@ export async function addBusLine(stopNumber, lineNumber) {
 
         // Limpiamos sugerencias de lineas
         document.getElementById('lineSuggestions').innerHTML = '';
+
+        // Hacer scroll suave a la parada cuando el elemento se haya creado
+        const stopElement = document.getElementById(stopNumber);
+        if (stopElement) {
+            stopElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            // Si el elemento no existe, crear un MutationObserver para observar cambios en el contenedor de paradas
+            const observer = new MutationObserver((mutationsList, observer) => {
+                // Buscar el elemento en cada mutación
+                const stopElement = document.getElementById(stopNumber);
+                if (stopElement) {
+                    // Si el elemento existe, hacer scroll y desconectar el observador
+                    stopElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    observer.disconnect(); // Detener la observación una vez que se haya encontrado el elemento
+                }
+            });
+
+            // Seleccionar el contenedor que contiene las paradas
+            const paradasContainer = document.getElementById('busList');
+            if (paradasContainer) {
+                // Configurar el observador para observar cambios en los hijos del contenedor
+                observer.observe(paradasContainer, { childList: true });
+            }
+        }
     }
 }
 
