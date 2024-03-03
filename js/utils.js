@@ -360,6 +360,7 @@ export function iniciarIntervalo(updateBusList) {
 
 export function displayGlobalAlertsBanner(alerts) {
     let alertsBox = document.getElementById('globalAlertsBox');
+    let tipsBanner = document.getElementById('tips-banner');
     if (!alertsBox) {
         alertsBox = document.createElement('div');
         alertsBox.id = 'globalAlertsBox';
@@ -371,6 +372,7 @@ export function displayGlobalAlertsBanner(alerts) {
     const alertsList = alertsBox.querySelector('ul');
     alertsList.innerHTML = '';
 
+    // Si hay alertas globales, las mostramos en un bloque
     if (alerts && alerts.length > 0) {
         alerts.forEach(alert => {
             if (alert.ruta.parada === null && alert.ruta.linea === null) {
@@ -380,7 +382,15 @@ export function displayGlobalAlertsBanner(alerts) {
             }
         });
         alertsBox.style.display = 'block';
+        // Ocultamos el banner de tips para no saturar la pantalla con avisos
+        if (tipsBanner) {
+            tipsBanner.style.display = 'none';
+        }
     } else {
         alertsBox.style.display = 'none';
+        // Volvemos a mostrar el banner de tips
+        if (tipsBanner) {
+            tipsBanner.style.display = 'block';
+        }
     }
 }
