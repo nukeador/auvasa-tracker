@@ -984,14 +984,14 @@ body.dark-mode {
 .dark-mode input#stopNumber {
     border-bottom: 1px solid #EEE;
     background: url(img/location-white.png) no-repeat;
-    background-size: 18px;
-    background-position: 1px 12px;
+    background-size: 15px;
+    background-position: 5px 9px;
 }
 
 .dark-mode input#lineNumber {
     background: url(img/bus-white.png) no-repeat;
-    background-size: 24px;
-    background-position: 1px 12px;
+    background-size: 19px;
+    background-position: 5px 9px;
 }
 
 .dark-mode #autocompleteResults, .dark-mode #lineSuggestions {
