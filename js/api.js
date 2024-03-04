@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner, toogleSidebar } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner, toogleSidebar, scrollToElement } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -402,7 +402,7 @@ export async function addBusLine(stopNumber, lineNumber) {
         // Hacer scroll suave a la parada cuando el elemento se haya creado
         const stopElement = document.getElementById(stopNumber);
         if (stopElement) {
-            stopElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollToElement(stopElement);
         } else {
             // Si el elemento no existe, crear un MutationObserver para observar cambios en el contenedor de paradas
             const observer = new MutationObserver((mutationsList, observer) => {
@@ -410,7 +410,7 @@ export async function addBusLine(stopNumber, lineNumber) {
                 const stopElement = document.getElementById(stopNumber);
                 if (stopElement) {
                     // Si el elemento existe, hacer scroll y desconectar el observador
-                    stopElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    scrollToElement(stopElement);
                     observer.disconnect(); // Detener la observación una vez que se haya encontrado el elemento
                 }
             });
@@ -448,6 +448,8 @@ export async function updateBusList() {
     
     // Elementos para listar las paradas en el sidebar
     const sidebarStops = document.getElementById('sidebar-stops');
+    // Limpiamos contenido por defecto por si hemos borrado las paradas
+    sidebarStops.innerHTML = '';
     let stopsListHTML = '';
 
     for (let stopId in stops) {
@@ -479,7 +481,7 @@ export async function updateBusList() {
                 const linkStopId = link.getAttribute('data-stopid');
                 const stopElement = document.getElementById(linkStopId);
                 if (stopElement) {
-                    stopElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    scrollToElement(stopElement);
                 }
             });
         });
@@ -766,7 +768,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         event.stopPropagation();
                     }
 
-                    this.parentElement.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    scrollToElement(this.parentElement.parentElement);
                 });
             }
             
