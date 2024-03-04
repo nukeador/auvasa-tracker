@@ -185,7 +185,7 @@ button#installButton {
     border-left: 1px solid #d0d0d0;
     overflow-x: hidden;
     transition: width 0.5s;
-    padding-top: 80px;
+    padding-top: 85px;
 }
 
 .dark-mode .sidebar {
