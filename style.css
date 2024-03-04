@@ -235,7 +235,7 @@ button#installButton {
 #nearestStopsResults {
     overflow: auto;
     max-height: 98%;
-    top: 67% !important;
+    top: 575px !important;
 }
 
 #nearestStopsResults p {
