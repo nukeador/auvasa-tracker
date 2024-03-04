@@ -394,3 +394,40 @@ export function displayGlobalAlertsBanner(alerts) {
         }
     }
 }
+
+// Función para abrir el panel lateral
+export function toogleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const menuButton = document.getElementById('menuButton');
+
+    // Alterna la clase para abrir o cerrar el sidebar
+    sidebar.classList.toggle('sidebar-open'); 
+    menuButton.classList.toggle('menu-button-open');
+
+    // Cambia el icono según el estado del sidebar
+    menuButton.innerHTML = sidebar.classList.contains('sidebar-open') ? '✖' : '☰';
+}
+
+// Devuelve la posición de un elemento
+export function getElementPosition(element) {
+    let yPosition = 0;
+    while (element) {
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+    }
+    return yPosition;
+}
+
+// Scroll de la página para ir a un elemento
+export function scrollToElement(element) {
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const elementPosition = getElementPosition(element);
+        setTimeout(function() {
+            // Calcular la nueva posición de scroll para evitar el header
+            const newScrollPosition = elementPosition - 60;
+            // Hacer scroll suave a la nueva posición
+            window.scrollTo({ top: newScrollPosition, behavior: 'smooth' });
+        }, 100);
+    }
+}

@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner, toogleSidebar, scrollToElement } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -342,7 +342,7 @@ export async function addBusLine(stopNumber, lineNumber) {
 
                 // Crear div para el mensaje 
                 const sucessMessage = document.createElement('div');
-                sucessMessage.textContent = 'Línea añadida con éxito';
+                sucessMessage.textContent = 'Línea añadida con éxito al final de tu lista';
                 sucessMessage.classList.add('success');
                 document.body.appendChild(sucessMessage);
 
@@ -402,7 +402,7 @@ export async function addBusLine(stopNumber, lineNumber) {
         // Hacer scroll suave a la parada cuando el elemento se haya creado
         const stopElement = document.getElementById(stopNumber);
         if (stopElement) {
-            stopElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollToElement(stopElement);
         } else {
             // Si el elemento no existe, crear un MutationObserver para observar cambios en el contenedor de paradas
             const observer = new MutationObserver((mutationsList, observer) => {
@@ -410,7 +410,7 @@ export async function addBusLine(stopNumber, lineNumber) {
                 const stopElement = document.getElementById(stopNumber);
                 if (stopElement) {
                     // Si el elemento existe, hacer scroll y desconectar el observador
-                    stopElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    scrollToElement(stopElement);
                     observer.disconnect(); // Detener la observación una vez que se haya encontrado el elemento
                 }
             });
@@ -445,6 +445,12 @@ export async function updateBusList() {
 
     let horariosBox = document.getElementById('horarios-box');
     let busList = document.getElementById('busList');
+    
+    // Elementos para listar las paradas en el sidebar
+    const sidebarStops = document.getElementById('sidebar-stops');
+    // Limpiamos contenido por defecto por si hemos borrado las paradas
+    sidebarStops.innerHTML = '';
+    let stopsListHTML = '';
 
     for (let stopId in stops) {
         let stopElement = document.getElementById(stopId);
@@ -462,6 +468,23 @@ export async function updateBusList() {
                 updateStopName(stopElement, updatedName, stopGeo);
             }
         }
+
+        // Actualizamos el listado en el sidebar
+        stopsListHTML += `<li><a class="sidebar-stop-link" data-stopid="${stopId}" href="#${stopId}">${stopName}</a></li>`;
+        sidebarStops.innerHTML = '<h2>Tus paradas</h2><ul>' + stopsListHTML + '</ul>';
+        // Agregar event listener a los enlaces del sidebar
+        const stopLinks = sidebarStops.querySelectorAll('.sidebar-stop-link');
+        stopLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+                toogleSidebar(); // Cerrar el sidebar
+                const linkStopId = link.getAttribute('data-stopid');
+                const stopElement = document.getElementById(linkStopId);
+                if (stopElement) {
+                    scrollToElement(stopElement);
+                }
+            });
+        });
 
 
         stops[stopId].forEach((line, index) => {
@@ -745,7 +768,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         event.stopPropagation();
                     }
 
-                    this.parentElement.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    scrollToElement(this.parentElement.parentElement);
                 });
             }
             

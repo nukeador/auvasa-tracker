@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner } from './utils.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, toogleSidebar } from './utils.js';
 import { removeAllBusLines, addBusLine, updateBusList, showNearestStops } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -53,6 +53,27 @@ function main() {
         });
     }    
 
+    // Si hacemos click fuera del sidebar, la cerramos
+    document.addEventListener('click', function(event) {
+        if (sidebar.classList.contains('sidebar-open') && !sidebar.contains(event.target) && event.target !== menuButton) {
+            toogleSidebar();
+        }
+    });
+
+    // Evento para abrir el panel lateral al hacer clic en el botón del menú
+    document.getElementById('menuButton').addEventListener('click', function() {
+        toogleSidebar();
+    });
+
+    // Al hacer clic en el header hacemos scroll arriba
+    const headerTitle = document.getElementById('title');
+    if (headerTitle) {
+        headerTitle.addEventListener('click', function() {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            window.scrollTo({ top: -headerHeight, behavior: 'smooth' });
+        });
+    }
+
     themeToggle.addEventListener('click', () => {
         const isDarkMode = document.body.classList.toggle('dark-mode');
         themeToggleIcon.textContent = isDarkMode ? '🌜' : '🌞';
@@ -67,6 +88,7 @@ function main() {
         if (navigator.geolocation) {
             displayLoadingSpinner();
             navigator.geolocation.getCurrentPosition(showNearestStops, showError);
+            toogleSidebar();
         } else {
            console.log("Geolocalización no soportada por este navegador.");
         }

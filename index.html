@@ -47,7 +47,8 @@
 
 <body>
     <header>
-        <h1>AUVASA Tracker</h1>
+        <h1 id="title">AUVASA Tracker</h1>
+        <button id="menuButton" class="menu-button">☰</button>
         <button id="installButton" style="display: none;">Instalar</button>
     </header>
  
@@ -59,11 +60,6 @@
             </div>
             <button id="addButton" title="Añadir a seguimiento" type="button">+</button>
         </form>
-
-        <div id="nearestStops">
-            <button id="searchNearStops">Paradas cercanas</button>
-            <div id="nearestStopsResults"></div>
-        </div>
     </div>
 
     <div id="autocompleteResults"></div>
@@ -89,6 +85,15 @@
         </div>
     </div>
 
+    <div id="sidebar" class="sidebar">
+        <!-- Aquí puedes agregar tus enlaces y contenido -->
+        <div id="nearestStops">
+            <button id="searchNearStops">Paradas cercanas</button>
+            <div id="nearestStopsResults"></div>
+        </div>
+        <div id="sidebar-stops"></div>
+    </div>
+
     <div class="foot-note">
         <button id="removeAllButton">Quitar todas las paradas</button>
         <p id="legend"><img src="img/clock.png"> Horario programado <img src="img/feed.png" /> Horario actualizado</p>
@@ -110,7 +115,7 @@
         <button id="theme-toggle">
             <span id="theme-toggle-icon" title="Cambiar a tema claro/oscuro">🌞</span> <!-- Icono de sol por defecto -->
         </button>       
-        <p id="data-notice">Origen de los datos: <a href="http://auvasa.es/auv_opendata.asp">GTFS de AUVASA</a>, proporcionados de forma no oficial sin ninguna garantía.</p>       
+        <p id="data-notice">Origen de los datos: <a href="https://www.auvasa.es/empresa/datos-abiertos/">GTFS de AUVASA</a>, proporcionados de forma no oficial sin ninguna garantía.</p>       
     </div>
 
     <footer>
