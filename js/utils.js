@@ -394,3 +394,16 @@ export function displayGlobalAlertsBanner(alerts) {
         }
     }
 }
+
+// Función para abrir el panel lateral
+export function toogleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const menuButton = document.getElementById('menuButton');
+
+    // Alterna la clase para abrir o cerrar el sidebar
+    sidebar.classList.toggle('sidebar-open'); 
+    menuButton.classList.toggle('menu-button-open');
+
+    // Cambia el icono según el estado del sidebar
+    menuButton.innerHTML = sidebar.classList.contains('sidebar-open') ? '✖' : '☰';
+}

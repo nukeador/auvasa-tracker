@@ -10,11 +10,17 @@ body {
 
 header {
     background: #054a32;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px -1px;
     margin: 0;
     padding: 0;
     color: #a1c7bf;
-    height: 75px;
+    height: 60px;
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 101;
 }
 
 header h1 {
@@ -31,6 +37,7 @@ header h1 {
     font-size: 1.3em;
     width: 100%;
     height: 100%;
+    cursor: pointer;
 }
 
 input[type=number], input[type=text] {
@@ -106,14 +113,16 @@ button#installButton {
     color: #000000;
     height: 39px;
     position: absolute;
-    right: 0.2em;
+    right: 3.2em;
     top: 0.2em;
     padding: 10px 14px;
 }
 
 #formulario {
-    padding: 14px 14px 0 14px;
-    margin-top: -30px;
+    padding: 0;
+    margin-top: 50px;
+    z-index: 101;
+    position: relative;
 }
 
 #formulario form {
@@ -136,7 +145,7 @@ button#installButton {
 }
 
 #autocompleteResults, #lineSuggestions {
-    margin-top: 5px; 
+    margin-top: 12px; 
     background-color: white;
     width: 100%; 
     box-sizing: border-box;
@@ -149,11 +158,77 @@ button#installButton {
     border-bottom: 1px solid #eee;
 }
 
+/* Estilos para el botón del menú hamburguesa */
+.menu-button {
+    font-size: 2em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    z-index: 1000;
+    padding: 0;
+    width: 50px;
+}
+
+/* Estilos para el panel lateral */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    background-color: #fffffff9;
+    border-left: 1px solid #d0d0d0;
+    overflow-x: hidden;
+    transition: width 0.5s;
+    padding-top: 135px;
+}
+
+.dark-mode .sidebar {
+    background-color: #323232;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 0px;
+    text-decoration: none;
+    font-size: 0.9em;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+.sidebar-open {
+    width: 250px;
+}
+
+.sidebar ul {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar ul li {
+    list-style: none;
+}
+
+.sidebar h2 {
+    font-size: 1em;
+    margin: 1.4em 0 0.2em 0
+}
+
+.sidebar #sidebar-stops {
+    padding-left: 32px;
+}
+
 #nearestStops {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 13px 0;
+    display: flex;
+    margin: 0 0 0 32px;
 }
 
 #nearestStopsResults {
@@ -746,6 +821,7 @@ button.mostrar-horarios {
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
 }
 
 .error.show, .success.show {

@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner, toogleSidebar } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -445,6 +445,10 @@ export async function updateBusList() {
 
     let horariosBox = document.getElementById('horarios-box');
     let busList = document.getElementById('busList');
+    
+    // Elementos para listar las paradas en el sidebar
+    const sidebarStops = document.getElementById('sidebar-stops');
+    let stopsListHTML = '';
 
     for (let stopId in stops) {
         let stopElement = document.getElementById(stopId);
@@ -462,6 +466,23 @@ export async function updateBusList() {
                 updateStopName(stopElement, updatedName, stopGeo);
             }
         }
+
+        // Actualizamos el listado en el sidebar
+        stopsListHTML += `<li><a class="sidebar-stop-link" data-stopid="${stopId}" href="#${stopId}">${stopName}</a></li>`;
+        sidebarStops.innerHTML = '<h2>Tus paradas</h2><ul>' + stopsListHTML + '</ul>';
+        // Agregar event listener a los enlaces del sidebar
+        const stopLinks = sidebarStops.querySelectorAll('.sidebar-stop-link');
+        stopLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+                toogleSidebar(); // Cerrar el sidebar
+                const linkStopId = link.getAttribute('data-stopid');
+                const stopElement = document.getElementById(linkStopId);
+                if (stopElement) {
+                    stopElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
 
 
         stops[stopId].forEach((line, index) => {
