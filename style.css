@@ -120,9 +120,10 @@ button#installButton {
 
 #formulario {
     padding: 0;
-    margin-top: 50px;
     z-index: 101;
     position: relative;
+    max-width: 95%;
+    margin: 50px auto 0 auto;
 }
 
 #formulario form {
@@ -184,7 +185,7 @@ button#installButton {
     border-left: 1px solid #d0d0d0;
     overflow-x: hidden;
     transition: width 0.5s;
-    padding-top: 135px;
+    padding-top: 140px;
 }
 
 .dark-mode .sidebar {
@@ -822,18 +823,20 @@ button.mostrar-horarios {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     z-index: 1000;
+    display: none;
 }
 
 .error.show, .success.show {
     opacity: 1;
+    display: block;
 }
 
 .error {
-    background-color: #b63e3e;
+    background-color: #a55b5b;
 }
 
 .success {
-    background-color: #3eb65c;
+    background-color: #6ba379;
 }
 
 .notification-popup {

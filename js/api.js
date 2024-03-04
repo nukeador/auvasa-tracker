@@ -342,7 +342,7 @@ export async function addBusLine(stopNumber, lineNumber) {
 
                 // Crear div para el mensaje 
                 const sucessMessage = document.createElement('div');
-                sucessMessage.textContent = 'Línea añadida con éxito';
+                sucessMessage.textContent = 'Línea añadida con éxito al final de tu lista';
                 sucessMessage.classList.add('success');
                 document.body.appendChild(sucessMessage);
 
