@@ -74,6 +74,17 @@ function main() {
         });
     }
 
+    // Enlace de volver arriba
+    const scrollTopLink = document.getElementById('scrollTop');
+    if (scrollTopLink) {
+        scrollTopLink.addEventListener('click', function() {
+            event.preventDefault();
+            const headerHeight = document.querySelector('header').offsetHeight;
+            window.scrollTo({ top: -headerHeight, behavior: 'smooth' });
+            toogleSidebar();
+        });
+    }
+
     themeToggle.addEventListener('click', () => {
         const isDarkMode = document.body.classList.toggle('dark-mode');
         themeToggleIcon.textContent = isDarkMode ? '🌜' : '🌞';

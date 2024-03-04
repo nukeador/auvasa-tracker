@@ -185,7 +185,7 @@ button#installButton {
     border-left: 1px solid #d0d0d0;
     overflow-x: hidden;
     transition: width 0.5s;
-    padding-top: 140px;
+    padding-top: 80px;
 }
 
 .dark-mode .sidebar {
@@ -226,6 +226,13 @@ button#installButton {
     padding-left: 32px;
 }
 
+.sidebar #scrollTop {
+    background-color: transparent;
+    background-image: url(img/arrow-up.png);
+    background-size: 14px;
+    background-repeat: no-repeat;
+    padding: 0 0 0 20px;
+}
 #nearestStops {
     display: flex;
     display: flex;
