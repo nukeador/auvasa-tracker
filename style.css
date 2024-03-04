@@ -13,7 +13,7 @@ header {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px -1px;
     margin: 0;
     padding: 0;
-    color: #a1c7bf;
+    color: #FFFFFF;
     height: 60px;
     display: flex;
     position: fixed;
@@ -235,6 +235,7 @@ button#installButton {
 #nearestStopsResults {
     overflow: auto;
     max-height: 98%;
+    top: 67% !important;
 }
 
 #nearestStopsResults p {
@@ -558,7 +559,7 @@ button.mostrar-horarios {
     top: 50%; /* Centra verticalmente */
     left: 50%; /* Centra horizontalmente */
     transform: translate(-50%, -50%); /* Desplaza el elemento hacia atrás para centrarlo perfectamente */
-    z-index: 2;
+    z-index: 105;
     display: none;
     flex-direction: column;
     align-items: center;
