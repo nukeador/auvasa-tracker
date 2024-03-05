@@ -1,5 +1,5 @@
 import { addLineNotification } from './notifications.js';
-import { removeBusLine, displayScheduledBuses, updateBusList } from './api.js';
+import { removeBusLine, displayScheduledBuses, updateBusList, removeStop } from './api.js';
 
 // Declaración global de intervalId
 let intervalId;
@@ -232,6 +232,23 @@ export function createMostrarHorariosButton(stopId, stopElement) {
     mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
     stopElement.appendChild(mostrarHorarios);
     return mostrarHorarios;
+}
+
+export function createRemoveStopButton(stopId, stopElement) {
+    
+    // Solo lo creamos si no existe
+    let borrarParada = stopElement.querySelector('.remove-stop');
+    if(!borrarParada) {
+        let removeStopButton = document.createElement('button');
+        removeStopButton.classList.add('remove-stop');
+        removeStopButton.id = 'remove-stop-' + stopId;
+        removeStopButton.innerHTML = 'Quitar parada';
+        stopElement.appendChild(removeStopButton);
+        removeStopButton.addEventListener('click', function() {
+            removeStop(stopId);
+        });
+        return removeStopButton;
+    }
 }
 
 export function removeObsoleteElements(stops) {
