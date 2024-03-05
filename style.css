@@ -471,6 +471,7 @@ button.mostrar-horarios {
     font-size: 0.8em;
     display: block;
     margin: auto;
+    padding: 10px 0px 10px 20px;
 }
 
 button.remove-stop {
@@ -484,7 +485,7 @@ button.remove-stop {
 	margin: auto;
 	float: right;
 	text-indent: -999px;
-	padding-right: 22px;
+	padding-right: 34px;
 	padding-left: 0;
 }
 
