@@ -574,14 +574,28 @@ button.mostrar-horarios {
 }
 
 #horarios-box {
-    width: 85%;
-    overflow: auto;
-    padding-left: 1em;
-    max-height: 98%;
+    width: calc(100%);
+    max-height: calc(100vh - 57px);
+    overflow-y: auto;
+    margin-top: 21px;
+    padding: 1em 2em;
+    box-sizing: border-box;
+    border-radius: 0;
 }
 
 #horarios-box div {
     margin: 1em 0;
+}
+
+#horarios-box .horarios-close {
+    background-color: transparent;
+    color: rgb(5, 5, 6);
+    font-size: 1.3em;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 5px;
+    top: 0px;
 }
 
 #horarios-box .hora {
@@ -601,6 +615,10 @@ button.mostrar-horarios {
 
 .line-info .alert-box h2, #horarios-box h2 {
     padding: 0;
+}
+
+#horarios-box h2 {
+    font-size: 1.1em;
 }
 
 #horarios-box h3 {
