@@ -1049,7 +1049,7 @@ export async function showNearestStops(position) {
 export async function displayNearestStopsResults(stops, userLocation) {
     let resultsDiv = document.getElementById('nearestStopsResults');
     resultsDiv.style.display = 'block';
-    resultsDiv.innerHTML = '<button id="close-nearest-stops">Cerrar</button>';
+    resultsDiv.innerHTML = '<button id="close-nearest-stops">X</button>';
 
     // Añadir otros elementos estáticos al resultsDiv
     resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
