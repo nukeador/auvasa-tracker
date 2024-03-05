@@ -236,19 +236,22 @@ export function createMostrarHorariosButton(stopId, stopElement) {
 
 export function createRemoveStopButton(stopId, stopElement) {
     
-    // Solo lo creamos si no existe
     let borrarParada = stopElement.querySelector('.remove-stop');
-    if(!borrarParada) {
-        let removeStopButton = document.createElement('button');
-        removeStopButton.classList.add('remove-stop');
-        removeStopButton.id = 'remove-stop-' + stopId;
-        removeStopButton.innerHTML = 'Quitar parada';
-        stopElement.appendChild(removeStopButton);
-        removeStopButton.addEventListener('click', function() {
-            removeStop(stopId);
-        });
-        return removeStopButton;
+    
+    // Si ya existe el elemento lo borraros y recreamos para que se posicione al final
+    if(borrarParada) {
+        borrarParada.remove();
     }
+        
+    let removeStopButton = document.createElement('button');
+    removeStopButton.classList.add('remove-stop');
+    removeStopButton.id = 'remove-stop-' + stopId;
+    removeStopButton.innerHTML = 'Quitar parada';
+    stopElement.appendChild(removeStopButton);
+    removeStopButton.addEventListener('click', function() {
+        removeStop(stopId);
+    });
+    return removeStopButton;
 }
 
 export function removeObsoleteElements(stops) {
