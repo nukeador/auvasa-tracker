@@ -136,19 +136,25 @@ export function updateNotifications(bellButton, stopNumber, lineNumber) {
     }
     
     let notifications = JSON.parse(localStorage.getItem('busNotifications')) || [];
-    let index = notifications.findIndex(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
+    
+    // Si lineNumber es null, borramos todas las notificaciones de líneas en esa parada
+    if (lineNumber === null) {
+        notifications = notifications.filter(n => n.stopNumber !== stopNumber);
+        } else {
+        let index = notifications.findIndex(n => n.stopNumber === stopNumber && n.lineNumber === lineNumber);
 
-    // Si no existe la creamos, si existe, la borramos
-    if (index === -1) {
-        if (bellButton) {
-            notifications.push({ stopNumber, lineNumber });
-            bellButton.style.backgroundImage = "url('img/bell-solid.png')";
-            showNotice(lineNumber);
-        }
-    } else {
-        notifications.splice(index, 1);
-        if (bellButton) {
-            bellButton.style.backgroundImage = "url('img/bell-gray.png')";
+        // Si no existe la creamos, si existe, la borramos
+        if (index === -1) {
+            if (bellButton) {
+                notifications.push({ stopNumber, lineNumber });
+                bellButton.style.backgroundImage = "url('img/bell-solid.png')";
+                showNotice(lineNumber);
+            }
+        } else {
+            notifications.splice(index, 1);
+            if (bellButton) {
+                bellButton.style.backgroundImage = "url('img/bell-gray.png')";
+            }
         }
     }
     localStorage.setItem('busNotifications', JSON.stringify(notifications));

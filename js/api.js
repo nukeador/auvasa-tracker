@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner, toogleSidebar, scrollToElement } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -498,6 +498,8 @@ export async function updateBusList() {
             fetchBusTime(line.stopNumber, line.lineNumber, busElement);
         });
 
+        createRemoveStopButton(stopId, stopElement);
+
         // Botón para motrar horarios al final
         let mostrarHorarios = stopElement.querySelector('.mostrar-horarios');
         // Para asegurarnos que queda al final al añadir una linea lo borramos y lo volvemos a colocar
@@ -975,6 +977,22 @@ export function removeBusLine(stopNumber, lineNumber) {
     } else {
         // El usuario eligió no eliminar las líneas de autobús
         console.log("Eliminación cancelada.");
+    }
+}
+
+export function removeStop(stopId) {
+    let avisoBorrado = '¿Seguro que quieres quitar la parada ' + stopId + ' y todas sus líneas?';
+
+    let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
+
+    if (confirm(avisoBorrado)) {
+        busLines = busLines.filter(function(line) {
+            return line.stopNumber !== stopId;
+        });
+
+        saveBusLines(busLines);
+        updateBusList();
+        updateNotifications(null, stopNumber, null);
     }
 }
 

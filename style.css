@@ -97,14 +97,16 @@ button#addButton:hover {
 
 button#removeAllButton {
     background: url(img/trash-gray.png) no-repeat #EAEAEA;
-    background-size: 20px;
+    background-size: 15px;
     background-position: 15px center;
     color: #686868;
-    padding: 10px 30px;
-    width: 271px;
+    padding: 9px 1px 9px 23px;
+    width: 200px;
     justify-content: center;
-    display: none; /* Oculto por defecto */
     margin: auto;
+    font-size: 0.9em;
+    text-align: center;
+    display: none; /* Oculto por defecto */
 }
 
 button#installButton {
@@ -469,6 +471,21 @@ button.mostrar-horarios {
     font-size: 0.8em;
     display: block;
     margin: auto;
+}
+
+button.remove-stop {
+	cursor: pointer;
+	background: url(img/trash-light-gray.png) no-repeat;
+	background-size: 13px;
+	background-position: 0px;
+	color: #CCC;
+	font-size: 0.8em;
+	display: block;
+	margin: auto;
+	float: right;
+	text-indent: -999px;
+	padding-right: 22px;
+	padding-left: 0;
 }
 
 .line-info .alert-box, #horarios-box, #nearestStopsResults {
