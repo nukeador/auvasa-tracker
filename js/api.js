@@ -227,7 +227,7 @@ export async function displayScheduledBuses(stopNumber) {
     horariosElement.className = 'horarios';
     horariosElement.id = 'horarios-' + stopNumber;
     let horariosBuses = await fetchScheduledBuses(stopNumber);
-    horariosElement.innerHTML += '<button class="horarios-close">Cerrar</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada</strong> hoy</p>';
+    horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada</strong> hoy</p>';
 
     // Agrupar los horarios por línea y destino
     const groupedHorarios = {};
@@ -268,7 +268,7 @@ export async function displayScheduledBuses(stopNumber) {
         }
     });
 
-    horariosElement.innerHTML += '<p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p><button class="horarios-close">Cerrar</button></div>';
+    horariosElement.innerHTML += '<p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p>';
     return horariosElement;
 }
 
@@ -1049,7 +1049,7 @@ export async function showNearestStops(position) {
 export async function displayNearestStopsResults(stops, userLocation) {
     let resultsDiv = document.getElementById('nearestStopsResults');
     resultsDiv.style.display = 'block';
-    resultsDiv.innerHTML = '<button id="close-nearest-stops">Cerrar</button>';
+    resultsDiv.innerHTML = '<button id="close-nearest-stops">X</button>';
 
     // Añadir otros elementos estáticos al resultsDiv
     resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
