@@ -575,9 +575,9 @@ button.mostrar-horarios {
 
 #horarios-box {
     width: calc(100%);
-    max-height: calc(100vh - 57px);
+    height: 100%;
     overflow-y: auto;
-    margin-top: 21px;
+    margin-top: 48px;
     padding: 1em 2em;
     box-sizing: border-box;
     border-radius: 0;
