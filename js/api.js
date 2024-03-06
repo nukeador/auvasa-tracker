@@ -328,7 +328,7 @@ export async function displayScheduledBuses(stopNumber, date) {
     Object.values(groupedHorarios).forEach(group => {
         horariosElement.innerHTML += '</p><div class="linea-' + group.linea + '"><h3>' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
         if (group.horarios.length === 0) {
-            horariosElement.innerHTML += '<p class="hora">No hay horarios programados para hoy</p>';
+            horariosElement.innerHTML += '<p class="hora">No hay horarios programados para esta fecha</p>';
         } else {
             group.horarios.forEach(horario => {
                 // Eliminamos los segundos de la hora de llegada
@@ -344,7 +344,7 @@ export async function displayScheduledBuses(stopNumber, date) {
     if (horariosBuses && horariosBuses.lineas) {
         horariosBuses.lineas.forEach(bus => {
             if (!groupedHorarios[`${bus.linea}-${bus.destino}`]) {
-                horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para hoy</p></div>';
+                horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para esta fecha</p></div>';
             }
         });
     }
