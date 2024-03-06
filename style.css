@@ -485,6 +485,7 @@ button.remove-stop {
 	margin: auto;
 	float: right;
 	text-indent: -999px;
+    font-size: 0px;
 	padding-right: 34px;
 	padding-left: 0;
 }
