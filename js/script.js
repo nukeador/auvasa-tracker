@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner, toogleSidebar } from './utils.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, toogleSidebar, isIOS } from './utils.js';
 import { removeAllBusLines, addBusLine, updateBusList, showNearestStops } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -11,6 +11,11 @@ function main() {
 
     updateBusList();
     iniciarIntervalo(updateBusList);
+
+    // Ejecuta updateBusList 1 segundo después de abrir la página en iOS porque los recursos localstorage no está disponibles inmediatamente en iOS 17.4 :-( 
+    if (isIOS()) {
+        setTimeout(updateBusList, 1000);
+    }
 
     // Determina el tema del usuario basándose en la preferencia guardada en localStorage
     // o en la preferencia del sistema operativo.
