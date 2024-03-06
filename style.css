@@ -486,8 +486,7 @@ button.remove-stop {
 	float: right;
 	text-indent: -999px;
     font-size: 0px;
-	padding-right: 34px;
-	padding-left: 0;
+    padding: 34px 34px 0 0;
 }
 
 .line-info .alert-box, #horarios-box, #nearestStopsResults {
