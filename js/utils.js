@@ -12,6 +12,10 @@ export function uuidv4() {
     });
 }
 
+export function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+
 export function createButton(className, text, onClick) {
     const button = document.createElement('button');
     button.className = className;
