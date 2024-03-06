@@ -362,7 +362,7 @@ export async function addBusLine(stopNumber, lineNumber) {
     }
     // Si solo se ha proporcionado la parada, añadir todas las líneas de esa parada
     else if (stopNumber && !lineNumber) {
-        if (confirm(`Esto añadirá la parada con TODAS sus líneas. Para añadir una sola línea cancele y rellénela en el formulario`)) {
+        if (confirm(`Esto añadirá la parada ${stopNumber} con TODAS sus líneas. Para añadir una sola línea cancele y rellénela en el formulario`)) {
             const allLines = [
                 ...(stopData.lineas.ordinarias || []), 
                 ...(stopData.lineas.poligonos || []), 
