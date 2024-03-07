@@ -775,7 +775,7 @@ button.remove-stop {
     top: 50px;
     left: 0;
     width: 100%;
-    height: calc(100% - 60px);
+    height: calc(100% - 50px);
     background-color: white;
     z-index: 1000;
     display: none; /* Inicialmente oculto */
