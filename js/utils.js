@@ -219,10 +219,12 @@ export function createMostrarHorarios(stopId, stopElement, horariosBox) {
     stopElement.appendChild(mostrarHorarios);
     
     mostrarHorarios.addEventListener('click', async function() {
+        displayLoadingSpinner();
         let horariosElement = await displayScheduledBuses(stopId);
         horariosBox.setAttribute('data-stopNumber', stopId);
         horariosBox.innerHTML = horariosElement.innerHTML;
         horariosBox.style.display = 'block';
+        hideLoadingSpinner();
         clearInterval(intervalId);
     });
 }
