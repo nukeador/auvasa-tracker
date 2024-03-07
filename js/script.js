@@ -1,5 +1,5 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner, toogleSidebar, isIOS } from './utils.js';
-import { removeAllBusLines, addBusLine, updateBusList, showNearestStops } from './api.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS } from './utils.js';
+import { removeAllBusLines, addBusLine, updateBusList, showNearestStops, displayScheduledBuses } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
     document.addEventListener("DOMContentLoaded", main);
@@ -90,6 +90,7 @@ function main() {
         });
     }
 
+    // Switch del modo claro/oscuro
     themeToggle.addEventListener('click', () => {
         const isDarkMode = document.body.classList.toggle('dark-mode');
         themeToggleIcon.textContent = isDarkMode ? '🌜' : '🌞';
@@ -113,7 +114,7 @@ function main() {
     // Banner con tips
     const tipsBanner = document.getElementById('tips-banner');
     if (tipsBanner) {
-        // Guardamos cada vez que se hace click en un enlace dentro de un parrafor hijo
+        // Guardamos cada vez que se hace click en un enlace dentro de un parrafo hijo
         tipsBanner.addEventListener('click', function(e) {
             if (e.target.tagName === 'A') {
                 // Mostramos el id del padre del enlace
@@ -122,6 +123,34 @@ function main() {
             }
         });
     }
+
+    // Eventos en el diálogo de mostrar horarios programados
+    let horariosBox = document.getElementById('horarios-box');
+    let closeButtons = horariosBox.querySelectorAll('.horarios-close');
+    // Eventos al hacer click en cambiar fecha
+    horariosBox.addEventListener('change', async function(event) {
+        if (event.target.matches("#stopDateInput")) {
+            displayLoadingSpinner();
+            const selectedDate = document.getElementById("stopDateInput").value;
+            let stopNumber = horariosBox.getAttribute("data-stopnumber");
+            horariosBox = document.getElementById('horarios-box');
+            let newHorariosElement = await displayScheduledBuses(stopNumber, selectedDate);
+            horariosBox.innerHTML = newHorariosElement.innerHTML;
+            hideLoadingSpinner();
+        }
+    });
+    // Manejo del botón de cerrar
+    horariosBox.addEventListener('click', async function(event) {
+        if (event.target.matches(".horarios-close")) {
+            closeButtons = horariosBox.querySelectorAll('.horarios-close');
+            closeButtons.forEach(button => {
+                button.parentNode.style.display = 'none';
+            });
+            
+            iniciarIntervalo(updateBusList);
+            updateBusList();
+        }
+    });
 }
 
 let deferredPrompt;

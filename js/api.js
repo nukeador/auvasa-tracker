@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, setupMostrarHorariosEventListener, createMostrarHorariosButton, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -150,8 +150,14 @@ export function filterAlertsByStop(alerts, stopNumber) {
     });
 }
 
-export async function fetchScheduledBuses(stopNumber) {
-    const cacheKey = 'busSchedule_' + stopNumber;
+// Consultamos en el api los horarios programados
+// Podemos perdirselos de sólo una parada
+// O podemos especificar también línea y fecha
+export async function fetchScheduledBuses(stopNumber, lineNumber, date) {
+    const baseCacheKey = `busSchedule_${stopNumber}`;
+    let cacheKey = lineNumber ? `${baseCacheKey}_${lineNumber}` : baseCacheKey;
+    cacheKey += date ? `_${date}` : '';
+
     const cachedData = getCachedData(cacheKey);
 
     // Comprueba si los datos en caché son válidos
@@ -161,7 +167,13 @@ export async function fetchScheduledBuses(stopNumber) {
 
     // Si no hay datos en caché o están desactualizados, realiza una llamada a la API
     try {
-        const url = apiEndPoint + `/v2/parada/${stopNumber}`;
+        let url = apiEndPoint + `/v2/parada/${stopNumber}`;
+        if (lineNumber) {
+            url += `/${lineNumber}`;
+        }
+        if (date) {
+            url += `/${date}`;
+        }
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -176,6 +188,7 @@ export async function fetchScheduledBuses(stopNumber) {
         return null;
     }
 }
+
 export async function getBusDestinationsForStop(stopNumber) {
     const currentTime = Date.now();
 
@@ -222,34 +235,100 @@ export async function getBusDestinationsForStop(stopNumber) {
     }
 }
 
-export async function displayScheduledBuses(stopNumber) {
+// Genera el HTML en base a una consulta a los horarios programados de una parada
+export async function displayScheduledBuses(stopNumber, date) {
     let horariosElement = document.createElement('div');
     horariosElement.className = 'horarios';
     horariosElement.id = 'horarios-' + stopNumber;
-    let horariosBuses = await fetchScheduledBuses(stopNumber);
-    horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada</strong> hoy</p>';
 
-    // Agrupar los horarios por línea y destino
-    const groupedHorarios = {};
-    horariosBuses.lineas.forEach(bus => {
-        bus.horarios.forEach(horario => {
-            const key = `${bus.linea}-${horario.destino}`;
-            if (!groupedHorarios[key]) {
-                groupedHorarios[key] = {
-                    linea: bus.linea,
-                    destino: horario.destino,
-                    horarios: []
-                };
+    let horariosBuses;
+    let groupedHorarios = {};
+    // Si se proporciona una fecha, obtener todas las líneas de la parada y consultar los horarios para cada una
+    if (date) {
+        const busStops = await loadBusStops();
+        const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
+        const allLines = [
+            ...(stopData.lineas.ordinarias || []), 
+            ...(stopData.lineas.poligonos || []), 
+            ...(stopData.lineas.matinales || []), 
+            ...(stopData.lineas.futbol || []), 
+            ...(stopData.lineas.buho || []), 
+            ...(stopData.lineas.universidad || [])
+        ];
+
+        for (const lineNumber of allLines) {
+            const busHorarios = await fetchScheduledBuses(stopNumber, lineNumber, date);
+            if (busHorarios && busHorarios.lineas) {
+                busHorarios.lineas.forEach(bus => {
+                    bus.horarios.forEach(horario => {
+                        const key = `${bus.linea}-${horario.destino}`;
+                        if (!groupedHorarios[key]) {
+                            groupedHorarios[key] = {
+                                linea: bus.linea,
+                                destino: horario.destino,
+                                horarios: []
+                            };
+                        }
+                        groupedHorarios[key].horarios.push(horario);
+                    });
+                    
+                    // Si no hay horarios para esta línea, al menos se crea una entrada con un array vacío
+                    if (bus.horarios.length === 0 && !groupedHorarios[`${bus.linea}-${bus.destino}`]) {
+                        groupedHorarios[`${bus.linea}-${bus.destino}`] = {
+                            linea: bus.linea,
+                            destino: bus.destino,
+                            horarios: []
+                        };
+                    }
+                });
             }
-            groupedHorarios[key].horarios.push(horario);
-        });
-    });
+        }
+        horariosBuses = { parada: [ { parada: stopData.parada.nombre } ] }; // Asumiendo que queremos mostrar el nombre de la parada
+    } else {
+        // Si no se proporciona una fecha, simplemente obtener los horarios de la parada sin especificar una línea
+        horariosBuses = await fetchScheduledBuses(stopNumber);
+        if (horariosBuses && horariosBuses.lineas) {
+            horariosBuses.lineas.forEach(bus => {
+                bus.horarios.forEach(horario => {
+                    const key = `${bus.linea}-${horario.destino}`;
+                    if (!groupedHorarios[key]) {
+                        groupedHorarios[key] = {
+                            linea: bus.linea,
+                            destino: horario.destino,
+                            horarios: []
+                        };
+                    }
+                    groupedHorarios[key].horarios.push(horario);
+                });
+            });
+        }
+    }
 
+    // La fecha es por defecto hoy a menos que le hayamos pasado alguna
+    date = date || new Date().toISOString().split('T')[0];
+
+    // Crear el campo de entrada de fecha y el botón para cambiar la fecha
+    const dateInput = document.createElement('input');
+    dateInput.type = 'date';
+    dateInput.id = 'stopDateInput';
+    dateInput.setAttribute('value', date);
+    dateInput.dispatchEvent(new Event('change'));
+    
+    if (horariosBuses && horariosBuses.parada && horariosBuses.parada[0]) {
+        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong>';
+        horariosElement.appendChild(dateInput);
+        horariosElement.innerHTML += '<p id="stopDateExplanation">Modifique para ver otros días</p>';
+    } else {
+        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>Parada ' + stopNumber + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong>';
+        horariosElement.appendChild(dateInput);
+        horariosElement.innerHTML += '<p id="stopDateExplanation">Modifique para ver otros días</p>';
+    }
+    
     // Mostrar los horarios agrupados
     Object.values(groupedHorarios).forEach(group => {
-        horariosElement.innerHTML += '<div class="linea-' + group.linea + '"><h3>' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
+        horariosElement.innerHTML += '</p><div class="linea-' + group.linea + '"><h3>' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
         if (group.horarios.length === 0) {
-            horariosElement.innerHTML += '<p class="hora">No hay horarios programados para hoy</p>';
+            horariosElement.innerHTML += '<p class="hora">No hay horarios programados para esta fecha</p>';
         } else {
             group.horarios.forEach(horario => {
                 // Eliminamos los segundos de la hora de llegada
@@ -260,15 +339,18 @@ export async function displayScheduledBuses(stopNumber) {
         }
         horariosElement.innerHTML += '</div>';
     });
-
+    
     // Agregar líneas sin horarios
-    horariosBuses.lineas.forEach(bus => {
-        if (!groupedHorarios[`${bus.linea}-${bus.destino}`]) {
-            horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para hoy</p></div>';
-        }
-    });
-
+    if (horariosBuses && horariosBuses.lineas) {
+        horariosBuses.lineas.forEach(bus => {
+            if (!groupedHorarios[`${bus.linea}-${bus.destino}`]) {
+                horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para esta fecha</p></div>';
+            }
+        });
+    }
+    
     horariosElement.innerHTML += '<p class="notice">Nota: Las actualizaciones de tiempos están pausadas hasta que cierre esta ventana</p>';
+
     return horariosElement;
 }
 
@@ -511,8 +593,7 @@ export async function updateBusList() {
         if (mostrarHorarios) {
             mostrarHorarios.remove();
         }
-        mostrarHorarios = createMostrarHorariosButton(stopId, stopElement);
-        setupMostrarHorariosEventListener(mostrarHorarios, stopId, horariosBox);
+        mostrarHorarios = createMostrarHorarios(stopId, stopElement, horariosBox);
     }
 
     removeObsoleteElements(stops);
@@ -1026,7 +1107,7 @@ export function removeAllBusLines() {
     }
 }
 
-// Función para cargar el JSON
+// Función para guardar un JSON con todas las paradas
 export async function loadBusStops() {
     const cacheKey = 'busStops';
     const cachedData = getCachedData(cacheKey);

@@ -520,6 +520,7 @@ button.remove-stop {
 
 #horarios-box div {
     margin: 1em 0;
+    clear: both;
 }
 
 /* Botón de cierre de diálogos */
@@ -532,6 +533,18 @@ button.remove-stop {
     position: absolute;
     right: 5px;
     top: 0px;
+}
+
+#horarios-box #stopDateInput {
+    float: right;
+    font-size: 1.3em;
+}
+
+#horarios-box #stopDateExplanation {
+    float: right;
+    font-size: 0.8em;
+    color: #CCC;
+    clear: both;
 }
 
 #horarios-box .hora {

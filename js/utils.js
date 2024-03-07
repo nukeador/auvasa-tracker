@@ -211,31 +211,22 @@ export function createBusElement(busId, line, index, stopElement) {
     return busElement;
 }
 
-export function setupMostrarHorariosEventListener(mostrarHorarios, stopId, horariosBox) {
-    mostrarHorarios.addEventListener('click', async function() {
-        let horariosElement = await displayScheduledBuses(stopId);
-        horariosBox.innerHTML = horariosElement.innerHTML;
-        horariosBox.style.display = 'block';
-        clearInterval(intervalId);
-
-        let closeButtons = horariosBox.querySelectorAll('.horarios-close');
-        closeButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                this.parentNode.style.display = 'none';
-                iniciarIntervalo(updateBusList);
-                updateBusList();
-            });
-        });
-    });
-}
-
-export function createMostrarHorariosButton(stopId, stopElement) {
+export function createMostrarHorarios(stopId, stopElement, horariosBox) {
     let mostrarHorarios = document.createElement('button');
     mostrarHorarios.classList.add('mostrar-horarios');
     mostrarHorarios.id = 'mostrar-horarios-' + stopId;
     mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
     stopElement.appendChild(mostrarHorarios);
-    return mostrarHorarios;
+    
+    mostrarHorarios.addEventListener('click', async function() {
+        displayLoadingSpinner();
+        let horariosElement = await displayScheduledBuses(stopId);
+        horariosBox.setAttribute('data-stopNumber', stopId);
+        horariosBox.innerHTML = horariosElement.innerHTML;
+        horariosBox.style.display = 'block';
+        hideLoadingSpinner();
+        clearInterval(intervalId);
+    });
 }
 
 export function createRemoveStopButton(stopId, stopElement) {
