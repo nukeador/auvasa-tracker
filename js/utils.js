@@ -446,3 +446,32 @@ export function scrollToElement(element) {
         }, 100);
     }
 }
+
+export function showRoutesIframe () {
+    const iframeContainer = document.getElementById('iframe-container');
+    // Crear el iframe y agregarlo al contenedor
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://rutas.auvasatracker.com';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    iframe.onload = function() {
+        // Ocultar el spinner de carga una vez que el iframe haya cargado
+        hideLoadingSpinner();
+    };
+    iframeContainer.appendChild(iframe);
+    
+    // Mostrar el contenedor
+    iframeContainer.style.display = 'block';
+    
+    // Agregar un botón de cierre
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('closeRoutesButton');
+    closeButton.textContent = 'X';
+    closeButton.addEventListener('click', function() {
+        // Ocultar el contenedor y eliminar el iframe
+        iframeContainer.style.display = 'none';
+        iframeContainer.innerHTML = ''; // Limpiar el contenedor
+    });
+    iframeContainer.appendChild(closeButton);
+}

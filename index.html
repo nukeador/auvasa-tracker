@@ -34,9 +34,9 @@
     script-src 'self' https://unpkg.com https://stats.auvasatracker.com https://beta.auvasatracker.com;
     style-src 'self' 'unsafe-inline' https://unpkg.com;
     img-src 'self' data: https://auvasatracker.com https://beta.auvasatracker.com https://*.tile.openstreetmap.org https://*.tile.thunderforest.com https://unpkg.com;
-    connect-src 'self' https://stats.auvasatracker.com https://beta.auvasatracker.com https://api.auvasatracker.com https://gtfs.auvasatracker.com https://push.auvasatracker.com;
+    connect-src 'self' https://stats.auvasatracker.com https://beta.auvasatracker.com https://api.auvasatracker.com https://gtfs.auvasatracker.com https://push.auvasatracker.com http://localhost:3000;
     font-src 'self';
-    frame-src 'self';
+    frame-src 'self' https://rutas.auvasatracker.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
@@ -93,6 +93,7 @@
             <div class="sidebar-links">
                 <p><a id="scrollTop" href="#">Volver arriba</a></p>
                 <button id="searchNearStops">Paradas cercanas</button>
+                <button id="routesButton">Calcular ruta</button>
             </div>
         </div>
         <div id="sidebar-stops"></div>
@@ -127,6 +128,10 @@
         <a href="https://t.me/auvasatracker">Contacto o informar de un error</a>
         <a href="https://www.gnu.org/licenses/agpl-3.0.html">Licencia AGPL 3</a>
     </footer>
+
+    <div id="iframe-container" style="display: none;">
+        <!-- Aquí se insertará el iframe -->
+    </div>
 
     <div id="spinnerOverlay">
         <div class="spinner"></div>

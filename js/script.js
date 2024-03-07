@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS } from './utils.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showRoutesIframe } from './utils.js';
 import { removeAllBusLines, addBusLine, updateBusList, showNearestStops, displayScheduledBuses } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -139,7 +139,7 @@ function main() {
             hideLoadingSpinner();
         }
     });
-    // Manejo del botón de cerrar
+    // Manejo del botón de cerrar en horarios
     horariosBox.addEventListener('click', async function(event) {
         if (event.target.matches(".horarios-close")) {
             closeButtons = horariosBox.querySelectorAll('.horarios-close');
@@ -150,6 +150,13 @@ function main() {
             iniciarIntervalo(updateBusList);
             updateBusList();
         }
+    });
+
+    const routesButton = document.getElementById('routesButton');
+    routesButton.addEventListener('click', function() {
+        displayLoadingSpinner();
+        showRoutesIframe();
+        toogleSidebar();
     });
 }
 

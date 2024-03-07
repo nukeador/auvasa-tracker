@@ -673,6 +673,30 @@ button.remove-stop {
     padding: 0 0 0 20px;
 }
 
+#routesButton {
+    background-color: transparent;
+    background-image: url(img/routes.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    color: #CCC;
+    font-size: 0.9em;
+    text-align: center;
+    margin: 1.5em 0;
+    padding: 0 0 0 20px;
+}
+
+.closeRoutesButton {
+    position: absolute;
+    top: 7px;
+    right: 3px;
+    z-index: 1001;
+    background-color: transparent;
+    color: #FFF;
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 #mapContainer {
     position: fixed;
     width: 96%;
@@ -744,6 +768,17 @@ button.remove-stop {
     padding: 1px 8px 10px 0;
     font-style: italic;
     margin: 0px 0 0 0;
+}
+
+#iframe-container {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px);
+    background-color: white;
+    z-index: 1000;
+    display: none; /* Inicialmente oculto */
 }
 
 .dark-mode #mapContainer #mapFooter {
