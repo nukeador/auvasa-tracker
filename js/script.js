@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showRoutesIframe } from './utils.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showIframe } from './utils.js';
 import { removeAllBusLines, addBusLine, updateBusList, showNearestStops, displayScheduledBuses } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -152,10 +152,18 @@ function main() {
         }
     });
 
+    // Iframes de rutas y paradas
     const routesButton = document.getElementById('routesButton');
     routesButton.addEventListener('click', function() {
         displayLoadingSpinner();
-        showRoutesIframe();
+        showIframe('https://rutas.auvasatracker.com');
+        toogleSidebar();
+    });
+    
+    const viewLinesButton = document.getElementById('viewLinesButton');
+    viewLinesButton.addEventListener('click', function() {
+        displayLoadingSpinner();
+        showIframe('https://rutas.auvasatracker.com/#/route');
         toogleSidebar();
     });
 }

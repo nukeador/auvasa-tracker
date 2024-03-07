@@ -447,11 +447,12 @@ export function scrollToElement(element) {
     }
 }
 
-export function showRoutesIframe () {
+// Mostramos una URL ocupando toda la pantalla (menos el header) en un iframe
+export function showIframe (url) {
     const iframeContainer = document.getElementById('iframe-container');
     // Crear el iframe y agregarlo al contenedor
     const iframe = document.createElement('iframe');
-    iframe.src = 'https://rutas.auvasatracker.com';
+    iframe.src = url;
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
