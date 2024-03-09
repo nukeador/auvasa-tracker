@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showIframe } from './utils.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showIframe, showOverlayIfNotClosed } from './utils.js';
 import { removeAllBusLines, addBusLine, updateBusList, showNearestStops, displayScheduledBuses } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -160,12 +160,24 @@ function main() {
         toogleSidebar();
     });
     
+    /* FIXME: La app react no puede enlazarse a una pantalla concreta
     const viewLinesButton = document.getElementById('viewLinesButton');
     viewLinesButton.addEventListener('click', function() {
         displayLoadingSpinner();
         showIframe('https://rutas.auvasatracker.com/#/route');
         toogleSidebar();
     });
+    */
+
+    // Al cerrar el overlay, guarda una preferencia en localStorage
+    overlay.addEventListener('click', function() {
+        overlay.style.display = 'none';
+        // Guarda la preferencia en localStorage
+        localStorage.setItem('overlayClosed', 'true');
+    });
+
+    // Mostramos el overlay a todo el mundo
+    showOverlayIfNotClosed();
 }
 
 let deferredPrompt;

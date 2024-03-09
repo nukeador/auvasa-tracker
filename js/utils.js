@@ -476,3 +476,13 @@ export function showIframe (url) {
     });
     iframeContainer.appendChild(closeButton);
 }
+
+// Antes de mostrar el overlay, verifica si ya ha sido cerrado
+export function showOverlayIfNotClosed() {
+    // Verifica si el overlay ya ha sido cerrado
+    const overlayClosed = localStorage.getItem('overlayClosed');
+    if (!overlayClosed) {
+        // Si el overlay no ha sido cerrado, muéstralo
+        overlay.style.display = 'flex';
+    }
+}

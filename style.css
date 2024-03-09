@@ -667,15 +667,16 @@ button.remove-stop {
     background-image: url(img/find-nearby.png);
     background-size: 16px;
     background-repeat: no-repeat;
-    color: #CCC;
+    color: #818181;
     font-size: 0.9em;
     text-align: center;
     margin: 12px 0;
     padding: 0 0 0 20px;
 }
 
+/* Enlaces en el sidebar */
 #routesButton, #viewLinesButton {
-    color: #CCC;
+    color: #818181;
     font-size: 0.9em;
     text-align: center;
     margin: 12px 0;
@@ -1145,6 +1146,53 @@ footer a:hover {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.new-feature::after {
+    content: "";
+    background: #0898d0;
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+    position: absolute;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Oculto a menos que lo cambiemos desde JS*/
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 0px 10px;
+    border-radius: 5px;
+    text-align: center;
+    position: absolute;
+    top: 52px;
+    right: 7px;
+    font-size: 0.95em;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+    position: absolute;
+    bottom: 56px;
+    left: 88%;
+    transform: translateX(-50%);
 }
 
 /* Dark mode */
