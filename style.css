@@ -1239,6 +1239,7 @@ body.dark-mode {
 .dark-mode #welcome-box {
     box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
     background: url("img/welcome-logo-white.png") no-repeat #2d2d2d center 0;
+    background-size: 200px;
 }
 
 .dark-mode .alert-box, .dark-mode #horarios-box, .dark-mode #nearestStopsResults {
