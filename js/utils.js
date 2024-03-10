@@ -477,12 +477,29 @@ export function showIframe (url) {
     iframeContainer.appendChild(closeButton);
 }
 
-// Antes de mostrar el overlay, verifica si ya ha sido cerrado
-export function showOverlayIfNotClosed() {
-    // Verifica si el overlay ya ha sido cerrado
-    const overlayClosed = localStorage.getItem('overlayClosed');
-    if (!overlayClosed) {
-        // Si el overlay no ha sido cerrado, muéstralo
-        overlay.style.display = 'flex';
+// Función para cerrar un overlay y guardar la preferencia del usuario
+export function closeOverlay(overlayId) {
+    const overlay = document.getElementById(overlayId);
+    if (overlay) {
+        overlay.style.display = 'none';
+        // Guarda la preferencia en localStorage
+        localStorage.setItem(`overlayClosed_${overlayId}`, 'true');
+    }
+}
+
+// Función para mostrar un overlay si no ha sido cerrado por el usuario y si el usuario tiene paradas y líneas añadidas
+export function showOverlayIfNotClosed(overlayId) {
+    const overlay = document.getElementById(overlayId);
+    if (overlay) {
+        // Verifica si el overlay ya ha sido cerrado
+        const overlayClosed = localStorage.getItem(`overlayClosed_${overlayId}`);
+        // Verifica si el usuario no tiene paradas ni líneas añadidas
+        const busLines = localStorage.getItem('busLines');
+        const hasBusLines = busLines && JSON.parse(busLines).length > 0;
+
+        if (!overlayClosed && hasBusLines) {
+            // Si el overlay no ha sido cerrado y el usuario no tiene paradas ni líneas añadidas, muéstralo
+            overlay.style.display = 'block';
+        }
     }
 }

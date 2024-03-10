@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showIframe, showOverlayIfNotClosed } from './utils.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showIframe, showOverlayIfNotClosed, closeOverlay } from './utils.js';
 import { removeAllBusLines, addBusLine, updateBusList, showNearestStops, displayScheduledBuses } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -169,15 +169,19 @@ function main() {
     });
     */
 
-    // Al cerrar el overlay, guarda una preferencia en localStorage
-    overlay.addEventListener('click', function() {
-        overlay.style.display = 'none';
-        // Guarda la preferencia en localStorage
-        localStorage.setItem('overlayClosed', 'true');
+    
+    // Al cerrar un overlay, guarda una preferencia en localStorage
+    const overlays = document.getElementsByClassName('overlay');
+    Array.from(overlays).forEach(overlay => {
+        overlay.addEventListener('click', function() {
+            closeOverlay(overlay.id);
+        });
     });
 
-    // Mostramos el overlay a todo el mundo
-    showOverlayIfNotClosed();
+    // Mostramos los overlays definidos si no se cerraron antes
+    Array.from(overlays).forEach(overlay => {
+        showOverlayIfNotClosed(overlay.id);
+    });
 }
 
 let deferredPrompt;
