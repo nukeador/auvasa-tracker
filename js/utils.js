@@ -456,6 +456,7 @@ export function showIframe (url) {
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
+    iframe.allow = "geolocation";
     iframe.onload = function() {
         // Ocultar el spinner de carga una vez que el iframe haya cargado
         hideLoadingSpinner();
