@@ -185,7 +185,7 @@ button#installButton {
     right: 0;
     background-color: #fffffff9;
     border-left: 1px solid #d0d0d0;
-    overflow-x: hidden;
+    overflow-x: auto;
     transition: width 0.5s;
     padding-top: 85px;
 }
@@ -224,8 +224,14 @@ button#installButton {
     margin: 1.4em 0 0.2em 0
 }
 
+.sidebar .sidebar-links {
+    margin: 0 0 0 32px;
+}
+
 .sidebar #sidebar-stops {
     padding-left: 32px;
+    max-height: 100%;
+    overflow-y: scroll;
 }
 
 .sidebar #scrollTop {
@@ -235,10 +241,8 @@ button#installButton {
     background-repeat: no-repeat;
     padding: 0 0 0 20px;
 }
-#nearestStops {
+.sidebar #nearestStops {
     display: flex;
-    display: flex;
-    margin: 0 0 0 32px;
 }
 .bus-list {
     list-style: none;
