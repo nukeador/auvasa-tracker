@@ -362,11 +362,11 @@ export async function addBusLine(stopNumber, lineNumber) {
     const busStops = await loadBusStops();
     const stopData = busStops.find(stop => stop.parada.numero === stopNumber);
 
-    // Si se ha proporcionado solo la parada
+    // Si se ha proporcionado solo la línea
     if (!stopNumber && lineNumber) {
         // Crear div para el mensaje 
         const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Debe especificar una parada';
+        errorMessage.textContent = 'Error: Debe especificar una parada para esta línea';
         errorMessage.classList.add('error');
         document.body.appendChild(errorMessage);
     
@@ -442,7 +442,7 @@ export async function addBusLine(stopNumber, lineNumber) {
             }
         }
     }
-    // Si solo se ha proporcionado la parada, añadir todas las líneas de esa parada
+    // Si solo se ha proporcionado la parada, añadir todas las líneas de esa parada tras confirmación
     else if (stopNumber && !lineNumber) {
         if (confirm(`Esto añadirá la parada ${stopNumber} con TODAS sus líneas. Para añadir una sola línea cancele y rellénela en el formulario`)) {
             const allLines = [
