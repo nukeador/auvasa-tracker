@@ -1183,10 +1183,6 @@ footer a:hover {
     font-family: 'Muli';
 }
 
-.dark-mode .overlay-content {
-    color: #999;
-}
-
 .overlay-content h2 {
     font-weight: bold;
     font-size: 1.1em;
