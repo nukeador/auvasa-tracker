@@ -34,9 +34,9 @@
     script-src 'self' https://unpkg.com https://stats.auvasatracker.com https://beta.auvasatracker.com;
     style-src 'self' 'unsafe-inline' https://unpkg.com;
     img-src 'self' data: https://auvasatracker.com https://beta.auvasatracker.com https://*.tile.openstreetmap.org https://*.tile.thunderforest.com https://unpkg.com;
-    connect-src 'self' https://stats.auvasatracker.com https://beta.auvasatracker.com https://api.auvasatracker.com https://gtfs.auvasatracker.com https://push.auvasatracker.com;
+    connect-src 'self' https://stats.auvasatracker.com https://beta.auvasatracker.com https://api.auvasatracker.com https://gtfs.auvasatracker.com https://push.auvasatracker.com http://localhost:3000;
     font-src 'self';
-    frame-src 'self';
+    frame-src 'self' https://rutas.auvasatracker.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
@@ -46,6 +46,18 @@
 </head>
 
 <body>
+    <div id="overlay-newmenu20240311" class="overlay">
+        <div class="overlay-content">
+            <div class="arrow"></div>
+            <h2>Descubre el nuevo menú</h2>
+            <ul>
+                <li>Listado de tus paradas</li>
+                <li>Planifica tu ruta</li>
+                <li>Paradas cercanas</li>
+            </ul>
+        </div>
+    </div>
+
     <header>
         <h1 id="title">AUVASA Tracker</h1>
         <button id="menuButton" class="menu-button">☰</button>
@@ -70,9 +82,11 @@
     <div class="bus-list" id="busList">
         <div id="welcome-box">
             <h2>Empiece a añadir lineas y paradas</h2>
-            <p>Puede añadir paradas completas o líneas individuales usando el buscador de la parte superior. </p>
+            <p>Puede añadir paradas completas o líneas individuales usando el formulario de la parte superior. </p>
             <h2>Instale o añada la app</h2>
             <p>No olvide instalar o <strong>Agregar a la pantalla principal</strong> desde el menú de su navegador o desde el icono Compartir <img src="img/ios-share.svg" alt="Icono compartir en iOS"/> en iOS</p>
+            <h2>Descubra más en el menú ☰</h2>
+            <p>Descubra otras opciones como paradas cercanas o planifique su ruta desde el menú superior ☰</p>
         </div>
     </div>
 
@@ -93,6 +107,8 @@
             <div class="sidebar-links">
                 <p><a id="scrollTop" href="#">Volver arriba</a></p>
                 <button id="searchNearStops">Paradas cercanas</button>
+                <button id="routesButton">Planifica tu ruta</button>
+                <!--<button id="viewLinesButton">Líneas y paradas</button>-->
             </div>
         </div>
         <div id="sidebar-stops"></div>
@@ -118,7 +134,8 @@
         <a id="instagram-button" href="https://www.instagram.com/auvasatracker/" target="_blank">Síguenos en Instagram</a>      
         <button id="theme-toggle">
             <span id="theme-toggle-icon" title="Cambiar a tema claro/oscuro">🌞</span> <!-- Icono de sol por defecto -->
-        </button>       
+        </button>  
+        <p>Servicio creado por voluntarios y usuarios del bus, independiente de AUVASA o cualquier otro organismo.</p>     
         <p id="data-notice">Origen de los datos: <a href="https://www.auvasa.es/empresa/datos-abiertos/">GTFS de AUVASA</a>, proporcionados de forma no oficial sin ninguna garantía.</p>       
     </div>
 
@@ -128,6 +145,10 @@
         <a href="https://www.gnu.org/licenses/agpl-3.0.html">Licencia AGPL 3</a>
     </footer>
 
+    <div id="iframe-container" style="display: none;">
+        <!-- Aquí se insertará el iframe -->
+    </div>
+    
     <div id="spinnerOverlay">
         <div class="spinner"></div>
     </div>

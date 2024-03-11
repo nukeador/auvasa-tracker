@@ -446,3 +446,60 @@ export function scrollToElement(element) {
         }, 100);
     }
 }
+
+// Mostramos una URL ocupando toda la pantalla (menos el header) en un iframe
+export function showIframe (url) {
+    const iframeContainer = document.getElementById('iframe-container');
+    // Crear el iframe y agregarlo al contenedor
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    iframe.onload = function() {
+        // Ocultar el spinner de carga una vez que el iframe haya cargado
+        hideLoadingSpinner();
+    };
+    iframeContainer.appendChild(iframe);
+    
+    // Mostrar el contenedor
+    iframeContainer.style.display = 'block';
+    
+    // Agregar un botón de cierre
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('closeRoutesButton');
+    closeButton.textContent = 'X';
+    closeButton.addEventListener('click', function() {
+        // Ocultar el contenedor y eliminar el iframe
+        iframeContainer.style.display = 'none';
+        iframeContainer.innerHTML = ''; // Limpiar el contenedor
+    });
+    iframeContainer.appendChild(closeButton);
+}
+
+// Función para cerrar un overlay y guardar la preferencia del usuario
+export function closeOverlay(overlayId) {
+    const overlay = document.getElementById(overlayId);
+    if (overlay) {
+        overlay.style.display = 'none';
+        // Guarda la preferencia en localStorage
+        localStorage.setItem(`overlayClosed_${overlayId}`, 'true');
+    }
+}
+
+// Función para mostrar un overlay si no ha sido cerrado por el usuario y si el usuario tiene paradas y líneas añadidas
+export function showOverlayIfNotClosed(overlayId) {
+    const overlay = document.getElementById(overlayId);
+    if (overlay) {
+        // Verifica si el overlay ya ha sido cerrado
+        const overlayClosed = localStorage.getItem(`overlayClosed_${overlayId}`);
+        // Verifica si el usuario no tiene paradas ni líneas añadidas
+        const busLines = localStorage.getItem('busLines');
+        const hasBusLines = busLines && JSON.parse(busLines).length > 0;
+
+        if (!overlayClosed && hasBusLines) {
+            // Si el overlay no ha sido cerrado y el usuario no tiene paradas ni líneas añadidas, muéstralo
+            overlay.style.display = 'block';
+        }
+    }
+}

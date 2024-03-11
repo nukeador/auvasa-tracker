@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS } from './utils.js';
+import { iniciarIntervalo, showError, displayLoadingSpinner, hideLoadingSpinner, toogleSidebar, isIOS, showIframe, showOverlayIfNotClosed, closeOverlay } from './utils.js';
 import { removeAllBusLines, addBusLine, updateBusList, showNearestStops, displayScheduledBuses } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -139,7 +139,7 @@ function main() {
             hideLoadingSpinner();
         }
     });
-    // Manejo del botón de cerrar
+    // Manejo del botón de cerrar en horarios
     horariosBox.addEventListener('click', async function(event) {
         if (event.target.matches(".horarios-close")) {
             closeButtons = horariosBox.querySelectorAll('.horarios-close');
@@ -150,6 +150,37 @@ function main() {
             iniciarIntervalo(updateBusList);
             updateBusList();
         }
+    });
+
+    // Iframes de rutas y paradas
+    const routesButton = document.getElementById('routesButton');
+    routesButton.addEventListener('click', function() {
+        displayLoadingSpinner();
+        showIframe('https://rutas.auvasatracker.com');
+        toogleSidebar();
+    });
+    
+    /* FIXME: La app react no puede enlazarse a una pantalla concreta
+    const viewLinesButton = document.getElementById('viewLinesButton');
+    viewLinesButton.addEventListener('click', function() {
+        displayLoadingSpinner();
+        showIframe('https://rutas.auvasatracker.com/#/route');
+        toogleSidebar();
+    });
+    */
+
+    
+    // Al cerrar un overlay, guarda una preferencia en localStorage
+    const overlays = document.getElementsByClassName('overlay');
+    Array.from(overlays).forEach(overlay => {
+        overlay.addEventListener('click', function() {
+            closeOverlay(overlay.id);
+        });
+    });
+
+    // Mostramos los overlays definidos si no se cerraron antes
+    Array.from(overlays).forEach(overlay => {
+        showOverlayIfNotClosed(overlay.id);
     });
 }
 
