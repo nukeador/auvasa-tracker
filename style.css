@@ -1053,6 +1053,10 @@ button.remove-stop {
     margin: 84px auto 30px auto;
 }
 
+#import-block h2 {
+    font-size: 20px;
+}
+
 #import-block #uploadForm {
     margin: 1em auto;
     width: 334px;
