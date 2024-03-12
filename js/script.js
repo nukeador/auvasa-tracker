@@ -160,15 +160,12 @@ function main() {
         toogleSidebar();
     });
     
-    /* FIXME: La app react no puede enlazarse a una pantalla concreta
     const viewLinesButton = document.getElementById('viewLinesButton');
     viewLinesButton.addEventListener('click', function() {
         displayLoadingSpinner();
         showIframe('https://rutas.auvasatracker.com/#/route');
         toogleSidebar();
     });
-    */
-
     
     // Al cerrar un overlay, guarda una preferencia en localStorage
     const overlays = document.getElementsByClassName('overlay');
