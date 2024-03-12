@@ -977,11 +977,9 @@ button.remove-stop {
 #tips-banner {
     font-size: 0.8em;
     background-color: #25d36636;
-    border-radius: 25px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2); 
     text-align: center;
-    margin: 20px auto;
-    max-width: 98%; 
+    margin: 20px auto 1px auto;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     box-sizing: border-box;
 }
@@ -1036,8 +1034,13 @@ button.remove-stop {
     padding: 0;
     margin: 0;
 }
+
 .global-alerts-box ul li {
     list-style: none;
+}
+
+.global-alerts-box .global-alert-title {
+    font-weight: bold;
 }
 
 .foot-note {

@@ -392,21 +392,21 @@ export function displayGlobalAlertsBanner(alerts) {
         alerts.forEach(alert => {
             if (alert.ruta.parada === null && alert.ruta.linea === null) {
                 const listItem = document.createElement('li');
-                listItem.textContent = alert.descripcion;
+                listItem.innerHTML = '<span class="global-alert-title">' + alert.resumen + '</span>: ' + alert.descripcion;
                 alertsList.appendChild(listItem);
             }
         });
         alertsBox.style.display = 'block';
         // Ocultamos el banner de tips para no saturar la pantalla con avisos
-        if (tipsBanner) {
+        /*if (tipsBanner) {
             tipsBanner.style.display = 'none';
-        }
+        }*/
     } else {
         alertsBox.style.display = 'none';
         // Volvemos a mostrar el banner de tips
-        if (tipsBanner) {
+        /*if (tipsBanner) {
             tipsBanner.style.display = 'block';
-        }
+        }*/
     }
 }
 
