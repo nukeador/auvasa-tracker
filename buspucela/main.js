@@ -30,7 +30,27 @@ function main() {
                     console.error(`Error al añadir la parada ${stop}:`, error);
                 }
             }
+            // Crear el botón después de que todas las paradas hayan sido importadas
+            createViewButton();
         };
         reader.readAsText(file);
     });
+
+    document.querySelector('.custom-file-upload').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        const fileName = event.target.files[0].name;
+        document.getElementById('fileLabel').textContent = fileName;
+    });
+
+    function createViewButton() {
+        const importBlock = document.getElementById('import-block');
+        const link = document.createElement('a');
+        link.textContent = 'Completado: Clic aquí para ver paradas importadas';
+        link.href = '/';
+        link.id = 'import-complete';
+        importBlock.appendChild(link);
+    }
 }
