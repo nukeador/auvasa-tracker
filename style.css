@@ -1053,6 +1053,37 @@ button.remove-stop {
     margin: 84px auto 30px auto;
 }
 
+#import-block #uploadForm {
+    margin: 1em auto;
+    width: 334px;
+    text-align: center;
+}
+
+#import-block #fileInput {
+    display: none;
+}
+
+#import-block .custom-file-upload {
+    padding: 8px;
+    background-color: #b17cb5;
+    color: white; 
+    cursor: pointer;
+    border-radius: 5px; 
+    display: inline-block;
+}
+
+#import-block #import-complete {
+    background-color: #f8f5d7;
+    color: #72711c;
+    border: 1px solid #f5f4c6;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    text-align: center;
+    display: block;
+}
+
 .foot-note {
     font-style: italic;
     padding: 1em;

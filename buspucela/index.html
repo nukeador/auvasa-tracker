@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,27 +18,26 @@
         <h1 id="title"><a href="/">AUVASA Tracker</a></h1>
     </header>
 
-    <div id="import-block"><form id="uploadForm">
+    <div id="import-block">
         <h2>Importar tus favoritos desde BusPucela</h2>
         <p>Esta página te permitirá importar tus paradas favoritas desde la app BusPucela a AUVASA Tracker</p>
         <ol>
             <li>Desde BusPucela accede al menú "Favoritos Urbanos"</li>
             <li>Al lado del texto "Mis paradas favoritas" haz click sobre el boton con una flecha hacia arriba ⬆️</li>
-            <li>Usa el formulario de abajo para seleccionar el archivo llamado Favoritos.txt ubicado en la carpeta BusPucela</li>
-            <li>Haz click en el botón "Importar"</li>
+            <li>Usa los botones de abajo para "Seleccionar el archivo" llamado Favoritos.txt ubicado en tu carpeta BusPucela</li>
+            <li>Haz click en el botón "Importar paradas"</li>
             <li>Acepta las confirmaciones para añadir todas las paradas, puedes cancelar las que no quieras importar</li>
             <li>Una vez añadidas todas, accede a <a href="/">la pantalla principal para visualizarlas</a></li>
         </ol>
-        <input type="file" id="fileInput" accept=".txt">
-        <button type="submit">Importar</button>
-    </form></div>
+        <form id="uploadForm">
+            <label for="fileInput" id="fileLabel" class="custom-file-upload">Seleccionar archivo</label>
+            <input type="file" id="fileInput" accept=".txt" style="display: none;">
+            <button type="submit">Importar paradas</button>
+        </form>
+    </div>
 
         <div id="mapContainer">
             <div id="busMap"></div>
-            <div id="mapFooter">
-                <p id="busMapLastUpdate">Actualmente no hay datos de ubicación para esta línea</p>
-                <button class="map-close">Cerrar mapa</button>
-            </div>
         </div>
     
         <footer>
