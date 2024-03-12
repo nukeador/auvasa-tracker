@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importar favoritos de BusPucela</title>
+
+    <link rel="icon" type="image/x-icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../style.css?v=202403122140">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <script src="../js/matomo.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1 id="title">AUVASA Tracker</h1>
+    </header>
+
+    <div id="import-block"><form id="uploadForm">
+        <h2>Importar tus favoritos desde BusPucela</h2>
+        <p>Esta página te permitirá importar tus paradas favoritas desde la app BusPucela a AUVASA Tracker</p>
+        <ol>
+            <li>Desde BusPucela accede al menú "Favoritos Urbanos"</li>
+            <li>Al lado del texto "Mis paradas favoritas" haz click sobre el boton con una flecha hacia arriba ⬆️</li>
+            <li>Usa el formulario de abajo para seleccionar el archivo llamado Favoritos.txt ubicado en la carpeta BusPucela</li>
+            <li>Haz click en el botón "Importar"</li>
+            <li>Acepta las confirmaciones para añadir todas las paradas, puedes cancelar las que no quieras importar</li>
+            <li>Una vez añadidas todas, accede a <a href="/">la pantalla principal para visualizarlas</a></li>
+        </ol>
+        <input type="file" id="fileInput" accept=".txt">
+        <button type="submit">Importar</button>
+    </form></div>
+
+        <div id="mapContainer">
+            <div id="busMap"></div>
+            <div id="mapFooter">
+                <p id="busMapLastUpdate">Actualmente no hay datos de ubicación para esta línea</p>
+                <button class="map-close">Cerrar mapa</button>
+            </div>
+        </div>
+    
+        <footer>
+            <a href="https://github.com/nukeador/auvasa-tracker">Código</a>
+            <a href="https://t.me/auvasatracker">Contacto o informar de un error</a>
+            <a href="https://www.gnu.org/licenses/agpl-3.0.html">Licencia AGPL 3</a>
+        </footer>
+
+        <div id="spinnerOverlay">
+            <div class="spinner"></div>
+        </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script type="module" src="../js/mapa.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
