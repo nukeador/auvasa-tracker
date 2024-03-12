@@ -40,6 +40,11 @@ header h1 {
     cursor: pointer;
 }
 
+header h1 a {
+    color: #FFF;
+    text-decoration: none;
+}
+
 input[type=number], input[type=text] {
     margin-left: 10px;
     padding: 10px;
