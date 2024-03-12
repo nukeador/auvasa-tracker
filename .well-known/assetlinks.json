@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.auvasatracker.twa",
+        "sha256_cert_fingerprints": ["A8:72:5D:23:15:CE:6B:58:AB:A9:B5:E6:D7:ED:7E:42:E7:B7:60:8C:D4:5B:F5:97:54:FD:48:F7:D7:A9:69:0F"]
+      }
+    }]
