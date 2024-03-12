@@ -3,6 +3,9 @@
       "target": {
         "namespace": "android_app",
         "package_name": "com.auvasatracker.twa",
-        "sha256_cert_fingerprints": ["A8:72:5D:23:15:CE:6B:58:AB:A9:B5:E6:D7:ED:7E:42:E7:B7:60:8C:D4:5B:F5:97:54:FD:48:F7:D7:A9:69:0F"]
+        "sha256_cert_fingerprints": [
+          "A8:72:5D:23:15:CE:6B:58:AB:A9:B5:E6:D7:ED:7E:42:E7:B7:60:8C:D4:5B:F5:97:54:FD:48:F7:D7:A9:69:0F",
+          "B1:B9:67:94:57:34:D8:BA:79:49:D6:3F:27:0C:1A:75:63:C3:65:67:BC:6D:01:55:0E:3A:3F:56:01:9A:DF:78"
+        ]
       }
     }]
