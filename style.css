@@ -1043,6 +1043,11 @@ button.remove-stop {
     font-weight: bold;
 }
 
+#import-block {
+    width: 95%;
+    margin: 84px auto 30px auto;
+}
+
 .foot-note {
     font-style: italic;
     padding: 1em;
