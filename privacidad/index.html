@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de privacidad - AUVASA Tracker</title>
+
+    <link rel="icon" type="image/x-icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../style.css?v=202403122140">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <script src="../js/matomo.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1 id="title"><a href="/">AUVASA Tracker</a></h1>
+    </header>
+
+    <div id="import-block">
+        <h2>Política de privacidad</h2>
+        <h3>Información recopilada</h3>
+        <p>AUVASA Tracker recopila información para proporcionar una experiencia de usuario personalizada y mejorar nuestros servicios. La información que recopilamos se procesa de manera que garantiza tu privacidad y puede incluir:</p>
+        <ul>
+        <li><strong>Información de uso</strong>: Datos sobre cómo utilizas la aplicación, como las líneas de autobús que sigues y las paradas que seleccionas, se recopilan de forma anónima. No almacenamos direcciones IP ni ningún otro identificador que pueda vincular estos datos a un usuario específico.</li>
+        <li><strong>Información de dispositivo</strong>: Información sobre tu dispositivo, como el modelo y la versión del sistema operativo, se recopila para asegurar la compatibilidad y optimizar el rendimiento de la aplicación.</li>
+        <li><strong>Información de geolocalización</strong>: Solo con tu consentimiento, AUVASA Tracker puede acceder a tu ubicación para mostrarte las paradas más cercanas y proporcionar funcionalidades relacionadas con el mapa. Esta información se procesa localmente en tu dispositivo y no se almacena en nuestros servidores.</li>
+        </ul>
+        <p><strong>Uso de la información recopilada</strong></p>
+        <p>Utilizamos la información recopilada para:</p>
+        <ul>
+        <li><strong>Mejorar la funcionalidad de la aplicación</strong>: Personalizar la información que se muestra y mejorar la funcionalidad general de la aplicación.</li>
+        <li><strong>Analizar el uso de la aplicación</strong>: Identificar tendencias y mejorar la experiencia del usuario sin comprometer tu privacidad.</li>
+        <li><strong>Notificaciones</strong>: Enviar notificaciones sobre los horarios de los autobuses que sigues, basándonos en tus preferencias y sin utilizar información personal.</li>
+        </ul>
+        <p><strong>Seguridad de los datos</strong></p>
+        <p>Todos los datos se transfieren de manera cifrada utilizando protocolos de seguridad estándar para proteger tu información durante la transmisión. No realizamos transferencias de datos a otros países y cumplimos con las regulaciones de protección de datos de la UE.</p>
+        <p><strong>Control de la información</strong></p>
+        <p>Tienes control total sobre la información que proporcionas a AUVASA Tracker. Puedes gestionar tus preferencias de privacidad y eliminar tus datos personales directamente desde el navegador en cualquier momento, utilizando las herramientas proporcionadas por el mismo.</p>
+        <p><strong>Cambios en la política de Privacidad</strong></p>
+        <p>Nos reservamos el derecho de modificar esta política de privacidad. Te notificaremos sobre cualquier cambio significativo a través de nuestra webapp y te recomendamos revisar esta política regularmente.</p>
+        <p><strong>Contacto</strong></p>
+        <p>Si tienes preguntas sobre esta política de privacidad o cómo ejercer tus derechos, puedes contactarnos a través de nuestro sitio web, la sección de contacto de la aplicación o enviando un correo electrónico a root@pucelabits.org.</p>
+    </div>
+
+        <div id="mapContainer">
+            <div id="busMap"></div>
+        </div>
+    
+        <footer>
+            <a href="https://github.com/nukeador/auvasa-tracker">Código</a>
+            <a href="https://t.me/auvasatracker">Contacto o informar de un error</a>
+            <a href="https://www.gnu.org/licenses/agpl-3.0.html">Licencia</a>
+            <a href="/privacidad/">Privacidad</a>
+        </footer>
+
+        <div id="spinnerOverlay">
+            <div class="spinner"></div>
+        </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script type="module" src="../js/mapa.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
