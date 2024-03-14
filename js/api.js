@@ -89,6 +89,7 @@ export async function getStopGeo(stopId) {
     }
 }
 
+// Obtener todas los avisos y alertas
 export async function fetchAllBusAlerts() {
     try {
         const response = await fetch(apiEndPoint + '/alertas/');
@@ -148,6 +149,32 @@ export function filterAlertsByStop(alerts, stopNumber) {
         // Si la alerta es para una parada específica, la incluimos si coincide con stopNumber
         return alert.ruta.parada === stopNumber;
     });
+}
+
+// Obtener el listado de paradas suprimidas
+export async function fetchSuppressedStops() {
+    try {
+        const response = await fetch(apiEndPoint + '/paradas/suprimidas');
+
+        if (!response.ok) {
+            // Si la respuesta no es exitosa, devuelve un array vacío
+            return [];
+        }
+
+        const data = await response.text(); // Obtiene la respuesta como texto
+
+        try {
+            // Intenta parsear el texto a JSON
+            return JSON.parse(data);
+        } catch (error) {
+            // Si el parseo falla (por ejemplo, si está vacío o no es JSON válido), devuelve un array vacío
+            console.log('Error al recuperar alertas:', error);
+            return [];
+        }
+    } catch (error) {
+        console.error('Error al recuperar alertas:', error);
+        return []; // Retorna un array vacío en caso de error
+    }
 }
 
 // Consultamos en el api los horarios programados
@@ -530,6 +557,9 @@ export async function updateBusList() {
     const globalAlerts = filterBusAlerts(allAlerts, null);
     displayGlobalAlertsBanner(globalAlerts);
 
+    // Obtener la lista de paradas suprimidas
+    const suppressedStops = await fetchSuppressedStops();
+
     let horariosBox = document.getElementById('horarios-box');
     let busList = document.getElementById('busList');
     
@@ -548,11 +578,25 @@ export async function updateBusList() {
 
         const stopName = await getStopName(stopId);
         const stopGeo = await getStopGeo(stopId);
+
         // Actualizamos el nombre de la parada si ha cambiado
         if (stopName) {
             let updatedName = stopName + ' <span class="stopId">(' + stopId + ')</span>';
             if (!stopElement.querySelector('.stopId') || stopElement.querySelector('.stopId').textContent !== '(' + stopId + ')') {
                 updateStopName(stopElement, updatedName, stopGeo);
+            }
+        }
+
+        // Comprobar si la parada está suprimida
+        const stopSuppressed = suppressedStops.some(stop => stop.numero === stopId);
+        if (stopSuppressed) {
+            // Solo añadimos información si no la tenía antes
+            if (!stopElement.classList.contains('suprimida')) {
+                stopElement.classList.add('suprimida');
+                let suppressedStopAlert = document.createElement('div');
+                suppressedStopAlert.className = 'suppressedStopAlert';
+                suppressedStopAlert.innerHTML = "Parada actualmente suprimida, consulte las alertas de las líneas para más información";
+                stopElement.appendChild(suppressedStopAlert);
             }
         }
 
@@ -573,7 +617,7 @@ export async function updateBusList() {
             });
         });
 
-
+        // Creamos todas las líneas añadidas en esa parada
         stops[stopId].forEach((line, index) => {
             const busId = stopId + '-' + line.lineNumber;
             let busElement = document.getElementById(busId);

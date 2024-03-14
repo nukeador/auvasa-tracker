@@ -291,6 +291,15 @@ button#installButton {
     position: relative;
 }
 
+.stop-block.suprimida .suppressedStopAlert {
+    background-color: #f8d7d7;
+    color: #721c1c;
+    border: 1px solid #f5c6c6;
+    padding: 10px;
+    font-size: 0.8em;
+    text-align: center;
+}
+
 .stop-block h2 {
     text-align: center;
     font-size: 0.9em;
