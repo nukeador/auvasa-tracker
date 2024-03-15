@@ -1,4 +1,4 @@
-import { apiEndPoint } from './api.js';
+import { apiEndPoint, fetchSuppressedStops } from './api.js';
 
 let myMap = L.map('busMap').setView([41.64817, -4.72974], 16);
 let centerControl;
@@ -230,24 +230,33 @@ async function addStopsToMap(tripId, lineNumber) {
             myMap.removeLayer(currentStopsLayer);
         }
 
+        // Obtener la lista de paradas suprimidas
+        const suppressedStops = await fetchSuppressedStops();
+
         // Actualizar el tripId actual
         currentTripId = tripId;
 
         // Add the new stops to the map
         currentStopsLayer = L.geoJSON(stopsData, {
             pointToLayer: (feature, latlng) => {
+
+                let iconUrl = 'img/bus-stop.png';
+                let popupContent = `<strong>${feature.properties.stop_name}</strong><br>${feature.properties.stop_desc}`;
+
+                // Verificar si la parada está suprimida
+                let stopSuppressed = suppressedStops.some(stop => stop.numero === feature.properties.stop_code);
+                if (stopSuppressed) {
+                    iconUrl = 'img/circle-exclamation.png'; // Asumiendo que tienes un icono diferente para las paradas suprimidas
+                    popupContent += '<br>🚫 Aviso: Parada actualmente suprimida';
+                }
+
                 const busStopIcon = L.icon({
-                    iconUrl: 'img/bus-stop.png', 
+                    iconUrl: iconUrl, 
                     iconSize: [12, 12], 
                     iconAnchor: [0, 0], 
                     popupAnchor: [0, -12]
                 });
-                return L.marker(latlng, { icon: busStopIcon });
-            },
-            onEachFeature: (feature, layer) => {
-                if (layer.bindPopup) {
-                    layer.bindPopup(`<strong>${feature.properties.stop_name}</strong><br>${feature.properties.stop_desc}`);
-                }
+                return L.marker(latlng, { icon: busStopIcon }).bindPopup(popupContent);
             }
         }).addTo(myMap);
     } catch (error) {
