@@ -1,4 +1,4 @@
-const CACHE_NAME = 'auvasatracker-v4.6';
+const CACHE_NAME = 'auvasatracker-v4.6.5';
 const urlsToCache = [
     // Lista de URLs a cachear
     '/favicon.png',
