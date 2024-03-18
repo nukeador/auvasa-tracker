@@ -392,8 +392,32 @@ export function displayGlobalAlertsBanner(alerts) {
         alerts.forEach(alert => {
             if (alert.ruta.parada === null && alert.ruta.linea === null) {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = '<span class="global-alert-title">' + alert.resumen + '</span>: ' + alert.descripcion;
+                const textContainer = document.createElement('div');
+                textContainer.className = 'alert-text-container';
+                textContainer.innerHTML = '<span class="global-alert-title">' + alert.resumen + '</span>: ' + alert.descripcion;
+
+                const readMoreButton = document.createElement('button');
+                readMoreButton.className = 'read-more-button';
+                readMoreButton.textContent = 'Leer más';
+                readMoreButton.addEventListener('click', function() {
+                    textContainer.classList.add('expanded');
+                    textContainer.classList.remove('has-more');
+                });
+
+                textContainer.appendChild(readMoreButton);
+                listItem.appendChild(textContainer);
                 alertsList.appendChild(listItem);
+
+                // Esperar a que el navegador haya renderizado el contenido
+                setTimeout(function() {
+                    // Calcular la altura del contenido
+                    const contentHeight = textContainer.scrollHeight;
+
+                    // Si el contenido es más alto que el contenedor, mostrar el botón "Leer más"
+                    if (contentHeight > 53) {
+                        textContainer.classList.add('has-more');
+                    }
+                }, 50);
             }
         });
         alertsBox.style.display = 'block';
