@@ -1057,6 +1057,37 @@ button.remove-stop {
     font-weight: bold;
 }
 
+.global-alerts-box .alert-text-container {
+    position: relative;
+    max-height: 53px;
+    overflow: hidden;
+}
+
+.global-alerts-box .alert-text-container.expanded {
+    max-height: none;
+}
+
+.global-alerts-box .alert-text-container .read-more-button {
+    position: absolute;
+    bottom: -7px;
+    right: -3px;
+    background-color: #f8f5d7;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: none;
+    color: #72711c;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.global-alerts-box .alert-text-container.expanded .read-more-button {
+    display: none;
+}
+
+.global-alerts-box .alert-text-container.has-more .read-more-button {
+    display: block;
+}
+
 #import-block {
     width: 95%;
     margin: 84px auto 30px auto;
