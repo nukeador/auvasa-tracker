@@ -115,14 +115,16 @@ button#removeAllButton {
 }
 
 button#installButton {
-    background-color: #6aa8ff;
+    background-color: #a7cafb;
     border-radius: 2em;
-    color: #000000;
     height: 39px;
     position: absolute;
-    right: 3.2em;
-    top: 0.2em;
-    padding: 10px 14px;
+    left: 10px;
+    top: 5px;
+    padding: 10px 17px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #304868;
 }
 
 #formulario {
