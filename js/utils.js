@@ -735,3 +735,15 @@ export function clickEvents() {
     });
 
 }
+
+export function socialBrowserWarning() {
+    // Aviso si se accede desde el navegador de instagram
+    // Check if the referrer is from Instagram
+    if (document.referrer.includes('instagram.com')) {
+        const tipsBannerElement = document.getElementById('tips-banner');
+        const instagramWarning = document.createElement('p');
+        instagramWarning.id = 'instagram-warning';
+        instagramWarning.innerHTML = '<strong>Si accedes desde Instagram</strong><br />Pulsa el menú superior derecho de Instagram y selecciona "Abrir en (Chrome/Safari/Firefox)" para poder usar esta web correctamente';
+        tipsBannerElement.insertBefore(instagramWarning, tipsBannerElement.firstChild);
+    }
+}

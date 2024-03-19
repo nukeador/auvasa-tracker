@@ -1,4 +1,4 @@
-import { iniciarIntervalo, isIOS, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents } from './utils.js';
+import { iniciarIntervalo, isIOS, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents, socialBrowserWarning } from './utils.js';
 import { updateBusList } from './api.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
@@ -48,6 +48,9 @@ function main() {
     Array.from(overlays).forEach(overlay => {
         showOverlayIfNotClosed(overlay.id);
     });
+
+    // Mostrar advertencia si el usuario está accediendo desde un webview integrado de una app de social media
+    socialBrowserWarning();
 }
 
 let deferredPrompt;
