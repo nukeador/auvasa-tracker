@@ -648,6 +648,10 @@ button.remove-stop {
     text-align: center;
     cursor: pointer;
     margin: 5px 0;
+    max-width: 130px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #nearestStopsResults .stopResult ul {
@@ -1539,7 +1543,7 @@ body.dark-mode {
     color: #FFF;
 }
 
-.bus-icon.linea-C1, .bus-icon.linea-C2, .linea-C1 h3, .linea-C2 h3, #busMap .linea-C1, #busMap .linea-C2, span.linea-C1, span.linea-C2 {
+.bus-icon.linea-C1, .bus-icon.linea-C2, .bus-icon.linea-C0, .linea-C1 h3, .linea-C2 h3, .linea-C0 h3, #busMap .linea-C1, #busMap .linea-C2, #busMap .linea-C0, span.linea-C1, span.linea-C2, span.linea-C0 {
     background-color: #555553;
     stroke: #555553;
     color: #FFF;
@@ -1549,6 +1553,24 @@ body.dark-mode {
     background-color: #e5232e;
     stroke: #e5232e;
     color: #000;
+}
+
+.bus-icon.linea-M1, .linea-M1 h3, #busMap .linea-M1, span.linea-M1, .bus-icon.linea-M2, .linea-M2 h3, #busMap .linea-M2, span.linea-M2, .bus-icon.linea-M3, .linea-M3 h3, #busMap .linea-M3, span.linea-M3, .bus-icon.linea-M5, .linea-M5 h3, #busMap .linea-M5, span.linea-M5, .bus-icon.linea-M4, .linea-M4 h3, #busMap .linea-M4, span.linea-M4, .bus-icon.linea-M6, .linea-M6 h3, #busMap .linea-M6, span.lineia-M6, .bus-icon.linea-M7, .linea-M7 h3, #busMap .linea-M7, span.linea-M7 {
+    background-color: #532FA2;
+    stroke: #532FA2;
+    color: #fff;
+}
+
+.bus-icon.linea-P1, .linea-P1 h3, #busMap .linea-P1, span.linea-P1, .bus-icon.linea-P2, .linea-P2 h3, #busMap .linea-P2, span.lineia-P2, .bus-icon.linea-P3, .linea-P3 h3, #busMap .linea-P3, span.linea-P3, .bus-icon.linea-P6, .linea-P6 h3, #busMap .linea-P6, span.linea-P6,.bus-icon.linea-PSC1, .linea-PSC1 h3, #busMap .linea-PSC1, span.linea-PSC1, .bus-icon.linea-PSC2, .linea-PSC2 h3, #busMap .linea-PSC2, span.linea-PSC2, .bus-icon.linea-PSC3, .linea-PSC3 h3, #busMap .linea-PSC3, span.linea-PSC3 {
+    background-color: #792B37;
+    stroke: #792B37;
+    color: #fff;
+}
+
+.bus-icon.linea-U1, .linea-U1 h3, #busMap .linea-U1, span.linea-U1, .bus-icon.linea-U8, .linea-U8 h3, #busMap .linea-U8, span.linea-U8 {
+    background-color: #FF3067;
+    stroke: #FF3067;
+    color: #fff;
 }
 
 .bus-icon.linea-B1, .linea-B1 h3, #busMap .linea-B1, span.linea-B1 {
