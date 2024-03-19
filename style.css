@@ -1009,6 +1009,12 @@ button.remove-stop {
     background-position: 15px center;
 }
 
+#instagram-warning {
+    color: #ffe9e9;
+    background-color: #c65151;
+    padding: 1em 5px;
+}
+
 .dark-mode #share-whatsapp {
     background-image: url('img/share-gray.png');
 }
