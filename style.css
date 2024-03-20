@@ -1077,6 +1077,8 @@ button.remove-stop {
 
 .global-alerts-box .alert-text-container {
     padding: 2px 0;
+    height: 18px;
+    overflow: hidden;
 }
 
 /* Si tiene mucho contenido lo limitamos */
@@ -1090,6 +1092,8 @@ button.remove-stop {
 .global-alerts-box .alert-text-container.expanded {
     white-space: wrap;
     text-overflow: none;
+    max-height: auto;
+    height: auto;
 }
 
 .global-alerts-box .alert-text-container .read-more-button {
