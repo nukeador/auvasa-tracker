@@ -482,6 +482,12 @@ button#installButton {
     margin-top: -0.3em;
 }
 
+.dark-mode .line-info .alert-icon {
+    background: url(img/warning-light.png) no-repeat;
+    background-size: 15px;
+    background-position: 0px 2px;
+}
+
 button.mostrar-horarios {
     cursor: pointer;
     background: url(img/bus-gray.png) no-repeat;
