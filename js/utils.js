@@ -414,7 +414,7 @@ export function displayGlobalAlertsBanner(alerts) {
                     const contentHeight = textContainer.scrollHeight;
 
                     // Si el contenido es más alto que el contenedor, mostrar el botón "Leer más"
-                    if (contentHeight > 53) {
+                    if (contentHeight > 20) {
                         textContainer.classList.add('has-more');
                     }
                 }, 50);

@@ -1070,19 +1070,26 @@ button.remove-stop {
 }
 
 .global-alerts-box .alert-text-container {
+    padding: 2px 0;
+}
+
+/* Si tiene mucho contenido lo limitamos */
+.global-alerts-box .alert-text-container.has-more {
     position: relative;
-    max-height: 53px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .global-alerts-box .alert-text-container.expanded {
-    max-height: none;
+    white-space: wrap;
+    text-overflow: none;
 }
 
 .global-alerts-box .alert-text-container .read-more-button {
     position: absolute;
-    bottom: -7px;
-    right: -3px;
+    bottom: -1px;
+    right: -10px;
     background-color: #f8f5d7;
     padding: 5px 10px;
     cursor: pointer;
