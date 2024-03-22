@@ -747,3 +747,23 @@ export function socialBrowserWarning() {
         tipsBannerElement.insertBefore(instagramWarning, tipsBannerElement.firstChild);
     }
 }
+
+// Eventos a controlar en elementos del mapa
+export function mapEvents() {
+
+    // Mediante delegación de eventos controlamos lo que pasa dentro de busMap
+    document.addEventListener('DOMContentLoaded', function() {
+        // Selecciona el elemento padre, que en este caso es #busMap
+        const parentElement = document.getElementById('busMap');
+
+        // Agrega el eventListener al elemento padre
+        parentElement.addEventListener('click', async function(event) {
+            // Verifica si el evento se originó en un elemento addLineButton y añadimos la línea a la lista
+            if (event.target.classList.contains('addLineButton')) {
+                let stopNumber = event.target.getAttribute('data-stop-number');
+                let lineNumber = event.target.getAttribute('data-line-number');
+                await addBusLine(stopNumber, lineNumber, true);
+            }
+        });
+    });
+}

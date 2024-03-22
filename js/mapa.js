@@ -1,9 +1,13 @@
-import { apiEndPoint, fetchSuppressedStops } from './api.js';
+import { apiEndPoint, fetchSuppressedStops, getStopLines } from './api.js';
+import { mapEvents } from './utils.js';
 
 let myMap = L.map('busMap').setView([41.64817, -4.72974], 16);
 let centerControl;
 let paradaMarker;
 let marcadorAutobus;
+
+// Eventos al mapa
+mapEvents();
 
 function crearIconoBus(numeroBus) {
     return L.divIcon({
@@ -210,6 +214,25 @@ async function addRouteShapesToMap(tripId, lineNumber) {
     }
 }
 
+// Preparar los datos asíncronos antes de agregar las capas al mapa
+// mapa.js
+async function prepareBusLines(stopsData) {
+    let busLinesPromises = stopsData.features.map(async (stop) => {
+        let stopCode = stop.properties.stop_code;
+        let lines = await getStopLines(stopCode);
+        return { stopCode, lines };
+    });
+
+    let busLinesArray = await Promise.all(busLinesPromises);
+
+    let busLines = {};
+    busLinesArray.forEach(({ stopCode, lines }) => {
+        busLines[stopCode] = lines;
+    });
+
+    return busLines;
+}
+
 let currentStopsLayer = null;
 let currentTripId = null;
 // Función para añadir paradas de un trip_id al mapa
@@ -236,12 +259,23 @@ async function addStopsToMap(tripId, lineNumber) {
         // Actualizar el tripId actual
         currentTripId = tripId;
 
+        // Obtener lineas activas para cada parada
+        let busLines = await prepareBusLines(stopsData);
+
         // Add the new stops to the map
         currentStopsLayer = L.geoJSON(stopsData, {
             pointToLayer: (feature, latlng) => {
 
+                // HTML para el listado de líneas
+                let lineasHTML = '<div id="lineas-correspondencia">';
+                // Iteramos por las líneas de la parada y las añadimos
+                busLines[feature.properties.stop_code].forEach(lineNumber => {
+                    lineasHTML += `<span class="addLineButton linea linea-${lineNumber}" data-stop-number="${feature.properties.stop_code}" data-line-number="${lineNumber}">${lineNumber}</span>`;
+                });
+                lineasHTML += '<p>Haga clic en una línea para añadirla a su lista</p></div>'
+
                 let iconUrl = 'img/bus-stop.png';
-                let popupContent = `<strong>${feature.properties.stop_name}</strong><br>${feature.properties.stop_desc}`;
+                let popupContent = `<strong>${feature.properties.stop_name}</strong><br>Número: ${feature.properties.stop_code} ${lineasHTML}`;
 
                 // Verificar si la parada está suprimida
                 let stopSuppressed = suppressedStops.some(stop => stop.numero === feature.properties.stop_code);

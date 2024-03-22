@@ -646,7 +646,8 @@ button.remove-stop {
     margin-bottom: 1em;
 }
 
-#nearestStopsResults .stopResult span {
+/* Enlaces a lineas en la info de paradas */
+#nearestStopsResults .stopResult span, #lineas-correspondencia span.linea {
     display: inline-block;
     padding: 6px 8px;
     border-radius: 10px;
@@ -658,6 +659,20 @@ button.remove-stop {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+#lineas-correspondencia {
+    margin: 8px 0;
+}
+
+#lineas-correspondencia span.linea {
+  padding: 1px 6px;
+  margin: 0px 2px;
+}
+
+#lineas-correspondencia p {
+    font-style: italic;
+    margin: 5px 0 0 0;
 }
 
 #nearestStopsResults .stopResult ul {
@@ -956,13 +971,13 @@ button.remove-stop {
     color: white;
     padding: 10px;
     border-radius: 5px;
-    position: absolute;
+    position: fixed;
     top: 10px; 
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    z-index: 1000;
+    z-index: 1100;
     display: none;
 }
 
