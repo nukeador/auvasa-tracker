@@ -89,6 +89,27 @@ export async function getStopGeo(stopId) {
     }
 }
 
+// Función para obtener las líneas de una parada
+export async function getStopLines(stopId) {
+    try {
+        // Buscar la parada por su número
+        const busStops = await loadBusStops();
+        const stop = busStops.find(stop => stop.parada.numero === stopId);
+
+        if (!stop) {
+            throw new Error(`No se encontró la parada con el ID: ${stopId}`);
+        }
+
+        // Extraer las líneas de la parada
+        const lines = stop.lineas.ordinarias;
+
+        return lines;
+    } catch (error) {
+        console.error('Error al obtener datos del JSON:', error);
+        return null;
+    }
+}
+
 // Obtener todas los avisos y alertas
 export async function fetchAllBusAlerts() {
     try {
@@ -381,7 +402,7 @@ export async function displayScheduledBuses(stopNumber, date) {
     return horariosElement;
 }
 
-export async function addBusLine(stopNumber, lineNumber) {
+export async function addBusLine(stopNumber, lineNumber, confirm = false) {
 
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
 
@@ -423,6 +444,15 @@ export async function addBusLine(stopNumber, lineNumber) {
 
     // Si se ha proporcionado tanto la parada como la línea
     if (stopNumber && lineNumber) {
+        
+        // Si se ha llamado a la función con confirm, preguntamos antes de añadir
+        if (confirm) {
+            if (!window.confirm(`¿Desea añadir la línea ${lineNumber} de la parada ${stopNumber} a su lista?`)) {
+                // Si el usuario cancela, no seguimos
+                return;
+            }
+        }
+
         const existsInApi = await stopAndLineExist(stopNumber, lineNumber);
         
         // Crear div para el mensaje 
@@ -431,7 +461,7 @@ export async function addBusLine(stopNumber, lineNumber) {
         errorMessage.classList.add('error');
         document.body.appendChild(errorMessage);
 
-        // Mostrar y ocultar el mensaje
+        // Si no existe la combinación linea + parada mostrar error
         if (!existsInApi) {
         errorMessage.classList.add('show');
         setTimeout(() => {
