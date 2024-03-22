@@ -767,3 +767,13 @@ export function mapEvents() {
         });
     });
 }
+
+// Función para obtener la fecha de i días en el futuro
+export function getFutureDate(days) {
+    const futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + days);
+    const year = futureDate.getFullYear();
+    const month = String(futureDate.getMonth() + 1).padStart(2, '0');
+    const day = String(futureDate.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`;
+}

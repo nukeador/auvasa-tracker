@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getFutureDate } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -18,7 +18,7 @@ const stopsDestinationsCache = {
     cacheDuration: 24 * 60 * 60 * 1000 // 24 horas de cache de destinos 
 };
 
-// Agregar función para consultar API
+// Comprobación de si lineas y paradas existen en los datos del API
 export async function stopAndLineExist(stopNumber, lineNumber) {
     // Buscar la parada en busStops usando stopNumber
     const busStops = await loadBusStops();
@@ -43,6 +43,7 @@ export async function stopAndLineExist(stopNumber, lineNumber) {
     return lineExists;
 }
 
+// Agrupar conjunto de paradas por su número de parada
 export function groupByStops(busLines) {
     return busLines.reduce(function(acc, line) {
         if (!acc[line.stopNumber]) {
@@ -136,6 +137,7 @@ export async function fetchAllBusAlerts() {
     }
 }
 
+// Filtrar y mostrar solo las alertas de una línea en concreto
 export function filterBusAlerts(alerts, busLine) {
     // Verifica si alerts es array y no está vacío
     if (!Array.isArray(alerts) || alerts.length === 0) {
@@ -154,6 +156,7 @@ export function filterBusAlerts(alerts, busLine) {
     });
 }
 
+// Filtrar y mostrar las alertas de una parada específica
 // TODO: Añadir la llamada cuando mostrarmos el nombre de las paradas
 export function filterAlertsByStop(alerts, stopNumber) {
     // Verifica si alerts es array y no está vacío
@@ -704,7 +707,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         // Si no hay datos para esa línea, no hacemos nada
         if (busesLinea) {
         // Filtrar y encontrar el bus más cercano para la línea específica
-        const busMasCercano = elegirBusMasCercano(busesLinea);
+        const busMasCercano = await elegirBusMasCercano(busesLinea, stopNumber, lineNumber);
         // Obtener los próximos 3 buses
         busesProximos = getNextBuses(busMasCercano, busesLinea, 3);
 
@@ -715,7 +718,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             let ubicacionLat;
             let ubicacionLon;
             let velocidad;
-
             
             let tripId = busMasCercano.trip_id;
 
@@ -751,6 +753,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             } else {
                 // Si no hay datos en tiempo real calculamos el tiempo restante a partir de la hora de llegada programada
                 horaLlegada = busMasCercano.scheduled.llegada;
+ 
                 // Si el busMasCercano.scheduled.llegada es menor de 60 segundos, mostramos 0 minutos
                 if (Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000) < 1) {
                     tiempoRestante = 0;
@@ -758,17 +761,38 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     tiempoRestante = Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000);
                 }
 
-                let ahora = new Date();
-                let horaLlegadaProgramada = new Date(`1970-01-01T${busMasCercano.scheduled.llegada}Z`);
+                // Si busMasCercano tiene futureDate, significa que el bus es de un día próximo
+                if (busMasCercano.futureDate) {
+                    // Usar busMasCercano.scheduled.llegada como la hora y busMasCercano.futureDate como la fecha
+                    let scheduledArrivalTime = busMasCercano.scheduled.llegada;
+                    let scheduledArrivalDate = busMasCercano.futureDate;
+                
+                    // Crear un objeto Date con la fecha y hora programadas
+                    // Asegurarse de que scheduledArrivalDate esté en el formato correcto (AAAA-MM-DD)
+                    let formattedDate = scheduledArrivalDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+                    let scheduledArrival = new Date(`${formattedDate}T${scheduledArrivalTime}`);
 
-                // Fix al tiempo restante si el bus está programado para el día siguiente
-                if (horaLlegadaProgramada.getUTCHours() < ahora.getUTCHours() ||
-                    (horaLlegadaProgramada.getUTCHours() === ahora.getUTCHours() && horaLlegadaProgramada.getUTCMinutes() < ahora.getUTCMinutes())) {
-                        tiempoRestante = Math.round((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`) - new Date()) / 60000);
-                        tiempoRestante = 1440 + tiempoRestante; // Sumamos 24 horas (en minutos) al tiempoRestante negativo
-                        let horas = Math.floor(tiempoRestante / 60);
-                        let minutos = tiempoRestante % 60;
-                        tiempoRestante = `${horas}h ${minutos}`;
+                    // Obtener el nombre del día de la semana
+                    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+                    var dayOfWeek = daysOfWeek[scheduledArrival.getDay()];
+                
+                    // Calcular el tiempo restante en minutos
+                    let now = new Date();
+                    let timeRemaining = Math.round((scheduledArrival - now) / 60000);
+                
+                    // Si el tiempo restante es mayor de 24 horas, lo mostramos en días y horas
+                    if (timeRemaining > 1440) { // 1440 minutos equivalen a 24 horas
+                        let days = Math.floor(timeRemaining / 1440);
+                        let hours = Math.floor((timeRemaining % 1440) / 60);
+                        let minutes = Math.floor((timeRemaining % 1440) / 120);
+                        tiempoRestante = `${days}d <p> ${hours}h`;
+                    } else if (timeRemaining > 59) {
+                        let hours = Math.floor(timeRemaining / 60);
+                        let minutes = timeRemaining % 60;
+                        tiempoRestante = `${hours}h ${minutes} <p> min.`;
+                    } else {
+                        tiempoRestante = `${timeRemaining} <p>min.`;
+                    }
                 } else if (tiempoRestante > 59 ) {
                     // Si el tiempo restante es mayor de 59 minutos, lo mostramos en horas y minutos
                     let horas = Math.floor(tiempoRestante / 60);
@@ -776,13 +800,11 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     tiempoRestante = `${horas}h ${minutos}`;
                 }
 
-
-
                 lineItem.classList.remove('realtime');
                 lineItem.classList.add('programado');
             }
 
-            // Pasamos la horas de llegada a formato HH:MM
+            // Pasamos la horas de llegada a formato HH:MM cuando vienen en HH:MM:SS
             horaLlegada = horaLlegada.split(':');
             horaLlegada = horaLlegada[0] + ':' + horaLlegada[1];
 
@@ -835,9 +857,19 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 destino = destino.substring(0, 22) + "...";
             }
 
+            // Formato tiempo restante a mostrar
+            let tiempoRestanteHTML;
+            // Si el bus próximo es para un día diferente mostramos el día de la semana
+            if (busMasCercano.futureDate) {
+                tiempoRestanteHTML = tiempoRestante;
+                horaLlegada = dayOfWeek;
+            } else {
+                tiempoRestanteHTML = tiempoRestante + ' <p>min.';
+            }
+
             // TODO: Solo actualizar los datos que hayan cambiado desde la anterior actualización cambiado el texto de dentro de los elementos placeholder creados por createBusElement()
             // Actualizar el HTML con los datos del bus más cercano
-            lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestante + ' <p>min.</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
+            lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestanteHTML + '</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
 
             // Guarda si el elemento tenía la clase 'highlight'
             let hadHighlight = lineItem.classList.contains('highlight');
@@ -999,7 +1031,8 @@ export function combineBusData(scheduledData) {
     return combined;
 }
 
-export function elegirBusMasCercano(buses) {
+// Lógica principal para determinar de un conjunto de buses ordenados por tripID, cual es el bus siguiente o más cercano
+export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
 
     if (!buses) return null;
 
@@ -1007,8 +1040,6 @@ export function elegirBusMasCercano(buses) {
     let busMasCercanoHoy = null;
     let diferenciaMinima = Infinity;
     let busesAdelantados = new Set();
-    let tripIdPrimerBusSiguienteDia = null;
-    let primerBusSiguienteDia = null;
 
     const hoy = new Date();
     const fechaHoy = hoy.toISOString().split('T')[0]; // Fecha de hoy en formato YYYY-MM-DD
@@ -1052,28 +1083,39 @@ export function elegirBusMasCercano(buses) {
         }
     });
 
-    // Si no se encontró un bus para hoy, seleccionar el primero de la mañana del día siguiente
+    // Si no se encontró un bus para hoy, buscar en los próximos días
     if (diferenciaMinima === Infinity) {
-        let horaMinima = new Date('1970-01-02T23:59:59');
-        Object.entries(buses).forEach(([tripId, bus]) => {
-            if (bus.scheduled && bus.scheduled.llegada) {
-                let horaLlegadaSiguienteDia = new Date(`1970-01-02T${bus.scheduled.llegada}`);
-                if (horaLlegadaSiguienteDia < horaMinima) {
-                    horaMinima = horaLlegadaSiguienteDia;
-                    tripIdPrimerBusSiguienteDia = tripId;
-                    primerBusSiguienteDia = bus;
+        const maxDaysToLookAhead = 4; // Límite de días a buscar
+        for (let i = 1; i <= maxDaysToLookAhead; i++) {
+            const futureDate = getFutureDate(i);
+
+            // Realizar una llamada a la API para obtener los buses programados de i días en el futuro
+            const scheduledBusesFuture = await fetchScheduledBuses(stopNumber, lineNumber, futureDate);
+            if (scheduledBusesFuture && scheduledBusesFuture.lineas) {
+                // Ordenar los buses por hora de llegada
+                const busesArray = Object.values(scheduledBusesFuture.lineas).sort((a, b) => {
+                    const arrivalA = a.scheduled && a.horarios.llegada ? new Date(`1970-01-02T${a.horarios.llegada}`) : Infinity;
+                    const arrivalB = b.scheduled && b.horarios.llegada ? new Date(`1970-01-02T${b.horarios.llegada}`) : Infinity;
+                    return arrivalA - arrivalB;
+                });
+
+                // Devolver el primer bus de la lista ordenada
+                const primerBusSiguienteDia = busesArray[0];
+                if (primerBusSiguienteDia && primerBusSiguienteDia.horarios && primerBusSiguienteDia.horarios[0] && primerBusSiguienteDia.horarios[0].trip_id) {
+                    let busdata = { 
+                        trip_id: primerBusSiguienteDia.horarios[0].trip_id, 
+                        destination: primerBusSiguienteDia.horarios[0].destino,
+                        scheduled: primerBusSiguienteDia.horarios[0], 
+                        futureDate: futureDate,
+                        realTime: null
+                    }
+                    return busdata;
                 }
             }
-        });
-    }
+        }
 
-    if (tripIdPrimerBusSiguienteDia && primerBusSiguienteDia) {
-        return { 
-            trip_id: tripIdPrimerBusSiguienteDia, 
-            destination: primerBusSiguienteDia.scheduled.destino,
-            scheduled: primerBusSiguienteDia.scheduled, 
-            realTime: primerBusSiguienteDia.realTime 
-        };
+        // Si no hay buses disponibles en los próximos días, devolver null
+        return null;
     }
 
     // Si hay buses disponibles para hoy, devolver el más cercano
