@@ -769,7 +769,14 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                         let horas = Math.floor(tiempoRestante / 60);
                         let minutos = tiempoRestante % 60;
                         tiempoRestante = `${horas}h ${minutos}`;
+                } else if (tiempoRestante > 59 ) {
+                    // Si el tiempo restante es mayor de 59 minutos, lo mostramos en horas y minutos
+                    let horas = Math.floor(tiempoRestante / 60);
+                    let minutos = tiempoRestante % 60;
+                    tiempoRestante = `${horas}h ${minutos}`;
                 }
+
+
 
                 lineItem.classList.remove('realtime');
                 lineItem.classList.add('programado');
