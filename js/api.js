@@ -899,14 +899,14 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
                     destino = scheduledData.lineas[0].destino;
                 }
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio próximo</div>';
             }
         } else {
                 let destino = "";
                 if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
                     destino = scheduledData.lineas[0].destino;
                 }
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio hoy</div>';
+                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio próximo</div>';
         }
             // Cuadro de alertas
             lineItem.innerHTML += alertHTML;
@@ -1085,7 +1085,7 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
 
     // Si no se encontró un bus para hoy, buscar en los próximos días
     if (diferenciaMinima === Infinity) {
-        const maxDaysToLookAhead = 4; // Límite de días a buscar
+        const maxDaysToLookAhead = 10; // Límite de días a buscar
         for (let i = 1; i <= maxDaysToLookAhead; i++) {
             const futureDate = getFutureDate(i);
 
