@@ -102,6 +102,10 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
                 // Eliminamos los segundos de la hora HH:MM:SS
                 horaLlegada = horaLlegada.substring(0, horaLlegada.lastIndexOf(":"));
             }
+            // Si la hora es de 24:00 a 27:00, fix visual
+            if (horaLlegada.split(":")[0] > 23) {
+                horaLlegada = (horaLlegada.split(":")[0] -24) + ':' + horaLlegada.split(":")[0];
+            }
 
             innerHTML += '<li><span class="' + llegadaClass + '">' + horaLlegada + '</span></li>';
         }
