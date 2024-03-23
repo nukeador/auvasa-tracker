@@ -97,10 +97,31 @@ document.getElementById('lineNumber').addEventListener('focus', async function()
 
 function displayLineSuggestions(buses) {
     let resultsContainer = document.getElementById('lineSuggestions');
-
     const lineNumber = document.getElementById('lineNumber');
 
     resultsContainer.innerHTML = '';
+
+    // Ordenar las sugerencias de líneas primero numéricamente y luego alfabéticamente
+    buses.sort((a, b) => {
+        const aNumber = parseInt(a.linea, 10);
+        const bNumber = parseInt(b.linea, 10);
+        const aIsNumber = !isNaN(aNumber);
+        const bIsNumber = !isNaN(bNumber);
+
+        if (aIsNumber && bIsNumber) {
+            // Si ambos son números, compararlos numéricamente
+            return aNumber - bNumber;
+        } else if (aIsNumber && !bIsNumber) {
+            // Si a es un número y b no, a va primero
+            return -1;
+        } else if (!aIsNumber && bIsNumber) {
+            // Si a no es un número y b sí, b va primero
+            return 1;
+        } else {
+            // Si ambos no son números, compararlos alfabéticamente
+            return a.linea.localeCompare(b.linea);
+        }
+    });
 
     buses.forEach(function(bus) {
         let resultElement = document.createElement('div');
