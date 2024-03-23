@@ -650,8 +650,27 @@ export async function updateBusList() {
             });
         });
 
-        // Creamos todas las líneas añadidas en esa parada
-        stops[stopId].forEach((line, index) => {
+        // Creamos todas las líneas añadidas en esa parada, mostrando primero las numéricas y luego las que tienen una letra
+        stops[stopId].sort((a, b) => {
+            const aNumber = parseInt(a.lineNumber, 10);
+            const bNumber = parseInt(b.lineNumber, 10);
+            const aIsNumber = !isNaN(aNumber);
+            const bIsNumber = !isNaN(bNumber);
+
+            if (aIsNumber && bIsNumber) {
+                // Si ambos son números, compararlos numéricamente
+                return aNumber - bNumber;
+            } else if (aIsNumber && !bIsNumber) {
+                // Si a es un número y b no, a va primero
+                return -1;
+            } else if (!aIsNumber && bIsNumber) {
+                // Si a no es un número y b sí, b va primero
+                return 1;
+            } else {
+                // Si ambos no son números, compararlos alfabéticamente
+                return a.lineNumber.localeCompare(b.lineNumber);
+            }
+        }).forEach((line, index) => {
             const busId = stopId + '-' + line.lineNumber;
             let busElement = document.getElementById(busId);
             // Solo creamos las líneas que no estaban creadas previamente
@@ -661,6 +680,7 @@ export async function updateBusList() {
             // Llamar a fetchBusTime independientemente de si el busElement es nuevo o ya existía
             fetchBusTime(line.stopNumber, line.lineNumber, busElement);
         });
+
 
         createRemoveStopButton(stopId, stopElement);
 
