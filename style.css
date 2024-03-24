@@ -1401,9 +1401,6 @@ footer a:hover {
 .arrow {
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #629ade;
     position: absolute;
 }
 
@@ -1412,6 +1409,9 @@ footer a:hover {
     top: -10px;
     left: 90%;
     transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #629ade;
 }
 
 #overlay-newmenu20240311 .overlay-content {
@@ -1419,6 +1419,20 @@ footer a:hover {
     right: 4px;
 }
 
+#overlay-fixedstops0324 .overlay-content {
+    top: 85px;
+    margin-right: 17px;
+    margin-left: 17px;
+}
+
+#overlay-fixedstops0324 .arrow {
+    top: 128px;
+    left: 10px;
+    transform: translateX(-50%);
+    border-top: 10px solid #629ade;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
 
 /* Dark mode */
 body.dark-mode {
