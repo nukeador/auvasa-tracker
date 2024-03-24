@@ -600,7 +600,7 @@ export function saveBusLines(busLines) {
 
 // Función principal que crea y actualiza la lista de paradas y líneas
 export async function updateBusList() {
-    // Recuperamos las paradas y líneas añadidas
+    // Recuperamos las paradas y líneas guardadas previamente en Localstorage
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
     const stops = groupByStops(busLines);
 
@@ -624,6 +624,7 @@ export async function updateBusList() {
     sidebarStops.innerHTML = '';
     let stopsListHTML = '';
 
+    // Creamos las paradas una a una
     for (let stopId in stops) {
         let stopElement = document.getElementById(stopId);
         // Solo creamos las paradas que no estaban creadas previamente
@@ -651,7 +652,16 @@ export async function updateBusList() {
                 let suppressedStopAlert = document.createElement('div');
                 suppressedStopAlert.className = 'suppressedStopAlert';
                 suppressedStopAlert.innerHTML = "Parada actualmente suprimida, consulte las alertas de las líneas para más información";
-                stopElement.appendChild(suppressedStopAlert);
+                
+                // Seleccionar el elemento h2 dentro de stopElement
+                const h2Element = stopElement.querySelector('h2');
+                if (h2Element) {
+                    // Insertar suppressedStopAlert justo después del h2Element
+                    h2Element.insertAdjacentElement('afterend', suppressedStopAlert);
+                } else {
+                    // Si no hay un elemento h2, añadirlo al final de stopElement como antes
+                    stopElement.appendChild(suppressedStopAlert);
+                }
             }
         }
 
@@ -1067,15 +1077,9 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
         } catch (error) {
             console.error('Error en fetchBusTime:', error);
-            lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo">Error</div>';
-            // Agregar también aquí el botón de eliminar
-            const removeButton = createButton('remove-button', '&#128465;', function() {
-                removeBusLine(stopNumber, lineNumber);
-            });
-            lineItem.appendChild(removeButton);
-            // Crear el botón de flecha
-            const arrowButton = createArrowButton();
-            lineItem.appendChild(arrowButton);
+            lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo sin-servicio">Sin datos en este momento</div>';
+            const infoPanel = createInfoPanel(busesProximos, stopNumber, lineNumber);
+            lineItem.appendChild(infoPanel);
         };
 }
 

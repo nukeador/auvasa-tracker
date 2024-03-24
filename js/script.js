@@ -9,11 +9,12 @@ if (document.readyState === "loading") {  // Cargando aún no ha terminado
 function main() {
     console.log('🚍 ¡Te damos la bienvenida a AUVASA Tracker! Recuerda que puedes colaborar con el código en https://github.com/nukeador/auvasa-tracker');
 
-    // Actualizar y pintar lista de paradas y líneas
+    // Actualizar y pintar lista de paradas
     updateBusList();
+    // Actualizar la lista de forma recurrente
     iniciarIntervalo(updateBusList);
 
-    // Ejecuta updateBusList 1 segundo después de abrir la página en iOS porque los recursos localstorage no está disponibles inmediatamente en iOS 17.4 :-( 
+    // HOTFIX iOS: Ejecuta updateBusList 1 segundo después de abrir la página en iOS porque los recursos localstorage no está disponibles inmediatamente en iOS 17.4 :-( 
     if (isIOS()) {
         setTimeout(updateBusList, 1000);
     }
