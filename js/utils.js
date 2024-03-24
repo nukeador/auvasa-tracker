@@ -83,33 +83,35 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
     let innerHTML = '<div class="proximos-buses"><ul>';
 
     // Añadimos cada autobús
-    busesProximos.forEach(bus => {
-        let horaLlegada;
-        let llegadaClass;
+    if (busesProximos?.length > 0){
+        busesProximos.forEach(bus => {
+            let horaLlegada;
+            let llegadaClass;
 
-        if (bus.realTime && bus.realTime.llegada) {
-            horaLlegada = bus.realTime.llegada;
-            llegadaClass = 'realtime';
-        } else {
-            horaLlegada = bus.scheduled.llegada;
-            llegadaClass = 'programado';
-        }
-
-        // Verificamos que horaLlegada no sea null o vacío
-        if (horaLlegada) {
-            // Verificamos si horaLlegada tiene el formato "HH:MM:SS"
-            if (horaLlegada.includes(":") && horaLlegada.split(":").length === 3) {
-                // Eliminamos los segundos de la hora HH:MM:SS
-                horaLlegada = horaLlegada.substring(0, horaLlegada.lastIndexOf(":"));
-            }
-            // Si la hora es de 24:00 a 27:00, fix visual
-            if (horaLlegada.split(":")[0] > 23) {
-                horaLlegada = (horaLlegada.split(":")[0] -24) + ':' + horaLlegada.split(":")[0];
+            if (bus.realTime && bus.realTime.llegada) {
+                horaLlegada = bus.realTime.llegada;
+                llegadaClass = 'realtime';
+            } else {
+                horaLlegada = bus.scheduled.llegada;
+                llegadaClass = 'programado';
             }
 
-            innerHTML += '<li><span class="' + llegadaClass + '">' + horaLlegada + '</span></li>';
-        }
-    });
+            // Verificamos que horaLlegada no sea null o vacío
+            if (horaLlegada) {
+                // Verificamos si horaLlegada tiene el formato "HH:MM:SS"
+                if (horaLlegada.includes(":") && horaLlegada.split(":").length === 3) {
+                    // Eliminamos los segundos de la hora HH:MM:SS
+                    horaLlegada = horaLlegada.substring(0, horaLlegada.lastIndexOf(":"));
+                }
+                // Si la hora es de 24:00 a 27:00, fix visual
+                if (horaLlegada.split(":")[0] > 23) {
+                    horaLlegada = (horaLlegada.split(":")[0] -24) + ':' + horaLlegada.split(":")[0];
+                }
+
+                innerHTML += '<li><span class="' + llegadaClass + '">' + horaLlegada + '</span></li>';
+            }
+        });
+    }
 
     innerHTML += '</ul></div><div class="actions-buttons"></div>';
 
