@@ -846,7 +846,18 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     // Crear un objeto Date con la fecha y hora programadas
                     // Asegurarse de que scheduledArrivalDate esté en el formato correcto (AAAA-MM-DD)
                     let formattedDate = scheduledArrivalDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+                    // Si la hora es 24:00 o superior, le sumamos un día a la fecha y restamos 24 a la hora
+                    if (busMasCercano.scheduled.llegada.split(":")[0] > 23) {
+                        let newDay = parseInt(formattedDate.split("-")[2]) + 1
+                        formattedDate = `${formattedDate.split("-")[0]}-${formattedDate.split("-")[1]}-${newDay}`;
+                        let newHour = parseInt(scheduledArrivalTime.split(":")[0]) -24;  
+                        // Añadimos un 0 al inicio para que 24 sea 00
+                        scheduledArrivalTime = `0${newHour}:${scheduledArrivalTime.split(":")[1]}`;
+                    }
+
                     let scheduledArrival = new Date(`${formattedDate}T${scheduledArrivalTime}`);
+
+                    console.log(`FLAG: ${tripId} - ${formattedDate}T${scheduledArrivalTime} = ${scheduledArrival}`);
 
                     // Obtener el nombre del día de la semana
                     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -878,19 +889,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
                 lineItem.classList.remove('realtime');
                 lineItem.classList.add('programado');
-            }
-
-            let horaLlegadaProgramada;
-            if (busMasCercano.scheduled) {
-                horaLlegadaProgramada = busMasCercano.scheduled.llegada.split(':');
-                // Fix a las horas 24:00 a 27:00
-                if (horaLlegadaProgramada[0] > 23) {horaLlegadaProgramada[0] = horaLlegadaProgramada[0] - 24}
-                horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
-            } else {
-                horaLlegadaProgramada = busMasCercano.realTime.llegada.split(':');
-                // Fix a las horas 24:00 a 27:00
-                if (horaLlegadaProgramada[0] > 23) {horaLlegadaProgramada[0] = horaLlegadaProgramada[0] - 24}
-                horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
             }
 
             // Calculos de retrasos/adelantos
@@ -931,6 +929,19 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             // Cortamos destino a máximo 22 caracteres
             if (destino.length > 25) {
                 destino = destino.substring(0, 22) + "...";
+            }
+
+            let horaLlegadaProgramada;
+            if (busMasCercano.scheduled) {
+                horaLlegadaProgramada = busMasCercano.scheduled.llegada.split(':');
+                // Fix a las horas 24:00 a 27:00
+                if (horaLlegadaProgramada[0] > 23) {horaLlegadaProgramada[0] = horaLlegadaProgramada[0] - 24}
+                horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
+                } else {
+                    horaLlegadaProgramada = busMasCercano.realTime.llegada.split(':');
+                    // Fix a las horas 24:00 a 27:00
+                if (horaLlegadaProgramada[0] > 23) {horaLlegadaProgramada[0] = horaLlegadaProgramada[0] - 24}
+                    horaLlegadaProgramada = horaLlegadaProgramada[0] + ':' + horaLlegadaProgramada[1];
             }
 
             // Formato tiempo restante a mostrar
