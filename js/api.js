@@ -857,8 +857,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
                     let scheduledArrival = new Date(`${formattedDate}T${scheduledArrivalTime}`);
 
-                    console.log(`FLAG: ${tripId} - ${formattedDate}T${scheduledArrivalTime} = ${scheduledArrival}`);
-
                     // Obtener el nombre del día de la semana
                     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
                     var dayOfWeek = daysOfWeek[scheduledArrival.getDay()];
