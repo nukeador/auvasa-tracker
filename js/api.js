@@ -874,15 +874,10 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     } else if (timeRemaining > 59) {
                         let hours = Math.floor(timeRemaining / 60);
                         let minutes = timeRemaining % 60;
-                        tiempoRestante = `${hours}h ${minutes} <p> min.`;
+                        tiempoRestante = `${hours}h <p>${minutes} min`;
                     } else {
-                        tiempoRestante = `${timeRemaining} <p>min.`;
+                        tiempoRestante = `${timeRemaining} <p>min`;
                     }
-                } else if (tiempoRestante > 59 ) {
-                    // Si el tiempo restante es mayor de 59 minutos, lo mostramos en horas y minutos
-                    let horas = Math.floor(tiempoRestante / 60);
-                    let minutos = tiempoRestante % 60;
-                    tiempoRestante = `${horas}h ${minutos}`;
                 }
 
                 lineItem.classList.remove('realtime');
@@ -948,8 +943,14 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             if (busMasCercano.futureDate) {
                 tiempoRestanteHTML = tiempoRestante;
                 horaLlegada = dayOfWeek;
+            } else if (tiempoRestante > 59 ) {
+                // Si el tiempo restante es mayor de 59 minutos, lo mostramos en horas y minutos
+                let horas = Math.floor(tiempoRestante / 60);
+                let minutos = tiempoRestante % 60;
+                tiempoRestanteHTML = `${horas}h <p>${minutos} min`;
+                horaLlegada = horaLlegada.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
             } else {
-                tiempoRestanteHTML = tiempoRestante + ' <p>min.';
+                tiempoRestanteHTML = tiempoRestante + ' <p>min';
                 // Pasamos la fecha y hora completa de llegada a hora HH:MM
                 horaLlegada = horaLlegada.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
             }
