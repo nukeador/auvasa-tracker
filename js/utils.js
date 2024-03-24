@@ -772,7 +772,14 @@ export function mapEvents() {
     });
 }
 
-// Función para obtener la fecha de i días en el futuro
+// Obtener el día anterior
+export function getYesterdayDate() {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return yesterday.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+}
+
+// Obtener la fecha de i días en el futuro
 export function getFutureDate(days) {
     const futureDate = new Date();
     futureDate.setDate(futureDate.getDate() + days);
