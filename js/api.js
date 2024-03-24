@@ -581,10 +581,38 @@ export async function updateBusList() {
     sidebarStops.innerHTML = '';
     let stopsListHTML = '';
 
+    // Obtén la lista de paradas "Fijas" del almacenamiento local
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
+
+    // Ordena las paradas en función de si son "Fijas" o no
+    let sortedStops = Object.keys(stops).sort((a, b) => {
+        const aIsFixed = fixedStops.includes(a);
+        const bIsFixed = fixedStops.includes(b);
+    
+        if (aIsFixed && !bIsFixed) {
+            return -1; // a debe ir primero
+        } else if (!aIsFixed && bIsFixed) {
+            return 1; // b debe ir primero
+        } else {
+            // Si ambos son "Fijas" o no "Fijas", ordenar alfabéticamente
+            return a.localeCompare(b);
+        }
+    });
+    
+    // Crea un nuevo array con los objetos ordenados
+    let sortedStopsArray = [];
+    sortedStops.forEach(key => {
+        sortedStopsArray.push({ stopId: key, lines: stops[key] });
+    });
+
     // Creamos las paradas una a una
-    for (let stopId in stops) {
+    (async () => {
+        for (let stop of sortedStopsArray) {
+        let stopId = stop.stopId;
+
         let stopElement = document.getElementById(stopId);
         // Solo creamos las paradas que no estaban creadas previamente
+        // A menos que no hayan pasado recreateStops
         if (!stopElement) {
             stopElement = createStopElement(stopId, busList);
         }
@@ -624,7 +652,7 @@ export async function updateBusList() {
 
         // Actualizamos el listado en el sidebar
         stopsListHTML += `<li><a class="sidebar-stop-link" data-stopid="${stopId}" href="#${stopId}">${stopName}</a></li>`;
-        sidebarStops.innerHTML = '<h2>Tus paradas</h2><ul>' + stopsListHTML + '</ul>';
+        sidebarStops.innerHTML = '<h2>Tus paradas</h2><ul>' + stopsListHTML + '</ul><p class="sidebar-footer">fijará una parada arriba en la lista</p>';
         // Agregar event listener a los enlaces del sidebar
         const stopLinks = sidebarStops.querySelectorAll('.sidebar-stop-link');
         stopLinks.forEach(link => {
@@ -680,7 +708,10 @@ export async function updateBusList() {
             mostrarHorarios.remove();
         }
         mostrarHorarios = createMostrarHorarios(stopId, stopElement, horariosBox);
-    }
+
+    }})().catch(error => {
+        console.error('Error processing stops:', error);
+    });
 
     removeObsoleteElements(stops);
     updateLastUpdatedTime();

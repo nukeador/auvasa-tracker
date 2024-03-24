@@ -175,6 +175,53 @@ export function updateStopName(stopElement, newName, stopGeo) {
     }
 }
 
+// Guarda o elimina las paradas fijas y actualiza su posición
+async function toggleFixedStop(event) {
+    const stopId = event.target.id.split('-')[2]; // Obtiene el stopId del id del icono
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
+
+    const busList = document.getElementById("busList");
+    const stopElement = document.getElementById(stopId);
+
+    if (fixedStops.includes(stopId)) {
+        // Si la parada ya está en fixedStops, la quitamos
+        fixedStops = fixedStops.filter(stop => stop !== stopId);
+        showSuccessPopUp("Parada desfijada");
+        stopElement.parentNode.removeChild(stopElement);
+
+        await updateBusList();
+        // Delay para que de tiempo a recrear el elemento
+        setTimeout(async () => {
+            const newStopElement = document.getElementById(`pin-icon-${stopId}`);
+            newStopElement.classList.remove('fixed'); // Actualiza el icono
+            await updateBusList(); // Volvemos a actualizar
+        }, 2000);
+    } else {
+        // Si la parada no está en fixedStops, la añadimos
+        fixedStops.push(stopId);
+        event.target.classList.add('fixed'); // Actualiza el icono
+        showSuccessPopUp("Parada fijada en la parte superior");
+        // Verifica si el elemento de parada ya está al principio del contenedor de paradas
+        const firstChild = busList.firstChild;
+        if (firstChild && firstChild.id !== stopId) {
+            // Mueve el elemento de parada al principio del contenedor de paradas
+            busList.insertBefore(stopElement, busList.firstChild);
+        }
+        // Actualiza la lista de paradas para reflejar el cambio
+        await updateBusList();
+
+        // Delay para que de tiempo a mover el elemento
+        setTimeout(async () => {
+            // Hacemos scroll al elemento
+            scrollToElement(stopElement);
+            await updateBusList(); // Volvemos a actualizar
+        }, 700);
+    }
+
+    // Guarda la nueva lista de paradas fijas en localStorage
+    localStorage.setItem('fixedStops', JSON.stringify(fixedStops));
+}
+
 export function createStopElement(stopId, busList) {
     let welcomeBox = document.getElementById('welcome-box');
     welcomeBox.style.display = 'none';
@@ -183,6 +230,22 @@ export function createStopElement(stopId, busList) {
     stopElement.id = stopId;
     stopElement.className = 'stop-block';
     stopElement.innerHTML = '<h2>'+ stopId + '</h2>';
+
+    // Agrega el icono de fijar parada
+    let pinIcon = document.createElement('i');
+    pinIcon.className = 'pin-icon';
+    pinIcon.id = 'pin-icon-' + stopId;
+    pinIcon.title = 'Fijar parada';
+
+    // Verifica si la parada está en fixedStops y establece la clase del icono en consecuencia
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
+    if (fixedStops.includes(stopId)) {
+        pinIcon.classList.add('fixed'); // Agrega la clase 'fixed' si la parada está en fixedStops
+        pinIcon.title = 'Desfijar parada';
+    }
+
+    pinIcon.addEventListener('click', toggleFixedStop);
+    stopElement.appendChild(pinIcon);
 
     busList.appendChild(stopElement);
     return stopElement;
