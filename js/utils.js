@@ -378,17 +378,29 @@ export function showErrorPopUp(message) {
     }, 3000); // ocultar después de 3 segundos
 }
 
-export function showSuccessPopUp(message) {
+export function showSuccessPopUp(message, elementId = null) {
     // Crear div para el mensaje 
-    const errorMessage = document.createElement('div');
-    errorMessage.textContent = message;
-    errorMessage.classList.add('success');
-    document.body.appendChild(errorMessage);
+    const successMessage = document.createElement('div');
+    successMessage.textContent = message;
+    successMessage.classList.add('success');
 
+    // Si le hemos pasado un elemento al que enlazar mostramos enlace
+    if (elementId) {
+        successMessage.innerHTML = `${message} <p><a href="#">Clic para ver</a></p>`;
+
+        successMessage.addEventListener('click', function() {
+            event.preventDefault;
+            const elementToScroll = document.getElementById(elementId);
+            scrollToElement(elementToScroll);
+            successMessage.classList.remove('show');
+        });
+    }
+
+    document.body.appendChild(successMessage);
     // Mostrar y ocultar mensaje
-    errorMessage.classList.add('show');
+    successMessage.classList.add('show');
     setTimeout(() => {
-        errorMessage.classList.remove('show');
+        successMessage.classList.remove('show');
     }, 3000); // ocultar después de 3 segundos
 }
 

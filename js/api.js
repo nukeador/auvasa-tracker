@@ -470,19 +470,25 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
             const exists = busLines.some(function(line) {
                 return line.stopNumber === stopNumber && line.lineNumber === lineNumber;
             });
+            // Si no la tenemos ya guardada, la guardamos y creamos
             if (!exists) {
                 busLines.push({ stopNumber: stopNumber, lineNumber: lineNumber });
                 saveBusLines(busLines);
                 updateBusList();
 
-                showSuccessPopUp('Línea añadida con éxito al final de tu lista');
-
-                // Limpiar el contenido del input lineNumber
-                document.getElementById('lineNumber').value = '';
-
-                // Limpiamos sugerencias de lineas
-                document.getElementById('lineSuggestions').innerHTML = '';
+                const elementId = `${stopNumber}-${lineNumber}`;
+                showSuccessPopUp('Línea añadida con éxito al final de tu lista', elementId);
+            } else {
+                // Si ya la teniamos añadida avisamos.
+                const elementId = `${stopNumber}-${lineNumber}`;
+                showSuccessPopUp('Ya tienes esa línea añadida', elementId);
             }
+
+            // Limpiar el contenido del input lineNumber
+            document.getElementById('lineNumber').value = '';
+
+            // Limpiamos sugerencias de lineas
+            document.getElementById('lineSuggestions').innerHTML = '';
         }
     }
     // Si solo se ha proporcionado la parada, añadir todas las líneas de esa parada tras confirmación
@@ -508,7 +514,7 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
             updateBusList();
 
             showSuccessPopUp('Todas las líneas de la parada añadidas');
-            
+
             // Limpiar el contenido del input stopNumber
             document.getElementById('stopNumber').value = '';
 
