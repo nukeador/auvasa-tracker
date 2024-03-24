@@ -1569,10 +1569,22 @@ body.dark-mode {
     color: #000;
 }
 
+.bus-icon.linea-23, .linea-23 h3, #busMap .linea-23, span.linea-23 {
+    background-color: #FCC600;
+    stroke: #FCC600;
+    color: #000;
+}
+
 .bus-icon.linea-24, .linea-24 h3, #busMap .linea-24, span.linea-24 {
     background-color: #11459f;
     stroke: #11459f;
     color: #FFF;
+}
+
+.bus-icon.linea-26, .linea-26 h3, #busMap .linea-26, span.linea-26 {
+    background-color: #80D0F7;
+    stroke: #80D0F7;
+    color: #000;
 }
 
 .bus-icon.linea-C1, .bus-icon.linea-C2, .bus-icon.linea-C0, .linea-C1 h3, .linea-C2 h3, .linea-C0 h3, #busMap .linea-C1, #busMap .linea-C2, #busMap .linea-C0, span.linea-C1, span.linea-C2, span.linea-C0 {
@@ -1593,7 +1605,7 @@ body.dark-mode {
     color: #fff;
 }
 
-.bus-icon.linea-P1, .linea-P1 h3, #busMap .linea-P1, span.linea-P1, .bus-icon.linea-P2, .linea-P2 h3, #busMap .linea-P2, span.lineia-P2, .bus-icon.linea-P3, .linea-P3 h3, #busMap .linea-P3, span.linea-P3, .bus-icon.linea-P6, .linea-P6 h3, #busMap .linea-P6, span.linea-P6,.bus-icon.linea-PSC1, .linea-PSC1 h3, #busMap .linea-PSC1, span.linea-PSC1, .bus-icon.linea-PSC2, .linea-PSC2 h3, #busMap .linea-PSC2, span.linea-PSC2, .bus-icon.linea-PSC3, .linea-PSC3 h3, #busMap .linea-PSC3, span.linea-PSC3 {
+.bus-icon.linea-P1, .linea-P1 h3, #busMap .linea-P1, span.linea-P1, .bus-icon.linea-P2, .linea-P2 h3, #busMap .linea-P2, span.lineia-P2, .bus-icon.linea-P3, .linea-P3 h3, #busMap .linea-P3, span.linea-P3, .bus-icon.linea-P6, .linea-P6 h3, #busMap .linea-P6, span.linea-P6, .bus-icon.linea-P13, .linea-P13 h3, #busMap .linea-P13, span.linea-P13, .bus-icon.linea-PSC1, .linea-PSC1 h3, #busMap .linea-PSC1, span.linea-PSC1, .bus-icon.linea-PSC2, .linea-PSC2 h3, #busMap .linea-PSC2, span.linea-PSC2, .bus-icon.linea-PSC3, .linea-PSC3 h3, #busMap .linea-PSC3, span.linea-PSC3 {
     background-color: #792B37;
     stroke: #792B37;
     color: #fff;
@@ -1632,5 +1644,11 @@ body.dark-mode {
 .bus-icon.linea-B5, .linea-B5 h3, #busMap .linea-B5, span.linea-B5 {
     background-color: #000;
     stroke: #000;
+    color: #FFF;
+}
+
+.bus-icon.linea-F1, .linea-F1 h3, #busMap .linea-F1, span.linea-F1, .bus-icon.linea-F2, .linea-F2 h3, #busMap .linea-F2, span.linea-F2, .bus-icon.linea-F3, .linea-F3 h3, #busMap .linea-F3, span.linea-F3, .bus-icon.linea-F4, .linea-F4 h3, #busMap .linea-F4, span.linea-F4, .bus-icon.linea-F5, .linea-F5 h3, #busMap .linea-F5, span.linea-F5 {
+    background-color: #006d38;
+    stroke: #006d38;
     color: #FFF;
 }
