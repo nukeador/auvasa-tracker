@@ -24,19 +24,19 @@
     <meta name="twitter:image" content="https://auvasatracker.com/favicon.png">
 
     <link rel="icon" type="image/x-icon" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="style.css?v=202403242130">
+    <link rel="stylesheet" type="text/css" href="style.css?v=202403242220">
     <link rel="manifest" href="manifest.json">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
     <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' https://unpkg.com https://stats.auvasatracker.com https://beta.auvasatracker.com;
-    style-src 'self' 'unsafe-inline' https://unpkg.com;
-    img-src 'self' data: https://auvasatracker.com https://beta.auvasatracker.com https://*.tile.openstreetmap.org https://*.tile.thunderforest.com https://unpkg.com;
-    connect-src 'self' https://stats.auvasatracker.com https://beta.auvasatracker.com https://api.auvasatracker.com https://gtfs.auvasatracker.com https://push.auvasatracker.com;
-    font-src 'self';
-    frame-src 'self' https://rutas.auvasatracker.com;
+    default-src 'self' http://localhost:8000 http://localhost:3000;
+    script-src 'self' https://unpkg.com https://stats.auvasatracker.com https://beta.auvasatracker.com http://localhost:8000 http://localhost:3000;
+    style-src 'self' 'unsafe-inline' https://unpkg.com http://localhost:8000 http://localhost:3000;
+    img-src 'self' data: https://auvasatracker.com https://beta.auvasatracker.com https://*.tile.openstreetmap.org https://*.tile.thunderforest.com https://unpkg.com http://localhost:8000 http://localhost:3000;
+    connect-src 'self' https://stats.auvasatracker.com https://beta.auvasatracker.com https://api.auvasatracker.com https://gtfs.auvasatracker.com https://push.auvasatracker.com http://localhost:8000 http://localhost:3000;
+    font-src 'self' http://localhost:8000 http://localhost:3000;
+    frame-src 'self' https://rutas.auvasatracker.com http://localhost:8000 http://localhost:3000;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
