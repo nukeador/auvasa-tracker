@@ -1181,6 +1181,8 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     });
 
     // Si no se encontró un bus para hoy, buscar en los próximos días
+    // TODO: Los buses nocturnos solo salen en los datos del día anterior, por lo que a las 0:00 se pierden
+    //       los datos de los buses que están por llegar, se necesita una solución para esto
     if (diferenciaMinima === Infinity) {
         const maxDaysToLookAhead = 10; // Límite de días a buscar
         for (let i = 1; i <= maxDaysToLookAhead; i++) {
@@ -1216,7 +1218,7 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     }
 
     // Si hay buses disponibles para hoy, devolver el más cercano
-    if (tripIdMasCercanoHoy && busMasCercanoHoy) {
+    if (tripIdMasCercanoHoy && busMasCercanoHoy && busMasCercanoHoy.scheduled) {
         return { 
             trip_id: tripIdMasCercanoHoy, 
             destination: busMasCercanoHoy.scheduled.destino,
