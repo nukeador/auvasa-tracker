@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -437,33 +437,13 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
 
     // Si se ha proporcionado solo la línea
     if (!stopNumber && lineNumber) {
-        // Crear div para el mensaje 
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Debe especificar una parada para esta línea';
-        errorMessage.classList.add('error');
-        document.body.appendChild(errorMessage);
-    
-        // Mostrar y ocultar mensaje
-        errorMessage.classList.add('show');
-        setTimeout(() => {
-            errorMessage.classList.remove('show');
-        }, 3000); // ocultar después de 3 segundos
+        showErrorPopUp('Debe especificar una parada para esta línea');
         return;
     }
 
     // Si no hay parada o datos de la parada
     if (!stopData) {
-        // Crear div para el mensaje 
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Parada no encontrada o vacía';
-        errorMessage.classList.add('error');
-        document.body.appendChild(errorMessage);
-
-        // Mostrar y ocultar mensaje
-        errorMessage.classList.add('show');
-        setTimeout(() => {
-            errorMessage.classList.remove('show');
-        }, 3000); // ocultar después de 3 segundos
+        showErrorPopUp('Error: Parada no encontrada o vacía');
         return;
     }
 
@@ -479,20 +459,11 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
         }
 
         const existsInApi = await stopAndLineExist(stopNumber, lineNumber);
-        
-        // Crear div para el mensaje 
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Actualmente no hay información para esa línea en esa parada';
-        errorMessage.classList.add('error');
-        document.body.appendChild(errorMessage);
 
         // Si no existe la combinación linea + parada mostrar error
         if (!existsInApi) {
-        errorMessage.classList.add('show');
-        setTimeout(() => {
-            errorMessage.classList.remove('show');
-        }, 3000); // ocultar después de 3 segundos
-        return;
+            showErrorPopUp('Error: Actualmente no hay información para esa línea en esa parada');
+            return;
         }
     
         if (stopNumber && lineNumber) {
@@ -504,17 +475,7 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
                 saveBusLines(busLines);
                 updateBusList();
 
-                // Crear div para el mensaje 
-                const sucessMessage = document.createElement('div');
-                sucessMessage.textContent = 'Línea añadida con éxito al final de tu lista';
-                sucessMessage.classList.add('success');
-                document.body.appendChild(sucessMessage);
-
-                // Mostrar y ocultar mensaje
-                sucessMessage.classList.add('show');
-                setTimeout(() => {
-                    sucessMessage.classList.remove('show');
-                }, 3000); // ocultar después de 3 segundos
+                showSuccessPopUp('Línea añadida con éxito al final de tu lista');
 
                 // Limpiar el contenido del input lineNumber
                 document.getElementById('lineNumber').value = '';
@@ -546,18 +507,8 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
             saveBusLines(busLines);
             updateBusList();
 
-            // Crear div para el mensaje 
-            const sucessMessage = document.createElement('div');
-            sucessMessage.textContent = 'Todas las líneas de la parada añadidas';
-            sucessMessage.classList.add('success');
-            document.body.appendChild(sucessMessage);
-
-            // Mostrar y ocultar mensaje
-            sucessMessage.classList.add('show');
-            setTimeout(() => {
-                sucessMessage.classList.remove('show');
-            }, 3000); // ocultar después de 3 segundos
-
+            showSuccessPopUp('Todas las líneas de la parada añadidas');
+            
             // Limpiar el contenido del input stopNumber
             document.getElementById('stopNumber').value = '';
 

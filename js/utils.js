@@ -364,6 +364,34 @@ export function showError(error) {
     hideLoadingSpinner();
 }    
 
+export function showErrorPopUp(message) {
+    // Crear div para el mensaje 
+    const errorMessage = document.createElement('div');
+    errorMessage.textContent = message;
+    errorMessage.classList.add('error');
+    document.body.appendChild(errorMessage);
+
+    // Mostrar y ocultar mensaje
+    errorMessage.classList.add('show');
+    setTimeout(() => {
+        errorMessage.classList.remove('show');
+    }, 3000); // ocultar después de 3 segundos
+}
+
+export function showSuccessPopUp(message) {
+    // Crear div para el mensaje 
+    const errorMessage = document.createElement('div');
+    errorMessage.textContent = message;
+    errorMessage.classList.add('success');
+    document.body.appendChild(errorMessage);
+
+    // Mostrar y ocultar mensaje
+    errorMessage.classList.add('show');
+    setTimeout(() => {
+        errorMessage.classList.remove('show');
+    }, 3000); // ocultar después de 3 segundos
+}
+
 export function iniciarIntervalo(updateBusList) {
     // Hacemos coincidir el intervalo con el inicio de cada minuto
     let ahora = new Date();
