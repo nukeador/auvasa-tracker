@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getFutureDate } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -1189,10 +1189,54 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
         }
     });
 
-    // Si no se encontró un bus para hoy, buscar en los próximos días
-    // TODO: Los buses nocturnos solo salen en los datos del día anterior, por lo que a las 0:00 se pierden
-    //       los datos de los buses que están por llegar, se necesita una solución para esto
+    // Si no se encontró un bus para hoy, buscar en los días siguientes
+    // Excepto si estamos entre las 12 de la noche y las 5 de la mañana, que buscaremos en los datos del día anterior
+    // Los buses nocturnos aparecen en los datos del día anterior con horas 24, 25, 26, 27...
     if (diferenciaMinima === Infinity) {
+        
+        const yesterdayDate = getYesterdayDate();
+        // Obtener la hora actual
+        const now = new Date();
+        const currentHour = now.getHours();
+
+        // Verificar si la hora actual está entre las 0:00 y las 5:00
+        if (currentHour >= 0 && currentHour < 5) {
+            // Consultar los buses nocturnos programados del día anterior, se consideran nocturnos si llegan antes de las 5:00
+            const scheduledBusesYesterday = await fetchScheduledBuses(stopNumber, lineNumber, yesterdayDate);
+            if (scheduledBusesYesterday && scheduledBusesYesterday.lineas) {
+                // Filtrar los buses que tienen una hora de llegada de 24:00 o superior
+                const busesArray = scheduledBusesYesterday.lineas.flatMap(linea => {
+                    return linea.horarios.filter(horario => {
+                        const [hours, minutes, seconds] = horario.llegada.split(':').map(Number);
+                        return hours > 23;
+                    }).map(horario => {
+                        return {
+                            ...linea,
+                            horarios: [horario]
+                        };
+                    });
+                }).sort((a, b) => {
+                    const arrivalA = a.horarios[0].llegada ? new Date(`1970-01-02T${a.horarios[0].llegada}`) : Infinity;
+                    const arrivalB = b.horarios[0].llegada ? new Date(`1970-01-02T${b.horarios[0].llegada}`) : Infinity;
+                    return arrivalA - arrivalB;
+                });
+
+                // Devolver el primer bus de la lista ordenada
+                const primerBusAnterior = busesArray[0];
+                if (primerBusAnterior && primerBusAnterior.horarios && primerBusAnterior.horarios[0]) {
+                    let busdata = { 
+                        trip_id: primerBusAnterior.horarios[0].trip_id, 
+                        destination: primerBusAnterior.horarios[0].destino,
+                        scheduled: primerBusAnterior.horarios[0], 
+                        pastDate: yesterdayDate,
+                        realTime: primerBusAnterior.realTime
+                    }
+                    return busdata;
+                }
+            }
+        }
+
+        // Si no hay buses nocturnos disponibles en el día anterior, buscar en los próximos días
         const maxDaysToLookAhead = 10; // Límite de días a buscar
         for (let i = 1; i <= maxDaysToLookAhead; i++) {
             const futureDate = getFutureDate(i);
