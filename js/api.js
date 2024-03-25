@@ -1412,6 +1412,15 @@ export function removeAllBusLines() {
         removeAllButton.style.display = 'none';
         let horariosBox = document.getElementById('horarios-box');
         horariosBox.innerHTML = '';
+        
+        // Hacemos scroll arriba
+        const headerTitle = document.getElementById('title');
+        if (headerTitle) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            window.scrollTo({ top: -headerHeight, behavior: 'smooth' });
+        }
+
+        showSuccessPopUp('Borradas todas las paradas');
     } else {
         // El usuario eligió no eliminar las líneas de autobús
         console.log("Eliminación cancelada.");
