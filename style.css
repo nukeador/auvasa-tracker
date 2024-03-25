@@ -1045,6 +1045,11 @@ button.remove-stop {
     background-color: #6ba379;
 }
 
+.success p {
+    margin: 4px 0;
+    font-size: 0.9em;
+}
+
 .notification-popup {
     position: fixed;
     top: 50%;
