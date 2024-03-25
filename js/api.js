@@ -1319,11 +1319,33 @@ export function removeBusLine(stopNumber, lineNumber) {
     let avisoBorrado = '¿Seguro que quieres borrar la línea ' + lineNumber + ' de la parada ' + stopNumber + '?';
 
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
 
     if (confirm(avisoBorrado)) {
         busLines = busLines.filter(function(line) {
             return !(line.stopNumber === stopNumber && line.lineNumber === lineNumber);
         });
+
+        // Comprobar si quedan líneas para esa parada
+        const remainingLinesForStop = busLines.filter(line => line.stopNumber === stopNumber);
+        if (remainingLinesForStop.length === 0) {
+            // Si no quedan líneas para esa parada, la borramos de paradas fijas
+            fixedStops = fixedStops.filter(stop => stop !== stopNumber);
+            localStorage.setItem('fixedStops', JSON.stringify(fixedStops));
+        }
+
+        // Si no quedan paradas, mostramos el mensaje de bienvenida de nuevo
+        if (busLines.length === 0) {
+            // Volvemos a mostrar el welcome-box
+            let welcomeBox = document.getElementById('welcome-box');
+            welcomeBox.style.display = 'block';
+
+            // Ocultamos el boton removeallbutton
+            let removeAllButton = document.getElementById('removeAllButton');
+            removeAllButton.style.display = 'none';
+            let horariosBox = document.getElementById('horarios-box');
+            horariosBox.innerHTML = '';
+        }
 
         saveBusLines(busLines);
         updateBusList();
@@ -1338,11 +1360,29 @@ export function removeStop(stopId) {
     let avisoBorrado = '¿Seguro que quieres quitar la parada ' + stopId + ' y todas sus líneas?';
 
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
 
     if (confirm(avisoBorrado)) {
         busLines = busLines.filter(function(line) {
             return line.stopNumber !== stopId;
         });
+
+        // Eliminar la parada de paradas fijadas si está allí
+        fixedStops = fixedStops.filter(stop => stop !== stopId);
+        localStorage.setItem('fixedStops', JSON.stringify(fixedStops));
+
+        // Si no quedan paradas, mostramos el mensaje de bienvenida de nuevo
+        if (busLines.length === 0) {
+            // Volvemos a mostrar el welcome-box
+            let welcomeBox = document.getElementById('welcome-box');
+            welcomeBox.style.display = 'block';
+
+            // Ocultamos el boton removeallbutton
+            let removeAllButton = document.getElementById('removeAllButton');
+            removeAllButton.style.display = 'none';
+            let horariosBox = document.getElementById('horarios-box');
+            horariosBox.innerHTML = '';
+        }
 
         saveBusLines(busLines);
         updateBusList();
@@ -1359,6 +1399,9 @@ export function removeAllBusLines() {
 
         // Borramos todas las notifiaciones
         updateNotifications(null, null, null);
+        // Borramos todas las paradas fijadas
+        let fixedStops = [];
+        localStorage.setItem('fixedStops', JSON.stringify(fixedStops));
 
         // Volvemos a mostrar el welcome-box
         let welcomeBox = document.getElementById('welcome-box');
