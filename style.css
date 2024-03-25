@@ -250,6 +250,24 @@ button#installButton {
 .sidebar #nearestStops {
     display: flex;
 }
+
+.sidebar .sidebar-footer {
+    background-image: url("img/pin-transparent.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    font-size: 0.75em;
+    padding-left: 18px;
+    background-position: 0px 3px;
+    color: #CCC;
+}
+
+.dark-mode .sidebar .sidebar-footer {
+    background-image: url("img/pin-transparent-light.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+}
+
 .bus-list {
     list-style: none;
     padding: 0;
@@ -305,12 +323,40 @@ button#installButton {
 .stop-block h2 {
     text-align: center;
     font-size: 0.9em;
-    padding: 0.7em 34px 0 10px;
+    padding: 0.7em 34px 0 33px;
 }
 
 .stop-block h2 span.stopId {
     font-weight: normal;
     color: #CCC;
+}
+
+.stop-block .pin-icon {
+    background-image: url("img/pin-transparent.png");
+    background-size: cover;
+    display: inline-block;
+    width: 10px;
+    height: 14px;
+    cursor: pointer;
+    position: absolute;
+    left: 17px;
+    top: 14px;
+}
+
+.dark-mode .stop-block .pin-icon {
+    background-image: url("img/pin-transparent-light.png");
+    background-size: cover;
+}
+
+.stop-block .pin-icon.fixed {
+    background-image: url("img/pin-solid.png");
+    background-size: cover;
+    display: inline-block;
+}
+
+.dark-mode .stop-block .pin-icon.fixed {
+    background-image: url("img/pin-solid-light.png");
+    background-size: cover;
 }
 
 .stop-block .mapIcon {
@@ -979,6 +1025,11 @@ button.remove-stop {
     transition: opacity 0.3s ease-in-out;
     z-index: 1100;
     display: none;
+    text-align: center;
+}
+
+.error a, .success a {
+    color: #FFF;
 }
 
 .error.show, .success.show {
@@ -992,6 +1043,11 @@ button.remove-stop {
 
 .success {
     background-color: #6ba379;
+}
+
+.success p {
+    margin: 4px 0;
+    font-size: 0.9em;
 }
 
 .notification-popup {
@@ -1315,7 +1371,7 @@ footer a:hover {
     box-shadow: 0 2px 16px 0 rgba(12,12,14,.57),0 4px 8px 0 rgba(12,12,14,.12);
     border-radius: 5px;
     position: absolute;
-    font-size: 0.8em;
+    font-size: 0.9em;
     padding: 10px 15px;
     color: #EEE;
     font-family: 'Muli';
@@ -1350,9 +1406,6 @@ footer a:hover {
 .arrow {
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #629ade;
     position: absolute;
 }
 
@@ -1361,6 +1414,9 @@ footer a:hover {
     top: -10px;
     left: 90%;
     transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #629ade;
 }
 
 #overlay-newmenu20240311 .overlay-content {
@@ -1368,6 +1424,20 @@ footer a:hover {
     right: 4px;
 }
 
+#overlay-fixedstops0324 .overlay-content {
+    top: 80px;
+    margin-right: 17px;
+    margin-left: 17px;
+}
+
+#overlay-fixedstops0324 .arrow {
+    top: 145px;
+    left: 10px;
+    transform: translateX(-50%);
+    border-top: 10px solid #629ade;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
 
 /* Dark mode */
 body.dark-mode {

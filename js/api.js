@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createArrowButton, createButton, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -437,33 +437,13 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
 
     // Si se ha proporcionado solo la línea
     if (!stopNumber && lineNumber) {
-        // Crear div para el mensaje 
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Debe especificar una parada para esta línea';
-        errorMessage.classList.add('error');
-        document.body.appendChild(errorMessage);
-    
-        // Mostrar y ocultar mensaje
-        errorMessage.classList.add('show');
-        setTimeout(() => {
-            errorMessage.classList.remove('show');
-        }, 3000); // ocultar después de 3 segundos
+        showErrorPopUp('Debe especificar una parada para esta línea');
         return;
     }
 
     // Si no hay parada o datos de la parada
     if (!stopData) {
-        // Crear div para el mensaje 
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Parada no encontrada o vacía';
-        errorMessage.classList.add('error');
-        document.body.appendChild(errorMessage);
-
-        // Mostrar y ocultar mensaje
-        errorMessage.classList.add('show');
-        setTimeout(() => {
-            errorMessage.classList.remove('show');
-        }, 3000); // ocultar después de 3 segundos
+        showErrorPopUp('Error: Parada no encontrada o vacía');
         return;
     }
 
@@ -479,49 +459,36 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
         }
 
         const existsInApi = await stopAndLineExist(stopNumber, lineNumber);
-        
-        // Crear div para el mensaje 
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error: Actualmente no hay información para esa línea en esa parada';
-        errorMessage.classList.add('error');
-        document.body.appendChild(errorMessage);
 
         // Si no existe la combinación linea + parada mostrar error
         if (!existsInApi) {
-        errorMessage.classList.add('show');
-        setTimeout(() => {
-            errorMessage.classList.remove('show');
-        }, 3000); // ocultar después de 3 segundos
-        return;
+            showErrorPopUp('Error: Actualmente no hay información para esa línea en esa parada');
+            return;
         }
     
         if (stopNumber && lineNumber) {
             const exists = busLines.some(function(line) {
                 return line.stopNumber === stopNumber && line.lineNumber === lineNumber;
             });
+            // Si no la tenemos ya guardada, la guardamos y creamos
             if (!exists) {
                 busLines.push({ stopNumber: stopNumber, lineNumber: lineNumber });
                 saveBusLines(busLines);
                 updateBusList();
 
-                // Crear div para el mensaje 
-                const sucessMessage = document.createElement('div');
-                sucessMessage.textContent = 'Línea añadida con éxito al final de tu lista';
-                sucessMessage.classList.add('success');
-                document.body.appendChild(sucessMessage);
-
-                // Mostrar y ocultar mensaje
-                sucessMessage.classList.add('show');
-                setTimeout(() => {
-                    sucessMessage.classList.remove('show');
-                }, 3000); // ocultar después de 3 segundos
-
-                // Limpiar el contenido del input lineNumber
-                document.getElementById('lineNumber').value = '';
-
-                // Limpiamos sugerencias de lineas
-                document.getElementById('lineSuggestions').innerHTML = '';
+                const elementId = `${stopNumber}-${lineNumber}`;
+                showSuccessPopUp('Línea añadida con éxito al final de tu lista', elementId);
+            } else {
+                // Si ya la teniamos añadida avisamos.
+                const elementId = `${stopNumber}-${lineNumber}`;
+                showSuccessPopUp('Ya tienes esa línea añadida', elementId);
             }
+
+            // Limpiar el contenido del input lineNumber
+            document.getElementById('lineNumber').value = '';
+
+            // Limpiamos sugerencias de lineas
+            document.getElementById('lineSuggestions').innerHTML = '';
         }
     }
     // Si solo se ha proporcionado la parada, añadir todas las líneas de esa parada tras confirmación
@@ -546,17 +513,7 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
             saveBusLines(busLines);
             updateBusList();
 
-            // Crear div para el mensaje 
-            const sucessMessage = document.createElement('div');
-            sucessMessage.textContent = 'Todas las líneas de la parada añadidas';
-            sucessMessage.classList.add('success');
-            document.body.appendChild(sucessMessage);
-
-            // Mostrar y ocultar mensaje
-            sucessMessage.classList.add('show');
-            setTimeout(() => {
-                sucessMessage.classList.remove('show');
-            }, 3000); // ocultar después de 3 segundos
+            showSuccessPopUp('Todas las líneas de la parada añadidas');
 
             // Limpiar el contenido del input stopNumber
             document.getElementById('stopNumber').value = '';
@@ -624,10 +581,38 @@ export async function updateBusList() {
     sidebarStops.innerHTML = '';
     let stopsListHTML = '';
 
+    // Obtén la lista de paradas "Fijas" del almacenamiento local
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
+
+    // Ordena las paradas en función de si son "Fijas" o no
+    let sortedStops = Object.keys(stops).sort((a, b) => {
+        const aIsFixed = fixedStops.includes(a);
+        const bIsFixed = fixedStops.includes(b);
+    
+        if (aIsFixed && !bIsFixed) {
+            return -1; // a debe ir primero
+        } else if (!aIsFixed && bIsFixed) {
+            return 1; // b debe ir primero
+        } else {
+            // Si ambos son "Fijas" o no "Fijas", ordenar alfabéticamente
+            return a.localeCompare(b);
+        }
+    });
+    
+    // Crea un nuevo array con los objetos ordenados
+    let sortedStopsArray = [];
+    sortedStops.forEach(key => {
+        sortedStopsArray.push({ stopId: key, lines: stops[key] });
+    });
+
     // Creamos las paradas una a una
-    for (let stopId in stops) {
+    (async () => {
+        for (let stop of sortedStopsArray) {
+        let stopId = stop.stopId;
+
         let stopElement = document.getElementById(stopId);
         // Solo creamos las paradas que no estaban creadas previamente
+        // A menos que no hayan pasado recreateStops
         if (!stopElement) {
             stopElement = createStopElement(stopId, busList);
         }
@@ -667,7 +652,7 @@ export async function updateBusList() {
 
         // Actualizamos el listado en el sidebar
         stopsListHTML += `<li><a class="sidebar-stop-link" data-stopid="${stopId}" href="#${stopId}">${stopName}</a></li>`;
-        sidebarStops.innerHTML = '<h2>Tus paradas</h2><ul>' + stopsListHTML + '</ul>';
+        sidebarStops.innerHTML = '<h2>Tus paradas</h2><ul>' + stopsListHTML + '</ul><p class="sidebar-footer">fijará una parada arriba en la lista</p>';
         // Agregar event listener a los enlaces del sidebar
         const stopLinks = sidebarStops.querySelectorAll('.sidebar-stop-link');
         stopLinks.forEach(link => {
@@ -723,7 +708,10 @@ export async function updateBusList() {
             mostrarHorarios.remove();
         }
         mostrarHorarios = createMostrarHorarios(stopId, stopElement, horariosBox);
-    }
+
+    }})().catch(error => {
+        console.error('Error processing stops:', error);
+    });
 
     removeObsoleteElements(stops);
     updateLastUpdatedTime();
@@ -1331,11 +1319,33 @@ export function removeBusLine(stopNumber, lineNumber) {
     let avisoBorrado = '¿Seguro que quieres borrar la línea ' + lineNumber + ' de la parada ' + stopNumber + '?';
 
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
 
     if (confirm(avisoBorrado)) {
         busLines = busLines.filter(function(line) {
             return !(line.stopNumber === stopNumber && line.lineNumber === lineNumber);
         });
+
+        // Comprobar si quedan líneas para esa parada
+        const remainingLinesForStop = busLines.filter(line => line.stopNumber === stopNumber);
+        if (remainingLinesForStop.length === 0) {
+            // Si no quedan líneas para esa parada, la borramos de paradas fijas
+            fixedStops = fixedStops.filter(stop => stop !== stopNumber);
+            localStorage.setItem('fixedStops', JSON.stringify(fixedStops));
+        }
+
+        // Si no quedan paradas, mostramos el mensaje de bienvenida de nuevo
+        if (busLines.length === 0) {
+            // Volvemos a mostrar el welcome-box
+            let welcomeBox = document.getElementById('welcome-box');
+            welcomeBox.style.display = 'block';
+
+            // Ocultamos el boton removeallbutton
+            let removeAllButton = document.getElementById('removeAllButton');
+            removeAllButton.style.display = 'none';
+            let horariosBox = document.getElementById('horarios-box');
+            horariosBox.innerHTML = '';
+        }
 
         saveBusLines(busLines);
         updateBusList();
@@ -1350,11 +1360,29 @@ export function removeStop(stopId) {
     let avisoBorrado = '¿Seguro que quieres quitar la parada ' + stopId + ' y todas sus líneas?';
 
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
+    let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
 
     if (confirm(avisoBorrado)) {
         busLines = busLines.filter(function(line) {
             return line.stopNumber !== stopId;
         });
+
+        // Eliminar la parada de paradas fijadas si está allí
+        fixedStops = fixedStops.filter(stop => stop !== stopId);
+        localStorage.setItem('fixedStops', JSON.stringify(fixedStops));
+
+        // Si no quedan paradas, mostramos el mensaje de bienvenida de nuevo
+        if (busLines.length === 0) {
+            // Volvemos a mostrar el welcome-box
+            let welcomeBox = document.getElementById('welcome-box');
+            welcomeBox.style.display = 'block';
+
+            // Ocultamos el boton removeallbutton
+            let removeAllButton = document.getElementById('removeAllButton');
+            removeAllButton.style.display = 'none';
+            let horariosBox = document.getElementById('horarios-box');
+            horariosBox.innerHTML = '';
+        }
 
         saveBusLines(busLines);
         updateBusList();
@@ -1371,6 +1399,9 @@ export function removeAllBusLines() {
 
         // Borramos todas las notifiaciones
         updateNotifications(null, null, null);
+        // Borramos todas las paradas fijadas
+        let fixedStops = [];
+        localStorage.setItem('fixedStops', JSON.stringify(fixedStops));
 
         // Volvemos a mostrar el welcome-box
         let welcomeBox = document.getElementById('welcome-box');
