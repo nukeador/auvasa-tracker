@@ -51,7 +51,7 @@ export function showNotice(lineNumber) {
     // Crear el elemento de notificación
     const notification = document.createElement('div');
     notification.className = 'notification-popup';
-    notification.textContent = `Se te notificará cuando queden 3 minutos para que llegue la línea ${lineNumber}`;
+    notification.textContent = `Se notificará cuando queden 3 minutos para que llegue la línea ${lineNumber}, deberá tener la app abierta`;
 
     // Agregar al cuerpo del documento
     document.body.appendChild(notification);
