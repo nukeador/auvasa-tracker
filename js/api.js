@@ -477,7 +477,7 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
                 updateBusList();
 
                 const elementId = `${stopNumber}-${lineNumber}`;
-                showSuccessPopUp('Línea añadida con éxito al final de tu lista', elementId);
+                showSuccessPopUp('Línea añadida al final de tu lista', elementId);
             } else {
                 // Si ya la teniamos añadida avisamos.
                 const elementId = `${stopNumber}-${lineNumber}`;

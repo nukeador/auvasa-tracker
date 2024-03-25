@@ -444,7 +444,7 @@ button#installButton {
 }
 
 .dark-mode .additional-info-panel.open {
-    background-color: #242424;
+    background-color: #333;
 }
 
 .additional-info-panel p, .additional-info-panel h2, .additional-info-panel ul, .additional-info-panel li {
@@ -683,6 +683,10 @@ button.remove-stop {
     border-radius: 20px;
     padding: 10px 10px;
     margin: 1em 0;
+}
+
+.dark-mode #nearestStopsResults .stopResult {
+    background-color: #333;
 }
 
 #nearestStopsResults .stopResult h4 {
@@ -1109,7 +1113,7 @@ button.remove-stop {
 }
 
 .dark-mode #share-whatsapp a {
-    color: #868686;
+    color: #bfbfbf;
 }
 
 #share-whatsapp:hover, #share-whatsapp:focus {
@@ -1131,6 +1135,12 @@ button.remove-stop {
     display: none; /* Inicialmente oculto */
     font-size: 0.8em;
     text-align: center;
+}
+
+.dark-mode .global-alerts-box {
+    background-color: #ceccb4;
+    color: #53533b;
+    border: 1px solid #8c8c71;
 }
 
 .global-alerts-box ul {
@@ -1178,6 +1188,10 @@ button.remove-stop {
     color: #72711c;
     font-weight: bold;
     font-size: 1em;
+}
+
+.dark-mode .global-alerts-box .alert-text-container .read-more-button {
+    background-color: #ceccb4;
 }
 
 .global-alerts-box .alert-text-container.expanded .read-more-button {
@@ -1305,6 +1319,10 @@ footer a {
     color: #333;
     text-decoration: none;
     margin: 0 0.5rem;
+}
+
+.dark-mode footer a {
+    color: #BBB;
 }
 
 footer a:hover {
@@ -1441,8 +1459,8 @@ footer a:hover {
 
 /* Dark mode */
 body.dark-mode {
-    background-color: #121212;
-    color: #fff;
+    background-color: #262626;
+    color: #eeeeee;
 }
 
 .dark-mode h1 {
@@ -1456,7 +1474,7 @@ body.dark-mode {
 
 .dark-mode #formulario form input {
     background-color: #323232;
-    color: #FFF;
+    color: #eeeeee;
 }
 
 .dark-mode input#stopNumber {
@@ -1488,17 +1506,17 @@ body.dark-mode {
 }
 
 .dark-mode #welcome-box h2, .dark-mode .alert-box h2, .dark-mode #horarios-box h2, .dark-mode #nearestStopsResults h2 {
-    color: #FFF;
+    color: #eeeeee;
 }
 
 .dark-mode #welcome-box p, .dark-mode .alert-box p, .dark-mode  #horarios-box p, .dark-mode #nearestStopsResults p {
-    color: #edebeb;
+    color: #eeeeee;
 }
 
 .dark-mode .stop-block {
-    background-color: #333; /* Fondo más oscuro */
-    color: #fff; /* Texto en color claro */
-    border-left-color: #aaa; /* Borde izquierdo más claro */
+    background-color: #333;
+    color: #eeeeee;
+    border-left-color: #aaa;
 }
 
 .dark-mode .highlight {
