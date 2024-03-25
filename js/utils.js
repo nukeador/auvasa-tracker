@@ -154,8 +154,12 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
     // No añadimos la campana en iOS porque no es compatible con las notificaciones
     const isOS = navigator.userAgent.match(/(iPad|iPhone|iPod)/g)? true : false;
 
+    // FIXME: Desactivamos notificaciones para todos hasta que haya una solución completa que
+    // funcione con la app cerrada
+    // https://github.com/nukeador/auvasa-tracker/issues/1#issuecomment-1867671323
     if (!isOS) {
-        infoPanel.querySelector('.actions-buttons').appendChild(bellButton);
+        // Descomentar la siguiente línea para activar notificaciones en Android
+        // infoPanel.querySelector('.actions-buttons').appendChild(bellButton);
     }
 
     // Añadimos el botón de eliminar al div de actions-buttons
