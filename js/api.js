@@ -1510,6 +1510,8 @@ export async function displayNearestStopsResults(stops, userLocation) {
             stop.distance + 'm</li></ul><a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A' + stop.ubicacion.y + ':' + stop.ubicacion.x + '&amp;origin=latlon%3A' + userLocation.y + '%3A' + userLocation.x + '#map=19.00/' + stop.ubicacion.x + '/' + stop.ubicacion.x + '" target="_blank">Mapa</a>';
 
         resultsDiv.appendChild(stopDiv);
+        // Restablecer el scroll arriba
+        resultsDiv.scrollTo(0, 0);
     }
 
     // Manejar los eventos de clic usando delegación de eventos
