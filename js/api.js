@@ -206,12 +206,6 @@ export async function fetchSuppressedStops() {
 // O podemos especificar también línea y fecha
 export async function fetchScheduledBuses(stopNumber, lineNumber, date) {
     
-    if(date) {
-        // Limpiamos el formato de date input HTML a YYYYMMDD
-        const [year, month, day] = date.split('-');
-        date = `${year}${month}${day}`;
-    }
-    
     const baseCacheKey = `busSchedule_${stopNumber}`;
     let cacheKey = lineNumber ? `${baseCacheKey}_${lineNumber}` : baseCacheKey;
     cacheKey += date ? `_${date}` : '';
@@ -315,7 +309,11 @@ export async function displayScheduledBuses(stopNumber, date) {
         ];
 
         for (const lineNumber of allLines) {
-            const busHorarios = await fetchScheduledBuses(stopNumber, lineNumber, date);
+            // Limpiamos el formato de date input HTML a YYYYMMDD
+            const [year, month, day] = date.split('-');
+            const cleanDate = `${year}${month}${day}`;
+
+            const busHorarios = await fetchScheduledBuses(stopNumber, lineNumber, cleanDate);
             if (busHorarios && busHorarios.lineas) {
                 busHorarios.lineas.forEach(bus => {
                     bus.horarios.forEach(horario => {
