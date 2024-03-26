@@ -1306,6 +1306,10 @@ button.remove-stop {
     text-align: center;
 }
 
+.dark-mode .foot-note #legend {
+    color: #CCC;
+}
+
 .foot-note #legend img {
     width: 15px;
     height: 15px;
