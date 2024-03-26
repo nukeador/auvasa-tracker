@@ -205,6 +205,13 @@ export async function fetchSuppressedStops() {
 // Podemos perdirselos de sólo una parada
 // O podemos especificar también línea y fecha
 export async function fetchScheduledBuses(stopNumber, lineNumber, date) {
+    
+    if(date) {
+        // Limpiamos el formato de date input HTML a YYYYMMDD
+        const [year, month, day] = date.split('-');
+        date = `${year}${month}${day}`;
+    }
+    
     const baseCacheKey = `busSchedule_${stopNumber}`;
     let cacheKey = lineNumber ? `${baseCacheKey}_${lineNumber}` : baseCacheKey;
     cacheKey += date ? `_${date}` : '';
@@ -366,17 +373,17 @@ export async function displayScheduledBuses(stopNumber, date) {
     dateInput.dispatchEvent(new Event('change'));
     
     if (horariosBuses && horariosBuses.parada && horariosBuses.parada[0]) {
-        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong>';
+        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong></p>';
         horariosElement.appendChild(dateInput);
         horariosElement.innerHTML += '<p id="stopDateExplanation">Modifique para ver otros días</p>';
     } else {
-        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>Parada ' + stopNumber + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong>';
+        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>Parada ' + stopNumber + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong></p>';
         horariosElement.appendChild(dateInput);
         horariosElement.innerHTML += '<p id="stopDateExplanation">Modifique para ver otros días</p>';
     }
-    
-    // Mostrar los horarios agrupados
-    Object.values(groupedHorarios).sort((a, b) => {
+
+    // Ordenar líneas, primer numéricas
+    let orderedHorarios = Object.values(groupedHorarios).sort((a, b) => {
         // Convertir los números de línea a enteros para la comparación
         const aNumber = parseInt(a.linea, 10);
         const bNumber = parseInt(b.linea, 10);
@@ -394,8 +401,16 @@ export async function displayScheduledBuses(stopNumber, date) {
         }
         // Si ambos son letras, compararlos alfabéticamente
         return a.linea.localeCompare(b.linea);
-    }).forEach(group => {
-        horariosElement.innerHTML += '</p><div class="linea-' + group.linea + '"><h3>' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
+    })
+
+    // Mostramos las líneas disponibles en la cabecera a modo de índice
+    Object.values(orderedHorarios).forEach (linea => {
+        horariosElement.innerHTML += `<a href="#linea-${linea.linea}"><span class="indice-linea linea-${linea.linea}">${linea.linea}</span></a>`;
+    });
+    
+    // Mostrar los horarios agrupados
+    orderedHorarios.forEach(group => {
+        horariosElement.innerHTML += '<div id="linea-' + group.linea + '" class="linea-' + group.linea + '"><h3>' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
         if (group.horarios.length === 0) {
             horariosElement.innerHTML += '<p class="hora">No hay horarios programados para esta fecha</p>';
         } else {
