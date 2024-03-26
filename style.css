@@ -673,6 +673,7 @@ button.remove-stop {
     font-size: 1.8em;
     margin: 0.4em 0.2em 0 0;
     display: inline-block;
+    cursor: pointer;
 }
 
 .line-info .alert-box .notice, #horarios-box .notice {

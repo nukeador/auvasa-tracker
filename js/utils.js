@@ -460,6 +460,9 @@ export function showSuccessPopUp(message, elementId = null) {
             const elementToScroll = document.getElementById(elementId);
             scrollToElement(elementToScroll);
             successMessage.classList.remove('show');
+            // Quitamos posibles diálogos que estén encima
+            const horariosBox = document.getElementById("horarios-box");
+            horariosBox.style.display = "none";
         });
     }
 
@@ -776,6 +779,12 @@ export function scheduledBusesEvents() {
             
             iniciarIntervalo(updateBusList);
             updateBusList();
+        }
+        // Verifica si el evento se originó en un elemento addLineButton y añadimos la línea a la lista
+        if (event.target.classList.contains('addLineButton')) {
+            let stopNumber = event.target.getAttribute('data-stop-number');
+            let lineNumber = event.target.getAttribute('data-line-number');
+            await addBusLine(stopNumber, lineNumber, true);
         }
     });
 }

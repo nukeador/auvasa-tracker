@@ -408,7 +408,7 @@ export async function displayScheduledBuses(stopNumber, date) {
     
     // Mostrar los horarios agrupados
     orderedHorarios.forEach(group => {
-        horariosElement.innerHTML += '<div id="linea-' + group.linea + '" class="linea-' + group.linea + '"><h3>' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
+        horariosElement.innerHTML += '<div id="linea-' + group.linea + '" class="linea-' + group.linea + '"><h3 class="addLineButton" data-stop-number="' + stopNumber + '" data-line-number="' + group.linea + '">' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
         if (group.horarios.length === 0) {
             horariosElement.innerHTML += '<p class="hora">No hay horarios programados para esta fecha</p>';
         } else {
