@@ -170,7 +170,7 @@ button#installButton {
 
 /* Estilos para el botón del menú hamburguesa */
 .menu-button {
-    font-size: 2em;
+    font-size: 32px;
     background: none;
     border: none;
     cursor: pointer;
@@ -180,6 +180,10 @@ button#installButton {
     z-index: 1000;
     padding: 0;
     width: 50px;
+}
+
+.menu-button-open {
+    top: -2px;
 }
 
 /* Estilos para el panel lateral */
@@ -598,22 +602,30 @@ button.remove-stop {
 
 /* Botón de cierre de diálogos */
 #horarios-box .horarios-close, #nearestStopsResults #close-nearest-stops {
-    background-color: #FFF;
+    background-image: url("img/close.png");
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    text-indent: -9999px;
+    cursor: pointer;
+    padding: 16px;
+    background-repeat: no-repeat;
     color: rgb(5, 5, 6);
-    font-size: 1.3em;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
     position: sticky;
     right: 0;
     top: 0;
     float: right;
     margin: 0;
-    padding: 3px;
-    }
+    border-radius: 50%;
+    border: 1px solid #cdcdcd;
+    display: block;
+    background-color: #FFF;
+    background-position: 8px 8px;
+}
 
 .dark-mode #horarios-box .horarios-close, .dark-mode #nearestStopsResults #close-nearest-stops {
-    color: #CCC;
     background-color: #2d2d2d;
+    border: 1px solid #7b7b7b;
 }
 
 #horarios-box #stopDateInput {
@@ -821,14 +833,23 @@ button.remove-stop {
 
 .closeRoutesButton {
     position: absolute;
-    top: 7px;
-    right: 3px;
+    top: 8px;
+    right: 14px;
     z-index: 1001;
-    background-color: transparent;
-    color: #FFF;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("img/close-light.png");
+    background-size: 12px;
+    width: 12px;
+    height: 12px;
+    text-indent: -9999px;
+    cursor: pointer;
+    padding: 15px;
+    background-repeat: no-repeat;
+    color: rgb(5, 5, 6);
+    border-radius: 50%;
+    border: 1px solid #646262;
+    display: block;
+    background-color: #444;
+    background-position: 9px 9px;
 }
 
 #mapContainer {
