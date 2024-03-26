@@ -297,6 +297,7 @@ export function createMostrarHorarios(stopId, stopElement, horariosBox) {
         horariosBox.setAttribute('data-stopNumber', stopId);
         horariosBox.innerHTML = horariosElement.innerHTML;
         horariosBox.style.display = 'block';
+        horariosBox.scrollTo(0, 0);
         hideLoadingSpinner();
         clearInterval(intervalId);
     });
