@@ -430,7 +430,7 @@ export async function displayScheduledBuses(stopNumber, date) {
     if (horariosBuses && horariosBuses.lineas) {
         horariosBuses.lineas.forEach(bus => {
             if (!groupedHorarios[`${bus.linea}-${bus.destino}`]) {
-                horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3>' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para esta fecha</p></div>';
+                horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3 class="addLineButton" data-stop-number="' + stopNumber + '" data-line-number="' + bus.linea + '">' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para esta fecha</p></div>';
             }
         });
     }
