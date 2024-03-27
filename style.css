@@ -882,7 +882,7 @@ button.remove-stop {
 #mapContainer {
     position: fixed;
     width: 100%;
-    height: 60%;
+    height: 65%;
     margin: 0 auto;
     top: 445px;
     left: 50%;
@@ -1329,7 +1329,6 @@ button.remove-stop {
 }
 
 .foot-note {
-    font-style: italic;
     padding: 1em;
     margin-top: 0 1em;
     font-size: 0.9em;
