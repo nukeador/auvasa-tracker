@@ -31,7 +31,7 @@ header h1 {
     background-image: url('img/logo-dark.png');
     background-repeat: no-repeat;
     background-size: 33px;
-    background-position: 1.2em;
+    background-position: 13px;
     padding: 0;
     margin: -6px 0 0 0;
     font-size: 1.3em;
@@ -89,15 +89,25 @@ button {
 }
 
 button#addButton {
-    margin: 0em 1.2em;
-    display: block;
-    color: #676f7b;
+    margin: 0em 19px 0 0;
     background-color: #c1c4ca;
+    background-image: url("img/add.png");
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    text-indent: -9999px;
+    cursor: pointer;
+    padding: 16px;
+    background-repeat: no-repeat;
+    color: rgb(5, 5, 6);
+    border-radius: 50%;
+    border: 1px solid #cdcdcd;
+    display: block;
+    background-position: 8px 8px;
 }
 
-button#addButton:hover {
-    background-color: #054a32;
-    color: #FFF;
+button#addButton:active {
+    background-color: #73767a;
 }
 
 button#removeAllButton {
