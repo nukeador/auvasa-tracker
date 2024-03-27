@@ -318,7 +318,6 @@ button#installButton {
 
 .stop-block {
     background-color: #fff;
-    border-left: 5px solid #143325;
     margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 4px;
@@ -417,6 +416,11 @@ button#installButton {
     position: relative;
     overflow: hidden;
     min-height: 60px;
+}
+
+.line-info .hora-programada {
+    margin-top: 12px;
+    margin-bottom: 0px;
 }
 
 .additional-info-panel {
@@ -521,12 +525,13 @@ button#installButton {
     border-radius: 10px;
     text-align: center;
     max-width: 76px;
-    min-width: 48px;
+    min-width: 29px;
     box-shadow: 1px 1px 10px 0 rgba(12,12,14,.2),0 4px 8px 0 rgba(6, 6, 7, 0.12);
     font-weight: bold;
-    font-size: 1.8em;
+    font-size: 1.6em;
     margin: 0.4em 0.2em 0 0;
     display: inline-block;
+    padding: 0 6px;
 }
 
 .line-info .alert-icon {
@@ -631,6 +636,7 @@ button.remove-stop {
     display: block;
     background-color: #FFF;
     background-position: 8px 8px;
+    z-index: 1;
 }
 
 .dark-mode #horarios-box .horarios-close, .dark-mode #nearestStopsResults #close-nearest-stops {
@@ -728,6 +734,7 @@ button.remove-stop {
     border-radius: 20px;
     padding: 10px 10px;
     margin: 1em 0;
+    min-width: 280px;
 }
 
 .dark-mode #nearestStopsResults .stopResult {
@@ -739,6 +746,7 @@ button.remove-stop {
     margin: 0;
     text-align: center;
     margin-bottom: 1em;
+    max-width: 280px;
 }
 
 /* Enlaces a lineas en la info de paradas */
@@ -783,13 +791,22 @@ button.remove-stop {
 }
 
 #nearestStopsResults .stopResult button {
-    background-color: #388f71;
-    font-size: 0.8em;
-    color: #FFF;
-    max-width: 70px;
-    padding: 5px 10px;
-    float: right;
-    font-weight: bold;
+    background-color: #c1c4ca;
+    background-image: url("img/add.png");
+    background-size: 10px;
+    width: 10px;
+    height: 10px;
+    text-indent: -9999px;
+    cursor: pointer;
+    padding: 12px;
+    background-repeat: no-repeat;
+    color: rgb(5, 5, 6);
+    border-radius: 50%;
+    border: 1px solid #cdcdcd;
+    display: block;
+    background-position: 7px 7px;
+    position: absolute;
+    right: 42px;
 }
 
 #nearestStopsResults .stopResult .mapIcon {
@@ -929,7 +946,6 @@ button.remove-stop {
     font-size: 0.8em;
     text-align: center;
     padding: 1px 8px 100px 0;
-    font-style: italic;
     margin: 0px 0 0 0;
 }
 
@@ -987,6 +1003,7 @@ button.remove-stop {
 
 .line-info .hora-tiempo .horaLlegada {
     margin: 0 0 0.9em 0;
+    font-size: 0.9em;
 }
 
 .line-info.realtime .hora-tiempo .horaLlegada {
@@ -1011,10 +1028,15 @@ button.remove-stop {
     display: inline-block;
     font-size: 0.8em; 
     margin: 0 0 0 0.3em;
+    color: #646464;
+}
+
+.dark-mode .line-info .destino {
+    color: #868686;
 }
 
 .line-info .tiempo {
-    font-size: 1.8em;
+    font-size: 1.6em;
     align-items: center;
     display: flex;
     justify-content: flex-end;
@@ -1139,6 +1161,11 @@ button.remove-stop {
     box-sizing: border-box;
 }
 
+.dark-mode #tips-banner {
+    background-color: #054a32;
+    color: #CCC;
+}
+
 #share-whatsapp {
     margin: 0; 
     color: #0e4f0b; 
@@ -1192,9 +1219,13 @@ button.remove-stop {
 }
 
 .dark-mode .global-alerts-box {
-    background-color: #ceccb4;
-    color: #53533b;
-    border: 1px solid #8c8c71;
+    background-color: #333;
+    color: #CCC;
+    border-top: 3px solid #ffb33c;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
 }
 
 .global-alerts-box ul {
@@ -1245,7 +1276,8 @@ button.remove-stop {
 }
 
 .dark-mode .global-alerts-box .alert-text-container .read-more-button {
-    background-color: #ceccb4;
+    background-color: #333;
+    color: #CCC;
 }
 
 .global-alerts-box .alert-text-container.expanded .read-more-button {
@@ -1574,7 +1606,6 @@ body.dark-mode {
 .dark-mode .stop-block {
     background-color: #333;
     color: #eeeeee;
-    border-left-color: #aaa;
 }
 
 .dark-mode .highlight {

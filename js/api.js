@@ -1525,8 +1525,7 @@ export async function displayNearestStopsResults(stops, userLocation) {
         } else if (event.target.matches('.addLineButton')) {
             let stopNumber = event.target.getAttribute('data-stop-number');
             let lineNumber = event.target.getAttribute('data-line-number');
-            await addBusLine(stopNumber, lineNumber);
-            resultsDiv.style.display = 'none';
+            await addBusLine(stopNumber, lineNumber, true);
         }
     });
 
