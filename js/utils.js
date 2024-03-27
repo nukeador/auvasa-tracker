@@ -464,6 +464,8 @@ export function showSuccessPopUp(message, elementId = null) {
             // Quitamos posibles diálogos que estén encima
             const horariosBox = document.getElementById("horarios-box");
             horariosBox.style.display = "none";
+            const nearestStopsBox = document.getElementById("nearestStopsResults");
+            nearestStopsBox.style.display = "none";
         });
     }
 
