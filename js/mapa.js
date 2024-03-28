@@ -81,6 +81,9 @@ export async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
 function actualizarControlCentro(map, lat, lon) {
     if (!centerControl) {
         let CenterControl = L.Control.extend({
+            options: {
+                position: 'topleft' // Posición del control en el mapa
+            },
             onAdd: function () {
                 let container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
                 container.style.backgroundColor = 'white';
@@ -105,7 +108,7 @@ function actualizarControlCentro(map, lat, lon) {
 
 let UbicacionUsuarioControl = L.Control.extend({
     options: {
-        position: 'topleft' // Posición del control en el mapa
+        position: 'bottomright' // Posición del control en el mapa
     },
 
     onAdd: function (map) {
