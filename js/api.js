@@ -799,11 +799,11 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 velocidad = busMasCercano.realTime.velocidad;
                 // tiempoRestante = busMasCercano.realTime.tiempoRestante;
                 // Calculamos el tiempo en el cliente porque el api puede tener cacheado este cálculo
-                // Si el busMasCercano.realTime.llegada es menor de 60 segundos, mostramos 0 minutos
-                if (Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000) < 1) {
+                // Si horaLlegada es menor de 60 segundos, mostramos 0 minutos
+                if (Math.floor((horaLlegada - new Date()) / 60000) < 1) {
                     tiempoRestante = 0;
                 } else {
-                    tiempoRestante = Math.floor((new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`) - new Date()) / 60000);
+                    tiempoRestante = Math.floor((horaLlegada - new Date()) / 60000);
                 }
                 // Comparamos la hora de llegada programada con la hora de llegada en tiempo real sin mirar los segundos
                 // Check por si en scheduled no hay datos o es null
@@ -1226,7 +1226,6 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
                     const arrivalB = b.horarios[0].llegada ? new Date(`1970-01-02T${b.horarios[0].llegada}`) : Infinity;
                     return arrivalA - arrivalB;
                 });
-
                 // Devolver el primer bus de la lista ordenada
                 const primerBusAnterior = busesArray[0];
                 if (primerBusAnterior && primerBusAnterior.horarios && primerBusAnterior.horarios[0]) {
