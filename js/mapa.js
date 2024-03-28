@@ -1,7 +1,7 @@
 import { apiEndPoint, fetchSuppressedStops, getStopLines } from './api.js';
 import { mapEvents } from './utils.js';
 
-let myMap = L.map('busMap').setView([41.64817, -4.72974], 16);
+let myMap = L.map('busMap').setView([41.64817, -4.72974], 15);
 let centerControl;
 let paradaMarker;
 let marcadorAutobus;
