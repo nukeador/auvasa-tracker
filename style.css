@@ -884,7 +884,7 @@ button.remove-stop {
 #mapContainer {
     position: fixed;
     width: 100%;
-    height: 70%;
+    height: 79%;
     margin: 0 auto;
     top: 442px;
     left: 50%;
@@ -971,6 +971,19 @@ button.remove-stop {
     background-color: #FFF;
     background-position: 8px 8px;
     z-index: 1000;
+}
+
+#mapContainer #mapFooter #busMapLastUpdate {
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    position: absolute;
+    background-color: #FFF;
+    padding: 1em 0;
+    width: 90%;
+    bottom: 7px;
+    z-index: 1000;
+    left: 17px;
+    font-size: 0.9em;
 }
 
 #iframe-container {
