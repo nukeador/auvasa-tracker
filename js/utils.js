@@ -897,7 +897,10 @@ export function mapEvents() {
 export function getYesterdayDate() {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
-    return yesterday.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    const year = yesterday.getFullYear();
+    const month = String(yesterday.getMonth() + 1).padStart(2, '0');
+    const day = String(yesterday.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`; // Formato YYYYMMDD
 }
 
 // Obtener la fecha de i días en el futuro
