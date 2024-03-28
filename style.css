@@ -966,10 +966,10 @@ button.remove-stop {
     position: absolute;
     margin: 0;
     border-radius: 50%;
-    border: 1px solid #aaa;
+    border: 2px solid rgba(0, 0, 0, 0.25);
     display: block;
     background-color: #FFF;
-    background-position: 8px 8px;
+    background-position: 7px 8px;
     z-index: 1000;
 }
 
@@ -986,6 +986,10 @@ button.remove-stop {
     font-size: 0.9em;
 }
 
+.dark-mode #mapContainer #mapFooter #busMapLastUpdate {
+    background-color: #484b4d;
+}
+
 #iframe-container {
     position: fixed;
     top: 50px;
@@ -998,7 +1002,7 @@ button.remove-stop {
 }
 
 .dark-mode #mapContainer #mapFooter {
-    background: #333;
+    background-color: #333;
     color: #fff;
 }
 
