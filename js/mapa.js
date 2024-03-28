@@ -108,7 +108,7 @@ function actualizarControlCentro(map, lat, lon) {
 
 let UbicacionUsuarioControl = L.Control.extend({
     options: {
-        position: 'bottomright' // Posición del control en el mapa
+        position: 'topleft' // Posición del control en el mapa
     },
 
     onAdd: function (map) {
