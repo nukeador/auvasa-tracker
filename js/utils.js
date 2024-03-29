@@ -91,7 +91,7 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
             if (bus.realTime && bus.realTime.llegada) {
                 horaLlegada = bus.realTime.llegada;
                 llegadaClass = 'realtime';
-            } else {
+            } else if (bus.scheduled && bus.scheduled.llegada) {
                 horaLlegada = bus.scheduled.llegada;
                 llegadaClass = 'programado';
             }
