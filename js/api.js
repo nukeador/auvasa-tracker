@@ -649,7 +649,7 @@ export async function updateBusList() {
                 stopElement.classList.add('suprimida');
                 let suppressedStopAlert = document.createElement('div');
                 suppressedStopAlert.className = 'suppressedStopAlert';
-                suppressedStopAlert.innerHTML = "Parada actualmente suprimida, consulte las alertas de las líneas para más información";
+                suppressedStopAlert.innerHTML = "Parada posiblemente suprimida actualmente, consulte si hay alertas en sus líneas para más información";
                 
                 // Seleccionar el elemento h2 dentro de stopElement
                 const h2Element = stopElement.querySelector('h2');
@@ -812,7 +812,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     let scheduledArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`);
                     realTimeArrival.setSeconds(0);
                     scheduledArrival.setSeconds(0);
-
                     diferencia = Math.ceil((realTimeArrival - scheduledArrival) / 60000);
                 } else {
                     diferencia = 0;
@@ -1135,7 +1134,6 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     let busesAdelantados = new Set();
 
     const hoy = new Date();
-    const fechaHoy = hoy.toISOString().split('T')[0]; // Fecha de hoy en formato YYYY-MM-DD
 
     Object.entries(buses).forEach(([tripId, bus]) => {
         let horaLlegada = null;
@@ -1199,7 +1197,6 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     // Excepto si estamos entre las 12 de la noche y las 5 de la mañana, que buscaremos en los datos del día anterior
     // Los buses nocturnos aparecen en los datos del día anterior con horas 24, 25, 26, 27...
     if (diferenciaMinima === Infinity) {
-        
         const yesterdayDate = getYesterdayDate();
         // Obtener la hora actual
         const now = new Date();

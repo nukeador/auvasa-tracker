@@ -336,6 +336,15 @@ button#installButton {
     text-align: center;
 }
 
+.dark-mode .stop-block.suprimida .suppressedStopAlert {
+    border-top: 3px solid #db3a3a;
+    color: rgb(238, 238, 238);
+    background-color: #333333;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+
 .stop-block h2 {
     text-align: center;
     font-size: 0.9em;
