@@ -932,7 +932,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
             // Recuperamos el destino desde los datos del trip_id, buses con la misma línea pueden tener destinos diferentes.
             let destino = "";
-            if (busMasCercano.scheduled.destino) {
+            if (busMasCercano.scheduled && busMasCercano.scheduled.destino) {
                 destino = busMasCercano.scheduled.destino;
             }
             // Cortamos destino a máximo 22 caracteres
@@ -1140,11 +1140,21 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     let busesAdelantados = new Set();
 
     const hoy = new Date();
+    // Obtener la hora actual
+    var currentHour = hoy.getHours();
 
     Object.entries(buses).forEach(([tripId, bus]) => {
         let horaLlegada = null;
 
         if (bus.realTime && bus.realTime.llegada) {
+            const rtHour = bus.realTime.llegada.split(':')[0];
+
+            // Verificar si la hora actual está entre las 0:00 y las 5:00
+            // Si hay datos de horas del día anterior las ignoramos para que no se confundan con las de hoy
+            if (currentHour >= 0 && currentHour < 5 && rtHour < 24 && rtHour > 6) {
+                return;
+            }
+
             let [hora, minuto, segundo] = bus.realTime.llegada.split(":").map(Number);
             horaLlegada = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate(), hora, minuto, segundo);
             // Si el bus ya llegó, añadirlo al conjunto de buses adelantados y saltar al siguiente bus
@@ -1178,6 +1188,13 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
                 let [hora, minuto, segundo] = bus.scheduled.llegada.split(":").map(Number);
                 // Crear una copia de la fecha actual para evitar modificar la original
                 let fechaActual = new Date(hoy.getTime());
+
+                // Verificar si la hora actual está entre las 0:00 y las 5:00
+                // Si es así ignoramos las horas 24 o superior, porque son para mañana, forzamos asi a que busque en el día anterior
+                if (currentHour >= 0 && currentHour < 5 && hora >= 24) {
+                    return;
+                }
+
                 // Ajuste para manejar buses que llegan en la madrugada del día siguiente
                 if (hora >= 24) {
                     // Si la hora es mayor o igual a 24, sumamos un día a la fecha actual
@@ -1214,6 +1231,8 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
             const scheduledBusesYesterday = await fetchScheduledBuses(stopNumber, lineNumber, yesterdayDate);
             if (scheduledBusesYesterday && scheduledBusesYesterday.lineas) {
                 // Filtrar los buses que tienen una hora de llegada de 24:00 o superior
+                // TODO: Hay que filtrar solo los que tienen una hora superior a la actual
+                // hay que sumar 24 a la hora actual y comparar
                 const busesArray = scheduledBusesYesterday.lineas.flatMap(linea => {
                     return linea.horarios.filter(horario => {
                         const [hours, minutes, seconds] = horario.llegada.split(':').map(Number);
@@ -1229,7 +1248,7 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
                     const arrivalB = b.horarios[0].llegada ? new Date(`1970-01-02T${b.horarios[0].llegada}`) : Infinity;
                     return arrivalA - arrivalB;
                 });
-                // Devolver el primer bus de la lista ordenada
+                // Devolver el primer bus de la lista ordenada que sea más tarde que la hora actual
                 const primerBusAnterior = busesArray[0];
                 if (primerBusAnterior && primerBusAnterior.horarios && primerBusAnterior.horarios[0]) {
                     let busdata = { 
@@ -1284,6 +1303,14 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
             trip_id: tripIdMasCercanoHoy, 
             destination: busMasCercanoHoy.scheduled.destino,
             scheduled: busMasCercanoHoy.scheduled, 
+            realTime: busMasCercanoHoy.realTime 
+        };
+    // Si no tenemos datos programados y solo realtime
+    } else if (tripIdMasCercanoHoy && busMasCercanoHoy && busMasCercanoHoy.realTime) {
+        return { 
+            trip_id: tripIdMasCercanoHoy, 
+            destination: null,
+            scheduled: null, 
             realTime: busMasCercanoHoy.realTime 
         };
     }
