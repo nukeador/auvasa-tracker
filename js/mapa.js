@@ -289,7 +289,13 @@ async function addStopsToMap(tripId, lineNumber) {
                 });
                 lineasHTML += '<p>Haga clic en una línea para añadirla a su lista</p></div>'
 
-                let iconUrl = 'img/bus-stop.png';
+                let iconUrl = 'img/bus-stop.png';;
+                const savedTheme = localStorage.getItem('theme');
+
+                if (savedTheme === "dark"){
+                    iconUrl = 'img/bus-stop-dark.png';
+                }
+
                 let popupContent = `<strong>${feature.properties.stop_name}</strong><br>Número: ${feature.properties.stop_code} ${lineasHTML}`;
 
                 // Verificar si la parada está suprimida
