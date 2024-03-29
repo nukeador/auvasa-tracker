@@ -982,6 +982,12 @@ button.remove-stop {
     z-index: 1000;
 }
 
+.dark-mode #mapContainer #mapFooter .map-close {
+    background-image: url("img/close-light.png");
+    border: 1px solid #646262;
+    background-color: #444;
+}
+
 #mapContainer #mapFooter #busMapLastUpdate {
     border: 1px solid #d0d0d0;
     border-radius: 10px;
@@ -998,6 +1004,14 @@ button.remove-stop {
 .dark-mode #mapContainer #mapFooter #busMapLastUpdate {
     background-color: #484b4d;
 }
+
+/* Modo oscuro para popups */
+.dark-mode  #mapContainer .leaflet-popup-content-wrapper,
+.dark-mode #mapContainer .leaflet-popup-tip {
+ background-color: #484b4d;
+ color: #eeeeee;
+}
+
 
 #iframe-container {
     position: fixed;
@@ -1843,34 +1857,23 @@ body.dark-mode {
     color: #fff;
 }
 
-.bus-icon.linea-B1, .linea-B1 h3, #busMap .linea-B1, span.linea-B1 {
-    background-color: #000;
-    stroke: #000;
-    color: #FFF;
-}
-
-.bus-icon.linea-B2, .linea-B2 h3, #busMap .linea-B2, span.linea-B2 {
-    background-color: #000;
-    stroke: #000;
-    color: #FFF;
-}
-
-.bus-icon.linea-B3, .linea-B3 h3, #busMap .linea-B3, span.linea-B3 {
-    background-color: #000;
-    stroke: #000;
-    color: #FFF;
-}
-
-.bus-icon.linea-B4, .linea-B4 h3, #busMap .linea-B4, span.linea-B4 {
-    background-color: #000;
-    stroke: #000;
-    color: #FFF;
-}
-
+.bus-icon.linea-B1, .linea-B1 h3, #busMap .linea-B1, span.linea-B1,
+.bus-icon.linea-B2, .linea-B2 h3, #busMap .linea-B2, span.linea-B2,
+.bus-icon.linea-B3, .linea-B3 h3, #busMap .linea-B3, span.linea-B3,
+.bus-icon.linea-B4, .linea-B4 h3, #busMap .linea-B4, span.linea-B4,
 .bus-icon.linea-B5, .linea-B5 h3, #busMap .linea-B5, span.linea-B5 {
     background-color: #000;
     stroke: #000;
     color: #FFF;
+}
+
+/* En dark mode debemos aclarar el color de la linea en el mapa */
+.dark-mode #busMap .linea-B1,
+.dark-mode #busMap .linea-B2,
+.dark-mode #busMap .linea-B3,
+.dark-mode #busMap .linea-B4,
+.dark-mode #busMap .linea-B5 {
+    stroke: #505050;
 }
 
 .bus-icon.linea-F1, .linea-F1 h3, #busMap .linea-F1, span.linea-F1, .bus-icon.linea-F2, .linea-F2 h3, #busMap .linea-F2, span.linea-F2, .bus-icon.linea-F3, .linea-F3 h3, #busMap .linea-F3, span.linea-F3, .bus-icon.linea-F4, .linea-F4 h3, #busMap .linea-F4, span.linea-F4, .bus-icon.linea-F5, .linea-F5 h3, #busMap .linea-F5, span.linea-F5, .bus-icon.linea-F6, .linea-F6 h3, #busMap .linea-F6, span.linea-F6 {
