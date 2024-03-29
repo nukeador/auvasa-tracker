@@ -17,21 +17,33 @@ function crearIconoBus(numeroBus) {
     });
 }
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors'
-}).addTo(myMap);
-
-L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1eb584c78ab43ddafe0831ad04566ae', {
-    maxZoom: 19,
-    attribution: 'Maps © <a href="http://thunderforest.com/">Thunderforest</a>',
-    subdomains: 'abc'
-}).addTo(myMap);
-
 let lat = null;
 let lon = null;
 
 export async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
+    // Detectamos el theme para ofrecer una capa u otra de mapa
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === "dark"){
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}' + (L.Browser.retina ? '@2x.png' : '.png'), {
+            attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20,
+            minZoom: 0
+        }).addTo(myMap);
+    } else {
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(myMap);
+
+        L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1eb584c78ab43ddafe0831ad04566ae', {
+            maxZoom: 19,
+            attribution: 'Maps © <a href="http://thunderforest.com/">Thunderforest</a>',
+            subdomains: 'abc'
+        }).addTo(myMap);
+    }
+
     if (!paradaData || !paradaData.latitud || !paradaData.longitud) {
         console.error('Datos de la parada no disponibles o inválidos');
         return;
