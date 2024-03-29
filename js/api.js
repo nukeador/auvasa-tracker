@@ -661,6 +661,12 @@ export async function updateBusList() {
                     stopElement.appendChild(suppressedStopAlert);
                 }
             }
+        } else {
+            // Si la parada no está suprimida, eliminar el div de alerta si existe
+            const suppressedStopAlert = stopElement.querySelector('.suppressedStopAlert');
+            if (suppressedStopAlert) {
+                suppressedStopAlert.remove();
+            }
         }
 
         // Actualizamos el listado en el sidebar
