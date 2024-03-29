@@ -946,6 +946,10 @@ button.remove-stop {
     animation: glowing 1s ease-in-out infinite;
 }
 
+.dark-mode #mapContainer #busMap .bus-icon {
+    border: 1px solid #0000001f;
+}
+
 #mapContainer #busMap .user-location-icon {
     animation: glowing 1s ease-in-out infinite;
     border-radius: 50%;
@@ -985,7 +989,6 @@ button.remove-stop {
 .dark-mode #mapContainer #mapFooter .map-close {
     background-image: url("img/close-light.png");
     border: 1px solid #646262;
-    background-color: #444;
 }
 
 #mapContainer #mapFooter #busMapLastUpdate {
