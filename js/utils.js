@@ -656,16 +656,21 @@ export function themeEvents() {
     // o en la preferencia del sistema operativo.
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleIcon = document.getElementById('theme-toggle-icon');
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme) {
-        document.body.classList.toggle('dark-mode', savedTheme === 'dark');
-        themeToggleIcon.textContent = savedTheme === 'dark' ? '🌜' : '🌞';
+    let savedTheme = localStorage.getItem('theme');
+
+    if (!savedTheme) {
+        // Si no hay un tema guardado en localStorage, establece el tema basado en la preferencia del sistema operativo.
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            savedTheme = 'dark';
+        } else {
+            savedTheme = 'light';
+        }
+        // Guarda la preferencia del sistema operativo en localStorage.
+        localStorage.setItem('theme', savedTheme);
     }
-    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark-mode');
-        themeToggleIcon.textContent = '🌜';
-    }
+
+    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+    themeToggleIcon.textContent = savedTheme === 'dark' ? '🌜' : '🌞';
 
     // Switch del modo claro/oscuro
     themeToggle.addEventListener('click', () => {
