@@ -337,7 +337,7 @@ button#installButton {
 }
 
 .dark-mode .stop-block.suprimida .suppressedStopAlert {
-    border-top: 4px solid #db3a3a;
+    border-top: 3px solid #db3a3a;
     color: rgb(238, 238, 238);
     background-color: #333333;
     border-left: none;
