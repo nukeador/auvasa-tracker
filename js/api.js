@@ -893,10 +893,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     destino = destino.substring(0, 22) + "...";
                 }
 
-                let horaLlegadaProgramada;
-                if (busMasCercano.scheduled) {
-                    horaLlegadaProgramada = horaLlegada.toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
-                }
+                let horaLlegadaProgramada = horaLlegada.toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
 
                 // Formato tiempo restante a mostrar
                 let tiempoRestanteHTML;
