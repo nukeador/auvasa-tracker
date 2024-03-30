@@ -1065,6 +1065,7 @@ export function combineBusData(scheduledData) {
             combined[linea][realtime.trip_id].realTime = {
                 llegada: realtime.llegada,
                 fechaHoraLlegada: realtime.fechaHoraLlegada,
+                tripId: realtime.trip_id ? realtime.trip_id.toString() : undefined,
                 latitud: realtime.latitud ? realtime.latitud.toString() : undefined,
                 longitud: realtime.longitud ? realtime.longitud.toString() : undefined,
                 velocidad: realtime.velocidad ? realtime.velocidad.toString() : undefined
@@ -1106,7 +1107,6 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
                 }
             }
         });
-
         return busMasCercano;
     };
 
@@ -1164,7 +1164,7 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     }
 
     return busMasCercanoHoy ? {
-        trip_id: busMasCercanoHoy.scheduled ? busMasCercanoHoy.scheduled.tripId : '',
+        trip_id: busMasCercanoHoy.realTime ? busMasCercanoHoy.realTime.tripId : busMasCercanoHoy.scheduled.tripId,
         destination: busMasCercanoHoy.scheduled ? busMasCercanoHoy.scheduled.destino : '',
         scheduled: busMasCercanoHoy.scheduled,
         realTime: busMasCercanoHoy.realTime
