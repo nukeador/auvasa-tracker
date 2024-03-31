@@ -602,7 +602,7 @@ button#installButton {
 
 button.mostrar-horarios {
     cursor: pointer;
-    background: url(img/bus-gray.png) no-repeat;
+    background: url(img/calendar-clock.png) no-repeat;
     background-size: 15px;
     background-position: 0px;
     color: #CCC;
