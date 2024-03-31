@@ -801,8 +801,8 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     // Comparamos la hora de llegada programada con la hora de llegada en tiempo real sin mirar los segundos
                     // Check por si en scheduled no hay datos o es null
                     if (busMasCercano.scheduled) {
-                        let realTimeArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.realTime.llegada}`);
-                        let scheduledArrival = new Date(`${new Date().toISOString().split('T')[0]}T${busMasCercano.scheduled.llegada}`);
+                        let realTimeArrival = horaLlegada;
+                        let scheduledArrival = new Date(busMasCercano.scheduled.fechaHoraLlegada);
                         realTimeArrival.setSeconds(0);
                         scheduledArrival.setSeconds(0);
                         diferencia = Math.ceil((realTimeArrival - scheduledArrival) / 60000);
@@ -893,7 +893,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     destino = destino.substring(0, 22) + "...";
                 }
 
-                let horaLlegadaProgramada = horaLlegada.toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
+                let horaLlegadaProgramada = new Date(busMasCercano.scheduled.fechaHoraLlegada).toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
 
                 // Formato tiempo restante a mostrar
                 let tiempoRestanteHTML;
