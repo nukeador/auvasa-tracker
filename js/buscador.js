@@ -28,16 +28,17 @@ document.getElementById('stopNumber').addEventListener('input', async function()
     });
 });
 
-// Función para buscar paradas por nombre
+// Función para buscar paradas por nombre o número
 async function searchByStopNumber(name) {
     // Normaliza y elimina los acentos del nombre buscado
     const normalizedSearchName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     const busStops = await loadBusStops();
 
-    // Devuelve todas las paradas que coincidan con el nombre buscado, ignorando acentos
+    // Devuelve todas las paradas que coincidan con el nombre buscado o el número de parada, ignorando acentos
     return busStops.filter(stop => {
         const normalizedStopName = stop.parada.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        return normalizedStopName.includes(normalizedSearchName);
+        const normalizedStopNumber = stop.parada.numero.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        return normalizedStopName.includes(normalizedSearchName) || normalizedStopNumber.includes(normalizedSearchName);
     });
 }
 
