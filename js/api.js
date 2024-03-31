@@ -1077,6 +1077,27 @@ export function combineBusData(scheduledData) {
     return combined;
 }
 
+// Combina los datos programados y tiempo real de dos días diferentes y agrupa por trip_id
+// Esto es necesario cuando de madrugada tiene datos en tiempo real de buses cuyos datos
+// programados están en el día anterior
+export function combineBusDataFromTwoDays(day1Data, day2Data) {
+    let combined = { ...day1Data }; // Comenzamos con los datos del primer día
+
+    // Iteramos sobre las claves del segundo día
+    Object.keys(day2Data).forEach(tripId => {
+        // Si el tripId ya existe en el objeto combinado, combinamos los datos
+        if (combined[tripId]) {
+            combined[tripId].scheduled = day2Data[tripId].scheduled || combined[tripId].scheduled;
+            combined[tripId].realTime = combined[tripId].realTime || day2Data[tripId].realTime;
+        } else {
+            // Si el tripId no existe, simplemente agregamos los datos del segundo día
+            combined[tripId] = day2Data[tripId];
+        }
+    });
+
+    return combined;
+}
+
 // Lógica principal para determinar de un conjunto de buses ordenados por tripID, cual es el bus siguiente o más cercano
 export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     if (!buses) return null;
@@ -1086,6 +1107,7 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
 
     const hoy = new Date();
     const currentHour = hoy.getHours();
+    const yesterdayDate = getYesterdayDate();
 
     // Función auxiliar para buscar el bus más cercano
     const buscarBusMasCercano = (buses) => {
@@ -1110,8 +1132,21 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
         return busMasCercano;
     };
 
-    // Buscar en el día actual
-    busMasCercanoHoy = buscarBusMasCercano(buses);
+    // Verificar si la hora actual está entre las 0:00 y las 5:00
+    if (currentHour >= 0 && currentHour < 5) {
+        // Consultar primero los buses programados del día anterior por si hay buses nocturnos
+        // se consideran nocturnos si llegan antes de las 5:00
+            const busesYesterdayData = await fetchScheduledBuses(stopNumber, lineNumber, yesterdayDate);
+            const busesYesterday = combineBusData(busesYesterdayData);
+            // Agrupar los datos por trip_id para una mejor búsqueda
+            const combinedData = combineBusDataFromTwoDays(buses, busesYesterday[lineNumber]);
+            if (combinedData) {
+                busMasCercanoHoy = buscarBusMasCercano(combinedData);
+            }
+    } else {
+        // Buscar en el día actual
+        busMasCercanoHoy = buscarBusMasCercano(buses);
+    }
 
     // Verificar si el bus más cercano ya llegó (hora realtime pasada)
     if (busMasCercanoHoy && busMasCercanoHoy.realTime && busMasCercanoHoy.realTime.fechaHoraLlegada) {
@@ -1130,23 +1165,6 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     // Excepto si estamos entre las 12 de la noche y las 5 de la mañana, que buscaremos en los datos del día anterior
     // Los buses nocturnos aparecen en los datos del día anterior con horas 24, 25, 26, 27...
     if (!busMasCercanoHoy) {
-        const yesterdayDate = getYesterdayDate();
-        // Obtener la hora actual
-        const now = new Date();
-        const currentHour = now.getHours();
-
-        // Verificar si la hora actual está entre las 0:00 y las 5:00
-        if (currentHour >= 0 && currentHour < 5) {
-            // Consultar los buses nocturnos programados del día anterior, se consideran nocturnos si llegan antes de las 5:00
-            const scheduledBusesYesterday = await fetchScheduledBuses(stopNumber, lineNumber, yesterdayDate);
-            // Agrupar los datos por trip_id para una mejor búsqueda
-            const combinedData = combineBusData(scheduledBusesYesterday);
-            let busesLinea = combinedData[lineNumber];
-            if (busesLinea) {
-                busMasCercanoHoy = buscarBusMasCercano(busesLinea);
-            }
-        }
-
         // Si no hay buses nocturnos disponibles en el día anterior, buscar en los próximos días
         const maxDaysToLookAhead = 10; // Límite de días a buscar
         for (let i = 1; i <= maxDaysToLookAhead; i++) {
