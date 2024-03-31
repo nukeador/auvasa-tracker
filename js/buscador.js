@@ -18,7 +18,7 @@ document.getElementById('stopNumber').addEventListener('input', async function()
     // Crea y muestra los resultados
     matchingStops.forEach(function(stop) {
         let resultElement = document.createElement('div');
-        resultElement.textContent = stop.parada.nombre + ' (Nº ' + stop.parada.numero + ')';
+        resultElement.innerHTML = '<span class="numParada">' + stop.parada.numero + '</span> ' + stop.parada.nombre;
         resultElement.classList.add('autocomplete-result');
         resultElement.addEventListener('click', function() {
             document.getElementById('stopNumber').value = stop.parada.numero;
@@ -125,8 +125,14 @@ function displayLineSuggestions(buses) {
 
     buses.forEach(function(bus) {
         let resultElement = document.createElement('div');
-        resultElement.textContent = 'Línea ' + bus.linea;
+
+        let lineElement = document.createElement('span');
+        lineElement.classList.add('linea', `linea-${ bus.linea}`);
+        lineElement.textContent = bus.linea;
+
         resultElement.classList.add('line-suggestion');
+        resultElement.appendChild(lineElement);
+
         resultElement.addEventListener('click', function() {
             lineNumber.value = bus.linea;
             resultsContainer.innerHTML = ''; // Limpia los resultados después de seleccionar
