@@ -18,7 +18,7 @@ document.getElementById('stopNumber').addEventListener('input', async function()
     // Crea y muestra los resultados
     matchingStops.forEach(function(stop) {
         let resultElement = document.createElement('div');
-        resultElement.textContent = stop.parada.nombre + ' (Nº ' + stop.parada.numero + ')';
+        resultElement.innerHTML = '<span class="numParada">' + stop.parada.numero + '</span> ' + stop.parada.nombre;
         resultElement.classList.add('autocomplete-result');
         resultElement.addEventListener('click', function() {
             document.getElementById('stopNumber').value = stop.parada.numero;
@@ -28,16 +28,17 @@ document.getElementById('stopNumber').addEventListener('input', async function()
     });
 });
 
-// Función para buscar paradas por nombre
+// Función para buscar paradas por nombre o número
 async function searchByStopNumber(name) {
     // Normaliza y elimina los acentos del nombre buscado
     const normalizedSearchName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     const busStops = await loadBusStops();
 
-    // Devuelve todas las paradas que coincidan con el nombre buscado, ignorando acentos
+    // Devuelve todas las paradas que coincidan con el nombre buscado o el número de parada, ignorando acentos
     return busStops.filter(stop => {
         const normalizedStopName = stop.parada.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        return normalizedStopName.includes(normalizedSearchName);
+        const normalizedStopNumber = stop.parada.numero.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        return normalizedStopName.includes(normalizedSearchName) || normalizedStopNumber.includes(normalizedSearchName);
     });
 }
 
@@ -125,8 +126,14 @@ function displayLineSuggestions(buses) {
 
     buses.forEach(function(bus) {
         let resultElement = document.createElement('div');
-        resultElement.textContent = 'Línea ' + bus.linea;
+
+        let lineElement = document.createElement('span');
+        lineElement.classList.add('linea', `linea-${ bus.linea}`);
+        lineElement.textContent = bus.linea;
+
         resultElement.classList.add('line-suggestion');
+        resultElement.appendChild(lineElement);
+
         resultElement.addEventListener('click', function() {
             lineNumber.value = bus.linea;
             resultsContainer.innerHTML = ''; // Limpia los resultados después de seleccionar

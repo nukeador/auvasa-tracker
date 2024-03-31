@@ -164,18 +164,53 @@ button#installButton {
     justify-content: center;
 }
 
-#autocompleteResults, #lineSuggestions {
+#autocompleteResults {
     margin-top: 12px; 
     background-color: white;
     width: 100%; 
     box-sizing: border-box;
 }
 
-.autocomplete-result, .line-suggestion {
+.autocomplete-result {
     cursor: pointer;
     margin: 2px;
     padding: 5px;
     border-bottom: 1px solid #eee;
+    display: flex; 
+    align-items: center;
+} 
+
+.autocomplete-result .numParada {
+    background-color: #054a32;
+    color: #EEE;
+    padding: 0 3px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    margin-right: 10px;
+    min-width: 40px;
+    text-align: center;
+}
+
+#lineSuggestions {
+    margin-top: 12px;
+    background-color: white;
+    box-sizing: border-box;
+    width: 100%; 
+}
+
+#lineSuggestions .line-suggestion {
+    display: inline-block;
+    margin: 5px;
+}
+
+#lineSuggestions .line-suggestion span.linea {
+    border-radius: 10px;
+    min-width: 24px;
+    text-align: center;
+    max-width: 130px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 4px;
 }
 
 /* Estilos para el botón del menú hamburguesa */
