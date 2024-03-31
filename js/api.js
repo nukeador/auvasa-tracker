@@ -1110,22 +1110,26 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     const yesterdayDate = getYesterdayDate();
 
     // Función auxiliar para buscar el bus más cercano
-    const buscarBusMasCercano = (buses) => {
+    const buscarBusMasCercano = (buses, tripIdBusLlegado = null) => {
         let busMasCercano = null;
         let fechaHoraLlegadaMinima = Infinity;
-
+    
         Object.entries(buses).forEach(([tripId, bus]) => {
-            if (bus.realTime && bus.realTime.fechaHoraLlegada) {
-                const fechaHoraLlegada = new Date(bus.realTime.fechaHoraLlegada);
-                if (fechaHoraLlegada > hoy && fechaHoraLlegada < fechaHoraLlegadaMinima) {
-                    fechaHoraLlegadaMinima = fechaHoraLlegada;
-                    busMasCercano = bus;
-                }
-            } else if (bus.scheduled && bus.scheduled.fechaHoraLlegada) {
-                const fechaHoraLlegada = new Date(bus.scheduled.fechaHoraLlegada);
-                if (fechaHoraLlegada > hoy && fechaHoraLlegada < fechaHoraLlegadaMinima) {
-                    fechaHoraLlegadaMinima = fechaHoraLlegada;
-                    busMasCercano = bus;
+            // Verificar si el tripId actual es diferente del tripId del bus que ya llegó 
+            // Ignora buses adelantados y no muestra hora programada cuando ya han llegado
+            if (!tripIdBusLlegado || tripId !== tripIdBusLlegado) {
+                if (bus.realTime && bus.realTime.fechaHoraLlegada) {
+                    const fechaHoraLlegada = new Date(bus.realTime.fechaHoraLlegada);
+                    if (fechaHoraLlegada > hoy && fechaHoraLlegada < fechaHoraLlegadaMinima) {
+                        fechaHoraLlegadaMinima = fechaHoraLlegada;
+                        busMasCercano = bus;
+                    }
+                } else if (bus.scheduled && bus.scheduled.fechaHoraLlegada) {
+                    const fechaHoraLlegada = new Date(bus.scheduled.fechaHoraLlegada);
+                    if (fechaHoraLlegada > hoy && fechaHoraLlegada < fechaHoraLlegadaMinima) {
+                        fechaHoraLlegadaMinima = fechaHoraLlegada;
+                        busMasCercano = bus;
+                    }
                 }
             }
         });
@@ -1138,7 +1142,7 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
         // se consideran nocturnos si llegan antes de las 5:00
             const busesYesterdayData = await fetchScheduledBuses(stopNumber, lineNumber, yesterdayDate);
             const busesYesterday = combineBusData(busesYesterdayData);
-            // Agrupar los datos por trip_id para una mejor búsqueda
+            // Agrupar los datos de ayer y hoy por trip_id
             const combinedData = combineBusDataFromTwoDays(buses, busesYesterday[lineNumber]);
             if (combinedData) {
                 busMasCercanoHoy = buscarBusMasCercano(combinedData);
@@ -1152,12 +1156,11 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     if (busMasCercanoHoy && busMasCercanoHoy.realTime && busMasCercanoHoy.realTime.fechaHoraLlegada) {
         const fechaHoraLlegadaRealTime = new Date(busMasCercanoHoy.realTime.fechaHoraLlegada);
         if (fechaHoraLlegadaRealTime <= hoy) {
-            // Si el bus ya llegó, buscar el siguiente bus más cercano
+            const tripIdBusLlegado = busMasCercanoHoy.realTime.tripId;
             busMasCercanoHoy = null;
             fechaHoraLlegadaMinima = Infinity;
-            // Aquí puedes repetir la lógica de búsqueda para encontrar el siguiente bus más cercano
-            // basándote en la lógica existente, asegurándote de omitir el bus ya verificado.
-            busMasCercanoHoy = buscarBusMasCercano(buses);
+            // Buscamos el bus más cercano ignorando el bus adelantado
+            busMasCercanoHoy = buscarBusMasCercano(buses, tripIdBusLlegado);
         }
     }
 
