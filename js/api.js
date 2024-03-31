@@ -1166,10 +1166,7 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     }
 
     // Si no se encontró un bus para hoy, buscar en los días siguientes
-    // Excepto si estamos entre las 12 de la noche y las 5 de la mañana, que buscaremos en los datos del día anterior
-    // Los buses nocturnos aparecen en los datos del día anterior con horas 24, 25, 26, 27...
     if (!busMasCercanoHoy) {
-        // Si no hay buses nocturnos disponibles en el día anterior, buscar en los próximos días
         const maxDaysToLookAhead = 10; // Límite de días a buscar
         for (let i = 1; i <= maxDaysToLookAhead; i++) {
             const futureDate = getFutureDate(i);
@@ -1218,10 +1215,24 @@ export async function getNextBuses(busMasCercano, busesLinea, stopNumber, lineNu
     });
 
     // Si no hay buses disponibles hoy, buscar en la fecha del llegada de busMasCercano
+    // Excepto si estamos entre las 12 y las 5 de la mañana, que para los buses que
+    // llegan a esa hora, debemos mirar en los datos del día anterior
     if (busesArray.length === 0) {
         const busMasCercanoDate = new Date(busMasCercano.scheduled.fechaHoraLlegada);
-        const futureDate = getFormattedDate(busMasCercanoDate);
-        const scheduledBusesFuture = await fetchScheduledBuses(stopNumber, lineNumber, futureDate);
+        const busMasCercanoHour = busMasCercanoDate.getHours();
+        const hoy = new Date();
+        const currentHour = hoy.getHours();
+        let dateToFecth;
+
+        // Si es madrugada y el busmascercano llega de madrugada
+        // Buscamos en los datos de ayer
+        if (currentHour >= 0 && currentHour < 5 && busMasCercanoHour >= 0 && busMasCercanoHour < 5) {
+            dateToFecth = getYesterdayDate();
+        } else {
+            dateToFecth = getFormattedDate(busMasCercanoDate);
+        }
+
+        const scheduledBusesFuture = await fetchScheduledBuses(stopNumber, lineNumber, dateToFecth);
         // Agrupar los datos por trip_id para una mejor búsqueda
         const combinedData = combineBusData(scheduledBusesFuture);
         let busesLineaFuture = combinedData[lineNumber];
