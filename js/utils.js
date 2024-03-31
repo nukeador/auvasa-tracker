@@ -917,3 +917,17 @@ export function getFutureDate(days) {
     const day = String(futureDate.getDate()).padStart(2, '0');
     return `${year}${month}${day}`;
 }
+
+// De un objeto fecha completo, devuelve fecha en formato YYYYMMDD
+export function getFormattedDate(fecha) {
+    var año = fecha.getFullYear().toString();
+    var mes = (fecha.getMonth() + 1).toString();
+    var día = fecha.getDate().toString();
+
+    // Asegurarse de que el mes y el día tengan dos dígitos
+    mes = mes.length == 1 ? '0' + mes : mes;
+    día = día.length == 1 ? '0' + día : día;
+
+    var fechaFormateada = año + mes + día;
+    return fechaFormateada;
+}

@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp, getFormattedDate } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -767,8 +767,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
         if (busesLinea) {
             // Filtrar y encontrar el bus más cercano para la línea específica
             const busMasCercano = await elegirBusMasCercano(busesLinea, stopNumber, lineNumber);
-            // Obtener los próximos 3 buses
-            busesProximos = getNextBuses(busMasCercano, busesLinea, 3);
 
             if (busMasCercano) {
                 let horaLlegada;
@@ -780,6 +778,9 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 let futureDate;
                 
                 let tripId = busMasCercano.trip_id;
+
+                // Obtener los próximos 3 buses
+                busesProximos = await getNextBuses(busMasCercano, busesLinea, stopNumber, lineNumber, 3);
 
                 // Si hay datos en tiempo real, usarlos, de lo contrario, usar los programados
                 if (busMasCercano.realTime) {
@@ -1192,9 +1193,48 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     } : null;
 }
 
-export function getNextBuses(busMasCercano, busesLinea, numBuses) {
+export async function getNextBuses(busMasCercano, busesLinea, stopNumber, lineNumber, numBuses) {
+    let futureData;
     // Convertir busesLinea a un array
-    const busesArray = Object.values(busesLinea);
+    let busesArray = Object.values(busesLinea);
+
+    // Filtrar los buses para excluir aquellos con fechaHoraLlegada anterior al busMasCercano
+    busesArray = busesArray.filter(bus => {
+        // Primero, intentamos usar bus.realTime si existe
+        let llegada = bus.realTime ? new Date(bus.realTime.fechaHoraLlegada) : null;
+        // Si bus.realTime no existe, usamos bus.scheduled
+        if (!llegada) {
+            llegada = new Date(bus.scheduled.fechaHoraLlegada);
+        }
+
+        // Determinar la fechaHoraLlegada del busMasCercano
+        let fechaHoraLlegadaBusMasCercano = busMasCercano.realTime ? new Date(busMasCercano.realTime.fechaHoraLlegada) : null;
+        // Si busMasCercano.realTime no existe, usamos busMasCercano.scheduled
+        if (!fechaHoraLlegadaBusMasCercano) {
+            fechaHoraLlegadaBusMasCercano = new Date(busMasCercano.scheduled.fechaHoraLlegada);
+        }
+
+        return llegada && llegada > fechaHoraLlegadaBusMasCercano;
+    });
+
+    // Si no hay buses disponibles hoy, buscar en la fecha del llegada de busMasCercano
+    if (busesArray.length === 0) {
+        const busMasCercanoDate = new Date(busMasCercano.scheduled.fechaHoraLlegada);
+        const futureDate = getFormattedDate(busMasCercanoDate);
+        const scheduledBusesFuture = await fetchScheduledBuses(stopNumber, lineNumber, futureDate);
+        // Agrupar los datos por trip_id para una mejor búsqueda
+        const combinedData = combineBusData(scheduledBusesFuture);
+        let busesLineaFuture = combinedData[lineNumber];
+        if (busesLineaFuture) {
+            busesArray = Object.values(busesLineaFuture);
+            futureData = true;
+        }
+    }
+
+    // Si después de buscar en fechas futuras aún no hay buses disponibles, retornar un array vacío
+    if (busesArray.length === 0) {
+        return [];
+    }
 
     // Ordenar el array por hora de llegada
     busesArray.sort((a, b) => {
@@ -1203,16 +1243,21 @@ export function getNextBuses(busMasCercano, busesLinea, numBuses) {
         return llegadaA - llegadaB;
     });
 
-    // Encontrar el índice de busMasCercano en el array
-    let indexBusMasCercano;
-    if (busMasCercano && busMasCercano.scheduled) {
-        indexBusMasCercano = busesArray.findIndex(bus => bus.scheduled && bus.scheduled.tripId === busMasCercano.scheduled.tripId);
+    let nextBuses;
+    if (futureData){
+        nextBuses = busesArray.slice(1, numBuses + 1);
     } else {
-        return [];
-    }
+    // Encontrar el índice de busMasCercano en el array
+        let indexBusMasCercano;
+        if (busMasCercano && busMasCercano.scheduled) {
+            indexBusMasCercano = busesArray.findIndex(bus => bus.scheduled && bus.scheduled.tripId === busMasCercano.scheduled.tripId);
+        } else {
+            return [];
+        }
 
-    // Seleccionar los 'numBuses' buses siguientes
-    const nextBuses = busesArray.slice(indexBusMasCercano + 1, indexBusMasCercano + 1 + numBuses);
+        // Seleccionar los 'numBuses' buses siguientes
+        nextBuses = busesArray.slice(indexBusMasCercano + 1, indexBusMasCercano + 1 + numBuses);
+    }
 
     // Devolver los datos de los buses seleccionados
     return nextBuses;
