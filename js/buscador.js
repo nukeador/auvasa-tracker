@@ -56,24 +56,28 @@ document.getElementById('stopNumber').addEventListener('focus', function() {
 // Cerrar el cuadro de búsqueda si se hace clic fuera de él
 window.addEventListener('click', function(event) {
     const searchBox = document.getElementById('autocompleteResults');
-    const searchButton = document.getElementById('stopNumber');
+    const stopNumberInput = document.getElementById('stopNumber');
 
     // Ignora los clics que se originen en los elementos
     if (event.target !== searchBox && 
         !searchBox.contains(event.target) &&
-        event.target !== searchButton) {
-        searchBox.style.display = 'none';
+        event.target !== stopNumberInput) {
+            searchBox.style.display = 'none';
     }
 });
 
+let timeoutId;
 // Sugerencias de lineas si hemos introducido parada
 document.getElementById('lineNumber').addEventListener('focus', async function() {
+    // Cancela cualquier timeout previo
+    clearTimeout(timeoutId);
+
     const lineNumber = this.value;
     const stopNumber = document.getElementById('stopNumber').value;
 
     // Verifica si lineNumber ya está rellenado o si stopNumber no es alfanumérico
-    if (lineNumber.trim() !== '' || !(/^[a-zA-Z0-9]+$/.test(stopNumber))) {
-        return; // No muestra sugerencias si lineNumber ya tiene un valor o stopNumber no es alfanumérico
+    if (!(/^[a-zA-Z0-9]+$/.test(stopNumber))) {
+        return; // No muestra sugerencias si stopNumber no es alfanumérico
     }
 
     // Encuentra la parada en busStops usando stopNumber
@@ -94,6 +98,20 @@ document.getElementById('lineNumber').addEventListener('focus', async function()
     } else {
         console.error('Error: Parada no encontrada en los datos locales');
     }
+});
+
+// Si el input de línea pierde el foco, borramos las sugerencias
+document.getElementById('lineNumber').addEventListener('blur', function() {
+    // Establece un timeout para esperar a ver si el usuario hace clic en #lineSuggestions
+    timeoutId = setTimeout(() => {
+        const lineSuggestions = document.getElementById('lineSuggestions');
+        lineSuggestions.innerHTML = ''; // Vacía el contenido de #lineSuggestions
+    }, 100);
+});
+
+// Cancela el timeout si el usuario hace clic en #lineSuggestions
+document.getElementById('lineSuggestions').addEventListener('mousedown', function() {
+    clearTimeout(timeoutId);
 });
 
 function displayLineSuggestions(buses) {
