@@ -1086,10 +1086,23 @@ export function combineBusDataFromTwoDays(day1Data, day2Data) {
 
     // Iteramos sobre las claves del segundo día
     Object.keys(day2Data).forEach(tripId => {
-        // Si el tripId ya existe en el objeto combinado, combinamos los datos
+        // Si el tripId ya existe en el objeto combinado, comparamos las fechas
         if (combined[tripId]) {
-            combined[tripId].scheduled = day2Data[tripId].scheduled || combined[tripId].scheduled;
-            combined[tripId].realTime = combined[tripId].realTime || day2Data[tripId].realTime;
+            // Comparamos las fechas de llegada de los datos programados y en tiempo real
+            const day1ScheduledDate = combined[tripId].scheduled ? new Date(combined[tripId].scheduled.fechaHoraLlegada) : null;
+            const day2ScheduledDate = day2Data[tripId].scheduled ? new Date(day2Data[tripId].scheduled.fechaHoraLlegada) : null;
+            const day1RealTimeDate = combined[tripId].realTime ? new Date(combined[tripId].realTime.fechaHoraLlegada) : null;
+            const day2RealTimeDate = day2Data[tripId].realTime ? new Date(day2Data[tripId].realTime.fechaHoraLlegada) : null;
+
+            // Si hay datos en tiempo real en el segundo día y son más recientes que los del primer día, los usamos
+            if (day2RealTimeDate && (!day1RealTimeDate || day2RealTimeDate > day1RealTimeDate)) {
+                combined[tripId].realTime = day2Data[tripId].realTime;
+            }
+
+            // Si hay datos programados en el segundo día y son más recientes que los del primer día, los usamos
+            if (day2ScheduledDate && (!day1ScheduledDate || day2ScheduledDate > day1ScheduledDate)) {
+                combined[tripId].scheduled = day2Data[tripId].scheduled;
+            }
         } else {
             // Si el tripId no existe, simplemente agregamos los datos del segundo día
             combined[tripId] = day2Data[tripId];
@@ -1114,13 +1127,14 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     const buscarBusMasCercano = (buses, tripIdBusLlegado = null) => {
         let busMasCercano = null;
         let fechaHoraLlegadaMinima = Infinity;
-    
+
         Object.entries(buses).forEach(([tripId, bus]) => {
             // Verificar si el tripId actual es diferente del tripId del bus que ya llegó 
             // Ignora buses adelantados y no muestra hora programada cuando ya han llegado
             if (!tripIdBusLlegado || tripId !== tripIdBusLlegado) {
                 if (bus.realTime && bus.realTime.fechaHoraLlegada) {
                     const fechaHoraLlegada = new Date(bus.realTime.fechaHoraLlegada);
+                    console.log(fechaHoraLlegada);
                     if (fechaHoraLlegada > hoy && fechaHoraLlegada < fechaHoraLlegadaMinima) {
                         fechaHoraLlegadaMinima = fechaHoraLlegada;
                         busMasCercano = bus;
@@ -1140,14 +1154,14 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
     // Verificar si la hora actual está entre las 0:00 y las 5:00
     if (currentHour >= 0 && currentHour < 5) {
         // Consultar primero los buses programados del día anterior por si hay buses nocturnos
-        // se consideran nocturnos si llegan antes de las 5:00
-            const busesYesterdayData = await fetchScheduledBuses(stopNumber, lineNumber, yesterdayDate);
-            const busesYesterday = combineBusData(busesYesterdayData);
-            // Agrupar los datos de ayer y hoy por trip_id
-            const combinedData = combineBusDataFromTwoDays(buses, busesYesterday[lineNumber]);
-            if (combinedData) {
-                busMasCercanoHoy = buscarBusMasCercano(combinedData);
-            }
+        // se consideran nocturnos si llegan entre las 0:00 y las 5:00
+        const busesYesterdayData = await fetchScheduledBuses(stopNumber, lineNumber, yesterdayDate);
+        const busesYesterday = combineBusData(busesYesterdayData);
+        // Agrupar los datos de ayer y hoy por trip_id
+        const combinedData = combineBusDataFromTwoDays(buses, busesYesterday[lineNumber]);
+        if (combinedData) {
+            busMasCercanoHoy = buscarBusMasCercano(combinedData);
+        }
     } else {
         // Buscar en el día actual
         busMasCercanoHoy = buscarBusMasCercano(buses);
