@@ -22,9 +22,10 @@
     <meta name="twitter:title" content="AUVASA Tracker">
     <meta name="twitter:description" content="🚍 La forma más rápida de saber cuándo llega tu bus en Valladolid">
     <meta name="twitter:image" content="https://auvasatracker.com/favicon.png">
-
+    <script type="module" src="js/browser.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="style.css?v=202403311540">
+
+    <link rel="stylesheet" type="text/css" href="style.css?v=202404011800">
     <link rel="manifest" href="manifest.json">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -78,12 +79,13 @@
 
     <div class="bus-list" id="busList">
         <div id="welcome-box">
-            <h2>Empiece a añadir lineas y paradas</h2>
-            <p>Puede añadir paradas completas o líneas individuales a su lista usando el formulario de la parte superior. </p>
-            <h2>Instale o añada la app</h2>
-            <p>No olvide instalar o <strong>Agregar a la pantalla principal</strong> desde el menú de su navegador o desde el icono Compartir <img src="img/ios-share.svg" alt="Icono compartir en iOS"/> en iOS</p>
+            <h2>Esta es su lista de líneas</h2>
+            <p>Puede añadir paradas completas o líneas individuales a esta pantalla usando el formulario de la parte superior y pulsando el botón <span class="button-sample">+</span>. </p>
             <h2>Descubra más en el menú ☰</h2>
             <p>Descubra otras opciones como paradas cercanas o planifique su ruta desde el menú superior ☰</p>
+            <h2>Instale o añada la app</h2>
+            <p>Si accede desde web, no olvide instalar o <strong>Agregar a la pantalla principal</strong> desde el menú de su navegador o desde el icono Compartir <img src="img/ios-share.svg" alt="Icono compartir en iOS"/> en iOS</p>
+            <p class="ios-only"><img src="/img/ios-homescreen.jpg" alt="Añadir a la pantalla principal en iOS" /></p>
         </div>
     </div>
 

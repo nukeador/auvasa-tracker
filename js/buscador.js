@@ -106,7 +106,7 @@ document.getElementById('lineNumber').addEventListener('blur', function() {
     timeoutId = setTimeout(() => {
         const lineSuggestions = document.getElementById('lineSuggestions');
         lineSuggestions.innerHTML = ''; // Vacía el contenido de #lineSuggestions
-    }, 100);
+    }, 200);
 });
 
 // Cancela el timeout si el usuario hace clic en #lineSuggestions
