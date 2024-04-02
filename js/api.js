@@ -800,8 +800,8 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 
                 let tripId = busMasCercano.trip_id;
                 let ocupacion;
-                let ocupacionClass;
-                let ocupacionDescription;
+                let ocupacionClass = null;
+                let ocupacionDescription = 'Sin datos de ocupación';
                 
                 // Datos de ocupación
                 if (tripId) {
@@ -962,7 +962,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
                 // TODO: Solo actualizar los datos que hayan cambiado desde la anterior actualización cambiado el texto de dentro de los elementos placeholder creados por createBusElement()
                 // Actualizar el HTML con los datos del bus más cercano
-                lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada"><span class="ocupacion '+ ocupacionClass + '">' + ocupacionDescription + '</span> ' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestanteHTML + '</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
+                lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada"><span class="ocupacion ' + ocupacionClass + '" title="' + ocupacionDescription + '">' + ocupacionDescription + '</span> ' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestanteHTML + '</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
 
                 // Guarda si el elemento tenía la clase 'highlight'
                 let hadHighlight = lineItem.classList.contains('highlight');

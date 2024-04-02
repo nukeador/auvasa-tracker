@@ -1152,8 +1152,16 @@ button.remove-stop {
     background-image: url("img/seats-empty-many.png");  
 }
 
+.dark-mode .line-info .ocupacion.empty, .dark-mode .line-info .ocupacion.many {
+    background-image: url("img/seats-empty-many-light.png");  
+}
+
 .line-info .ocupacion.few {
     background-image: url("img/seats-few.png"); 
+}
+
+.dark-mode .line-info .ocupacion.few {
+    background-image: url("img/seats-few-light.png"); 
 }
 
 .line-info .ocupacion.crushed, .line-info .ocupacion.full {
