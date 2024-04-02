@@ -1137,6 +1137,41 @@ button.remove-stop {
     color: rgb(60, 167, 60);
 }
 
+.line-info .ocupacion {
+    display: inline-block;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    text-indent: -9999px;
+    cursor: pointer;
+    background-size: cover;
+    line-height: 15px;
+}
+
+.line-info .ocupacion.empty, .line-info .ocupacion.many {
+    background-image: url("img/seats-empty-many.png");  
+}
+
+.line-info .ocupacion.few {
+    background-image: url("img/seats-few.png"); 
+}
+
+.line-info .ocupacion.crushed, .line-info .ocupacion.full {
+    background-image: url("img/seats-full.png"); 
+}
+
+.line-info .ocupacion.not {
+    background-image: url("img/seats-notaccepting.png"); 
+}
+
+.line-info .ocupacion.standing {
+    background-image: url("img/seats-standing.png");  
+}
+
+.line-info .ocupacion.null, .line-info .ocupacion.undefined {
+    display: none;  
+}
+
 .line-info .hora-tiempo .horaLlegada {
     margin: 0 0 0.9em 0;
     font-size: 0.9em;
@@ -1280,6 +1315,8 @@ button.remove-stop {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     z-index: 1000; /* Ensure it is above other elements */
+    min-width: 250px;
+    text-align: center;
 }
 
 .notification-popup.show {

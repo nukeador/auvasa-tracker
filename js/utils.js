@@ -43,11 +43,16 @@ export function createArrowButton() {
     return button;
 }
 
-export function showNotice(lineNumber) {
+export function showNotice(lineNumber, message = null) {
     // Crear el elemento de notificación
     const notification = document.createElement('div');
     notification.className = 'notification-popup';
     notification.textContent = `Se notificará cuando queden 3 minutos para que llegue la línea ${lineNumber}, deberá tener la app abierta`;
+
+    // Si le pasamos argumento lo usamos como mensaje
+    if (message) {
+        notification.textContent = message;
+    }
 
     // Agregar al cuerpo del documento
     document.body.appendChild(notification);
@@ -63,7 +68,7 @@ export function showNotice(lineNumber) {
         setTimeout(() => {
             document.body.removeChild(notification);
         }, 500); // Esperar a que termine la transición de desvanecimiento
-    }, 3000);
+    }, 2000);
 }
 
 export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
@@ -858,6 +863,16 @@ export function clickEvents() {
         displayLoadingSpinner();
         showIframe('https://rutas.auvasatracker.com/#/route');
         toogleSidebar();
+    });
+
+    // Tooltips para iconos de ocupación
+    document.querySelector('#busList').addEventListener('touchstart', function(event) {
+        // Verifica si el evento se originó en un elemento .ocupacion
+        const ocupacionElement = event.target.closest('.ocupacion');
+        if (ocupacionElement) {
+            // Crea el tooltip
+            showNotice('', ocupacionElement.textContent);
+        }
     });
 
 }
