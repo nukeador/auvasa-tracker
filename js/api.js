@@ -110,6 +110,26 @@ export async function getStopLines(stopId) {
         return null;
     }
 }
+// Obtener ocupación de un vehículo
+export async function fetchBusOccupancy(tripId) {
+    try {
+        const response = await fetch(apiEndPoint + `/v2/busOccupancy/${tripId}`);
+        // Si no hay datos los dejamos como null
+        if (!response.ok) {
+            console.log('Error al consultar el API');
+            return null;
+        }
+        else {
+            // Devolvemos una versión simplificada del estado
+            // primera palabra en minúscula
+            const occupancyStatus = await response.text();
+            return occupancyStatus.split('_')[0].replace('"', '').toLowerCase();
+        }
+    } catch (error) {
+        console.error('Error al recuperar ocupación:', error);
+        return null; // Devuelve null en caso de error
+    }
+}
 
 // Obtener todas los avisos y alertas
 export async function fetchAllBusAlerts() {
@@ -735,6 +755,7 @@ export async function updateBusList() {
     removeObsoleteElements(stops);
     updateLastUpdatedTime();
 }
+
 // Función principal que actualiza los datos de una línea
 export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
     // URL del API con estáticos y tiempo real
@@ -778,6 +799,28 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 let futureDate;
                 
                 let tripId = busMasCercano.trip_id;
+                let ocupacion;
+                let ocupacionClass;
+                let ocupacionDescription;
+                
+                // Datos de ocupación
+                if (tripId) {
+                    ocupacion = await fetchBusOccupancy(tripId);
+                    // Si no es null asignamos la clase
+                    if (ocupacion) {
+                        const occupancyStatusMapping = {
+                            'empty': 'Todos los asientos están libres',
+                            'many': 'Hay bastantes asientos libres',
+                            'few': 'Hay pocos asientos libres',
+                            'standing': 'No hay asientos, solo de pie',
+                            'crushed': 'No hay casi hueco libre',
+                            'full': 'Bus lleno, no hay sitios',
+                            'not': 'Bus lleno, no admite más personas',
+                          };
+                        ocupacionDescription = occupancyStatusMapping[ocupacion];
+                        ocupacionClass = ocupacion;
+                    }
+                }
 
                 // Obtener los próximos 3 buses
                 busesProximos = await getNextBuses(busMasCercano, busesLinea, stopNumber, lineNumber, 3);
@@ -919,7 +962,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
                 // TODO: Solo actualizar los datos que hayan cambiado desde la anterior actualización cambiado el texto de dentro de los elementos placeholder creados por createBusElement()
                 // Actualizar el HTML con los datos del bus más cercano
-                lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada">' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestanteHTML + '</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
+                lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada"><span class="ocupacion '+ ocupacionClass + '">' + ocupacionDescription + '</span> ' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestanteHTML + '</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
 
                 // Guarda si el elemento tenía la clase 'highlight'
                 let hadHighlight = lineItem.classList.contains('highlight');
