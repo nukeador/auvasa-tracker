@@ -32,11 +32,6 @@ export async function updateBusMap(tripId, lineNumber, paradaData, centerMap) {
             minZoom: 0
         }).addTo(myMap);
     } else {
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors'
-        }).addTo(myMap);
-
         L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1eb584c78ab43ddafe0831ad04566ae', {
             maxZoom: 19,
             attribution: 'Maps © <a href="http://thunderforest.com/">Thunderforest</a>',
