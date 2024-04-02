@@ -1134,7 +1134,6 @@ export async function elegirBusMasCercano(buses, stopNumber, lineNumber) {
             if (!tripIdBusLlegado || tripId !== tripIdBusLlegado) {
                 if (bus.realTime && bus.realTime.fechaHoraLlegada) {
                     const fechaHoraLlegada = new Date(bus.realTime.fechaHoraLlegada);
-                    console.log(fechaHoraLlegada);
                     if (fechaHoraLlegada > hoy && fechaHoraLlegada < fechaHoraLlegadaMinima) {
                         fechaHoraLlegadaMinima = fechaHoraLlegada;
                         busMasCercano = bus;
