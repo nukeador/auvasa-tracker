@@ -389,10 +389,10 @@ html.ios .ios-only {
 
 .stop-block {
     background-color: #fff;
-    margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #CCCCCCBA;
     border-radius: 4px;
-    margin: 0 4px;
+    margin: 0 4px 15px 4px;
     position: relative;
 }
 
@@ -417,7 +417,7 @@ html.ios .ios-only {
 .stop-block h2 {
     text-align: center;
     font-size: 0.9em;
-    padding: 0.7em 34px 0 33px;
+    padding: 0 40px 0 34px;
 }
 
 .stop-block h2 span.stopId {
@@ -1786,6 +1786,7 @@ body.dark-mode {
 .dark-mode .stop-block {
     background-color: #333;
     color: #eeeeee;
+    border: 1px solid #404040BA;
 }
 
 .dark-mode .highlight {
