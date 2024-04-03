@@ -655,7 +655,7 @@ export async function updateBusList() {
 
         // Actualizamos el nombre de la parada si ha cambiado
         if (stopName) {
-            let updatedName = stopName + ' <span class="stopId">(' + stopId + ')</span>';
+            let updatedName = `${stopName} <span class="stopId">(${stopId})</span>`;
             if (!stopElement.querySelector('.stopId') || stopElement.querySelector('.stopId').textContent !== '(' + stopId + ')') {
                 updateStopName(stopElement, updatedName, stopGeo);
             }
