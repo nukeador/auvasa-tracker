@@ -866,7 +866,7 @@ export function clickEvents() {
     });
 
     // Tooltips para iconos de ocupación
-    document.querySelector('#busList').addEventListener('touchstart', function(event) {
+    document.querySelector('#busList').addEventListener('click', function(event) {
         // Verifica si el evento se originó en un elemento .ocupacion
         const ocupacionElement = event.target.closest('.ocupacion');
         if (ocupacionElement) {
