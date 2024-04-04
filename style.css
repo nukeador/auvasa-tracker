@@ -1176,7 +1176,8 @@ button.remove-stop {
     background-image: url("img/seats-standing.png");  
 }
 
-.line-info .ocupacion.null, .line-info .ocupacion.undefined {
+/* No mostramos nada si los datos son nulos, vacíos o no_data_available */
+.line-info .ocupacion.null, .line-info .ocupacion.undefined, .line-info .ocupacion.no {
     display: none;  
 }
 
