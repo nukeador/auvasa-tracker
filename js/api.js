@@ -113,7 +113,7 @@ export async function getStopLines(stopId) {
 // Obtener ocupación de un vehículo
 export async function fetchBusOccupancy(tripId) {
     try {
-        const response = await fetch(apiEndPoint + `/v2/busOccupancy/${tripId}`);
+        const response = await fetch(apiEndPoint + `/v2/busPosition/${tripId}`);
         // Si no hay datos los dejamos como null
         if (!response.ok) {
             console.log('Error al consultar el API');
@@ -122,8 +122,14 @@ export async function fetchBusOccupancy(tripId) {
         else {
             // Devolvemos una versión simplificada del estado
             // primera palabra en minúscula
-            const occupancyStatus = await response.text();
-            return occupancyStatus.split('_')[0].replace('"', '').toLowerCase();
+            const data = await response.json();
+            if (data && data.length && data[0].ocupacion) {
+                const occupancyStatus = data[0].ocupacion;
+                return occupancyStatus.split('_')[0].replace('"', '').toLowerCase();
+            }
+            else {
+                return null;
+            }
         }
     } catch (error) {
         console.error('Error al recuperar ocupación:', error);
