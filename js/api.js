@@ -1073,13 +1073,13 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             }
             
             // Creamos el panel informativo desplegable
-            const infoPanel = createInfoPanel(busesProximos, stopNumber, lineNumber);
+            const infoPanel = await createInfoPanel(busesProximos, stopNumber, lineNumber);
             lineItem.appendChild(infoPanel);
 
         } catch (error) {
             console.error('Error en fetchBusTime:', error);
             lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo sin-servicio">Sin datos en este momento</div>';
-            const infoPanel = createInfoPanel(busesProximos, stopNumber, lineNumber);
+            const infoPanel = await createInfoPanel(busesProximos, stopNumber, lineNumber);
             lineItem.appendChild(infoPanel);
         };
 }

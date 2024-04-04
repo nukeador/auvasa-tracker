@@ -1,5 +1,5 @@
 import { addLineNotification } from './notifications.js';
-import { removeBusLine, displayScheduledBuses, updateBusList, removeStop, removeAllBusLines, addBusLine, showNearestStops } from './api.js';
+import { removeBusLine, displayScheduledBuses, updateBusList, removeStop, removeAllBusLines, addBusLine, showNearestStops, fetchBusOccupancy } from './api.js';
 
 // Declaración global de intervalId
 let intervalId;
@@ -71,7 +71,7 @@ export function showNotice(lineNumber, message = null) {
     }, 2000);
 }
 
-export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
+export async function createInfoPanel(busesProximos, stopNumber, lineNumber) {
     let infoPanel = document.createElement('div');
     infoPanel.className = 'additional-info-panel';
 
@@ -85,33 +85,48 @@ export function createInfoPanel(busesProximos, stopNumber, lineNumber) {
 
     // Añadimos cada autobús
     if (busesProximos?.length > 0){
-        busesProximos.forEach(bus => {
+        // Usamos for...of para poder hacer llamadas async
+        for (const bus of busesProximos) {
             let horaLlegada;
             let llegadaClass;
 
-            if (bus.realTime && bus.realTime.llegada) {
-                horaLlegada = bus.realTime.llegada;
+            let ocupacion;
+            let ocupacionClass = null;
+            let ocupacionDescription = 'Sin datos de ocupación';
+            let tripId;
+
+            if (bus.realTime && bus.realTime.fechaHoraLlegada) {
+                horaLlegada = new Date(bus.realTime.fechaHoraLlegada).toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
                 llegadaClass = 'realtime';
-            } else if (bus.scheduled && bus.scheduled.llegada) {
-                horaLlegada = bus.scheduled.llegada;
+                tripId = bus.realTime.tripId;
+                ocupacion = await fetchBusOccupancy(tripId);
+            } else if (bus.scheduled && bus.scheduled.fechaHoraLlegada) {
+                horaLlegada = new Date(bus.scheduled.fechaHoraLlegada).toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
                 llegadaClass = 'programado';
+                tripId = bus.scheduled.tripId;
+                ocupacion = await fetchBusOccupancy(tripId);
+            }
+
+            // Si no es null asignamos la clase
+            if (ocupacion) {
+                const occupancyStatusMapping = {
+                    'empty': 'Todos los asientos están libres',
+                    'many': 'Hay bastantes asientos libres',
+                    'few': 'Hay pocos asientos libres',
+                    'standing': 'No hay asientos, solo de pie',
+                    'crushed': 'No hay casi hueco libre',
+                    'full': 'Bus lleno, no hay sitios',
+                    'not': 'Bus lleno, no admite más personas',
+                  };
+                ocupacionDescription = occupancyStatusMapping[ocupacion];
+                ocupacionClass = ocupacion;
             }
 
             // Verificamos que horaLlegada no sea null o vacío
             if (horaLlegada) {
-                // Verificamos si horaLlegada tiene el formato "HH:MM:SS"
-                if (horaLlegada.includes(":") && horaLlegada.split(":").length === 3) {
-                    // Eliminamos los segundos de la hora HH:MM:SS
-                    horaLlegada = horaLlegada.substring(0, horaLlegada.lastIndexOf(":"));
-                }
-                // Si la hora es de 24:00 a 27:00, fix visual
-                if (horaLlegada.split(":")[0] > 23) {
-                    horaLlegada = (horaLlegada.split(":")[0] -24) + ':' + horaLlegada.split(":")[0];
-                }
-
-                innerHTML += '<li><span class="' + llegadaClass + '">' + horaLlegada + '</span></li>';
+                innerHTML += '<li data-trip-id="'+ tripId + '"><span class="' + llegadaClass + '">' + horaLlegada + '</span><span class="ocupacion ' + ocupacionClass + '" title="' + ocupacionDescription + '">' + ocupacionDescription + '</span></li>';
             }
-        });
+        }
     }
 
     innerHTML += '</ul></div><div class="actions-buttons"></div>';
