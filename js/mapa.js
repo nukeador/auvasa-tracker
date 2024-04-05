@@ -173,7 +173,8 @@ function actualizarBus(lat, lon, lineNumber) {
 }
 
 function actualizarUltimaActualizacion(timestamp) {
-    let timestampDate = new Date(timestamp);
+    // Convertimos el Unix timestamp a ms
+    let timestampDate = new Date(timestamp * 1000);
     let currentDate = new Date();
     let diff = currentDate - timestampDate;
     let minutes = Math.floor(diff / 60000);
