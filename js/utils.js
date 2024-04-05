@@ -799,6 +799,24 @@ export function sidebarEvents() {
             }
         }
     }, false);
+
+    // Función para ajustar el margin-top del sidebar basado en la posición de desplazamiento
+    function adjustSidebarMargin() {
+        const sidebar = document.getElementById('sidebar');
+        if (window.scrollY === 0) {
+            // Si la página está arriba del todo, aplica un margin-top de 50px
+            sidebar.style.marginTop = '50px';
+        } else {
+            // Si la página no está arriba del todo, aplica un margin-top de 60px
+            sidebar.style.marginTop = '60px';
+        }
+    }
+
+    // Agrega el evento scroll al objeto window para ajustar el margin-top del sidebar
+    window.addEventListener('scroll', adjustSidebarMargin);
+
+    // Asegura que el margin-top inicial sea correcto cuando la página se carga
+    adjustSidebarMargin();
 }
 
 // Eventos en el diálogo de mostrar horarios programados
