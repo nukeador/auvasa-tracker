@@ -431,16 +431,20 @@ export function showError(error) {
     let message;
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            message = "Usuario negó la solicitud de geolocalización.";
+            message = "Debe permitir acceso a la ubicación, verifique los permisos de esta web/app.";
+            showErrorPopUp(message);
             break;
         case error.POSITION_UNAVAILABLE:
             message = "Información de ubicación no disponible.";
+            showErrorPopUp(message);
             break;
         case error.TIMEOUT:
-            message = "La solicitud para obtener la ubicación del usuario expiró.";
+            message = "El tiempo de espera para obtener la ubicación expiró.";
+            showErrorPopUp(message);
             break;
         default:
-            message = "Un error desconocido ocurrió.";
+            message = "Un error desconocido ocurrió al recuperar la ubicación.";
+            showErrorPopUp(message);
             break;
     }
     document.getElementById('nearestStopsResults').innerHTML = message;
@@ -845,7 +849,7 @@ export function clickEvents() {
     nearestStopsButton.addEventListener('click', function() {
         if (navigator.geolocation) {
             displayLoadingSpinner();
-            navigator.geolocation.getCurrentPosition(showNearestStops, showError);
+            navigator.geolocation.getCurrentPosition(showNearestStops, showError, { maximumAge: 6000, timeout: 15000 });
             toogleSidebar();
         } else {
            console.log("Geolocalización no soportada por este navegador.");
