@@ -240,12 +240,12 @@ button#installButton {
     width: 250px; /* Ajusta este valor al ancho deseado */
     transition: right 0.5s ease-in-out; /* Ajusta la duración y la función de tiempo según tus preferencias */
     right: -100%; /* Oculta el sidebar por defecto */
-    z-index: 100;
+    z-index: 1001;
     top: 0;
     background-color: #fffffff9;
     border-left: 1px solid #d0d0d0;
     overflow-x: auto;
-    padding-top: 85px;
+    margin-top: 50px;
 }
 
 .dark-mode .sidebar {

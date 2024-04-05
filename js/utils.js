@@ -1,8 +1,15 @@
 import { addLineNotification } from './notifications.js';
-import { removeBusLine, displayScheduledBuses, updateBusList, removeStop, removeAllBusLines, addBusLine, showNearestStops, fetchBusOccupancy } from './api.js';
+import { removeBusLine, displayScheduledBuses, updateBusList, removeStop, removeAllBusLines, addBusLine, showNearestStops, fetchBusOccupancy, displayNearestStopsResults } from './api.js';
 
 // Declaración global de intervalId
 let intervalId;
+
+// Listado de ids de diálogos de la app
+export const dialogIds = [
+    'horarios-box',
+    'nearestStopsResults',
+    'iframe-container'
+];
 
 // Generar o recuperar el ID único del cliente
 export function uuidv4() {
@@ -314,6 +321,13 @@ export function createMostrarHorarios(stopId, stopElement, horariosBox) {
         horariosBox.innerHTML = horariosElement.innerHTML;
         horariosBox.style.display = 'block';
         horariosBox.scrollTo(0, 0);
+        // URL para horarios
+        const dialogState = {
+            dialogType: 'scheduledTimes',
+            stopNumber: stopId
+        };
+        history.pushState(dialogState, `Horarios para la parada ${dialogState.stopNumber}`, `#/horarios/${dialogState.stopNumber}`);
+
         hideLoadingSpinner();
         clearInterval(intervalId);
     });
@@ -613,6 +627,7 @@ export function scrollToElement(element) {
 // Mostramos una URL ocupando toda la pantalla (menos el header) en un iframe
 export function showIframe (url) {
     const iframeContainer = document.getElementById('iframe-container');
+    iframeContainer.innerHTML = ''; 
     // Crear el iframe y agregarlo al contenedor
     const iframe = document.createElement('iframe');
     iframe.src = url;
@@ -637,6 +652,11 @@ export function showIframe (url) {
         // Ocultar el contenedor y eliminar el iframe
         iframeContainer.style.display = 'none';
         iframeContainer.innerHTML = ''; // Limpiar el contenedor
+        // Regresamos al home
+        const dialogState = {
+            dialogType: 'home'
+        };
+        history.replaceState(dialogState, document.title, '#/');
     });
     iframeContainer.appendChild(closeButton);
 }
@@ -779,6 +799,24 @@ export function sidebarEvents() {
             }
         }
     }, false);
+
+    // Función para ajustar el margin-top del sidebar basado en la posición de desplazamiento
+    function adjustSidebarMargin() {
+        const sidebar = document.getElementById('sidebar');
+        if (window.scrollY === 0) {
+            // Si la página está arriba del todo, aplica un margin-top de 50px
+            sidebar.style.marginTop = '50px';
+        } else {
+            // Si la página no está arriba del todo, aplica un margin-top de 60px
+            sidebar.style.marginTop = '60px';
+        }
+    }
+
+    // Agrega el evento scroll al objeto window para ajustar el margin-top del sidebar
+    window.addEventListener('scroll', adjustSidebarMargin);
+
+    // Asegura que el margin-top inicial sea correcto cuando la página se carga
+    adjustSidebarMargin();
 }
 
 // Eventos en el diálogo de mostrar horarios programados
@@ -805,6 +843,11 @@ export function scheduledBusesEvents() {
                 button.parentNode.style.display = 'none';
             });
             
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
             iniciarIntervalo(updateBusList);
             updateBusList();
         }
@@ -825,6 +868,12 @@ export function scrollTopEvents() {
         headerTitle.addEventListener('click', function() {
             const headerHeight = document.querySelector('header').offsetHeight;
             window.scrollTo({ top: -headerHeight, behavior: 'smooth' });
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
+            closeAllDialogs(dialogIds);
         });
     }
 
@@ -836,6 +885,12 @@ export function scrollTopEvents() {
             const headerHeight = document.querySelector('header').offsetHeight;
             window.scrollTo({ top: -headerHeight, behavior: 'smooth' });
             toogleSidebar();
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
+            closeAllDialogs(dialogIds);
         });
     }
 }
@@ -849,6 +904,7 @@ export function clickEvents() {
     nearestStopsButton.addEventListener('click', function() {
         if (navigator.geolocation) {
             displayLoadingSpinner();
+            closeAllDialogs(dialogIds);
             navigator.geolocation.getCurrentPosition(showNearestStops, showError, { maximumAge: 6000, timeout: 15000 });
             toogleSidebar();
         } else {
@@ -873,14 +929,26 @@ export function clickEvents() {
     const routesButton = document.getElementById('routesButton');
     routesButton.addEventListener('click', function() {
         displayLoadingSpinner();
+        closeAllDialogs(dialogIds);
         showIframe('https://rutas.auvasatracker.com');
+        // URL para rutas
+        const dialogState = {
+            dialogType: 'planRoute'
+        };
+        history.pushState(dialogState, `Planificar ruta`, `#/rutas/`);
         toogleSidebar();
     });
     
     const viewLinesButton = document.getElementById('viewLinesButton');
     viewLinesButton.addEventListener('click', function() {
         displayLoadingSpinner();
+        closeAllDialogs(dialogIds);
         showIframe('https://rutas.auvasatracker.com/#/route');
+        // URL para visor de líneas
+        const dialogState = {
+            dialogType: 'showLines'
+        };
+        history.pushState(dialogState, `Planificar ruta`, `#/lineas/`);
         toogleSidebar();
     });
 
@@ -960,4 +1028,47 @@ export function getFormattedDate(fecha) {
 
     var fechaFormateada = año + mes + día;
     return fechaFormateada;
+}
+
+// Función para ocultar elementos
+export function closeAllDialogs(ids) {
+    ids.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = 'none';
+        }
+    });
+}
+
+// Manejo de estado de URLs y acciones en cada ruta
+export function routersEvents() {
+    window.addEventListener('popstate', async function(event) {
+        // Verifica si hay un estado guardado
+        if (window.location.hash === '') {
+            // Aquí puedes verificar el estado guardado para determinar qué diálogo abrir
+            if (event.state.dialogType === 'scheduledTimes') {
+                const stopNumber = event.state.stopNumber;
+                if (stopNumber) {  await displayScheduledBuses(stopNumber); }
+            } else if (event.state.dialogType === 'nearbyStops') {
+                if (navigator.geolocation) {
+                    displayLoadingSpinner();
+                    navigator.geolocation.getCurrentPosition(showNearestStops, showError, { maximumAge: 6000, timeout: 15000 });
+                    toogleSidebar();
+                } else {
+                   console.log("Geolocalización no soportada por este navegador.");
+                }
+            } else if (event.state.dialogType === 'home') {
+                closeAllDialogs(dialogIds);
+            }
+        } else {
+            // Si no hay estado guardado, asume que el usuario quiere volver a la página principal
+            // Lógica para cerrar cualquier diálogo abierto y mostrar la página principal
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
+            closeAllDialogs(dialogIds);
+        }
+    });
 }

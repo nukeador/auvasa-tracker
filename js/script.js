@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents, socialBrowserWarning } from './utils.js';
+import { iniciarIntervalo, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents, socialBrowserWarning, routersEvents } from './utils.js';
 import { updateBusList } from './api.js';
 import { isIOS } from './browser.js';
 
@@ -19,6 +19,14 @@ function main() {
     if (isIOS()) {
         setTimeout(updateBusList, 1000);
     }
+
+    // Eventos para el manejo de URLs
+    // Establece el estado inicial y la URL al cargar la página por primera vez
+    const initialState = {
+        dialogType: 'home'
+    };
+    history.replaceState(initialState, document.title, '#/');
+    routersEvents();
 
     // Eventos y detección de theme
     themeEvents();
