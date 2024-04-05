@@ -1,8 +1,15 @@
 import { addLineNotification } from './notifications.js';
-import { removeBusLine, displayScheduledBuses, updateBusList, removeStop, removeAllBusLines, addBusLine, showNearestStops, fetchBusOccupancy } from './api.js';
+import { removeBusLine, displayScheduledBuses, updateBusList, removeStop, removeAllBusLines, addBusLine, showNearestStops, fetchBusOccupancy, displayNearestStopsResults } from './api.js';
 
 // Declaración global de intervalId
 let intervalId;
+
+// Listado de ids de diálogos de la app
+const dialogIds = [
+    'horarios-box',
+    'nearestStopsResults',
+    'iframe-container'
+];
 
 // Generar o recuperar el ID único del cliente
 export function uuidv4() {
@@ -314,6 +321,13 @@ export function createMostrarHorarios(stopId, stopElement, horariosBox) {
         horariosBox.innerHTML = horariosElement.innerHTML;
         horariosBox.style.display = 'block';
         horariosBox.scrollTo(0, 0);
+        // URL para horarios
+        const dialogState = {
+            dialogType: 'scheduledTimes',
+            stopNumber: stopId
+        };
+        history.pushState(dialogState, `Horarios para la parada ${dialogState.stopNumber}`, `#/horarios/${dialogState.stopNumber}`);
+
         hideLoadingSpinner();
         clearInterval(intervalId);
     });
@@ -613,6 +627,7 @@ export function scrollToElement(element) {
 // Mostramos una URL ocupando toda la pantalla (menos el header) en un iframe
 export function showIframe (url) {
     const iframeContainer = document.getElementById('iframe-container');
+    iframeContainer.innerHTML = ''; 
     // Crear el iframe y agregarlo al contenedor
     const iframe = document.createElement('iframe');
     iframe.src = url;
@@ -637,6 +652,11 @@ export function showIframe (url) {
         // Ocultar el contenedor y eliminar el iframe
         iframeContainer.style.display = 'none';
         iframeContainer.innerHTML = ''; // Limpiar el contenedor
+        // Regresamos al home
+        const dialogState = {
+            dialogType: 'home'
+        };
+        history.replaceState(dialogState, document.title, '#/');
     });
     iframeContainer.appendChild(closeButton);
 }
@@ -805,6 +825,11 @@ export function scheduledBusesEvents() {
                 button.parentNode.style.display = 'none';
             });
             
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
             iniciarIntervalo(updateBusList);
             updateBusList();
         }
@@ -874,6 +899,11 @@ export function clickEvents() {
     routesButton.addEventListener('click', function() {
         displayLoadingSpinner();
         showIframe('https://rutas.auvasatracker.com');
+        // URL para rutas
+        const dialogState = {
+            dialogType: 'planRoute'
+        };
+        history.pushState(dialogState, `Planificar ruta`, `#/rutas/`);
         toogleSidebar();
     });
     
@@ -881,6 +911,11 @@ export function clickEvents() {
     viewLinesButton.addEventListener('click', function() {
         displayLoadingSpinner();
         showIframe('https://rutas.auvasatracker.com/#/route');
+        // URL para visor de líneas
+        const dialogState = {
+            dialogType: 'showLines'
+        };
+        history.pushState(dialogState, `Planificar ruta`, `#/lineas/`);
         toogleSidebar();
     });
 
@@ -960,4 +995,47 @@ export function getFormattedDate(fecha) {
 
     var fechaFormateada = año + mes + día;
     return fechaFormateada;
+}
+
+// Función para ocultar elementos
+export function closeAllDialogs(ids) {
+    ids.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = 'none';
+        }
+    });
+}
+
+// Manejo de estado de URLs y acciones en cada ruta
+export function routersEvents() {
+    window.addEventListener('popstate', async function(event) {
+        // Verifica si hay un estado guardado
+        if (window.location.hash === '') {
+            // Aquí puedes verificar el estado guardado para determinar qué diálogo abrir
+            if (event.state.dialogType === 'scheduledTimes') {
+                const stopNumber = event.state.stopNumber;
+                if (stopNumber) {  await displayScheduledBuses(stopNumber); }
+            } else if (event.state.dialogType === 'nearbyStops') {
+                if (navigator.geolocation) {
+                    displayLoadingSpinner();
+                    navigator.geolocation.getCurrentPosition(showNearestStops, showError, { maximumAge: 6000, timeout: 15000 });
+                    toogleSidebar();
+                } else {
+                   console.log("Geolocalización no soportada por este navegador.");
+                }
+            } else if (event.state.dialogType === 'home') {
+                closeAllDialogs(dialogIds);
+            }
+        } else {
+            // Si no hay estado guardado, asume que el usuario quiere volver a la página principal
+            // Lógica para cerrar cualquier diálogo abierto y mostrar la página principal
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
+            closeAllDialogs(dialogIds);
+        }
+    });
 }

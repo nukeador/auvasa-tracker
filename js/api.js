@@ -1037,7 +1037,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     // Obtenemos el tripId del elemento hermano llamado .linea
                     const brotherElement = this.parentElement.previousElementSibling;
                     const tripId = brotherElement.getAttribute('data-trip-id');
-                
 
                     if (mapBox) {
                         let paradaData = {
@@ -1045,7 +1044,6 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                             longitud: scheduledData.parada[0].longitud,
                             nombre: scheduledData.parada[0].parada,
                         };
-
                         mapBox.classList.add('show');
                         updateBusMap(tripId, lineNumber, paradaData, true);
 
@@ -1495,6 +1493,13 @@ export async function showNearestStops(position) {
 export async function displayNearestStopsResults(stops, userLocation) {
     let resultsDiv = document.getElementById('nearestStopsResults');
     resultsDiv.style.display = 'block';
+
+    // URL para paradas cercanas
+    const dialogState = {
+        dialogType: 'nearbyStops'
+    };
+    history.pushState(dialogState, `Paradas cercanas`, `#/cercanas/`);
+
     resultsDiv.innerHTML = '<button id="close-nearest-stops">X</button>';
 
     // Añadir otros elementos estáticos al resultsDiv
@@ -1527,6 +1532,11 @@ export async function displayNearestStopsResults(stops, userLocation) {
     resultsDiv.addEventListener('click', async function (event) {
         if (event.target.matches('#close-nearest-stops')) {
             resultsDiv.style.display = 'none';
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
         } else if (event.target.matches('.addStopButton')) {
             let stopNumber = event.target.getAttribute('data-stop-number');
             await addBusLine(stopNumber);
