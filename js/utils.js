@@ -5,7 +5,7 @@ import { removeBusLine, displayScheduledBuses, updateBusList, removeStop, remove
 let intervalId;
 
 // Listado de ids de diálogos de la app
-const dialogIds = [
+export const dialogIds = [
     'horarios-box',
     'nearestStopsResults',
     'iframe-container'
@@ -904,6 +904,7 @@ export function clickEvents() {
     nearestStopsButton.addEventListener('click', function() {
         if (navigator.geolocation) {
             displayLoadingSpinner();
+            closeAllDialogs(dialogIds);
             navigator.geolocation.getCurrentPosition(showNearestStops, showError, { maximumAge: 6000, timeout: 15000 });
             toogleSidebar();
         } else {
@@ -928,6 +929,7 @@ export function clickEvents() {
     const routesButton = document.getElementById('routesButton');
     routesButton.addEventListener('click', function() {
         displayLoadingSpinner();
+        closeAllDialogs(dialogIds);
         showIframe('https://rutas.auvasatracker.com');
         // URL para rutas
         const dialogState = {
@@ -940,6 +942,7 @@ export function clickEvents() {
     const viewLinesButton = document.getElementById('viewLinesButton');
     viewLinesButton.addEventListener('click', function() {
         displayLoadingSpinner();
+        closeAllDialogs(dialogIds);
         showIframe('https://rutas.auvasatracker.com/#/route');
         // URL para visor de líneas
         const dialogState = {

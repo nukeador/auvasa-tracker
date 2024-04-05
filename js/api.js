@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp, getFormattedDate } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp, getFormattedDate, closeAllDialogs, dialogIds } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap } from './mapa.js';
 
@@ -704,6 +704,12 @@ export async function updateBusList() {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
                 toogleSidebar(); // Cerrar el sidebar
+                closeAllDialogs(dialogIds);
+                // Regresamos al home
+                const dialogState = {
+                    dialogType: 'home'
+                };
+                history.replaceState(dialogState, document.title, '#/');
                 const linkStopId = link.getAttribute('data-stopid');
                 const stopElement = document.getElementById(linkStopId);
                 if (stopElement) {
