@@ -850,6 +850,12 @@ export function scrollTopEvents() {
         headerTitle.addEventListener('click', function() {
             const headerHeight = document.querySelector('header').offsetHeight;
             window.scrollTo({ top: -headerHeight, behavior: 'smooth' });
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
+            closeAllDialogs(dialogIds);
         });
     }
 
@@ -861,6 +867,12 @@ export function scrollTopEvents() {
             const headerHeight = document.querySelector('header').offsetHeight;
             window.scrollTo({ top: -headerHeight, behavior: 'smooth' });
             toogleSidebar();
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
+            closeAllDialogs(dialogIds);
         });
     }
 }
