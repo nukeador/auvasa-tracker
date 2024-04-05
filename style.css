@@ -1181,6 +1181,13 @@ button.remove-stop {
     display: none;  
 }
 
+/* Estilo extra para los iconos en el panel de info de próximos buses */
+
+.additional-info-panel .ocupacion {
+    line-height: 17px;
+    margin-left: 5px;
+}
+
 .line-info .hora-tiempo .horaLlegada {
     margin: 0 0 0.9em 0;
     font-size: 0.9em;
