@@ -1,6 +1,6 @@
 import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp, getFormattedDate, closeAllDialogs, dialogIds } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
-import { updateBusMap } from './mapa.js';
+import { updateBusMap, mapaParadasCercanas } from './mapa.js';
 
 // Definir la URL base del API, no incluir la / al final
 export const apiEndPoint = 'https://gtfs.auvasatracker.com';
@@ -294,7 +294,6 @@ export async function getBusDestinationsForStop(stopNumber) {
                         }
                     });
                 } else { 
-                    console.log(linea.destino);
                     // Si no hay datos la tomamos del general
                     if (!destinations[linea.linea]) {
                         destinations[linea.linea] = new Set();
@@ -1572,8 +1571,12 @@ export async function displayNearestStopsResults(stops, userLocation) {
     resultsDiv.innerHTML = '<button id="close-nearest-stops">X</button>';
 
     // Añadir otros elementos estáticos al resultsDiv
-    resultsDiv.innerHTML += '<h2>Paradas cercanas</h2><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
-
+    resultsDiv.innerHTML += `
+        <h2>Paradas cercanas</h2>
+        <p>Estas son las paradas más cercanas a tu ubicación.</p>
+        <div id="mapaParadasCercanas" style="height: 400px; width: 100%;"></div>
+        <p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>`;
+    
     for (let stop of stops) {
         // Obtener destino para todas las líneas de la parada
         let lineasDestinos = await getBusDestinationsForStop(stop.parada.numero);
@@ -1610,6 +1613,8 @@ export async function displayNearestStopsResults(stops, userLocation) {
         `;
 
         resultsDiv.appendChild(stopDiv);
+        // Generamos el mapa de paradas
+        await mapaParadasCercanas(stops, userLocation.x, userLocation.y);
         // Restablecer el scroll arriba
         resultsDiv.scrollTo(0, 0);
     }

@@ -895,6 +895,7 @@ button.remove-stop {
 #lineas-correspondencia span.linea {
   padding: 1px 6px;
   margin: 0px 2px;
+  border-radius: 10px;
 }
 
 #lineas-correspondencia p {
