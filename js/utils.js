@@ -857,6 +857,12 @@ export function scheduledBusesEvents() {
             let lineNumber = event.target.getAttribute('data-line-number');
             await addBusLine(stopNumber, lineNumber, true);
         }
+        // Clic en una línea en el índice superior
+        if (event.target.classList.contains('indice-linea')) {
+            let lineNumber = event.target.getAttribute('data-line-number');
+            let lineElement = horariosBox.querySelector(`#linea-${lineNumber}`);
+            scrollToElement(lineElement);
+        }
     });
 }
 
