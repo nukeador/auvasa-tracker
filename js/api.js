@@ -686,7 +686,7 @@ export async function updateBusList() {
 
         // Actualizamos el nombre de la parada si ha cambiado
         if (stopName) {
-            let updatedName = `${stopName} <span class="stopId">(${stopId})</span>`;
+            let updatedName = `<span class="stop-name">${stopName} <span class="stopId">(${stopId})</span></span>`;
             if (!stopElement.querySelector('.stopId') || stopElement.querySelector('.stopId').textContent !== '(' + stopId + ')') {
                 updateStopName(stopElement, updatedName, stopGeo);
             }
@@ -702,11 +702,11 @@ export async function updateBusList() {
                 suppressedStopAlert.className = 'suppressedStopAlert';
                 suppressedStopAlert.innerHTML = "Esta parada es posible que esté suprimida actualmente, consulte si hay alertas en sus líneas para más información";
                 
-                // Seleccionar el elemento h2 dentro de stopElement
-                const h2Element = stopElement.querySelector('h2');
-                if (h2Element) {
-                    // Insertar suppressedStopAlert justo después del h2Element
-                    h2Element.insertAdjacentElement('afterend', suppressedStopAlert);
+                // Seleccionar el elemento stop-header dentro de stopElement
+                const stopHeaderElement = stopElement.querySelector('stop-header');
+                if (stopHeaderElement) {
+                    // Insertar suppressedStopAlert justo después del stopHeaderElement
+                    stopHeaderElement.insertAdjacentElement('afterend', suppressedStopAlert);
                 } else {
                     // Si no hay un elemento h2, añadirlo al final de stopElement como antes
                     stopElement.appendChild(suppressedStopAlert);

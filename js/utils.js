@@ -203,7 +203,17 @@ export function updateStopName(stopElement, newName, stopGeo) {
     // Actualiza el nombre de la parada en el DOM
     const nameElement = stopElement.querySelector('h2');
     if (nameElement) {
-        nameElement.innerHTML = `${newName} <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%3A${stopGeo.y}:${stopGeo.x}#map=19.00/${stopGeo.y}/${stopGeo.x}" target="_blank">Mapa</a>`;
+        nameElement.innerHTML = `${newName}`;
+
+        // Icono de mapa
+        const mapIconElement = document.createElement('a');
+        mapIconElement.className = 'mapIcon';
+        mapIconElement.setAttribute('title', 'Cómo llegar');
+        mapIconElement.setAttribute('href', `https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%3A${stopGeo.y}:${stopGeo.x}#map=19.00/${stopGeo.y}/${stopGeo.x}`);
+        mapIconElement.setAttribute('target', '_blank');
+        mapIconElement.textContent = 'Mapa';
+
+        nameElement.insertAdjacentElement('afterend', mapIconElement);
     }
 }
 
@@ -261,7 +271,12 @@ export function createStopElement(stopId, busList) {
     let stopElement = document.createElement('div');
     stopElement.id = stopId;
     stopElement.className = 'stop-block';
-    stopElement.innerHTML = `<h2>${stopId}</h2>`;
+
+    let headerElement = document.createElement('div');
+    headerElement.className = 'stop-header';
+
+    let nameElement = document.createElement('h2');
+    nameElement.textContent = `${stopId}`;
 
     // Agrega el icono de fijar parada
     let pinIcon = document.createElement('i');
@@ -277,7 +292,10 @@ export function createStopElement(stopId, busList) {
     }
 
     pinIcon.addEventListener('click', toggleFixedStop);
-    stopElement.appendChild(pinIcon);
+    
+    headerElement.appendChild(pinIcon);
+    headerElement.appendChild(nameElement);
+    stopElement.appendChild(headerElement);
 
     busList.appendChild(stopElement);
     return stopElement;
