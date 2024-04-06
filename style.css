@@ -1113,8 +1113,8 @@ button.remove-stop {
 }
 
 /* Modo oscuro para popups */
-.dark-mode  #mapContainer .leaflet-popup-content-wrapper,
-.dark-mode #mapContainer .leaflet-popup-tip {
+.dark-mode .leaflet-popup-content-wrapper,
+.dark-mode .leaflet-popup-tip {
  background-color: #484b4d;
  color: #eeeeee;
 }
