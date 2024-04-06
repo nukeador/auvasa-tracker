@@ -12,7 +12,7 @@ mapEvents();
 function crearIconoBus(numeroBus) {
     return L.divIcon({
         className: 'bus-icon' + (numeroBus ? ' linea-' + numeroBus : ''),
-        html: '<div>' + numeroBus + '</div>',
+        html: `<div>${numeroBus}</div>`,
         iconSize: [30, 30]
     });
 }
@@ -180,7 +180,7 @@ function actualizarUltimaActualizacion(timestamp) {
     let minutes = Math.floor(diff / 60000);
     let seconds = ((diff % 60000) / 1000).toFixed(0);
     let lastUpdate = minutes < 1 ? `${seconds}s` : `${minutes} min ${seconds}s`;
-    let updateHTML = "Última ubicación <strong>aproximada</strong>. Actualizada hace " + lastUpdate;
+    let updateHTML = `Última ubicación <strong>aproximada</strong>. Actualizada hace ${lastUpdate}`;
     document.getElementById('busMapLastUpdate').innerHTML = updateHTML;
 }
 

@@ -18,7 +18,7 @@ document.getElementById('stopNumber').addEventListener('input', async function()
     // Crea y muestra los resultados
     matchingStops.forEach(function(stop) {
         let resultElement = document.createElement('div');
-        resultElement.innerHTML = '<span class="numParada">' + stop.parada.numero + '</span> ' + stop.parada.nombre;
+        resultElement.innerHTML = `<span class="numParada">${stop.parada.numero}</span> ${stop.parada.nombre}`;
         resultElement.classList.add('autocomplete-result');
         resultElement.addEventListener('click', function() {
             document.getElementById('stopNumber').value = stop.parada.numero;
