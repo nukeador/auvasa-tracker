@@ -429,7 +429,7 @@ export async function displayScheduledBuses(stopNumber, date) {
 
     // Mostramos las líneas disponibles en la cabecera a modo de índice
     Object.values(orderedHorarios).forEach (linea => {
-        horariosElement.innerHTML += `<span class="indice-linea linea-${linea.linea}" data-line-number="${linea.linea}">${linea.linea}</span>`;
+        horariosElement.innerHTML += `<a href="#linea-${linea.linea}"><span class="indice-linea linea-${linea.linea}" data-stop-number="${stopNumber}" data-line-number="${linea.linea}">${linea.linea}</span></a>`;
     });
     
     // Mostrar los horarios agrupados
