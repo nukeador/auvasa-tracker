@@ -716,7 +716,7 @@ button.remove-stop {
     display: block;
     background-color: #FFF;
     background-position: 8px 8px;
-    z-index: 1;
+    z-index: 1000;
 }
 
 .dark-mode #horarios-box .horarios-close, .dark-mode #nearestStopsResults #close-nearest-stops {
@@ -806,6 +806,10 @@ button.remove-stop {
 
 #nearestStopsResults > * {
     padding: 0 15px;
+}
+
+#nearestStopsResults #close-nearest-stops {
+    right: 15px;
 }
 
 #nearestStopsResults h2 {
