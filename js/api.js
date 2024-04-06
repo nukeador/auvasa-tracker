@@ -284,7 +284,7 @@ export async function getBusDestinationsForStop(stopNumber) {
         let destinations = {};
         if (data.lineas) {
             data.lineas.forEach(linea => {
-                if (linea.horarios) {
+                if (linea.horarios && linea.horarios.length > 0) {
                     linea.horarios.forEach(horario => {
                         if (horario.destino) {
                             if (!destinations[linea.linea]) {
@@ -293,6 +293,13 @@ export async function getBusDestinationsForStop(stopNumber) {
                             destinations[linea.linea].add(horario.destino);
                         }
                     });
+                } else { 
+                    console.log(linea.destino);
+                    // Si no hay datos la tomamos del general
+                    if (!destinations[linea.linea]) {
+                        destinations[linea.linea] = new Set();
+                    }
+                    destinations[linea.linea].add(linea.destino);
                 }
             });
         }
@@ -397,11 +404,19 @@ export async function displayScheduledBuses(stopNumber, date) {
     dateInput.dispatchEvent(new Event('change'));
     
     if (horariosBuses && horariosBuses.parada && horariosBuses.parada[0]) {
-        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>' + horariosBuses.parada[0].parada + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong></p>';
+        horariosElement.innerHTML += `
+            <button class="horarios-close">X</button>
+            <h2>${horariosBuses.parada[0].parada}</h2>
+            <p>Horarios programados de <strong>llegada a esta parada.</strong></p>
+        `;
         horariosElement.appendChild(dateInput);
         horariosElement.innerHTML += '<p id="stopDateExplanation">Modifique para ver otros días</p>';
     } else {
-        horariosElement.innerHTML += '<button class="horarios-close">X</button><h2>Parada ' + stopNumber + '</h2><p>Horarios programados de <strong>llegada a esta parada.</strong></p>';
+        horariosElement.innerHTML += `
+            <button class="horarios-close">X</button>
+            <h2>Parada${stopNumber}</h2>
+            <p>Horarios programados de <strong>llegada a esta parada.</strong></p>
+        `;
         horariosElement.appendChild(dateInput);
         horariosElement.innerHTML += '<p id="stopDateExplanation">Modifique para ver otros días</p>';
     }
@@ -434,7 +449,11 @@ export async function displayScheduledBuses(stopNumber, date) {
     
     // Mostrar los horarios agrupados
     orderedHorarios.forEach(group => {
-        horariosElement.innerHTML += '<div id="linea-' + group.linea + '" class="linea-' + group.linea + '"><h3 class="addLineButton" data-stop-number="' + stopNumber + '" data-line-number="' + group.linea + '">' + group.linea + '</h3><p class="destino">' + group.destino + '</p>';
+        horariosElement.innerHTML += `
+            <div id="linea-${group.linea}" class="linea-${group.linea}">
+                <h3 class="addLineButton" data-stop-number="${stopNumber}" data-line-number="${group.linea}">${group.linea}</h3>
+                <p class="destino">${group.destino}</p>
+        `;
         if (group.horarios.length === 0) {
             horariosElement.innerHTML += '<p class="hora">No hay horarios programados para esta fecha</p>';
         } else {
@@ -456,7 +475,13 @@ export async function displayScheduledBuses(stopNumber, date) {
     if (horariosBuses && horariosBuses.lineas) {
         horariosBuses.lineas.forEach(bus => {
             if (!groupedHorarios[`${bus.linea}-${bus.destino}`]) {
-                horariosElement.innerHTML += '<div class="linea-' + bus.linea + '"><h3 class="addLineButton" data-stop-number="' + stopNumber + '" data-line-number="' + bus.linea + '">' + bus.linea + '</h3><p class="destino">' + bus.destino + '</p><p class="hora">No hay horarios programados para esta fecha</p></div>';
+                horariosElement.innerHTML += `
+                    <div class="linea-${bus.linea}">
+                        <h3 class="addLineButton" data-stop-number="${stopNumber}" data-line-number="${bus.linea}">${bus.linea}</h3>
+                        <p class="destino">${bus.destino}</p>
+                        <p class="hora">No hay horarios programados para esta fecha</p>
+                    </div>
+                `;
             }
         });
     }
@@ -586,6 +611,7 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
         } else {
             // El usuario no aceptó, por lo que no hacemos nada
             console.log("El usuario no desea añadir todas las líneas de la parada.");
+            return false;
         }
     }
 }
@@ -697,7 +723,10 @@ export async function updateBusList() {
 
         // Actualizamos el listado en el sidebar
         stopsListHTML += `<li><a class="sidebar-stop-link" data-stopid="${stopId}" href="#${stopId}">${stopName}</a></li>`;
-        sidebarStops.innerHTML = '<h2>Tus paradas</h2><ul>' + stopsListHTML + '</ul><p class="sidebar-footer">fijará una parada arriba en la lista</p>';
+        sidebarStops.innerHTML = `
+            <h2>Tus paradas</h2><ul>${stopsListHTML}</ul>
+                <p class="sidebar-footer">fijará una parada arriba en la lista</p>
+        `;
         // Agregar event listener a los enlaces del sidebar
         const stopLinks = sidebarStops.querySelectorAll('.sidebar-stop-link');
         stopLinks.forEach(link => {
@@ -937,7 +966,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     mapElementClass += " noLocationData";
                 }
                 
-                let mapElement = '<a class="' + mapElementClass + '" title="Ver linea en el mapa">Mapa</a>';
+                let mapElement = `<a class="${mapElementClass}" title="Ver linea en el mapa">Mapa</a>`;
 
                 // Recuperamos el destino desde los datos del trip_id, buses con la misma línea pueden tener destinos diferentes.
                 let destino = "";
@@ -967,14 +996,28 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                     tiempoRestanteHTML = `${horas}h <p>${minutos} min`;
                     horaLlegada = horaLlegada.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
                 } else {
-                    tiempoRestanteHTML = tiempoRestante + ' <p>min';
+                    tiempoRestanteHTML = `${tiempoRestante} <p>min`;
                     // Pasamos la fecha y hora completa de llegada a hora HH:MM
                     horaLlegada = horaLlegada.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
                 }
 
                 // TODO: Solo actualizar los datos que hayan cambiado desde la anterior actualización cambiado el texto de dentro de los elementos placeholder creados por createBusElement()
                 // Actualizar el HTML con los datos del bus más cercano
-                lineItem.innerHTML = '<div class="linea" data-trip-id="' + tripId + '"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p><p class="hora-programada"><span class="ocupacion ' + ocupacionClass + '" title="' + ocupacionDescription + '">' + ocupacionDescription + '</span> ' + '<span class="hora">' + horaLlegadaProgramada + '</span> <span class="diferencia">' + diferencia + '</span></p></div><div class="hora-tiempo"><div class="tiempo">' + tiempoRestanteHTML + '</div>' + mapElement + '<div class="horaLlegada">' + horaLlegada + '</div></div>' + alertHTML;
+                lineItem.innerHTML = `
+                    <div class="linea" data-trip-id="${tripId}">
+                        <h3>${lineNumber}<a class="alert-icon">${alertIcon}</a></h3>
+                        <p class="destino">${destino}</p>
+                        <p class="hora-programada">
+                            <span class="ocupacion ${ocupacionClass}" title="${ocupacionDescription}">${ocupacionDescription}</span> <span class="hora">${horaLlegadaProgramada}</span> <span class="diferencia">${diferencia}</span>
+                        </p>
+                    </div>
+                    <div class="hora-tiempo">
+                        <div class="tiempo">${tiempoRestanteHTML}</div>
+                        ${mapElement}
+                        <div class="horaLlegada">${horaLlegada}</div>
+                    </div>
+                    ${alertHTML}
+                `;
 
                 // Guarda si el elemento tenía la clase 'highlight'
                 let hadHighlight = lineItem.classList.contains('highlight');
@@ -1004,19 +1047,32 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
                 if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
                     destino = scheduledData.lineas[0].destino;
                 }
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '<a class="alert-icon">' + alertIcon + '</a> </h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio próximo</div>';
+                lineItem.innerHTML = `
+                    <div class="linea">
+                        <h3>${lineNumber}<a class="alert-icon">${alertIcon}</a></h3>
+                        <p class="destino">${destino}</p>
+                    </div> 
+                    <div class="tiempo sin-servicio">Sin servicio próximo</div>
+                `;
             }
         } else {
                 let destino = "";
                 if (scheduledData.lineas && scheduledData.lineas[0] && scheduledData.lineas[0].destino) {
                     destino = scheduledData.lineas[0].destino;
                 }
-                lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber  + '<a class="alert-icon">' + alertIcon + '</a></h3><p class="destino">' + destino + '</p></div> <div class="tiempo sin-servicio">Sin servicio próximo</div>';
+                lineItem.innerHTML = `
+                    <div class="linea">
+                        <h3>${lineNumber}<a class="alert-icon">${alertIcon}</a></h3>
+                        <p class="destino">${destino}</p>
+                    </div> 
+                    <div class="tiempo sin-servicio">Sin servicio próximo</div>
+                `;
         }
             // Cuadro de alertas
             lineItem.innerHTML += alertHTML;
 
             // Agrega un controlador de eventos de clic a alert-icon
+            // TODO: Mover a utils con delegación de eventos
             lineItem.querySelector('.alert-icon').addEventListener('click', function() {
                 const alertBox = this.parentNode.parentNode.parentNode.querySelector('.alert-box');
                 if (alertBox) {
@@ -1035,6 +1091,7 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
             });
 
             // Agrega un controlador de eventos de clic mostrar el mapa si hay datos
+            // TODO: Mover a utils con delegación de eventos
             let intervalMap;
             let showMapIcon = lineItem.querySelector('.showMapIcon');
             if (showMapIcon) {
@@ -1082,7 +1139,13 @@ export async function fetchBusTime(stopNumber, lineNumber, lineItem) {
 
         } catch (error) {
             console.error('Error en fetchBusTime:', error);
-            lineItem.innerHTML = '<div class="linea"><h3>' + lineNumber + '</h3></div> <div class="tiempo sin-servicio">Sin datos en este momento</div>';
+            lineItem.innerHTML = `
+                <div class="linea">
+                    <h3>${lineNumber}</h3>
+                </div> 
+                <div class="tiempo sin-servicio">
+                    Sin datos en este momento
+                </div>`;
             const infoPanel = await createInfoPanel(busesProximos, stopNumber, lineNumber);
             lineItem.appendChild(infoPanel);
         };
@@ -1342,7 +1405,7 @@ export async function getNextBuses(busMasCercano, busesLinea, stopNumber, lineNu
 
 export function removeBusLine(stopNumber, lineNumber) {
    
-    let avisoBorrado = '¿Seguro que quieres borrar la línea ' + lineNumber + ' de la parada ' + stopNumber + '?';
+    let avisoBorrado = `¿Seguro que quieres borrar la línea ${lineNumber} de la parada ${stopNumber}?`;
 
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
     let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
@@ -1383,7 +1446,7 @@ export function removeBusLine(stopNumber, lineNumber) {
 }
 
 export function removeStop(stopId) {
-    let avisoBorrado = '¿Seguro que quieres quitar la parada ' + stopId + ' y todas sus líneas?';
+    let avisoBorrado = `¿Seguro que quieres quitar la parada ${stopId} y todas sus líneas?`;
 
     let busLines = localStorage.getItem('busLines') ? JSON.parse(localStorage.getItem('busLines')) : [];
     let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
@@ -1509,7 +1572,7 @@ export async function displayNearestStopsResults(stops, userLocation) {
     resultsDiv.innerHTML = '<button id="close-nearest-stops">X</button>';
 
     // Añadir otros elementos estáticos al resultsDiv
-    resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
+    resultsDiv.innerHTML += '<h2>Paradas cercanas</h2><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
 
     for (let stop of stops) {
         // Obtener destino para todas las líneas de la parada
@@ -1518,16 +1581,33 @@ export async function displayNearestStopsResults(stops, userLocation) {
         // Procesar cada línea y su destino
         let lineasHTML = stop.lineas.ordinarias.map(linea => {
             let destino = lineasDestinos[linea] || '';
-            return `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea} - ${destino}</span>`;
+            return `
+                <div>
+                    <span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea}</span><span class="addLineButton destino linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${destino}</span>
+                </div>
+            `;
         }).join(" ");
 
         // Crear y añadir el div para cada parada
         let stopDiv = document.createElement('div');
         stopDiv.classList.add('stopResult');
 
-        stopDiv.innerHTML = '<button class="addStopButton" data-stop-number="' + stop.parada.numero + '">+</button><h4>' + stop.parada.nombre + ' (' + stop.parada.numero + ')</h4><ul><li>' +
-            lineasHTML + '</li><li>Distancia: ' +
-            stop.distance + 'm</li></ul><a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A' + stop.ubicacion.y + ':' + stop.ubicacion.x + '&amp;origin=latlon%3A' + userLocation.y + '%3A' + userLocation.x + '#map=19.00/' + stop.ubicacion.x + '/' + stop.ubicacion.x + '" target="_blank">Mapa</a>';
+        stopDiv.innerHTML = `
+            <h2>
+                <span>
+                    ${stop.parada.nombre} 
+                    <span class="numParada">(${stop.parada.numero})</span>
+                </span>
+                <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A${stop.ubicacion.y}:${stop.ubicacion.x}&amp;origin=latlon%3A${userLocation.y}%3A${userLocation.x}#map=19.00/${stop.ubicacion.x}/${stop.ubicacion.x}" target="_blank">Mapa</a>
+            </h2>
+            <div class="lineas-correspondencia">
+                ${lineasHTML}
+            </div>
+            <div class="stopResultFooter">
+                <p>Distancia: ${stop.distance}m</p>
+                <button class="addStopButton" data-stop-number="${stop.parada.numero}">+</button>
+            </div>
+        `;
 
         resultsDiv.appendChild(stopDiv);
         // Restablecer el scroll arriba
@@ -1545,8 +1625,10 @@ export async function displayNearestStopsResults(stops, userLocation) {
             history.replaceState(dialogState, document.title, '#/');
         } else if (event.target.matches('.addStopButton')) {
             let stopNumber = event.target.getAttribute('data-stop-number');
-            await addBusLine(stopNumber);
-            resultsDiv.style.display = 'none';
+            const addBusLineStatus = await addBusLine(stopNumber);
+            if (addBusLineStatus != false) {
+                resultsDiv.style.display = 'none';
+            }
         } else if (event.target.matches('.addLineButton')) {
             let stopNumber = event.target.getAttribute('data-stop-number');
             let lineNumber = event.target.getAttribute('data-line-number');

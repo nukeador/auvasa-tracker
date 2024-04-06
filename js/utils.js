@@ -131,7 +131,12 @@ export async function createInfoPanel(busesProximos, stopNumber, lineNumber) {
 
             // Verificamos que horaLlegada no sea null o vacío
             if (horaLlegada) {
-                innerHTML += '<li data-trip-id="'+ tripId + '"><span class="' + llegadaClass + '">' + horaLlegada + '</span><span class="ocupacion ' + ocupacionClass + '" title="' + ocupacionDescription + '">' + ocupacionDescription + '</span></li>';
+                innerHTML += `
+                    <li data-trip-id="${tripId}">
+                        <span class="${llegadaClass}">${horaLlegada}</span>
+                        <span class="ocupacion ${ocupacionClass}" title="${ocupacionDescription}">${ocupacionDescription}</span>
+                    </li>
+                `;
             }
         }
     }
@@ -198,7 +203,7 @@ export function updateStopName(stopElement, newName, stopGeo) {
     // Actualiza el nombre de la parada en el DOM
     const nameElement = stopElement.querySelector('h2');
     if (nameElement) {
-        nameElement.innerHTML = newName + ' <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%253A' + stopGeo.y + ':' + stopGeo.x +'#map=19.00/' + stopGeo.y + '/' + stopGeo.x + '" target="_blank">Mapa</a>';
+        nameElement.innerHTML = `${newName} <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%3A${stopGeo.y}:${stopGeo.x}#map=19.00/${stopGeo.y}/${stopGeo.x}" target="_blank">Mapa</a>`;
     }
 }
 
@@ -256,12 +261,12 @@ export function createStopElement(stopId, busList) {
     let stopElement = document.createElement('div');
     stopElement.id = stopId;
     stopElement.className = 'stop-block';
-    stopElement.innerHTML = '<h2>'+ stopId + '</h2>';
+    stopElement.innerHTML = `<h2>${stopId}</h2>`;
 
     // Agrega el icono de fijar parada
     let pinIcon = document.createElement('i');
     pinIcon.className = 'pin-icon';
-    pinIcon.id = 'pin-icon-' + stopId;
+    pinIcon.id = `pin-icon-${stopId}`;
     pinIcon.title = 'Fijar parada';
 
     // Verifica si la parada está en fixedStops y establece la clase del icono en consecuencia
@@ -280,7 +285,7 @@ export function createStopElement(stopId, busList) {
 
 export function createBusElement(busId, line, index, stopElement) {
     let busElement = document.createElement('div');
-    busElement.className = 'line-info linea-' + line.lineNumber;
+    busElement.className = `line-info linea-${line.lineNumber}`;
     busElement.id = busId;
 
     if (index % 2 === 0) {
@@ -294,7 +299,21 @@ export function createBusElement(busId, line, index, stopElement) {
     }
 
     // Elemento con placeholders HTML
-    busElement.innerHTML = '<div class="linea" data-trip-id=""><h3>' + lineNumber + '<a class="alert-icon"></a></h3><p class="destino"></p><p class="hora-programada"><span class="hora"></span> <span class="diferencia"></span></p></div><div class="hora-tiempo"><div class="tiempo"><p>min.</div><a class="showMapIcon" title="Ver linea en el mapa">Mapa</a></a><div class="horaLlegada"></div></div>';
+    busElement.innerHTML = `
+        <div class="linea" data-trip-id="">
+            <h3>${lineNumber}<a class="alert-icon"></a></h3>
+            <p class="destino"></p>
+            <p class="hora-programada">
+                <span class="hora"></span> <span class="diferencia"></span>
+            </p>
+        </div>
+        <div class="hora-tiempo">
+            <div class="tiempo">
+                <p>min.</p><a class="showMapIcon" title="Ver linea en el mapa">Mapa</a></a>
+                <div class="horaLlegada"></div>
+            </div>
+        </div>
+    `;
     
     const removeButton = createButton('remove-button', '&#128465;', function() {
         removeBusLine(line.stopNumber, line.lineNumber);
@@ -310,7 +329,7 @@ export function createBusElement(busId, line, index, stopElement) {
 export function createMostrarHorarios(stopId, stopElement, horariosBox) {
     let mostrarHorarios = document.createElement('button');
     mostrarHorarios.classList.add('mostrar-horarios');
-    mostrarHorarios.id = 'mostrar-horarios-' + stopId;
+    mostrarHorarios.id = `mostrar-horarios-${stopId}`;
     mostrarHorarios.innerHTML = 'Mostrar todos los horarios';
     stopElement.appendChild(mostrarHorarios);
     
@@ -344,7 +363,7 @@ export function createRemoveStopButton(stopId, stopElement) {
         
     let removeStopButton = document.createElement('button');
     removeStopButton.classList.add('remove-stop');
-    removeStopButton.id = 'remove-stop-' + stopId;
+    removeStopButton.id = `remove-stop-${stopId}`;
     removeStopButton.innerHTML = 'Quitar parada';
     stopElement.appendChild(removeStopButton);
     removeStopButton.addEventListener('click', function() {
@@ -412,7 +431,7 @@ export function setCacheData(cacheKey, data) {
 export function updateLastUpdatedTime() {
     const now = new Date();
     const formattedTime = now.toLocaleTimeString(); // Formatea la hora como prefieras
-    document.getElementById('last-update').textContent = 'Última actualización: ' + formattedTime;
+    document.getElementById('last-update').textContent = `Última actualización: ${formattedTime}`;
 }
 
 // Función para mostrar el spinner de carga
@@ -547,7 +566,7 @@ export function displayGlobalAlertsBanner(alerts) {
                 const listItem = document.createElement('li');
                 const textContainer = document.createElement('div');
                 textContainer.className = 'alert-text-container';
-                textContainer.innerHTML = '<span class="global-alert-title">' + alert.resumen + '</span>: ' + alert.descripcion;
+                textContainer.innerHTML = `<span class="global-alert-title">${alert.resumen}</span>: ${alert.descripcion}`;
 
                 const readMoreButton = document.createElement('button');
                 readMoreButton.className = 'read-more-button';
@@ -919,7 +938,7 @@ export function clickEvents() {
         tipsBanner.addEventListener('click', function(e) {
             if (e.target.tagName === 'A') {
                 // Mostramos el id del padre del enlace
-                console.log('Click en ' + e.target.parentElement.id);
+                console.log(`Click en ${e.target.parentElement.id}`);
                 _paq.push(['trackEvent', 'tips-banner', 'click', e.target.parentElement.id]);
             }
         });
