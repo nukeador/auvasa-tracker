@@ -804,6 +804,10 @@ button.remove-stop {
     border-radius: 0;
 }
 
+#nearestStopsResults h2 {
+    font-size: 1.2em;
+}
+
 #nearestStopsResults p {
     font-size: 0.8em;
 }
@@ -835,6 +839,10 @@ button.remove-stop {
 #nearestStopsResults .stopResult h2 .mapIcon {
     position: relative;
     right: 0;
+    background-size: contain;
+    width: 23px;
+    height: 22px;
+    background-repeat: no-repeat;
 }
 
 #nearestStopsResults .stopResult h2 .numParada {
