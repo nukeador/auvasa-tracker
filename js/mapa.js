@@ -1,4 +1,4 @@
-import { apiEndPoint, fetchSuppressedStops, getStopLines } from './api.js';
+import { apiEndPoint, fetchSuppressedStops, getStopLines, getBusDestinationsForStop } from './api.js';
 import { mapEvents } from './utils.js';
 
 let myMap = L.map('busMap').setView([41.64817, -4.72974], 15);
@@ -380,34 +380,47 @@ function mostrarErrorUbicacion(error) {
 
 // Función auxiliar para preparar datos de paradas a GeoJSON
 function prepararDatosParadas(paradas) {
-    //const suppressedStops = await fetchSuppressedStops();
 
     return {
         type: "FeatureCollection",
         features: paradas.map(parada => {
             // Generar el HTML para el listado de líneas
             let lineasHTML = '<div id="lineas-correspondencia">';
-            parada.lineas.ordinarias.forEach(linea => {
+            parada.lineas.ordinarias.sort((a, b) => {
+                // Comprueba si 'a' y 'b' contienen una letra
+                const aHasLetter = /[a-zA-Z]/.test(a);
+                const bHasLetter = /[a-zA-Z]/.test(b);
+            
+                // Si ambos contienen una letra, los ordena alfabéticamente
+                if (aHasLetter && bHasLetter) {
+                    return a.localeCompare(b);
+                }
+                // Si solo 'a' contiene una letra, lo coloca después
+                if (aHasLetter) {
+                    return 1;
+                }
+                // Si solo 'b' contiene una letra, lo coloca después
+                if (bHasLetter) {
+                    return -1;
+                }
+                // Si ninguno contiene una letra, los ordena numéricamente
+                return parseInt(a, 10) - parseInt(b, 10);
+            }).forEach(linea => {
                 lineasHTML += `<span class="addLineButton linea linea-${linea}" data-stop-number="${parada.parada.numero}" data-line-number="${linea}">${linea}</span>`;
             });
             lineasHTML += '<p>Haga clic en una línea para añadirla a su lista</p></div>';
-
-            /* Verificar si la parada está suprimida
-            let stopSuppressed = suppressedStops.some(stop => stop.numero === parada.parada.numero);
-            if (stopSuppressed) {
-                lineasHTML += '<br>🚫 Aviso: Parada actualmente suprimida';
-            }*/
 
             return {
                 type: "Feature",
                 properties: {
                     nombre: parada.parada.nombre,
                     numero: parada.parada.numero,
-                    lineasHTML: lineasHTML, // Incluir el HTML generado como una propiedad
+                    lineasHTML: lineasHTML,
+                    lineas: parada.lineas.ordinarias,
                 },
                 geometry: {
                     type: "Point",
-                    coordinates: [parada.ubicacion.x, parada.ubicacion.y] // Asegúrate de que las coordenadas estén en el orden correcto [longitud, latitud]
+                    coordinates: [parada.ubicacion.x, parada.ubicacion.y]
                 }
             };
         })
@@ -426,6 +439,7 @@ export async function mapaParadasCercanas(paradas, ubicacionUsuarioX, ubicacionU
     window.myMapParadasCercanas = L.map('mapaParadasCercanas').setView([ubicacionUsuarioY, ubicacionUsuarioX], 15);
 
     let iconUrl = 'img/bus-stop.png';
+    const suppressedStops = await fetchSuppressedStops();
 
     // Detectamos el theme para ofrecer una capa u otra de mapa
     const savedTheme = localStorage.getItem('theme');
@@ -446,22 +460,54 @@ export async function mapaParadasCercanas(paradas, ubicacionUsuarioX, ubicacionU
     }
 
     const geoJSONData = prepararDatosParadas(paradas);
-    console.log(geoJSONData);
 
     L.geoJSON(geoJSONData, {
         pointToLayer: function (feature, latlng) {
             // Crear el icono para la parada
             const iconoParada = L.icon({
-                iconUrl: 'img/bus-stop.png', // Asegúrate de que esta ruta sea correcta
+                iconUrl: 'img/bus-stop.png',
                 iconSize: [12, 12],
                 iconAnchor: [0, 0],
                 popupAnchor: [0, -12]
             });
     
             // Crear el marcador con el icono y el popup personalizado
-            return L.marker(latlng, { icon: iconoParada })
-                .bindPopup(`<strong>${feature.properties.nombre}</strong><br>Número: ${feature.properties.numero} ${feature.properties.lineasHTML}`);
-            }
+            const marker = L.marker(latlng, { icon: iconoParada })
+            .bindPopup(`<strong>${feature.properties.nombre}</strong> (${feature.properties.numero}) ${feature.properties.lineasHTML}`);
+
+           // Agregar un evento de clic al marcador
+            marker.on('click', async function(e) {
+                // Obtener destino para todas las líneas de la parada
+                let lineasDestinos = await getBusDestinationsForStop(feature.properties.numero);
+
+                // Generar el HTML para el listado de líneas
+                let lineasHTML = '<div id="lineas-correspondencia">';
+                feature.properties.lineas.forEach(linea => {
+                    let destino = lineasDestinos[linea] || '';
+                    lineasHTML += `
+                        <div>
+                            <span class="addLineButton linea linea-${linea}" data-stop-number="${feature.properties.numero}" data-line-number="${linea}">${linea}</span><span class="addLineButton destino linea-${linea}" data-stop-number="${feature.properties.numero}" data-line-number="${linea}">${destino}</span>
+                        </div>
+                    `;
+                });
+                lineasHTML += '<p>Haga clic en una línea para añadirla a su lista</p></div>';
+
+                // Verificar si la parada está suprimida
+                const stopSuppressed = suppressedStops.some(stop => stop.numero === feature.properties.numero);
+
+                // Si la parada está suprimida, añadir texto adicional al popup
+                if (stopSuppressed) {
+                    marker.setPopupContent(`<strong>${feature.properties.nombre}</strong> (${feature.properties.numero}) ${lineasHTML}<p>🚫 Aviso: Parada actualmente suprimida</p>`);
+                } else {
+                    marker.setPopupContent(`<strong>${feature.properties.nombre}</strong> (${feature.properties.numero}) ${lineasHTML}`);
+                }
+
+                // Mostrar el popup
+                marker.openPopup();
+            });
+
+            return marker;
+        }
     }).addTo(window.myMapParadasCercanas);
 
     const lat = ubicacionUsuarioY;

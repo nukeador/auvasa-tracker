@@ -862,12 +862,12 @@ button.remove-stop {
 
 
 /* Enlaces a lineas en la info de paradas */
-#nearestStopsResults .stopResult .addLineButton, #lineas-correspondencia span.linea, #nearestStopsResults .stopResult .destino {
+#nearestStopsResults .stopResult .addLineButton, #lineas-correspondencia span.linea, #nearestStopsResults .stopResult .destino, #nearestStopsResults .leaflet-popup-content .destino {
     display: inline-block;
     padding: 6px 8px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    min-width: 14px;
+    width: 33px;
     text-align: center;
     cursor: pointer;
     margin: 5px 0;
@@ -881,22 +881,28 @@ button.remove-stop {
     margin-top: 10px;
 }
 
-#nearestStopsResults .stopResult .lineas-correspondencia div {
+#nearestStopsResults .stopResult .lineas-correspondencia div, #nearestStopsResults #mapaParadasCercanas #lineas-correspondencia div {
     display: inline-block;
 }
 
 
-#nearestStopsResults .stopResult .addLineButton, #nearestStopsResults .stopResult .destino {
+#nearestStopsResults .stopResult .addLineButton, #nearestStopsResults .stopResult .destino, #nearestStopsResults .leaflet-popup-content .destino {
     font-size: 0.7em;
 }
 
-#nearestStopsResults .stopResult .destino {
+#nearestStopsResults .stopResult .destino, #nearestStopsResults .leaflet-popup-content .destino {
     border-top-left-radius: 0px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 10px;
     opacity: 0.7;
     width: 58px;
+}
+
+#nearestStopsResults .leaflet-popup-content .destino {
+    margin: 0 6px 0 0;
+    line-height: 0.8em;
+    width: 45px;
 }
 
 #lineas-correspondencia {
@@ -909,8 +915,17 @@ button.remove-stop {
   border-radius: 10px;
 }
 
+#mapaParadasCercanas .leaflet-popup-content #lineas-correspondencia span.linea {
+    margin: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
 #lineas-correspondencia p {
     font-style: italic;
+    font-size: 0.9em;
     margin: 5px 0 0 0;
 }
 
