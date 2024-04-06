@@ -857,12 +857,6 @@ export function scheduledBusesEvents() {
             let lineNumber = event.target.getAttribute('data-line-number');
             await addBusLine(stopNumber, lineNumber, true);
         }
-        // Clic en una línea en el índice superior
-        if (event.target.classList.contains('indice-linea')) {
-            let lineNumber = event.target.getAttribute('data-line-number');
-            let lineElement = horariosBox.querySelector(`#linea-${lineNumber}`);
-            scrollToElement(lineElement);
-        }
     });
 }
 
@@ -1066,6 +1060,9 @@ export function routersEvents() {
             } else if (event.state.dialogType === 'home') {
                 closeAllDialogs(dialogIds);
             }
+        } else if (window.location.hash.startsWith('#linea-')) {
+            // Si tenemos enlaces a #linea- no hacemos nada y dejamos que funcionen normal
+            return;
         } else {
             // Si no hay estado guardado, asume que el usuario quiere volver a la página principal
             // Lógica para cerrar cualquier diálogo abierto y mostrar la página principal
