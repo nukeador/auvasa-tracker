@@ -1552,9 +1552,17 @@ export async function showNearestStops(position) {
     let sortedStops = busStops.map(stop => {
         let distance = calculateDistance(userLocation, stop.ubicacion);
         return { ...stop, distance: distance };
-    }).sort((a, b) => a.distance - b.distance).slice(0, 10);
+    }).sort((a, b) => a.distance - b.distance);
 
-    displayNearestStopsResults(sortedStops, userLocation);
+    // Filtrar las paradas a 1 km o menos
+    let nearbyStops = sortedStops.filter(stop => stop.distance <= 1000);
+
+    // Si no hay paradas a 1 km o menos, mostrar las 20 más cercanas
+    if (nearbyStops.length === 0) {
+        nearbyStops = sortedStops.slice(0, 20);
+    }
+
+    displayNearestStopsResults(nearbyStops, userLocation);
 }
 
 // Función para mostrar los resultados de las paradas más cercanas
@@ -1577,6 +1585,12 @@ export async function displayNearestStopsResults(stops, userLocation) {
         <div id="mapaParadasCercanas"></div>
         <p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>`;
     
+    // Restablecer el scroll arriba
+    resultsDiv.scrollTo(0, 0);
+    // Generamos el mapa de paradas
+    await mapaParadasCercanas(stops, userLocation.x, userLocation.y);
+    hideLoadingSpinner();
+
     for (let stop of stops) {
         // Obtener destino para todas las líneas de la parada
         let lineasDestinos = await getBusDestinationsForStop(stop.parada.numero);
@@ -1613,10 +1627,6 @@ export async function displayNearestStopsResults(stops, userLocation) {
         `;
 
         resultsDiv.appendChild(stopDiv);
-        // Generamos el mapa de paradas
-        await mapaParadasCercanas(stops, userLocation.x, userLocation.y);
-        // Restablecer el scroll arriba
-        resultsDiv.scrollTo(0, 0);
     }
 
     // Manejar los eventos de clic usando delegación de eventos
@@ -1636,6 +1646,4 @@ export async function displayNearestStopsResults(stops, userLocation) {
             }
         }
     });
-
-    hideLoadingSpinner();
 }
