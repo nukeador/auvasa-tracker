@@ -302,25 +302,9 @@ export function createBusElement(busId, line, index, stopElement) {
     busElement.innerHTML = `
         <div class="linea" data-trip-id="">
             <h3>${lineNumber}<a class="alert-icon"></a></h3>
-            <p class="destino"></p>
-            <p class="hora-programada">
-                <span class="hora"></span> <span class="diferencia"></span>
-            </p>
         </div>
-        <div class="hora-tiempo">
-            <div class="tiempo">
-                <p>min.</p><a class="showMapIcon" title="Ver linea en el mapa">Mapa</a></a>
-                <div class="horaLlegada"></div>
-            </div>
-        </div>
+        <div class="hora-tiempo"></div>
     `;
-    
-    const removeButton = createButton('remove-button', '&#128465;', function() {
-        removeBusLine(line.stopNumber, line.lineNumber);
-    });
-    busElement.appendChild(removeButton);
-    const arrowButton = createArrowButton();
-    busElement.appendChild(arrowButton);
 
     stopElement.appendChild(busElement);
     return busElement;
