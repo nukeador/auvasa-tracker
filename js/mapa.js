@@ -388,7 +388,7 @@ export async function mapaParadasCercanas(paradas, ubicacionUsuarioX, ubicacionU
     }
 
     // Create a new map instance
-    window.myMapParadasCercanas = L.map('mapaParadasCercanas').setView([ubicacionUsuarioY, ubicacionUsuarioX], 17);
+    window.myMapParadasCercanas = L.map('mapaParadasCercanas').setView([ubicacionUsuarioY, ubicacionUsuarioX], 15);
 
     let iconUrl = 'img/bus-stop.png';
 

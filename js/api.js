@@ -1574,7 +1574,7 @@ export async function displayNearestStopsResults(stops, userLocation) {
     resultsDiv.innerHTML += `
         <h2>Paradas cercanas</h2>
         <p>Estas son las paradas más cercanas a tu ubicación.</p>
-        <div id="mapaParadasCercanas" style="height: 400px; width: 100%;"></div>
+        <div id="mapaParadasCercanas"></div>
         <p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>`;
     
     for (let stop of stops) {

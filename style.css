@@ -799,9 +799,13 @@ button.remove-stop {
     height: 100%;
     overflow-y: auto;
     margin-top: 48px;
-    padding:1em 1em 4em 1em;
+    padding: 1em 0 4em 0;
     box-sizing: border-box;
     border-radius: 0;
+}
+
+#nearestStopsResults > * {
+    padding: 0 15px;
 }
 
 #nearestStopsResults h2 {
@@ -810,10 +814,6 @@ button.remove-stop {
 
 #nearestStopsResults p {
     font-size: 0.8em;
-}
-
-#nearestStopsResults .stopResult {
-    padding: 0 15px;
 }
 
 #nearestStopsResults .stopResult h2 {
@@ -849,6 +849,13 @@ button.remove-stop {
     font-weight: normal;
     color: #CCC;
 }
+
+#nearestStopsResults #mapaParadasCercanas {
+    height: 400px; 
+    width: 100%;
+    padding: 0;
+}
+
 
 /* Enlaces a lineas en la info de paradas */
 #nearestStopsResults .stopResult .addLineButton, #lineas-correspondencia span.linea, #nearestStopsResults .stopResult .destino {
