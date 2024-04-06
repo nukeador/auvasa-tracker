@@ -1741,6 +1741,19 @@ footer a:hover {
 }
 
 /* Posiciones específicas para diferentes overlays */
+
+#overlay-updates20240406 .overlay-content {
+    top: 35%;
+    width: 80%;
+    right: 6%;
+    background-color: #054a3dfa;
+    font-size: 0.85em;
+}
+
+#overlay-updates20240406 .overlay-content .close-overlay {
+    background-color: #2b7b6c
+}
+
 #overlay-newmenu20240311 .arrow {
     top: -10px;
     left: 90%;
