@@ -284,7 +284,7 @@ export async function getBusDestinationsForStop(stopNumber) {
         let destinations = {};
         if (data.lineas) {
             data.lineas.forEach(linea => {
-                if (linea.horarios) {
+                if (linea.horarios && linea.horarios.length > 0) {
                     linea.horarios.forEach(horario => {
                         if (horario.destino) {
                             if (!destinations[linea.linea]) {
@@ -293,6 +293,13 @@ export async function getBusDestinationsForStop(stopNumber) {
                             destinations[linea.linea].add(horario.destino);
                         }
                     });
+                } else { 
+                    console.log(linea.destino);
+                    // Si no hay datos la tomamos del general
+                    if (!destinations[linea.linea]) {
+                        destinations[linea.linea] = new Set();
+                    }
+                    destinations[linea.linea].add(linea.destino);
                 }
             });
         }
@@ -604,6 +611,7 @@ export async function addBusLine(stopNumber, lineNumber, confirm = false) {
         } else {
             // El usuario no aceptó, por lo que no hacemos nada
             console.log("El usuario no desea añadir todas las líneas de la parada.");
+            return false;
         }
     }
 }
@@ -1564,7 +1572,7 @@ export async function displayNearestStopsResults(stops, userLocation) {
     resultsDiv.innerHTML = '<button id="close-nearest-stops">X</button>';
 
     // Añadir otros elementos estáticos al resultsDiv
-    resultsDiv.innerHTML += '<h3>Paradas cercanas</h3><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
+    resultsDiv.innerHTML += '<h2>Paradas cercanas</h2><p>Estas son las paradas más cercanas a tu ubicación.</p><p><strong>Pulsa sobre la linea para añadirla</strong> o sobre el botón <strong>+</strong> para añadir todas las líneas de la parada.</p>';
 
     for (let stop of stops) {
         // Obtener destino para todas las líneas de la parada
@@ -1573,7 +1581,11 @@ export async function displayNearestStopsResults(stops, userLocation) {
         // Procesar cada línea y su destino
         let lineasHTML = stop.lineas.ordinarias.map(linea => {
             let destino = lineasDestinos[linea] || '';
-            return `<span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea} - ${destino}</span>`;
+            return `
+                <div>
+                    <span class="addLineButton linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${linea}</span><span class="addLineButton destino linea-${linea}" data-stop-number="${stop.parada.numero}" data-line-number="${linea}">${destino}</span>
+                </div>
+            `;
         }).join(" ");
 
         // Crear y añadir el div para cada parada
@@ -1581,13 +1593,20 @@ export async function displayNearestStopsResults(stops, userLocation) {
         stopDiv.classList.add('stopResult');
 
         stopDiv.innerHTML = `
-            <button class="addStopButton" data-stop-number="${stop.parada.numero}">+</button>
-            <h4>${stop.parada.nombre} (${stop.parada.numero})</h4>
-                <ul>
-                    <li>${lineasHTML}</li>
-                    <li>Distancia: ${stop.distance}m</li>
-                </ul>
-            <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A${stop.ubicacion.y}:${stop.ubicacion.x}&amp;origin=latlon%3A${userLocation.y}%3A${userLocation.x}#map=19.00/${stop.ubicacion.x}/${stop.ubicacion.x}" target="_blank">Mapa</a>
+            <h2>
+                <span>
+                    ${stop.parada.nombre} 
+                    <span class="numParada">(${stop.parada.numero})</span>
+                </span>
+                <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A${stop.ubicacion.y}:${stop.ubicacion.x}&amp;origin=latlon%3A${userLocation.y}%3A${userLocation.x}#map=19.00/${stop.ubicacion.x}/${stop.ubicacion.x}" target="_blank">Mapa</a>
+            </h2>
+            <div class="lineas-correspondencia">
+                ${lineasHTML}
+            </div>
+            <div class="stopResultFooter">
+                <p>Distancia: ${stop.distance}m</p>
+                <button class="addStopButton" data-stop-number="${stop.parada.numero}">+</button>
+            </div>
         `;
 
         resultsDiv.appendChild(stopDiv);
@@ -1606,8 +1625,10 @@ export async function displayNearestStopsResults(stops, userLocation) {
             history.replaceState(dialogState, document.title, '#/');
         } else if (event.target.matches('.addStopButton')) {
             let stopNumber = event.target.getAttribute('data-stop-number');
-            await addBusLine(stopNumber);
-            resultsDiv.style.display = 'none';
+            const addBusLineStatus = await addBusLine(stopNumber);
+            if (addBusLineStatus != false) {
+                resultsDiv.style.display = 'none';
+            }
         } else if (event.target.matches('.addLineButton')) {
             let stopNumber = event.target.getAttribute('data-stop-number');
             let lineNumber = event.target.getAttribute('data-line-number');

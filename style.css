@@ -387,7 +387,7 @@ html.ios .ios-only {
     position: absolute;
 }
 
-.stop-block {
+.stop-block, #nearestStopsResults .stopResult {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border: 1px solid #CCCCCCBA;
@@ -453,7 +453,7 @@ html.ios .ios-only {
     background-size: cover;
 }
 
-.stop-block .mapIcon {
+.stop-block .mapIcon, .stopResult .mapIcon {
     background-image: url("img/directions.png");
     background-size: cover;
     display: inline-block;
@@ -799,7 +799,7 @@ button.remove-stop {
     height: 100%;
     overflow-y: auto;
     margin-top: 48px;
-    padding: 1em 2em 4em 2em;
+    padding:1em 1em 4em 1em;
     box-sizing: border-box;
     border-radius: 0;
 }
@@ -809,31 +809,45 @@ button.remove-stop {
 }
 
 #nearestStopsResults .stopResult {
-    overflow: auto;
-    border: 1px solid #CCC;
-    border-radius: 20px;
-    padding: 10px 10px;
-    margin: 1em 0;
-    min-width: 280px;
+    padding: 0 15px;
 }
 
-.dark-mode #nearestStopsResults .stopResult {
-    background-color: #333;
-}
-
-#nearestStopsResults .stopResult h4 {
-    font-size: 0.85em;
-    margin: 0;
+#nearestStopsResults .stopResult h2 {
+    font-size: 0.9em;
+    padding: 9px 0 9px 24px;
     text-align: center;
-    margin-bottom: 1em;
-    max-width: 275px;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url(img/bus-stop.png);
+    background-size: 17px;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.dark-mode #nearestStopsResults .stopResult h2 {
+    background-image: url(img/bus-stop-dark.png);
+}
+
+#nearestStopsResults .stopResult h2 .mapIcon {
+    position: relative;
+    right: 0;
+}
+
+#nearestStopsResults .stopResult h2 .numParada {
+    font-weight: normal;
+    color: #CCC;
 }
 
 /* Enlaces a lineas en la info de paradas */
-#nearestStopsResults .stopResult span, #lineas-correspondencia span.linea {
+#nearestStopsResults .stopResult .addLineButton, #lineas-correspondencia span.linea, #nearestStopsResults .stopResult .destino {
     display: inline-block;
     padding: 6px 8px;
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     min-width: 14px;
     text-align: center;
     cursor: pointer;
@@ -842,6 +856,28 @@ button.remove-stop {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+#nearestStopsResults .stopResult .lineas-correspondencia {
+    margin-top: 10px;
+}
+
+#nearestStopsResults .stopResult .lineas-correspondencia div {
+    display: inline-block;
+}
+
+
+#nearestStopsResults .stopResult .addLineButton, #nearestStopsResults .stopResult .destino {
+    font-size: 0.7em;
+}
+
+#nearestStopsResults .stopResult .destino {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 10px;
+    opacity: 0.7;
+    width: 58px;
 }
 
 #lineas-correspondencia {
@@ -858,48 +894,27 @@ button.remove-stop {
     margin: 5px 0 0 0;
 }
 
-#nearestStopsResults .stopResult ul {
-    font-size: 0.8em;
-    margin: 5px 0 0 0;
-    padding: 0;
+#nearestStopsResults .stopResult .stopResultFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-#nearestStopsResults .stopResult ul li {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-
-#nearestStopsResults .stopResult button {
+#nearestStopsResults .stopResult .addStopButton {
     background-color: #c1c4ca;
     background-image: url("img/add.png");
-    background-size: 10px;
-    width: 10px;
-    height: 10px;
+    background-size: 8px;
+    width: 9px;
+    height: 9px;
     text-indent: -9999px;
     cursor: pointer;
-    padding: 12px;
+    padding: 11px;
     background-repeat: no-repeat;
     color: rgb(5, 5, 6);
     border-radius: 50%;
     border: 1px solid #cdcdcd;
-    display: block;
+    display: inline-block;
     background-position: 7px 7px;
-    position: absolute;
-    right: 42px;
-}
-
-#nearestStopsResults .stopResult .mapIcon {
-    background-image: url("img/directions.png");
-    background-size: 26px;
-    width: 15px;
-    height: 15px;
-    text-indent: -9999px;
-    cursor: pointer;
-    padding: 5px 5px;
-    float: right;
-    background-repeat: no-repeat;
-    margin-top: -2em;
 }
 
 #nearestStops #searchNearStops {
@@ -1791,10 +1806,10 @@ body.dark-mode {
     color: #eeeeee;
 }
 
-.dark-mode .stop-block {
-    background-color: #333;
+.dark-mode .stop-block, .dark-mode .stopResult {
+    background-color: #333 !important;
     color: #eeeeee;
-    border: 1px solid #404040BA;
+    border: 1px solid #404040BA !important;
 }
 
 .dark-mode .highlight {
@@ -1813,9 +1828,9 @@ body.dark-mode {
     background-color: #222;
 }
 
-.dark-mode .stop-block .mapIcon {
+.dark-mode .stop-block .mapIcon, .dark-mode .stopResult .mapIcon {
     background-image: url("img/directions.png");
-  }  
+}  
 
 .dark-mode button#removeAllButton {
     background: url(img/trash-white.png) no-repeat #323232;
