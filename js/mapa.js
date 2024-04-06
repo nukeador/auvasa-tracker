@@ -283,9 +283,9 @@ async function addStopsToMap(tripId, lineNumber) {
                 busLines[feature.properties.stop_code].forEach(lineNumber => {
                     lineasHTML += `<span class="addLineButton linea linea-${lineNumber}" data-stop-number="${feature.properties.stop_code}" data-line-number="${lineNumber}">${lineNumber}</span>`;
                 });
-                lineasHTML += '<p>Haga clic en una línea para añadirla a su lista</p></div>'
+                lineasHTML += '<p>Haga clic en una línea para añadirla a su lista</p></div>';
 
-                let iconUrl = 'img/bus-stop.png';;
+                let iconUrl = 'img/bus-stop.png';
                 const savedTheme = localStorage.getItem('theme');
 
                 if (savedTheme === "dark"){
@@ -377,4 +377,102 @@ function mostrarErrorUbicacion(error) {
             console.error("Un error desconocido ocurrió.");
             break;
     }
+}
+
+// Mapa para paradas cercanas
+export async function mapaParadasCercanas(paradas, ubicacionUsuarioX, ubicacionUsuarioY) {
+    // Check if the map container already has a map instance
+    if (window.myMapParadasCercanas) {
+        // Remove the existing map instance
+        window.myMapParadasCercanas.remove();
+    }
+
+    // Create a new map instance
+    window.myMapParadasCercanas = L.map('mapaParadasCercanas').setView([ubicacionUsuarioY, ubicacionUsuarioX], 15);
+
+    let iconUrl = 'img/bus-stop.png';
+
+    // Detectamos el theme para ofrecer una capa u otra de mapa
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === "dark"){
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}' + (L.Browser.retina ? '@2x.png' : '.png'), {
+            attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20,
+            minZoom: 0
+        }).addTo(window.myMapParadasCercanas);
+        iconUrl = 'img/bus-stop-dark.png';
+    } else {
+        L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=a1eb584c78ab43ddafe0831ad04566ae', {
+            maxZoom: 19,
+            attribution: 'Maps © <a href="http://thunderforest.com/">Thunderforest</a>',
+            subdomains: 'abc'
+        }).addTo(window.myMapParadasCercanas);
+    }
+
+    // Obtener la lista de paradas suprimidas
+    const suppressedStops = await fetchSuppressedStops();
+
+    // Iterate over the list of stops
+    paradas.forEach(async parada => {
+
+        // Buscamos la info completa de la parada
+        const stopsResponse = await fetch(apiEndPoint + `/v2/parada/${parada.parada.numero}`);
+        if (!stopsResponse.ok) {
+            throw new Error('Failed to fetch stops');
+        }
+        const stopsData = await stopsResponse.json();
+
+        // HTML para el listado de líneas
+        let lineasHTML = '<div id="lineas-correspondencia">';
+        stopsData.lineas.forEach(linea => {
+            lineasHTML += `<span class="addLineButton linea linea-${linea.linea}" data-stop-number="${parada.parada.numero}" data-line-number="${linea.linea}">${linea.linea}</span>`;
+        });
+        lineasHTML += '<p>Haga clic en una línea para añadirla a su lista</p></div>';
+
+        // Create the icon for the stop
+        const iconoParada = L.icon({
+            iconUrl: iconUrl, // Ensure this file exists in your images folder
+            iconSize: [12, 12],
+            iconAnchor: [0, 0],
+            popupAnchor: [0, -12]
+        });
+
+        // Verificar si la parada está suprimida
+        let stopSuppressed = suppressedStops.some(stop => stop.numero === parada.parada.numero);
+        if (stopSuppressed) {
+            iconUrl = 'img/circle-exclamation.png';
+            popupContent += '<br>🚫 Aviso: Parada actualmente suprimida';
+        }
+
+        // Create the stop marker with the icon and the popup
+        const marcadorParada = L.marker([parada.ubicacion.y, parada.ubicacion.x], { icon: iconoParada })
+            .addTo(window.myMapParadasCercanas)
+            .bindPopup(`<strong>${parada.parada.nombre}</strong><br>Número: ${parada.parada.numero} ${lineasHTML}`);
+    });
+
+    const lat = ubicacionUsuarioY;
+    const lon = ubicacionUsuarioX;
+
+    // Si ya existe un marcador de ubicación del usuario, actualiza su posición
+    if (userLocationMarker) {
+        userLocationMarker.setLatLng([lat, lon]);
+    } else {
+        // Si no, crea un nuevo marcador
+        userLocationMarker = L.marker([lat, lon], {
+            icon: L.divIcon({
+                className: 'user-location-icon',
+                html: '<div class="location-icon"></div>',
+                iconSize: [15, 15]
+            })
+        }).addTo(window.myMapParadasCercanas);
+    }
+
+    // Dibuja un círculo alrededor de la ubicación del usuario
+    L.circle([lat, lon], {
+        color: '#FFF',
+        fillColor: '#1da1f2',
+        fillOpacity: 0.7,
+        radius: 50
+    }).addTo(window.myMapParadasCercanas);
 }
