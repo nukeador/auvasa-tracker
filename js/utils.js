@@ -854,12 +854,6 @@ export function scheduledBusesEvents() {
             iniciarIntervalo(updateBusList);
             updateBusList();
         }
-        // Verifica si el evento se originó en un elemento addLineButton y añadimos la línea a la lista
-        if (event.target.classList.contains('addLineButton')) {
-            let stopNumber = event.target.getAttribute('data-stop-number');
-            let lineNumber = event.target.getAttribute('data-line-number');
-            await addBusLine(stopNumber, lineNumber, true);
-        }
     });
 }
 
@@ -982,15 +976,12 @@ export function socialBrowserWarning() {
 // Eventos a controlar en elementos del mapa
 export function mapEvents() {
 
-    // Mediante delegación de eventos controlamos lo que pasa dentro de busMap
+    // Mediante delegación de eventos controlamos clics
     document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona el elemento padre, que en este caso es #busMap
-        const parentElement = document.getElementById('busMap');
-
-        // Agrega el eventListener al elemento padre
-        parentElement.addEventListener('click', async function(event) {
+        // Agrega el eventListener a cualquier elemento con clase addLineButton
+        document.addEventListener('click', async function(event) {
             // Verifica si el evento se originó en un elemento addLineButton y añadimos la línea a la lista
-            if (event.target.classList.contains('addLineButton')) {
+            if (event.target.matches('.addLineButton')) {
                 let stopNumber = event.target.getAttribute('data-stop-number');
                 let lineNumber = event.target.getAttribute('data-line-number');
                 await addBusLine(stopNumber, lineNumber, true);
@@ -1047,7 +1038,7 @@ export function closeAllDialogs(ids) {
 export function routersEvents() {
     window.addEventListener('popstate', async function(event) {
         // Verifica si hay un estado guardado
-        if (window.location.hash === '') {
+        if (event.state && window.location.hash === '') {
             // Aquí puedes verificar el estado guardado para determinar qué diálogo abrir
             if (event.state.dialogType === 'scheduledTimes') {
                 const stopNumber = event.state.stopNumber;

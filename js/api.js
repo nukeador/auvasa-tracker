@@ -1628,16 +1628,12 @@ export async function displayNearestStopsResults(stops, userLocation) {
                 dialogType: 'home'
             };
             history.replaceState(dialogState, document.title, '#/');
-        } else if (event.target.matches('.addStopButton')) {
+        } else if (event.target.matches('.stopResult .addStopButton')) {
             let stopNumber = event.target.getAttribute('data-stop-number');
             const addBusLineStatus = await addBusLine(stopNumber);
             if (addBusLineStatus != false) {
                 resultsDiv.style.display = 'none';
             }
-        } else if (event.target.matches('.addLineButton')) {
-            let stopNumber = event.target.getAttribute('data-stop-number');
-            let lineNumber = event.target.getAttribute('data-line-number');
-            await addBusLine(stopNumber, lineNumber, true);
         }
     });
 
