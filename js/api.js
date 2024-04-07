@@ -1587,6 +1587,27 @@ export async function displayNearestStopsResults(stops, userLocation) {
     
     // Restablecer el scroll arriba
     resultsDiv.scrollTo(0, 0);
+
+    // Manejar los eventos de clic usando delegación de eventos
+    // Lo hacemos antes del resto para que no espere a aplicarse el evento
+    // hasta que no carguen todas las paradas
+    resultsDiv.addEventListener('click', async function (event) {
+        if (event.target.matches('#close-nearest-stops')) {
+            resultsDiv.style.display = 'none';
+            // Regresamos al home
+            const dialogState = {
+                dialogType: 'home'
+            };
+            history.replaceState(dialogState, document.title, '#/');
+        } else if (event.target.matches('.stopResult .addStopButton')) {
+            let stopNumber = event.target.getAttribute('data-stop-number');
+            const addBusLineStatus = await addBusLine(stopNumber);
+            if (addBusLineStatus != false) {
+                resultsDiv.style.display = 'none';
+            }
+        }
+    });
+
     // Generamos el mapa de paradas
     await mapaParadasCercanas(stops, userLocation.x, userLocation.y);
     hideLoadingSpinner();
@@ -1628,22 +1649,4 @@ export async function displayNearestStopsResults(stops, userLocation) {
 
         resultsDiv.appendChild(stopDiv);
     }
-
-    // Manejar los eventos de clic usando delegación de eventos
-    resultsDiv.addEventListener('click', async function (event) {
-        if (event.target.matches('#close-nearest-stops')) {
-            resultsDiv.style.display = 'none';
-            // Regresamos al home
-            const dialogState = {
-                dialogType: 'home'
-            };
-            history.replaceState(dialogState, document.title, '#/');
-        } else if (event.target.matches('.stopResult .addStopButton')) {
-            let stopNumber = event.target.getAttribute('data-stop-number');
-            const addBusLineStatus = await addBusLine(stopNumber);
-            if (addBusLineStatus != false) {
-                resultsDiv.style.display = 'none';
-            }
-        }
-    });
 }
