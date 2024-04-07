@@ -465,7 +465,7 @@ export async function mapaParadasCercanas(paradas, ubicacionUsuarioX, ubicacionU
         pointToLayer: function (feature, latlng) {
             // Crear el icono para la parada
             const iconoParada = L.icon({
-                iconUrl: 'img/bus-stop.png',
+                iconUrl: iconUrl,
                 iconSize: [12, 12],
                 iconAnchor: [0, 0],
                 popupAnchor: [0, -12]
