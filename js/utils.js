@@ -1087,3 +1087,21 @@ export function routersEvents() {
         }
     });
 }
+
+// Función para redireccionar a nuevo dominio imporytando paradas
+// Ejemplo: redirectAndImport('https://DOMAIN.TLD/import/');
+export function redirectAndImport(urlbase) {
+    // Obtener los valores de busLines y fixedStops del localStorage
+    const busLines = JSON.parse(localStorage.getItem('busLines')) || [];
+    const fixedStops = JSON.parse(localStorage.getItem('fixedStops')) || [];
+
+    // Serializar los arrays en formato JSON y luego codificarlos en Base64
+    const busLinesEncoded = btoa(JSON.stringify(busLines));
+    const fixedStopsEncoded = btoa(JSON.stringify(fixedStops));
+
+    // Construir la URL con los parámetros
+    const url = `${urlbase}?busLines=${encodeURIComponent(busLinesEncoded)}&fixedStops=${encodeURIComponent(fixedStopsEncoded)}`;
+
+    // Redirigir al usuario al nuevo dominio con los parámetros
+    window.location.href = url;
+}
