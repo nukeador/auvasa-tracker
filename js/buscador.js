@@ -1,5 +1,7 @@
-import { loadBusStops } from './api.js';
+import { loadBusStops, showNearestStops} from './api.js';
+import { toogleSidebar, displayLoadingSpinner, closeAllDialogs, dialogIds, showError } from './utils.js';
 
+// Mostrar sugerencias de paradas al introducir texto
 document.getElementById('stopNumber').addEventListener('input', async function() {
     const inputText = this.value;
     const matchingStops = await searchByStopNumber(inputText);
@@ -26,6 +28,37 @@ document.getElementById('stopNumber').addEventListener('input', async function()
         });
         resultsContainer.appendChild(resultElement);
     });
+});
+
+// Mostrar tip sobre paradas cercanas al hacer clic en input de parada
+document.getElementById('stopNumber').addEventListener('click', async function() {
+    const inputText = this.value;
+
+    // Solo mostramos sugerencia si no hay texto
+    if (inputText.trim() === '') {
+        // Limpia resultados previos
+        const resultsContainer = document.getElementById('autocompleteResults');
+        resultsContainer.innerHTML = '';
+        resultsContainer.style.display = 'block';
+
+        let resultElement = document.createElement('div');
+        resultElement.innerHTML = `Buscar todas las paradas cercanas`;
+        resultElement.classList.add('autocomplete-result');
+        resultElement.classList.add('nearbyStopsSuggestion');
+        resultElement.addEventListener('click', function() {
+            resultsContainer.innerHTML = ''; // Limpia los resultados después de seleccionar
+            // Mandamos al diálogo de paradas cercanas
+            if (navigator.geolocation) {
+                displayLoadingSpinner();
+                closeAllDialogs(dialogIds);
+                navigator.geolocation.getCurrentPosition(showNearestStops, showError, { maximumAge: 6000, timeout: 15000 });
+                toogleSidebar();
+            } else {
+               console.log("Geolocalización no soportada por este navegador.");
+            }
+        });
+        resultsContainer.appendChild(resultElement);
+    }
 });
 
 // Función para buscar paradas por nombre o número
