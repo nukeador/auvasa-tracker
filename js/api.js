@@ -1642,7 +1642,7 @@ export async function displayNearestStopsResults(stops, userLocation) {
                     ${stop.parada.nombre} 
                     <span class="numParada">(${stop.parada.numero})</span>
                 </span>
-                <a class="mapIcon" title="Cómo llegar" href="https://www.qwant.com/maps/routes/?mode=walking&amp;destination=latlon%3A${stop.ubicacion.y}:${stop.ubicacion.x}&amp;origin=latlon%3A${userLocation.y}%3A${userLocation.x}#map=19.00/${stop.ubicacion.x}/${stop.ubicacion.x}" target="_blank">Mapa</a>
+                <a class="mapIcon" title="Cómo llegar" href="#">Mapa</a>
             </h2>
             <div class="lineas-correspondencia">
                 ${lineasHTML}
