@@ -647,18 +647,24 @@ export async function updateBusList() {
 
     // Obtén la lista de paradas "Fijas" del almacenamiento local
     let fixedStops = localStorage.getItem('fixedStops') ? JSON.parse(localStorage.getItem('fixedStops')) : [];
-
-    // Ordena las paradas en función de si son "Fijas" o no
-    let sortedStops = Object.keys(stops).sort((a, b) => {
-        const aIsFixed = fixedStops.includes(a);
-        const bIsFixed = fixedStops.includes(b);
     
-        if (aIsFixed && !bIsFixed) {
-            return -1; // a debe ir primero
-        } else if (!aIsFixed && bIsFixed) {
-            return 1; // b debe ir primero
-        } else {
-            // Si ambos son "Fijas" o no "Fijas", ordenar alfabéticamente
+    // Ordena las paradas en función de su índice en fixedStops, de manera que las paradas añadidas más recientemente aparezcan primero
+    let sortedStops = Object.keys(stops).sort((a, b) => {
+        const aIndex = fixedStops.indexOf(a);
+        const bIndex = fixedStops.indexOf(b);
+    
+        // Si ambas paradas están en fixedStops, ordenar por su índice (las más recientes primero)
+        if (aIndex !== -1 && bIndex !== -1) {
+            return bIndex - aIndex;
+        }
+        // Si solo una de las paradas está en fixedStops, mostrarla primero
+        else if (aIndex !== -1) {
+            return -1;
+        } else if (bIndex !== -1) {
+            return 1;
+        }
+        // Si ninguna de las paradas está en fixedStops, ordenarlas alfabéticamente
+        else {
             return a.localeCompare(b);
         }
     });
