@@ -699,7 +699,7 @@ button.remove-stop {
     width: calc(100%);
     height: 100%;
     overflow-y: auto;
-    margin-top: 48px;
+    margin-top: 50px;
     padding: 1em 2em 4em 2em;
     box-sizing: border-box;
     border-radius: 0;
@@ -813,7 +813,7 @@ button.remove-stop {
     width: calc(100%);
     height: 100%;
     overflow-y: auto;
-    margin-top: 48px;
+    margin-top: 50px;
     padding: 1em 0 4em 0;
     box-sizing: border-box;
     border-radius: 0;

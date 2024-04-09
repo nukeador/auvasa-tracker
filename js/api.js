@@ -1,4 +1,4 @@
-import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp, getFormattedDate, closeAllDialogs, dialogIds } from './utils.js';
+import { getCachedData, setCacheData, updateStopName, createInfoPanel, removeObsoleteElements, updateLastUpdatedTime, iniciarIntervalo, calculateDistance, hideLoadingSpinner, createStopElement, createBusElement, createMostrarHorarios, displayGlobalAlertsBanner, toogleSidebar, scrollToElement, createRemoveStopButton, getYesterdayDate, getFutureDate, showErrorPopUp, showSuccessPopUp, getFormattedDate, closeAllDialogs, dialogIds, displayLoadingSpinner, showError, showIframe } from './utils.js';
 import { checkAndSendBusArrivalNotification, updateNotifications } from './notifications.js';
 import { updateBusMap, mapaParadasCercanas } from './mapa.js';
 
@@ -1652,6 +1652,32 @@ export async function displayNearestStopsResults(stops, userLocation) {
                 <button class="addStopButton" data-stop-number="${stop.parada.numero}">+</button>
             </div>
         `;
+
+        // Añadir el evento click al elemento mapIcon
+        let mapIconElement = stopDiv.querySelector('.mapIcon');
+        mapIconElement.addEventListener('click', function(event) {
+            // Prevenir la acción por defecto del enlace
+            event.preventDefault();
+
+            // Abrimos el planeador de rutas
+            let plannerURL;
+
+            if (navigator.geolocation) {
+                displayLoadingSpinner();
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    plannerURL = `https://rutas.auvasatracker.com/#/?ui_activeItinerary=0&&fromPlace=(Ubicación actual)::${position.coords.latitude},${position.coords.longitude}&toPlace=${stop.parada.nombre}::${stop.ubicacion.y},${stop.ubicacion.x}&arriveBy=false&mode=WALK&showIntermediateStops=true&maxWalkDistance=2000&ignoreRealtimeUpdates=true&numItineraries=3&otherThanPreferredRoutesPenalty=900`
+                    showIframe(plannerURL);
+                    // URL para rutas
+                    const dialogState = {
+                        dialogType: 'planRoute'
+                    };
+                    history.pushState(dialogState, `Planificar ruta`, `#/rutas/`);
+                }, showError,
+                    { maximumAge: 6000, timeout: 15000 });
+            } else {
+            console.log("Geolocalización no soportada por este navegador.");
+            }
+        });
 
         resultsDiv.appendChild(stopDiv);
     }
