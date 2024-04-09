@@ -205,15 +205,40 @@ export function updateStopName(stopElement, newName, stopGeo) {
     if (nameElement) {
         nameElement.innerHTML = `${newName}`;
 
+        const stopNameSpan = nameElement.querySelector('.stop-name');
+        const stopName = stopNameSpan ? stopNameSpan.textContent : 'Destino';
+
         // Icono de mapa
         const mapIconElement = document.createElement('a');
         mapIconElement.className = 'mapIcon';
         mapIconElement.setAttribute('title', 'Cómo llegar');
-        mapIconElement.setAttribute('href', `https://www.qwant.com/maps/routes/?mode=walking&destination=latlon%3A${stopGeo.y}:${stopGeo.x}#map=19.00/${stopGeo.y}/${stopGeo.x}`);
-        mapIconElement.setAttribute('target', '_blank');
         mapIconElement.textContent = 'Mapa';
 
         nameElement.insertAdjacentElement('afterend', mapIconElement);
+
+        mapIconElement.addEventListener('click', function(event) {
+            // Prevenir la acción por defecto del enlace
+            event.preventDefault();
+
+            // Abrimos el planeador de rutas
+            let plannerURL;
+
+            if (navigator.geolocation) {
+                displayLoadingSpinner();
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    plannerURL = `https://rutas.auvasatracker.com/#/?ui_activeItinerary=0&&fromPlace=(Ubicación actual)::${position.coords.latitude},${position.coords.longitude}&toPlace=${stopName}::${stopGeo.y},${stopGeo.x}&arriveBy=false&mode=WALK&showIntermediateStops=true&maxWalkDistance=2000&ignoreRealtimeUpdates=true&numItineraries=3&otherThanPreferredRoutesPenalty=900`
+                    showIframe(plannerURL);
+                    // URL para rutas
+                    const dialogState = {
+                        dialogType: 'planRoute'
+                    };
+                    history.pushState(dialogState, `Planificar ruta`, `#/rutas/`);
+                }, showError,
+                    { maximumAge: 6000, timeout: 15000 });
+            } else {
+               console.log("Geolocalización no soportada por este navegador.");
+            }
+        });
     }
 }
 
