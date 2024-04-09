@@ -1,4 +1,4 @@
-import { iniciarIntervalo, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents, socialBrowserWarning, routersEvents } from './utils.js';
+import { iniciarIntervalo, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents, socialBrowserWarning, routersEvents, redirectAndImport } from './utils.js';
 import { updateBusList } from './api.js';
 import { isIOS } from './browser.js';
 
@@ -61,6 +61,9 @@ function main() {
 
     // Mostrar advertencia si el usuario está accediendo desde un webview integrado de una app de social media
     socialBrowserWarning();
+
+    // Aquí podría ir redirect a nuevo dominio si fuera necesario
+    // redirectAndImport('https://DOMAIN.TLD/import/');
 }
 
 let deferredPrompt;
