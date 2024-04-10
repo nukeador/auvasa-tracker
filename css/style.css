@@ -1,5 +1,21 @@
+@font-face {
+    font-family: 'Fira Sans';
+    src: local('Fira Sans Bold'),
+         url('/fonts/FiraSans-Bold.woff2') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    src: local('Fira Sans Regular'),
+         url('/fonts/FiraSans-Regular.woff2') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Roboto', Helvetica, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -28,12 +44,14 @@ header h1 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url('img/logo-dark.png');
+    background-image: url('/img/logo-dark.png');
     background-repeat: no-repeat;
     background-size: 33px;
-    background-position: 13px;
+    background-position: 13px 20px;
     padding: 0;
-    margin: -6px 0 0 0;
+    margin: -12px 0 0 0;
+    font-family: 'Fira Sans';
+    font-weight: 700;
     font-size: 1.3em;
     width: 100%;
     height: 100%;
@@ -43,6 +61,15 @@ header h1 {
 header h1 a {
     color: #FFF;
     text-decoration: none;
+}
+
+header h1 #subheader {
+    font-size: 0.6em;
+    font-weight: normal;
+    color: #CCC;
+    display: inline-block;
+    position: absolute;
+    top: 30px;
 }
 
 input[type=number], input[type=text] {
@@ -61,12 +88,12 @@ input[type=number], input[type=text] {
 
 input#stopNumber {
     border-bottom: 1px solid #DDD;
-    background: url(img/location-gray.png) no-repeat;
+    background: url('/img/location-gray.png') no-repeat;
     background-size: 15px;
 }
 
 input#lineNumber {
-    background: url(img/bus-gray.png) no-repeat;
+    background: url('/img/bus-gray.png') no-repeat;
     background-size: 19px;
 }
 
@@ -91,7 +118,7 @@ button {
 button#addButton {
     margin: 0em 19px 0 0;
     background-color: #c1c4ca;
-    background-image: url("img/add.png");
+    background-image: url("/img/add.png");
     background-size: 16px;
     width: 16px;
     height: 16px;
@@ -111,7 +138,7 @@ button#addButton:active {
 }
 
 button#removeAllButton {
-    background: url(img/trash-gray.png) no-repeat #EAEAEA;
+    background: url('/img/trash-gray.png') no-repeat #EAEAEA;
     background-size: 15px;
     background-position: 15px center;
     color: #686868;
@@ -193,7 +220,7 @@ button#installButton {
 
 .autocomplete-result.nearbyStopsSuggestion {
     background-color: transparent;
-    background-image: url(img/find-nearby.png);
+    background-image: url('/img/find-nearby.png');
     background-size: 18px;
     background-repeat: no-repeat;
     font-size: 0.9em;
@@ -305,7 +332,7 @@ button#installButton {
 
 .sidebar #scrollTop {
     background-color: transparent;
-    background-image: url(img/arrow-up.png);
+    background-image: url('/img/arrow-up.png');
     background-size: 14px;
     background-repeat: no-repeat;
     padding: 0 0 0 20px;
@@ -315,7 +342,7 @@ button#installButton {
 }
 
 .sidebar .sidebar-footer {
-    background-image: url("img/pin-transparent.png");
+    background-image: url("/img/pin-transparent.png");
     background-size: 10px;
     background-repeat: no-repeat;
     font-size: 0.75em;
@@ -325,7 +352,7 @@ button#installButton {
 }
 
 .dark-mode .sidebar .sidebar-footer {
-    background-image: url("img/pin-transparent-light.png");
+    background-image: url("/img/pin-transparent-light.png");
     background-size: 10px;
     background-repeat: no-repeat;
     background-position: 0px 3px;
@@ -348,7 +375,7 @@ button#installButton {
     width: 90%;
     margin: 1em auto 0 auto;
     padding: 136px 0 5px 0;
-    background: url("img/welcome-logo.png") no-repeat #FFF center 8px;
+    background: url("/img/welcome-logo.png") no-repeat #FFF center 8px;
     background-size: 140px;
 }
 
@@ -383,7 +410,7 @@ html.ios .ios-only {
 #welcome-box span.button-sample {
     margin: 0px 0 0 0;
     background-color: #c1c4ca;
-    background-image: url("img/add.png");
+    background-image: url("/img/add.png");
     background-size: 8px;
     width: 0px;
     height: 0px;
@@ -445,7 +472,7 @@ html.ios .ios-only {
 }
 
 .stop-block .pin-icon {
-    background-image: url("img/pin-transparent.png");
+    background-image: url("/img/pin-transparent.png");
     background-size: 11px;
     display: inline-block;
     width: 11px;
@@ -455,23 +482,23 @@ html.ios .ios-only {
 }
 
 .dark-mode .stop-block .pin-icon {
-    background-image: url("img/pin-transparent-light.png");
+    background-image: url("/img/pin-transparent-light.png");
     background-size: 11px;
 }
 
 .stop-block .pin-icon.fixed {
-    background-image: url("img/pin-solid.png");
+    background-image: url("/img/pin-solid.png");
     background-size: cover;
     display: inline-block;
 }
 
 .dark-mode .stop-block .pin-icon.fixed {
-    background-image: url("img/pin-solid-light.png");
+    background-image: url("/img/pin-solid-light.png");
     background-size: cover;
 }
 
 .stop-block .mapIcon, .stopResult .mapIcon {
-    background-image: url("img/directions.png");
+    background-image: url("/img/directions.png");
     background-size: 22px;
     display: inline-block;
     width: 22px;
@@ -481,7 +508,7 @@ html.ios .ios-only {
 }
 
 .showMapIcon {
-    background-image: url("img/bus-location.png");
+    background-image: url("/img/bus-location.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 0px;
@@ -495,13 +522,13 @@ html.ios .ios-only {
 }
 
 .showMapIcon.noLocationData {
-    background-image: url("img/bus-location-white.png");
+    background-image: url("/img/bus-location-white.png");
     font-weight: normal;
     color: #CCC;
 }
 
 .dark-mode .showMapIcon {
-    background-image: url("img/bus-location-white.png");
+    background-image: url("/img/bus-location-white.png");
 }
 
 .line-info {
@@ -574,14 +601,14 @@ html.ios .ios-only {
 }
 
 .additional-info-panel .proximos-buses span.programado {
-    background: url(img/clock.png) no-repeat;
+    background: url('/img/clock.png') no-repeat;
     background-size: 15px;
     background-position: 0px;
     padding: 0 0 0 20px;
 }
 
 .additional-info-panel .proximos-buses span.realtime {
-    background: url(img/feed.png) no-repeat;
+    background: url('/img/feed.png') no-repeat;
     background-size: 15px;
     background-position: 0px;
     padding: 0 0 0 20px;
@@ -632,7 +659,7 @@ html.ios .ios-only {
 .line-info .alert-icon {
     font-size: 0.7em;
     cursor: pointer;
-    background: url(img/warning.png) no-repeat;
+    background: url('/img/warning.png') no-repeat;
     background-size: 15px;
     background-position: 0px 2px;
     text-indent: -9999px;
@@ -644,14 +671,14 @@ html.ios .ios-only {
 }
 
 .dark-mode .line-info .alert-icon {
-    background: url(img/warning-light.png) no-repeat;
+    background: url('/img/warning-light.png') no-repeat;
     background-size: 15px;
     background-position: 0px 2px;
 }
 
 button.mostrar-horarios {
     cursor: pointer;
-    background: url(img/calendar-clock.png) no-repeat;
+    background: url('/img/calendar-clock.png') no-repeat;
     background-size: 15px;
     background-position: 0px;
     color: #CCC;
@@ -663,7 +690,7 @@ button.mostrar-horarios {
 
 button.remove-stop {
 	cursor: pointer;
-	background: url(img/trash-light-gray.png) no-repeat;
+	background: url('/img/trash-light-gray.png') no-repeat;
 	background-size: 13px;
 	background-position: 0px;
 	color: #CCC;
@@ -712,7 +739,7 @@ button.remove-stop {
 
 /* Botón de cierre de diálogos */
 #horarios-box .horarios-close, #nearestStopsResults #close-nearest-stops {
-    background-image: url("img/close.png");
+    background-image: url("/img/close.png");
     background-size: 16px;
     width: 16px;
     height: 16px;
@@ -845,14 +872,14 @@ button.remove-stop {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-image: url(img/bus-stop.png);
+    background-image: url('/img/bus-stop.png');
     background-size: 17px;
     background-repeat: no-repeat;
     background-position: left;
 }
 
 .dark-mode #nearestStopsResults .stopResult h2 {
-    background-image: url(img/bus-stop-dark.png);
+    background-image: url('/img/bus-stop-dark.png');
 }
 
 #nearestStopsResults .stopResult h2 .mapIcon {
@@ -952,7 +979,7 @@ button.remove-stop {
 
 #nearestStopsResults .stopResult .addStopButton {
     background-color: #c1c4ca;
-    background-image: url("img/add.png");
+    background-image: url("/img/add.png");
     background-size: 8px;
     width: 9px;
     height: 9px;
@@ -969,7 +996,7 @@ button.remove-stop {
 
 #nearestStops #searchNearStops {
     background-color: transparent;
-    background-image: url(img/find-nearby.png);
+    background-image: url('/img/find-nearby.png');
     background-size: 16px;
     background-repeat: no-repeat;
     color: #818181;
@@ -991,14 +1018,14 @@ button.remove-stop {
 
 #routesButton { 
     background-color: transparent;
-    background-image: url(img/routes.png);
+    background-image: url('/img/routes.png');
     background-size: 16px;
     background-repeat: no-repeat;
 }
 
 #viewLinesButton {
     background-color: transparent;
-    background-image: url(img/bus-gray.png);
+    background-image: url('/img/bus-gray.png');
     background-size: 16px;
     background-repeat: no-repeat;
 }
@@ -1008,7 +1035,7 @@ button.remove-stop {
     top: 8px;
     right: 14px;
     z-index: 1001;
-    background-image: url("img/close-light.png");
+    background-image: url("/img/close-light.png");
     background-size: 12px;
     width: 12px;
     height: 12px;
@@ -1099,7 +1126,7 @@ button.remove-stop {
 }
 
 #mapContainer #mapFooter .map-close {
-    background-image: url("img/close.png");
+    background-image: url("/img/close.png");
     background-size: 15px;
     width: 15px;
     height: 15px;
@@ -1121,7 +1148,7 @@ button.remove-stop {
 }
 
 .dark-mode #mapContainer #mapFooter .map-close {
-    background-image: url("img/close-light.png");
+    background-image: url("/img/close-light.png");
     border: 1px solid #646262;
 }
 
@@ -1167,7 +1194,7 @@ button.remove-stop {
 }
 
 .line-info .hora-programada .hora {
-    background: url(img/clock.png) no-repeat;
+    background: url('/img/clock.png') no-repeat;
     background-size: 15px;
     background-position: 0px;
     padding: 0 0 0 20px;
@@ -1214,31 +1241,31 @@ button.remove-stop {
 }
 
 .line-info .ocupacion.empty, .line-info .ocupacion.many {
-    background-image: url("img/seats-empty-many.png");  
+    background-image: url("/img/seats-empty-many.png");  
 }
 
 .dark-mode .line-info .ocupacion.empty, .dark-mode .line-info .ocupacion.many {
-    background-image: url("img/seats-empty-many-light.png");  
+    background-image: url("/img/seats-empty-many-light.png");  
 }
 
 .line-info .ocupacion.few {
-    background-image: url("img/seats-few.png"); 
+    background-image: url("/img/seats-few.png"); 
 }
 
 .dark-mode .line-info .ocupacion.few {
-    background-image: url("img/seats-few-light.png"); 
+    background-image: url("/img/seats-few-light.png"); 
 }
 
 .line-info .ocupacion.crushed, .line-info .ocupacion.full {
-    background-image: url("img/seats-full.png"); 
+    background-image: url("/img/seats-full.png"); 
 }
 
 .line-info .ocupacion.not {
-    background-image: url("img/seats-notaccepting.png"); 
+    background-image: url("/img/seats-notaccepting.png"); 
 }
 
 .line-info .ocupacion.standing {
-    background-image: url("img/seats-standing.png");  
+    background-image: url("/img/seats-standing.png");  
 }
 
 /* No mostramos nada si los datos son nulos, vacíos o no_data_available */
@@ -1259,14 +1286,14 @@ button.remove-stop {
 }
 
 .line-info.realtime .hora-tiempo .horaLlegada {
-    background: url(img/feed.png) no-repeat;
+    background: url('/img/feed.png') no-repeat;
     background-size: 15px;
     background-position: 0px;
     padding: 0 0 0 20px;
 }
 
 .line-info.programado .hora-tiempo .horaLlegada {
-    background: url(img/clock.png) no-repeat;
+    background: url('/img/clock.png') no-repeat;
     background-size: 15px;
     background-position: 0px;
     padding: 0 0 0 20px;
@@ -1308,7 +1335,7 @@ button.remove-stop {
 
 .bell-button {
     background: transparent no-repeat center center;
-    background-image: url('img/bell-gray.png');
+    background-image: url('/img/bell-gray.png');
     background-size: 15px 15px;
     border: none;
     font-size: 0;
@@ -1322,7 +1349,7 @@ button.remove-stop {
 
 .remove-button {
     background: transparent no-repeat center center;
-    background-image: url('img/trash-gray.png');
+    background-image: url('/img/trash-gray.png');
     background-size: 15px 15px;
     border: none;
     font-size: 0;
@@ -1336,7 +1363,7 @@ button.remove-stop {
 
 .arrow-button {
     background: transparent no-repeat center center;
-    background-image: url('img/arrow-light.png');
+    background-image: url('/img/arrow-light.png');
     background-size: 25px 25px;
     border: none;
     font-size: 0;
@@ -1407,7 +1434,6 @@ button.remove-stop {
 
 #tips-banner {
     font-size: 0.8em;
-    background-color: #25d36636;
     box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2); 
     text-align: center;
     margin: 20px auto 1px auto;
@@ -1416,14 +1442,14 @@ button.remove-stop {
 }
 
 .dark-mode #tips-banner {
-    background-color: #054a32;
     color: #CCC;
 }
 
 #share-whatsapp {
     margin: 0; 
     color: #0e4f0b; 
-    background-image: url('img/share.png');
+    background-color: #25d36636;
+    background-image: url('/img/share.png');
     background-size: 12px;
     background-repeat: no-repeat;
     background-position: 15px center;
@@ -1436,7 +1462,8 @@ button.remove-stop {
 }
 
 .dark-mode #share-whatsapp {
-    background-image: url('img/share-gray.png');
+    background-image: url('/img/share-gray.png');
+    background-color: #054a32;
 }
 
 #share-whatsapp a {
@@ -1451,13 +1478,28 @@ button.remove-stop {
     color: #bfbfbf;
 }
 
-#share-whatsapp:hover, #share-whatsapp:focus {
-    background-color: rgba(255, 255, 255, 0.2); /* Efecto sutil al pasar el mouse */
-    text-decoration: none; /* Continuar sin subrayado */
+#newname-banner {
+    margin: 0; 
+    color: #0e4f0b; 
+    background-color: #25cbd336;
+    background-image: url('/img/info.png');
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    padding: 5px 5px 5px 26px;
 }
 
-.dark-mode #share-whatsapp:hover, #share-whatsapp:focus {
-    background-color: rgba(0, 0, 0, 0.2); /* Efecto sutil al pasar el mouse */
+.dark-mode #newname-banner {
+    background-image: url('/img/info-gray.png');
+}
+
+#newname-banner a {
+    color: #0e4f0b; 
+    text-decoration: none; 
+}
+
+.dark-mode #newname-banner a {
+    color: #bfbfbf;
 }
 
 .global-alerts-box {
@@ -1820,7 +1862,7 @@ body.dark-mode {
 }
 
 .dark-mode h1 {
-    background-image: url('img/logo-dark.png');
+    background-image: url('/img/logo-dark.png');
 }
 
 .dark-mode #formulario form {
@@ -1835,13 +1877,13 @@ body.dark-mode {
 
 .dark-mode input#stopNumber {
     border-bottom: 1px solid #EEE;
-    background: url(img/location-white.png) no-repeat;
+    background: url('/img/location-white.png') no-repeat;
     background-size: 15px;
     background-position: 5px 9px;
 }
 
 .dark-mode input#lineNumber {
-    background: url(img/bus-white.png) no-repeat;
+    background: url('/img/bus-white.png') no-repeat;
     background-size: 19px;
     background-position: 5px 9px;
 }
@@ -1852,7 +1894,7 @@ body.dark-mode {
 
 .dark-mode #welcome-box {
     box-shadow: 0 8px 64px 0 rgba(12,12,14,.12);
-    background: url("img/welcome-logo-white.png") no-repeat #2d2d2d center 8px;
+    background: url("/img/welcome-logo-white.png") no-repeat #2d2d2d center 8px;
     background-size: 140px;
 }
 
@@ -1892,11 +1934,11 @@ body.dark-mode {
 }
 
 .dark-mode .stop-block .mapIcon, .dark-mode .stopResult .mapIcon {
-    background-image: url("img/directions.png");
+    background-image: url("/img/directions.png");
 }  
 
 .dark-mode button#removeAllButton {
-    background: url(img/trash-white.png) no-repeat #323232;
+    background: url('/img/trash-white.png') no-repeat #323232;
     background-size: 20px;
     background-position: 15px center;
     color: #b1b1b1;

@@ -1663,8 +1663,8 @@ export async function displayNearestStopsResults(stops, userLocation) {
             let plannerURL;
 
             if (navigator.geolocation) {
-                displayLoadingSpinner();
                 navigator.geolocation.getCurrentPosition(function(position) {
+                    displayLoadingSpinner();
                     plannerURL = `https://rutas.auvasatracker.com/#/?ui_activeItinerary=0&&fromPlace=(Ubicación actual)::${position.coords.latitude},${position.coords.longitude}&toPlace=${stop.parada.nombre}::${stop.ubicacion.y},${stop.ubicacion.x}&arriveBy=false&mode=WALK&showIntermediateStops=true&maxWalkDistance=2000&ignoreRealtimeUpdates=true&numItineraries=3&otherThanPreferredRoutesPenalty=900`
                     showIframe(plannerURL);
                     // URL para rutas

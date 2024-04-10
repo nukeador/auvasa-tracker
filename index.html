@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>AUVASA Tracker - La forma más rápida de saber cuándo llega tu bus en Valladolid</title>
+    <title>AUVASA Tracker (VallaBus) - La forma más rápida de saber cuándo llega tu bus en Valladolid</title>
 
     <!-- Descripción General -->
     <meta name="description" content="La forma más rápida de saber cuándo llega tu bus en Valladolid">
     <meta name="theme-color" content="#054a32">
 
     <!-- Open Graph: Facebook, LinkedIn, y otros -->
-    <meta property="og:title" content="AUVASA Tracker" />
+    <meta property="og:title" content="AUVASA Tracker (VallaBus)" />
     <meta property="og:description" content="🚍 La forma más rápida de saber cuándo llega tu bus en Valladolid" />
     <meta property="og:image" content="https://auvasatracker.com/favicon.png" />
     <meta property="og:url" content="https://auvasatracker.com/" />
@@ -19,16 +19,16 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AUVASA Tracker">
+    <meta name="twitter:title" content="AUVASA Tracker (VallaBus)">
     <meta name="twitter:description" content="🚍 La forma más rápida de saber cuándo llega tu bus en Valladolid">
     <meta name="twitter:image" content="https://auvasatracker.com/favicon.png">
     <script type="module" src="js/browser.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="style.css?v=202404091700">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=202404101840">
     <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
 
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
@@ -62,7 +62,7 @@
     </div>
 
     <header>
-        <h1 id="title">AUVASA Tracker</h1>
+        <h1 id="title">AUVASA Tracker<span id="subheader">VallaBus</span></h1>
         <button id="menuButton" class="menu-button">☰</button>
         <button id="installButton" style="display: none;">Instalar</button>
     </header>
@@ -80,7 +80,10 @@
     <div id="autocompleteResults"></div>
     <div id="lineSuggestions"></div>
 
-    <div id="tips-banner"><p id="share-whatsapp"><a href="whatsapp://send?text=%F0%9F%9A%8D%20AUVASA%20Tracker%20es%20la%20forma%20m%C3%A1s%20r%C3%A1pida%20de%20saber%20cu%C3%A1ndo%20llega%20tu%20bus%20en%20Valladolid.%20%C2%A1Dale%20un%20vistazo%21%20https%3A%2F%2Fauvasatracker.com%2F%3Fmtm_campaign%3Dwhatsappshare" target="_blank" rel="noopener" aria-label="Whatsapp">Clic aquí para compartir en tus grupos de WhatsApp</a></p></div>
+    <div id="tips-banner">
+        <p id="share-whatsapp"><a href="whatsapp://send?text=%F0%9F%9A%8D%20AUVASA%20Tracker%20es%20la%20forma%20m%C3%A1s%20r%C3%A1pida%20de%20saber%20cu%C3%A1ndo%20llega%20tu%20bus%20en%20Valladolid.%20%C2%A1Dale%20un%20vistazo%21%20https%3A%2F%2Fauvasatracker.com%2F%3Fmtm_campaign%3Dwhatsappshare" target="_blank" rel="noopener" aria-label="Whatsapp">Clic aquí para compartir en tus grupos de WhatsApp</a></p>
+        <p id="newname-banner">Pronto AUVASA Tracker pasará a ser VallaBus</p>
+    </div>
 
     <div class="bus-list" id="busList">
         <div id="welcome-box">

@@ -8,7 +8,7 @@ if (document.readyState === "loading") {  // Cargando aún no ha terminado
     main();
 }
 function main() {
-    console.log('🚍 ¡Te damos la bienvenida a AUVASA Tracker! Recuerda que puedes colaborar con el código en https://github.com/nukeador/auvasa-tracker');
+    console.log('🚍 ¡Te damos la bienvenida a AUVASA Tracker (VallaBus)! Recuerda que puedes colaborar con el código en https://github.com/nukeador/auvasa-tracker');
 
     // Actualizar y pintar lista de paradas
     updateBusList();
