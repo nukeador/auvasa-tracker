@@ -1491,6 +1491,7 @@ button.remove-stop {
 
 .dark-mode #newname-banner {
     background-image: url('/img/info-gray.png');
+    color: #bfbfbf;
 }
 
 #newname-banner a {
