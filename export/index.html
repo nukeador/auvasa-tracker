@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUVASA Tracker export</title>
+    <script type="module" src="../js/utils.js"></script>
+</head>
+<body>
+    <script>
+        // Función para redireccionar a nuevo dominio imporytando paradas
+        // Ejemplo: redirectAndImport('https://DOMAIN.TLD/import/');
+            function redirectAndImport(urlbase) {
+            // Obtener los valores de busLines y fixedStops del localStorage
+            const busLines = JSON.parse(localStorage.getItem('busLines')) || [];
+            const fixedStops = JSON.parse(localStorage.getItem('fixedStops')) || [];
+
+            // Serializar los arrays en formato JSON y luego codificarlos en Base64
+            const busLinesEncoded = btoa(JSON.stringify(busLines));
+            const fixedStopsEncoded = btoa(JSON.stringify(fixedStops));
+
+            // Construir la URL con los parámetros
+            const url = `${urlbase}?busLines=${encodeURIComponent(busLinesEncoded)}&fixedStops=${encodeURIComponent(fixedStopsEncoded)}`;
+
+            // Redirigir al usuario al nuevo dominio con los parámetros
+            window.location.href = url;
+        }
+
+        redirectAndImport('https://vallabus.com/import/');
+    </script>
+</body>
+</html>
