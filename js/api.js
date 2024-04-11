@@ -204,7 +204,7 @@ export function filterAlertsByStop(alerts, stopNumber) {
 // Obtener el listado de paradas suprimidas
 export async function fetchSuppressedStops() {
     try {
-        const response = await fetch(apiEndPoint + '/paradas/suprimidas');
+        const response = await fetch(apiEndPoint + '/paradas/suprimidas/');
 
         if (!response.ok) {
             // Si la respuesta no es exitosa, devuelve un array vacío
