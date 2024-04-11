@@ -1238,34 +1238,42 @@ button.remove-stop {
     cursor: pointer;
     background-size: cover;
     line-height: 15px;
+    display: none; /* Por defecto oculto */
 }
 
 .line-info .ocupacion.empty, .line-info .ocupacion.many {
     background-image: url("/img/seats-empty-many.png");  
+    display: inline-block;
 }
 
 .dark-mode .line-info .ocupacion.empty, .dark-mode .line-info .ocupacion.many {
     background-image: url("/img/seats-empty-many-light.png");  
+    display: inline-block;
 }
 
 .line-info .ocupacion.few {
     background-image: url("/img/seats-few.png"); 
+    display: inline-block;
 }
 
 .dark-mode .line-info .ocupacion.few {
     background-image: url("/img/seats-few-light.png"); 
+    display: inline-block;
 }
 
 .line-info .ocupacion.crushed, .line-info .ocupacion.full {
     background-image: url("/img/seats-full.png"); 
+    display: inline-block;
 }
 
 .line-info .ocupacion.not {
     background-image: url("/img/seats-notaccepting.png"); 
+    display: inline-block;
 }
 
 .line-info .ocupacion.standing {
     background-image: url("/img/seats-standing.png");  
+    display: inline-block;
 }
 
 /* No mostramos nada si los datos son nulos, vacíos o no_data_available */

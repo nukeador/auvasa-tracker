@@ -78,7 +78,9 @@ export function showNotice(lineNumber, message = null) {
     }, 2000);
 }
 
+// Creación del panel lateral desplegable con info extra de la línea
 export async function createInfoPanel(busesProximos, stopNumber, lineNumber) {
+    let tripId;
     let infoPanel = document.createElement('div');
     infoPanel.className = 'additional-info-panel';
 
@@ -92,41 +94,18 @@ export async function createInfoPanel(busesProximos, stopNumber, lineNumber) {
 
     // Añadimos cada autobús
     if (busesProximos?.length > 0){
-        // Usamos for...of para poder hacer llamadas async
         for (const bus of busesProximos) {
             let horaLlegada;
             let llegadaClass;
-
-            let ocupacion;
-            let ocupacionClass = null;
-            let ocupacionDescription = 'Sin datos de ocupación';
-            let tripId;
 
             if (bus.realTime && bus.realTime.fechaHoraLlegada) {
                 horaLlegada = new Date(bus.realTime.fechaHoraLlegada).toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
                 llegadaClass = 'realtime';
                 tripId = bus.realTime.tripId;
-                ocupacion = await fetchBusOccupancy(tripId);
             } else if (bus.scheduled && bus.scheduled.fechaHoraLlegada) {
                 horaLlegada = new Date(bus.scheduled.fechaHoraLlegada).toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
                 llegadaClass = 'programado';
                 tripId = bus.scheduled.tripId;
-                ocupacion = await fetchBusOccupancy(tripId);
-            }
-
-            // Si no es null asignamos la clase
-            if (ocupacion) {
-                const occupancyStatusMapping = {
-                    'empty': 'Todos los asientos están libres',
-                    'many': 'Hay bastantes asientos libres',
-                    'few': 'Hay pocos asientos libres',
-                    'standing': 'No hay asientos, solo de pie',
-                    'crushed': 'No hay casi hueco libre',
-                    'full': 'Bus lleno, no hay sitios',
-                    'not': 'Bus lleno, no admite más personas',
-                  };
-                ocupacionDescription = occupancyStatusMapping[ocupacion];
-                ocupacionClass = ocupacion;
             }
 
             // Verificamos que horaLlegada no sea null o vacío
@@ -134,7 +113,7 @@ export async function createInfoPanel(busesProximos, stopNumber, lineNumber) {
                 innerHTML += `
                     <li data-trip-id="${tripId}">
                         <span class="${llegadaClass}">${horaLlegada}</span>
-                        <span class="ocupacion ${ocupacionClass}" title="${ocupacionDescription}">${ocupacionDescription}</span>
+                        <span class="ocupacion" data-trip-id="${tripId}"></span>
                     </li>
                 `;
             }
@@ -161,6 +140,37 @@ export async function createInfoPanel(busesProximos, stopNumber, lineNumber) {
 
         // Alternar la visibilidad del panel
         panel.classList.toggle('open');
+
+        // Si el panel se está abriendo, cargamos la ocupación
+        if (panel.classList.contains('open')) {
+            const busElements = panel.querySelectorAll('.ocupacion');
+            busElements.forEach(async (busElement) => {
+                const tripId = busElement.getAttribute('data-trip-id');
+                let ocupacionClass = null;
+                let ocupacionDescription = 'Sin datos de ocupación';
+                const ocupacion = await fetchBusOccupancy(tripId);
+
+                // Si no es null asignamos la clase
+                if (ocupacion) {
+                    const occupancyStatusMapping = {
+                        'empty': 'Todos los asientos están libres',
+                        'many': 'Hay bastantes asientos libres',
+                        'few': 'Hay pocos asientos libres',
+                        'standing': 'No hay asientos, solo de pie',
+                        'crushed': 'No hay casi hueco libre',
+                        'full': 'Bus lleno, no hay sitios',
+                        'not': 'Bus lleno, no admite más personas',
+                    };
+                    ocupacionDescription = occupancyStatusMapping[ocupacion];
+                    ocupacionClass = ocupacion;
+                    busElement.classList.add(ocupacionClass);
+                    busElement.setAttribute('title', ocupacionDescription);
+                    busElement.textContent = ocupacionDescription;
+                } else {
+                    busElement.classList.add('null');
+                }
+            });
+        }
 
         // Cambia la imagen de fondo del botón
         if (this.style.backgroundImage.endsWith('arrow-left-light.png")')) {
