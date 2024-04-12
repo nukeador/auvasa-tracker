@@ -27,20 +27,9 @@
             
             // Construir la URL con los parámetros
             const url = `${urlbase}/import/?busLines=${encodeURIComponent(busLinesEncoded)}&fixedStops=${encodeURIComponent(fixedStopsEncoded)}`;
-    
-            // Detectar si el navegador es Firefox
-            const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-    
-            if (isFirefox) {
-                // Crear un elemento <a> con el enlace y agregarlo al cuerpo del documento
-                const link = document.createElement('a');
-                link.href = url;
-                link.textContent = 'Haz clic aquí para continuar';
-                document.body.appendChild(link);
-            } else {
-                // Redirigir al usuario al nuevo dominio con los parámetros
-                window.location.href = url;
-            }
+
+            // Redirigir al usuario al nuevo dominio con los parámetros
+            window.location.href = url;
         }
     
         redirectAndImport('https://vallabus.com');
