@@ -9,25 +9,41 @@
 </head>
 <body>
     <script>
-        // Función para redireccionar a nuevo dominio imporytando paradas
-        // Ejemplo: redirectAndImport('https://DOMAIN.TLD/import/');
-            function redirectAndImport(urlbase) {
+        function redirectAndImport(urlbase) {
             // Obtener los valores de busLines y fixedStops del localStorage
             const busLines = JSON.parse(localStorage.getItem('busLines')) || [];
             const fixedStops = JSON.parse(localStorage.getItem('fixedStops')) || [];
 
+            // Verificar si busLines está vacío y no hace falta migrar nada
+            if (busLines.length === 0) {
+                // Redirigir al usuario a vallabus.com
+                window.location.href = urlbase;
+                return; // Salir de la función
+            }
+            
             // Serializar los arrays en formato JSON y luego codificarlos en Base64
             const busLinesEncoded = btoa(JSON.stringify(busLines));
             const fixedStopsEncoded = btoa(JSON.stringify(fixedStops));
-
+            
             // Construir la URL con los parámetros
-            const url = `${urlbase}?busLines=${encodeURIComponent(busLinesEncoded)}&fixedStops=${encodeURIComponent(fixedStopsEncoded)}`;
-
-            // Redirigir al usuario al nuevo dominio con los parámetros
-            window.location.href = url;
+            const url = `${urlbase}/import/?busLines=${encodeURIComponent(busLinesEncoded)}&fixedStops=${encodeURIComponent(fixedStopsEncoded)}`;
+    
+            // Detectar si el navegador es Firefox
+            const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+    
+            if (isFirefox) {
+                // Crear un elemento <a> con el enlace y agregarlo al cuerpo del documento
+                const link = document.createElement('a');
+                link.href = url;
+                link.textContent = 'Haz clic aquí para continuar';
+                document.body.appendChild(link);
+            } else {
+                // Redirigir al usuario al nuevo dominio con los parámetros
+                window.location.href = url;
+            }
         }
-
-        redirectAndImport('https://vallabus.com/import/');
+    
+        redirectAndImport('https://vallabus.com');
     </script>
 </body>
 </html>
