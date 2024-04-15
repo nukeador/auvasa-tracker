@@ -1504,7 +1504,7 @@ button.remove-stop {
 
 #newname-banner a {
     color: #0e4f0b; 
-    text-decoration: none; 
+    text-decoration: underline; 
 }
 
 .dark-mode #newname-banner a {
