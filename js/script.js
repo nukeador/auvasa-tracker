@@ -5,8 +5,8 @@ import { isIOS } from './browser.js';
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
     document.addEventListener("DOMContentLoaded", main);
 } else {  // `DOMContentLoaded` ya se ha disparado
-    checkAndRedirect();
     main();
+    checkAndRedirect();
 }
 function main() {
     console.log('🚍 ¡Te damos la bienvenida a AUVASA Tracker (VallaBus)! Recuerda que puedes colaborar con el código en https://github.com/nukeador/auvasa-tracker');
@@ -18,6 +18,7 @@ function main() {
 
     // HOTFIX iOS: Ejecuta updateBusList 1 segundo después de abrir la página en iOS porque los recursos localstorage no está disponibles inmediatamente en iOS 17.4 :-( 
     if (isIOS()) {
+        setTimeout(checkAndRedirect, 1000);
         setTimeout(updateBusList, 1000);
     }
 
