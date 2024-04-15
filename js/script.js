@@ -1,10 +1,11 @@
-import { iniciarIntervalo, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents, socialBrowserWarning, routersEvents } from './utils.js';
+import { iniciarIntervalo, showOverlayIfNotClosed, closeOverlay, sidebarEvents, themeEvents, addRemoveButtonsEvents, scrollTopEvents, scheduledBusesEvents, clickEvents, socialBrowserWarning, routersEvents, checkAndRedirect } from './utils.js';
 import { updateBusList } from './api.js';
 import { isIOS } from './browser.js';
 
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
     document.addEventListener("DOMContentLoaded", main);
 } else {  // `DOMContentLoaded` ya se ha disparado
+    checkAndRedirect();
     main();
 }
 function main() {
