@@ -5,8 +5,8 @@ import { isIOS } from './browser.js';
 if (document.readyState === "loading") {  // Cargando aún no ha terminado
     document.addEventListener("DOMContentLoaded", main);
 } else {  // `DOMContentLoaded` ya se ha disparado
-    main();
     checkAndRedirect();
+    main();
 }
 function main() {
     console.log('🚍 ¡Te damos la bienvenida a AUVASA Tracker (VallaBus)! Recuerda que puedes colaborar con el código en https://github.com/nukeador/auvasa-tracker');
