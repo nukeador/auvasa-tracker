@@ -1125,7 +1125,7 @@ export function routersEvents() {
 
 // Función para redireccionar al nuevo dominio
 export function checkAndRedirect() {
-    // Obtener los valores de busLines y fixedStops del localStorage
+    /* Obtener los valores de busLines y fixedStops del localStorage
     const busLines = JSON.parse(localStorage.getItem('busLines')) || [];
     const fixedStops = JSON.parse(localStorage.getItem('fixedStops')) || [];
 
@@ -1134,5 +1134,8 @@ export function checkAndRedirect() {
         // Redirigir al usuario a vallabus.com
         window.location.href = 'https://vallabus.com/';
         return;
-    }
+    }*/
+
+    // Redirigir al usuario a vallabus.com
+    window.location.href = 'https://vallabus.com/';
 }
